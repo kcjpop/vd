@@ -1,9 +1,12 @@
-import { Layout } from '@/lib/Layout'
+import { Layout } from '@/lib/common/Layout'
+import { Search } from './Search'
 
 export function Home() {
   return (
     <Layout>
-      <h1 className="text-6xl font-bold">Hello world</h1>
+      <div className="mt-4">
+        <Search></Search>
+      </div>
     </Layout>
   )
 }
