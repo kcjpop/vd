@@ -2,7 +2,7 @@ export function Word() {
   return (
     <div>
       <h1>actuate</h1>
-      <p>@actuate /''æktjueit/</p>
+      <p>@actuate /&apos;æktjueit/</p>
       <p>* ngoại động từ</p>
       <p>- thúc đẩy, kích thích; là động cơ thúc đẩy (ai...)</p>
       <p>
