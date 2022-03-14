@@ -5,15 +5,19 @@ export default function (req, res) {
 
   const matched = db[kw] || db[kw.replaceAll('-', ' ')]
 
-  if (!!matched) {
+  if (matched !== undefined || matched !== null) {
     const [first, ...rest] = matched.split('<br>')
-    let word, ipa, _, ipaVariations
+    let word, ipa, ipaVariations
 
-    if (/^@(.*?)(\/.*?\/)(\s+\.*\\s+\/.*\/)?/gms.test(first))
-      [[_, word, ipa, ipaVariations]] = [
-        ...first.matchAll(/^@(.*?)(\/.*?\/)(\s+\(.*\)\s+\/.*\/)?/g),
-      ]
-    else [[_, word]] = [...first.matchAll(/^@(.*?)/gms)]
+    if (/^@(.*?)(\/.*?\/)(\s+\.*\\s+\/.*\/)?/gms.test(first)) {
+      let parsed = [...first.matchAll(/^@(.*?)(\/.*?\/)(\s+\(.*\)\s+\/.*\/)?/g)]
+      word = parsed[1]
+      ipa = parsed[2]
+      ipaVariations = parsed[3] || null
+    } else {
+      let parsed = [...first.matchAll(/^@(.*?)/gms)]
+      word = parsed[1]
+    }
 
     let marker
     let definitions = [],
@@ -53,10 +57,10 @@ export default function (req, res) {
       }
     })
 
-    const payload = { word, ipa, definitions }
+    const payload = { word, ipa, definitions, ipaVariations }
 
     res.status(200).json(payload)
   } else {
-    res.status(500).json({ message: `${word} not found` })
+    res.status(500).json({ message: `${kw} not found` })
   }
 }
