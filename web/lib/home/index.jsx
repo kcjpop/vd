@@ -4,9 +4,7 @@ import { Search } from './Search'
 export function Home() {
   return (
     <Layout>
-      <div className="mt-4">
-        <Search></Search>
-      </div>
+      <Search></Search>
     </Layout>
   )
 }

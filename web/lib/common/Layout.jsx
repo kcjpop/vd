@@ -13,7 +13,9 @@ export function Layout({ children }) {
         <Nav />
       </header>
 
-      <main className="flex w-full flex-col">{children}</main>
+      <main>
+        <div className="mx-auto max-w-7xl p-4 text-base">{children}</div>
+      </main>
     </section>
   )
 }
