@@ -1,8 +1,6 @@
 import { words as db } from 'lib/db'
 
-export default function (req, res) {
-  const { word: kw } = req.query
-
+export const parser = (kw) => {
   const matched = db[kw] || db[kw.replaceAll('-', ' ')]
 
   if (matched !== undefined || matched !== null) {
@@ -57,10 +55,8 @@ export default function (req, res) {
       }
     })
 
-    const payload = { word, ipa, definitions, ipaVariations }
-
-    res.status(200).json(payload)
-  } else {
-    res.status(500).json({ message: `${kw} not found` })
+    return { word, ipa, definitions, ipaVariations }
   }
+
+  return null
 }
