@@ -223,6 +223,19 @@ const w = {
             },
           ],
         },
+        {
+          text: [
+            "it's all up with him",
+            "it's all over with him",
+            "it's all U.P. with him",
+          ],
+          definitions: [
+            {
+              meaning:
+                '(từ lóng) thế là nó tong rồi, thế là nó tiêu ma rồi thế là nó đi đời rồi',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -247,7 +260,7 @@ function Definition({ def }) {
   return (
     <div className="ml-4">
       <div className="flex flex-col gap-4">
-        <p>{def.meaning}</p>
+        <p className="text-rose-600">{def.meaning}</p>
 
         {def?.examples?.map((ex) => (
           <Example key={ex.text} text={ex.text} translation={ex.translation} />
@@ -280,8 +293,8 @@ function Idioms({ idioms }) {
   if (!Array.isArray(idioms) || idioms.length === 0) return null
 
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="font-bold">Thành ngữ</h3>
+    <div className="flex flex-col gap-2 rounded bg-gray-100 p-4">
+      <h3 className="font-bold text-sky-600">thành ngữ</h3>
       {idioms.map((i, index) => (
         <Idiom key={index} idiom={i} />
       ))}
@@ -293,8 +306,8 @@ function WordDefinition({ def }) {
   return (
     <div>
       <div className="grid gap-4 lg:grid-cols-2">
-        <div className="flex flex-col gap-2">
-          <p className="font-bold">{def.partOfSpeech}</p>
+        <div className="flex flex-col gap-2 p-4">
+          <h3 className="font-bold text-sky-600">{def.partOfSpeech}</h3>
 
           {def.definitions.map((d) => (
             <Definition key={d.meaning} def={d} />
