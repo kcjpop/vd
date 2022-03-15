@@ -5,7 +5,7 @@ export function Search() {
 
   const doSubmit = (e) => {
     e.preventDefault()
-    router.push('/en-vi/actuate')
+    router.push('/w/actuate')
   }
 
   return (
