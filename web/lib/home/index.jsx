@@ -1,7 +1,7 @@
 import { Layout } from '@/lib/common/Layout'
 import { Search } from './Search'
 
-export function Home() {
+export function Page() {
   return (
     <Layout>
       <Search></Search>

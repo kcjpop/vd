@@ -1,3 +1,3 @@
-import { EnVi } from '@/lib/en-vi'
+import { Page } from '@/lib/word'
 
-export default EnVi
+export default Page

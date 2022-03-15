@@ -1,3 +1,3 @@
-import { Home } from '@/lib/home'
+import { Page } from '@/lib/home'
 
-export default Home
+export default Page

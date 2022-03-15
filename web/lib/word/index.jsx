@@ -1,7 +1,7 @@
 import { Layout } from '../common/Layout'
 import { Word } from './Word'
 
-export function EnVi() {
+export function Page() {
   return (
     <Layout>
       <Word></Word>
