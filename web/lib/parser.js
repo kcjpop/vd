@@ -8,7 +8,7 @@ export const parser = (kw) => {
     let word, ipa, ipaVariations
 
     if (/^@(.*?)(\/.*?\/)(\s+\.*\\s+\/.*\/)?/gms.test(first)) {
-      let parsed = [...first.matchAll(/^@(.*?)(\/.*?\/)(\s+\(.*\)\s+\/.*\/)?/g)]
+      let parsed = [...first.matchAll(/^@(.*)(\/.*?\/)(\s+\(.*\)\s+\/.*\/)?/g)]
       word = parsed[1]
       ipa = parsed[2]
       ipaVariations = parsed[3] || null
