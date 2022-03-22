@@ -75,7 +75,7 @@ const parseIdiom = function (idiom) {
   )
 }
 
-export function parser(entry) {
+export function parse(entry) {
   const [firstline] = entry.split('<br>')
 
   return {
