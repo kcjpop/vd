@@ -1,62 +1,102 @@
-import { words as db } from 'lib/db'
+const Rgx = {
+  firstline: /(?<=@).*?(?=<br>)/g,
+  definitions: /(?<=<br>)-.*?((?=<br>!)|(?=$))/,
+  definitionGroup: /(?<=<br>)\*.*?((?=<br>\*)|(?=$))+/g,
+  partOfSpeech: /\*.*?(?=<br>)/g,
+  idioms: /(?<=<br>)!.*?((?=<br>!)|(?=$))/g,
+  fl: {
+    word: /(?<=@).*?(?=\/)/,
+    ipas: /(?<=\/)[^\s]+?(?=\/)/g,
+    alternatives: /(?<=\().*?(?=\))/g,
+  },
+}
 
-export const parser = (kw) => {
-  const matched = db[kw] || db[kw.replaceAll('-', ' ')]
+const parseFirstLine = function (line) {
+  const [ipa, ...altIpas] = [...line.matchAll(Rgx.fl.ipas)].map(([v]) => v)
+  const alts = [...line.matchAll(Rgx.fl.alternatives)].map(([v]) => v)
 
-  if (matched !== undefined || matched !== null) {
-    const [first, ...rest] = matched.split('<br>')
-    let word, ipa, ipaVariations
+  const alternatives = alts.map((word, index) => ({
+    word,
+    ipa: altIpas[index] || null,
+  }))
 
-    if (/^@(.*?)(\/.*?\/)(\s+\.*\\s+\/.*\/)?/gms.test(first)) {
-      let parsed = [...first.matchAll(/^@(.*)(\/.*?\/)(\s+\(.*\)\s+\/.*\/)?/g)]
-      word = parsed[1]
-      ipa = parsed[2]
-      ipaVariations = parsed[3] || null
-    } else {
-      let parsed = [...first.matchAll(/^@(.*?)/gms)]
-      word = parsed[1]
+  return {
+    word: line.match(Rgx.fl.word)[0].trim(),
+    ipa,
+    alternatives,
+  }
+}
+
+const parseText = function (string) {
+  return string.substring(1).trim()
+}
+
+const parseExample = function (string) {
+  const [text, translation] = string
+    .substring(1)
+    .split('+')
+    .map((str) => str.trim())
+
+  return { text, translation }
+}
+
+const parseDefinition = function (defs) {
+  return defs.split('<br>').reduce((acc, line) => {
+    if (line.startsWith('-')) {
+      acc.meaning = parseText(line)
+    } else if (line.startsWith('=')) {
+      acc.examples = [...(acc.examples || []), parseExample(line)]
     }
 
-    let marker
-    let definitions = [],
-      index = -1
-    rest.forEach((element) => {
-      marker = marker || element[0]
+    return acc
+  }, {})
+}
 
-      if (element[0] === marker) {
-        definitions.push({})
-        ++index
+const parseIdiom = function (idiom) {
+  let definitionIndex = -1
+  return idiom.split('<br>').reduce(
+    (acc, line) => {
+      if (line.startsWith('!')) {
+        acc.text.push(parseText(line))
+      } else if (line.startsWith('-')) {
+        definitionIndex += 1
+
+        acc.definitions.push({ meaning: parseText(line) })
+      } else if (line.startsWith('=')) {
+        acc.definitions[definitionIndex].examples = [
+          ...(acc.definitions[definitionIndex].examples || []),
+          parseExample(line),
+        ]
       }
 
-      const value = element.substring(1).trim()
-      switch (element[0]) {
-        case '*': {
-          definitions[index].partOfSpeech = value
-          break
-        }
-        case '-': {
-          definitions[index].meanings = definitions[index].meanings
-            ? [...definitions[index].meanings, value]
-            : [value]
-          break
-        }
-        case '=': {
-          const [text, translation] = value.split('+ ')
-          definitions[index].examples = definitions[index].examples
-            ? [...definitions[index].examples, { text, translation }]
-            : [{ text, translation }]
+      return acc
+    },
+    { text: [], definitions: [] },
+  )
+}
 
-          break
-        }
-        case '+':
-        default: {
-          break
-        }
+export function parser(entry) {
+  const [firstline] = entry.split('<br>')
+
+  return {
+    ...parseFirstLine(firstline),
+    definitions: [...entry.matchAll(Rgx.definitionGroup)].map(([group]) => {
+      const [partOfSpeech] = group
+        .match(Rgx.partOfSpeech)
+        .map((line) => parseText(line))
+
+      const definitions = [...group.match(Rgx.definitions)].map((line) =>
+        parseDefinition(line),
+      )
+      const idioms = [...group.matchAll(Rgx.idioms)].map(([idiom]) =>
+        parseIdiom(idiom),
+      )
+
+      return {
+        partOfSpeech,
+        definitions,
+        idioms,
       }
-    })
-
-    return { word, ipa, definitions, ipaVariations }
+    }),
   }
-
-  return null
 }
