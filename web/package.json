@@ -8,10 +8,12 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.2",
     "@supabase/supabase-js": "^1.31.1",
     "next": "12.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-json-view": "^1.21.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.2",
