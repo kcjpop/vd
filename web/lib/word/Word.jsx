@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router'
-import { VerbTenses } from './VerbTenses'
-
 /*
 
 interface Example {
@@ -31,6 +28,10 @@ interface Word {
 }
 
 */
+import { useRouter } from 'next/router'
+import { VerbTenses } from './VerbTenses'
+import { Speech } from './Speech'
+
 const mock = {
   word: 'all',
   ipa: 'ɔ:l',
@@ -401,7 +402,11 @@ export function Word(props) {
   return (
     <div>
       <div className="mb-4">
-        <h1 className="text-3xl font-bold">{word}</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-bold">{word}</h1>
+          <Speech word={word} />
+        </div>
+
         <Ipa ipa={w.ipa} />
       </div>
 
