@@ -1,7 +1,12 @@
 import Link from 'next/link'
+
+import { useTranslation } from '../i18n'
+
 import { SettingButton } from './SettingButton'
 
 export function Nav() {
+  const { _e } = useTranslation()
+
   return (
     <nav className="sticky top-0 bg-gray-800 text-gray-200">
       <div className="mx-auto max-w-7xl p-4">
@@ -9,14 +14,14 @@ export function Nav() {
           <li>
             <Link href="/">
               <a className="block rounded-md py-2 px-4 hover:bg-gray-900">
-                Home
+                {_e('nav.home')}
               </a>
             </Link>
           </li>
           <li>
             <Link href="/about">
               <a className="block rounded-md py-2 px-4 hover:bg-gray-900 hover:text-gray-100">
-                About
+                {_e('nav.about')}
               </a>
             </Link>
           </li>

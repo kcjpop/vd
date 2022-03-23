@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 import { useFloating, offset, shift } from '@floating-ui/react-dom'
 
 import { SettingsIcon } from '../common/Icons'
+import { useTranslation } from '../i18n'
+
 import { Settings } from './Settings'
 
 export function SettingButton() {
+  const { _e } = useTranslation()
   const { x, y, reference, floating, strategy } = useFloating({
     placement: 'bottom-end',
     middleware: [offset(5), shift()],
@@ -36,7 +39,7 @@ export function SettingButton() {
         onClick={() => setOpen(!open)}
         type="button"
         className="rounded bg-gray-900 p-2"
-        title="Thiết lập"
+        title={_e('nav.settings')}
         ref={reference}>
         <SettingsIcon />
       </button>

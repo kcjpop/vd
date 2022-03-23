@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useTranslation } from '../i18n'
 import { getVoiceSettings } from '../storage'
 
 export function Settings() {
+  const { _e } = useTranslation()
+
   const voices = globalThis.window
     ? window.speechSynthesis
         .getVoices()
@@ -20,14 +23,14 @@ export function Settings() {
 
   return (
     <div className="grid grid-cols-2 items-center">
-      <p className="font-bold">Giọng đọc</p>
+      <p className="font-bold">{_e('nav.settings.voice')}</p>
       <select
         className="rounded border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500"
         value={selected}
         onChange={doSetVoice}>
         {voices.map((voice) => (
           <option value={voice.voiceURI} key={voice.voiceURI}>
-            {voice.name} - {voice.lang}
+            {voice.name} - {_e('nav.settings.voice.' + voice.lang)}
           </option>
         ))}
       </select>
