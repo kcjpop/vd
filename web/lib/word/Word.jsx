@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 /*
 
 interface Example {
@@ -321,10 +323,13 @@ function WordDefinition({ def }) {
 }
 
 export function Word() {
+  const router = useRouter()
+  const { word } = router.query
+
   return (
     <div>
       <div className="mb-4">
-        <h1 className="text-3xl font-bold">{w.word}</h1>
+        <h1 className="text-3xl font-bold">{word}</h1>
         <Ipa ipa={w.ipa} />
       </div>
 
