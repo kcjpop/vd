@@ -30,6 +30,7 @@ interface Word {
 }
 
 */
+import { Speech } from './Speech'
 const w = {
   word: 'all',
   ipa: 'ɔ:l',
@@ -329,7 +330,11 @@ export function Word() {
   return (
     <div>
       <div className="mb-4">
-        <h1 className="text-3xl font-bold">{word}</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-bold">{word}</h1>
+          <Speech word={word} />
+        </div>
+
         <Ipa ipa={w.ipa} />
       </div>
 
