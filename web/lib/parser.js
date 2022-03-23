@@ -1,12 +1,12 @@
 const Rgx = {
   firstline: /(?<=@).*?(?=<br>)/g,
-  definitions: /(?<=<br>)-.*?((?=<br>!)|(?=$))/,
+  definitions: /(?<=<br>)-.*?((?=<br>[!-])|(?=$))/g,
   definitionGroup: /(?<=<br>)\*.*?((?=<br>\*)|(?=$))+/g,
   partOfSpeech: /\*.*?(?=<br>)/g,
   idioms: /(?<=<br>)!.*?((?=<br>!)|(?=$))/g,
   fl: {
-    word: /(?<=@).*?(?=\/)/,
-    ipas: /(?<=\/)[^\s]+?(?=\/)/g,
+    word: /(?<=@).*?((?=\/)|(?=$))/,
+    ipas: /(?<=\/)[^\s]+?((?=\/)|(?=$))/g,
     alternatives: /(?<=\().*?(?=\))/g,
   },
 }
@@ -81,11 +81,11 @@ export function parse(entry) {
   return {
     ...parseFirstLine(firstline),
     definitions: [...entry.matchAll(Rgx.definitionGroup)].map(([group]) => {
-      const [partOfSpeech] = group
-        .match(Rgx.partOfSpeech)
-        .map((line) => parseText(line))
+      const [partOfSpeech] = (group.match(Rgx.partOfSpeech) || ['']).map(
+        (line) => parseText(line),
+      )
 
-      const definitions = [...group.match(Rgx.definitions)].map((line) =>
+      const definitions = [...group.matchAll(Rgx.definitions)].map(([line]) =>
         parseDefinition(line),
       )
       const idioms = [...group.matchAll(Rgx.idioms)].map(([idiom]) =>
