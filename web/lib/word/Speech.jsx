@@ -1,4 +1,4 @@
-import { Volumn } from '../common/Icons'
+import { VolumnIcon } from '../common/Icons'
 
 const LANG = 'en-GB'
 
@@ -13,5 +13,5 @@ export function Speech({ word }) {
     synth.speak(utterance)
   }
 
-  return <Volumn size="24px" className="cursor-pointer" onClick={doSpeak} />
+  return <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
 }
