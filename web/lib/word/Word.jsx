@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { VerbTenses } from './VerbTenses'
 
 /*
 
@@ -30,10 +31,74 @@ interface Word {
 }
 
 */
-const w = {
+const mock = {
   word: 'all',
   ipa: 'ɔ:l',
   definitions: [
+    {
+      partOfSpeech: 'ngoại động từ',
+      definitions: [
+        {
+          meaning: 'đề địa chỉ',
+          examples: [
+            {
+              text: 'to a letter',
+              translation: 'đề địa chỉ trên một bức thư',
+            },
+          ],
+        },
+        {
+          meaning: 'gửi',
+          examples: [
+            {
+              text: 'to address a letter to somebody',
+              translation: 'gửi một bức thư cho ai',
+            },
+          ],
+        },
+        {
+          meaning: 'xưng hô, gọi',
+          examples: [
+            {
+              text: 'how to address an ambassador',
+              translation: 'xưng hô như thế nào với một đại sứ',
+            },
+          ],
+        },
+        {
+          meaning: 'nói với, nói chuyện với, diễn thuyết trước; viết cho',
+          examples: [
+            {
+              text: 'to oneself to someone',
+              translation: 'nói với ai; viết (thư) cho ai',
+            },
+            {
+              text: 'to address an audience',
+              translation: 'nói với thính giả, diễn thuyết trước thính giả',
+            },
+          ],
+        },
+        {
+          meaning: 'to address oneself to chăm chú, toàn tâm toàn ý',
+          examples: [
+            {
+              text: 'to address oneself to a task',
+              translation: 'toàn tâm toàn ý với nhiệm vụ',
+            },
+          ],
+        },
+        {
+          meaning: '(thể dục,thể thao) nhắm',
+          examples: [
+            {
+              text: 'to address the ball',
+              translation: 'nhắm quả bóng (trước khi đánh gôn)',
+            },
+          ],
+        },
+      ],
+      idioms: [],
+    },
     {
       partOfSpeech: 'tính từ',
       definitions: [
@@ -304,12 +369,16 @@ function Idioms({ idioms }) {
   )
 }
 
-function WordDefinition({ def }) {
+function WordDefinition({ def, tenses }) {
   return (
     <div>
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="flex flex-col gap-2 p-4">
           <h3 className="font-bold text-sky-600">{def.partOfSpeech}</h3>
+
+          {def.partOfSpeech.includes('động từ') && (
+            <VerbTenses tenses={tenses} />
+          )}
 
           {def.definitions.map((d) => (
             <Definition key={d.meaning} def={d} />
@@ -322,9 +391,12 @@ function WordDefinition({ def }) {
   )
 }
 
-export function Word() {
+export function Word(props) {
   const router = useRouter()
   const { word } = router.query
+
+  // Hack while waiting for the whole `word` data coming from props
+  const w = { ...mock, ...props.word }
 
   return (
     <div>
@@ -335,7 +407,7 @@ export function Word() {
 
       <div className="flex flex-col gap-4">
         {w.definitions.map((def) => (
-          <WordDefinition key={def.partOfSpeech} def={def} />
+          <WordDefinition key={def.partOfSpeech} def={def} tenses={w.tenses} />
         ))}
       </div>
     </div>
