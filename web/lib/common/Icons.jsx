@@ -1,1 +1,4 @@
-export { FiVolume2 as Volumn, FiSettings as Settings } from 'react-icons/fi'
+export {
+  FiVolume2 as VolumnIcon,
+  FiSettings as SettingsIcon,
+} from 'react-icons/fi'

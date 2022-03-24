@@ -1,17 +1,24 @@
-import { Volumn } from '../common/Icons'
+import { getVoiceSettings } from '../storage'
+import { VolumnIcon } from '../common/Icons'
 
 const LANG = 'en-GB'
 
 export function Speech({ word }) {
   const doSpeak = () => {
+    const selectedVoice = getVoiceSettings().get()
+
     const synth = window.speechSynthesis
-    const voice = synth.getVoices().find((voice) => voice.lang === LANG)
+    const voice = synth
+      .getVoices()
+      .find((voice) =>
+        selectedVoice ? voice.voiceURI === selectedVoice : voice.lang === LANG,
+      )
 
     const utterance = new SpeechSynthesisUtterance(word)
-    utterance.lang = LANG
+    utterance.lang = voice.lang
     utterance.voice = voice
     synth.speak(utterance)
   }
 
-  return <Volumn size="24px" className="cursor-pointer" onClick={doSpeak} />
+  return <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
 }
