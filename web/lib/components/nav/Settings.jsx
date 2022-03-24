@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useTranslation } from '../i18n'
-import { getVoiceSettings } from '../storage'
+import { useTranslation } from '../../i18n'
+import { getVoiceSettings } from '../../storage'
 
 export function Settings() {
   const { _e } = useTranslation()

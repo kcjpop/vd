@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../../i18n'
 
 import { SettingButton } from './SettingButton'
 

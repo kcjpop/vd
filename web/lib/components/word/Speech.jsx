@@ -1,4 +1,4 @@
-import { getVoiceSettings } from '../storage'
+import { getVoiceSettings } from '../../storage'
 import { VolumnIcon } from '../common/Icons'
 
 const LANG = 'en-GB'

@@ -1,4 +1,4 @@
-import { Layout } from '@/lib/common/Layout'
+import { Layout } from '@/lib/components/common/Layout'
 import { Search } from './Search'
 
 export function Page() {

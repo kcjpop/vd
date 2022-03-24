@@ -1,24 +1,13 @@
-import path from 'path'
-import sqlite3 from 'sqlite3'
-import { open } from 'sqlite'
+import { getDb } from './db'
 
-const DB_PATH = path.join(process.cwd(), 'db/verb-tenses.db')
-console.log(DB_PATH)
-
-async function getDb() {
-  return open({
-    filename: DB_PATH,
-    driver: sqlite3.Database,
-    mode: sqlite3.OPEN_READONLY,
-  })
-}
+const VERB_TENSES_DB = 'verb-tenses.db'
 
 /**
  * Get all tenses of a verb
  * @param {string} verb
  */
 export async function getAllTenses(verb) {
-  const db = await getDb()
+  const db = await getDb(VERB_TENSES_DB)
 
   const item = await db.get(
     'SELECT * FROM verb_tenses WHERE infinitive = ?',

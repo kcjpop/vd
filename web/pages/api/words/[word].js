@@ -1,4 +1,4 @@
-import { getAllTenses } from '@/lib/api/verbTenses'
+import { getAllTenses } from '@/lib/domain-logic/verbTenses'
 
 export default async function handler(req, res) {
   try {

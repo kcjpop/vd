@@ -1,3 +1,3 @@
-import { Page } from '@/lib/word'
+import { Page } from '@/lib/components/word'
 
 export default Page

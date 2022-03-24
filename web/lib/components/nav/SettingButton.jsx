@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useFloating, offset, shift } from '@floating-ui/react-dom'
 
 import { SettingsIcon } from '../common/Icons'
-import { useTranslation } from '../i18n'
+import { useTranslation } from '../../i18n'
 
 import { Settings } from './Settings'
 

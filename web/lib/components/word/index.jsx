@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 
 import { Layout } from '../common/Layout'
 import { Word } from './Word'
-import { fetchSingleWord } from '../api'
+import { fetchSingleWord } from '../../api'
 
 export function Page() {
   const router = useRouter()
