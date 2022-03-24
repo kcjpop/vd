@@ -1,7 +1,9 @@
+import path from 'path'
 import sqlite3 from 'sqlite3'
 import { open } from 'sqlite'
 
-const DB_PATH = './db/verb-tenses.db'
+const DB_PATH = path.join(process.cwd(), 'db/verb-tenses.db')
+console.log(DB_PATH)
 
 async function getDb() {
   return open({
