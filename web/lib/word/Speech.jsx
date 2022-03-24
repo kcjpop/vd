@@ -14,10 +14,12 @@ export function Speech({ word }) {
         selectedVoice ? voice.voiceURI === selectedVoice : voice.lang === LANG,
       )
 
-    const utterance = new SpeechSynthesisUtterance(word)
-    utterance.lang = voice.lang
-    utterance.voice = voice
-    synth.speak(utterance)
+    if (voice) {
+      const utterance = new SpeechSynthesisUtterance(word)
+      utterance.lang = voice.lang
+      utterance.voice = voice
+      synth.speak(utterance)
+    }
   }
 
   return <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
