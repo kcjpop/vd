@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import '../styles/globals.css'
+import { Provider as IntlProvider } from '@/lib/i18n'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,7 +14,9 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <IntlProvider>
+        <Component {...pageProps} />
+      </IntlProvider>
     </QueryClientProvider>
   )
 }
