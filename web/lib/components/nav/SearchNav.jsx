@@ -39,16 +39,16 @@ function SearchForm() {
 
 export function SearchNav() {
   return (
-    <ul className="flex h-full items-center gap-4 px-4">
+    <ul className="space-between flex h-full items-center gap-4 px-4">
       <li>
         <Link href="/">
           <a className="p-2 font-bold">tudien.io</a>
         </Link>
       </li>
-      <li className="flex-1">
+      <li className="flex-1 md:ml-auto md:flex-none">
         <SearchForm />
       </li>
-      <li className="ml-auto">
+      <li>
         <SettingButton />
       </li>
     </ul>
