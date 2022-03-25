@@ -17,6 +17,7 @@ const messages = {
   'nav.settings.voice.en-ZA': 'English (South Africa)',
 
   'word.seeAlso': 'See also',
+  'word.copyPermalink': 'Copy permalink to this definition',
 }
 
 export default messages

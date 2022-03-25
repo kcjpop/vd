@@ -59,6 +59,7 @@ export async function getSingleWord(word) {
 
   if (rows) {
     const mapped = rows.map((row) => ({
+      id: row.synsetid,
       partOfSpeech: translatePos(row.pos),
       relatedWords: row.related_words?.split(',').filter((w) => w !== word),
       examples: unique(row.examples?.split('|'))?.map((text) => ({ text })),
@@ -66,11 +67,11 @@ export async function getSingleWord(word) {
     }))
 
     const compress = (group) =>
-      group.reduce((acc, { partOfSpeech, meaning, relatedWords, examples }) => {
+      group.reduce((acc, { partOfSpeech, ...def }) => {
         acc.partOfSpeech = partOfSpeech
 
         if (!acc.definitions) acc.definitions = []
-        acc.definitions.push({ meaning, relatedWords, examples })
+        acc.definitions.push(def)
 
         return acc
       }, {})

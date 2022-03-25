@@ -11,29 +11,52 @@ function Ipa({ ipa }) {
 
 function Example({ text, translation }) {
   return (
-    <div className="ml-4">
-      <p className="upper-first">
-        {text}{' '}
-        {translation && (
-          <span className="italic text-stone-700">= {translation}</span>
-        )}
-      </p>
-    </div>
+    <p className="upper-first">
+      {text}{' '}
+      {translation && (
+        <span className="italic text-stone-700">= {translation}</span>
+      )}
+    </p>
   )
 }
 
-function Definition({ def }) {
+function Definition({ def, index }) {
+  const { _e } = useTranslation()
+
+  const id = `def-${def.id}`
+
   return (
-    <div className="ml-4">
-      <div className="flex flex-col gap-4">
-        <p className="text-rose-600">{def.meaning}</p>
+    <div className="flex flex-col gap-4" id={id}>
+      <p className="font-semibold">
+        <a
+          title={_e('word.copyPermalink')}
+          href={'#' + id}
+          className="text-sm text-slate-400 hover:text-slate-600">
+          {index}.
+        </a>{' '}
+        <span className="text-rose-600">{def.meaning}</span>
+      </p>
 
-        {def.examples?.map((ex) => (
-          <Example key={ex.text} text={ex.text} translation={ex.translation} />
-        ))}
+      {def.examples && (
+        <div className="ml-4">
+          <p className="upper-first mb-2 font-semibold">Examples:</p>
+          <div className="flex flex-col gap-2">
+            {def.examples.map((ex) => (
+              <Example
+                key={ex.text}
+                text={ex.text}
+                translation={ex.translation}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
-        <SeeAlso words={def.relatedWords} />
-      </div>
+      {def.relatedWords && (
+        <div className="ml-4">
+          <SeeAlso words={def.relatedWords} />
+        </div>
+      )}
     </div>
   )
 }
@@ -76,19 +99,22 @@ function SeeAlso({ words }) {
   if (!Array.isArray(words) || words.length === 0) return null
 
   return (
-    <div className="flex flex-wrap items-center gap-1">
-      <p className="upper-first font-semibold">
+    <>
+      <p className="upper-first mb-2 font-semibold">
         {_e('word.seeAlso', { count: words.length })}:
       </p>
-      {words.map((word) => (
-        <LinkToWord
-          key={word}
-          query={{ word }}
-          className="rounded bg-blue-100 px-2">
-          {word}
-        </LinkToWord>
-      ))}
-    </div>
+
+      <div className="flex flex-wrap items-center gap-1">
+        {words.map((word) => (
+          <LinkToWord
+            key={word}
+            query={{ word }}
+            className="rounded bg-blue-100 px-2">
+            {word}
+          </LinkToWord>
+        ))}
+      </div>
+    </>
   )
 }
 
@@ -103,8 +129,8 @@ function WordDefinition({ def, tenses }) {
             <VerbTenses tenses={tenses} />
           )}
 
-          {def.definitions.map((d) => (
-            <Definition key={d.meaning} def={d} />
+          {def.definitions.map((d, index) => (
+            <Definition key={d.meaning} def={d} index={index + 1} />
           ))}
         </div>
 

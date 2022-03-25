@@ -17,6 +17,7 @@ const messages = {
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
 
   'word.seeAlso': 'Xem thêm',
+  'word.copyPermalink': 'Copy đường dẫn đến định nghĩa này',
 }
 
 export default messages
