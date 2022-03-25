@@ -7,7 +7,7 @@ export function Search() {
 
   const doSubmit = (e) => {
     e.preventDefault()
-    router.push(`/w/${keyword.trim()}`)
+    router.push(`/w/${keyword.trim().toLocaleLowerCase()}`)
   }
 
   return (
