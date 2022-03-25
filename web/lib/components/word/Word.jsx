@@ -41,7 +41,7 @@ function Definition({ def, index }) {
           className="text-sm text-slate-400 hover:text-slate-600">
           {index}.
         </a>{' '}
-        <span className="text-rose-700">{def.meaning}</span>
+        <span className="text-pink-700">{def.meaning}</span>
       </p>
 
       {def.examples && (
@@ -120,7 +120,7 @@ function WordDefinition({ def, tenses }) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="flex flex-col gap-4">
-        <h3 className="font-bold text-sky-600">{def.partOfSpeech}</h3>
+        <h3 className="font-bold uppercase text-sky-600">{def.partOfSpeech}</h3>
 
         {def.partOfSpeech.includes('động từ') && <VerbTenses tenses={tenses} />}
 

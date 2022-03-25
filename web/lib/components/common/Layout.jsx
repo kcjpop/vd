@@ -1,16 +1,16 @@
 import Head from 'next/head'
 import { Nav } from '../nav/Nav'
 
-export function Layout({ children }) {
+export function Layout({ children, navVariant }) {
   return (
-    <section className="flex flex-col">
+    <section>
       <Head>
         <title>vd</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header>
-        <Nav />
+        <Nav variant={navVariant} />
       </header>
 
       <main>

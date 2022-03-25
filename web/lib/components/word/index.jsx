@@ -14,7 +14,7 @@ export function Page() {
   )
 
   return (
-    <Layout>
+    <Layout navVariant="search">
       {isLoading && <p>Loading…</p>}
       {data && <Word word={data} />}
     </Layout>
