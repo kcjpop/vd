@@ -9,7 +9,7 @@ export function Layout({ children, navVariant }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
+      <header className="sticky top-0">
         <Nav variant={navVariant} />
       </header>
 
