@@ -9,14 +9,21 @@ function Ipa({ ipa }) {
   return <p>/{ipa}/</p>
 }
 
-function Example({ text, translation }) {
+function Examples({ examples }) {
   return (
-    <p className="upper-first">
-      {text}{' '}
-      {translation && (
-        <span className="italic text-stone-700">= {translation}</span>
-      )}
-    </p>
+    <>
+      <p className="upper-first mb-2 font-semibold">Examples:</p>
+      <ul className="flex list-[circle] flex-col gap-2 pl-4" data-list-char="-">
+        {examples.map((ex) => (
+          <li className="upper-first" key={ex.text}>
+            {ex.text}{' '}
+            {ex.translation && (
+              <span className="italic text-stone-700">= {ex.translation}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </>
   )
 }
 
@@ -34,21 +41,12 @@ function Definition({ def, index }) {
           className="text-sm text-slate-400 hover:text-slate-600">
           {index}.
         </a>{' '}
-        <span className="text-rose-600">{def.meaning}</span>
+        <span className="text-rose-700">{def.meaning}</span>
       </p>
 
       {def.examples && (
         <div className="ml-4">
-          <p className="upper-first mb-2 font-semibold">Examples:</p>
-          <div className="flex flex-col gap-2">
-            {def.examples.map((ex) => (
-              <Example
-                key={ex.text}
-                text={ex.text}
-                translation={ex.translation}
-              />
-            ))}
-          </div>
+          <Examples examples={def.examples} />
         </div>
       )}
 
@@ -122,7 +120,7 @@ function WordDefinition({ def, tenses }) {
   return (
     <div>
       <div className="grid gap-4 lg:grid-cols-2">
-        <div className="flex flex-col gap-2 p-4">
+        <div className="flex flex-col gap-4">
           <h3 className="font-bold text-sky-600">{def.partOfSpeech}</h3>
 
           {def.partOfSpeech.includes('động từ') && (
@@ -130,7 +128,7 @@ function WordDefinition({ def, tenses }) {
           )}
 
           {def.definitions.map((d, index) => (
-            <Definition key={d.meaning} def={d} index={index + 1} />
+            <Definition def={d} index={index + 1} key={d.meaning} />
           ))}
         </div>
 
