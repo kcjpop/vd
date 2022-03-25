@@ -42,7 +42,7 @@ export async function getSingleWord(word) {
   )
   select
     lemma,
-    group_concat(distinct lemma) as synonyms,
+    group_concat(distinct lemma) as related_words,
     -- Would be nice if we can group_concat(distinct sample, '|') but sqlite
     -- doesn't support that. Maybe we can refactor this query somehow.
     group_concat(sample, '|') as examples,
@@ -60,17 +60,17 @@ export async function getSingleWord(word) {
   if (rows) {
     const mapped = rows.map((row) => ({
       partOfSpeech: translatePos(row.pos),
-      synonymps: row.synonyms?.split(',').filter((w) => w !== word),
+      relatedWords: row.related_words?.split(',').filter((w) => w !== word),
       examples: unique(row.examples?.split('|'))?.map((text) => ({ text })),
       meaning: row.definition,
     }))
 
     const compress = (group) =>
-      group.reduce((acc, { partOfSpeech, meaning, synonymps, examples }) => {
+      group.reduce((acc, { partOfSpeech, meaning, relatedWords, examples }) => {
         acc.partOfSpeech = partOfSpeech
 
         if (!acc.definitions) acc.definitions = []
-        acc.definitions.push({ meaning, synonymps, examples })
+        acc.definitions.push({ meaning, relatedWords, examples })
 
         return acc
       }, {})

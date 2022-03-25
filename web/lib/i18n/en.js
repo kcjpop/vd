@@ -15,6 +15,8 @@ const messages = {
   'nav.settings.voice.en-IE': 'English (Ireland)',
   'nav.settings.voice.en-IN': 'English (India)',
   'nav.settings.voice.en-ZA': 'English (South Africa)',
+
+  'word.seeAlso': 'See also',
 }
 
 export default messages

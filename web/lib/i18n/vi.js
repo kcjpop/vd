@@ -15,6 +15,8 @@ const messages = {
   'nav.settings.voice.en-IE': 'Giọng Anh Ireland',
   'nav.settings.voice.en-IN': 'Giọng Anh Ấn',
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
+
+  'word.seeAlso': 'Xem thêm',
 }
 
 export default messages

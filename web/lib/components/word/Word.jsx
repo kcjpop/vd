@@ -32,7 +32,7 @@ function Definition({ def }) {
           <Example key={ex.text} text={ex.text} translation={ex.translation} />
         ))}
 
-        <Synonymps synonymps={def.synonymps} />
+        <SeeAlso words={def.relatedWords} />
       </div>
     </div>
   )
@@ -70,17 +70,17 @@ function Idioms({ idioms }) {
   )
 }
 
-function Synonymps({ synonymps }) {
+function SeeAlso({ words }) {
   const { _e } = useTranslation()
 
-  if (!Array.isArray(synonymps) || synonymps.length === 0) return null
+  if (!Array.isArray(words) || words.length === 0) return null
 
   return (
-    <div className="flex flex-wrap items-center gap-x-1">
+    <div className="flex flex-wrap items-center gap-1">
       <p className="upper-first font-semibold">
-        {_e('common.synonymps', { count: synonymps.length })}:
+        {_e('word.seeAlso', { count: words.length })}:
       </p>
-      {synonymps.map((word) => (
+      {words.map((word) => (
         <LinkToWord
           key={word}
           query={{ word }}
