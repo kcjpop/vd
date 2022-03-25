@@ -7,10 +7,10 @@ import { fetchSingleWord } from '../../api'
 
 export function Page() {
   const router = useRouter()
-  const { word } = router.query
+  const { word, dict } = router.query
 
-  const { data, isLoading } = useQuery(['word', word], () =>
-    word ? fetchSingleWord(word) : null,
+  const { data, isLoading } = useQuery(['word', word, dict], () =>
+    word ? fetchSingleWord(word, dict) : null,
   )
 
   return (

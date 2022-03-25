@@ -1,10 +1,15 @@
 import { getAllTenses } from '@/lib/domain-logic/verbTenses'
+import { getSingleWord } from '@/lib/domain-logic/wordnet'
 
 export default async function handler(req, res) {
   try {
-    const tenses = await getAllTenses(req.query.word)
+    const { word, dict } = req.query
+    const entry =
+      dict === 'wordnet' ? await getSingleWord(word) : { word, definitions: [] }
 
-    const result = {}
+    const result = { ...entry }
+    const tenses = await getAllTenses(word)
+
     result.tenses = tenses ?? null
 
     res.status(200).json(result)

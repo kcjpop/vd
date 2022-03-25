@@ -1,4 +1,9 @@
 const messages = {
+  'common.synonymps': 'từ đồng nghĩa',
+
+  'dict.en-vi': '🇻🇳 Từ điển Anh - Việt',
+  'dict.wordnet': '🇬🇧 Từ điển Anh - Anh',
+
   'nav.home': 'Trang chủ',
   'nav.about': 'Giới thiệu',
   'nav.settings': 'Thiết lập',

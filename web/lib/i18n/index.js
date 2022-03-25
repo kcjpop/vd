@@ -7,12 +7,12 @@ const messages = { vi, en }
 
 export function useTranslation() {
   const intl = useIntl()
-  const _e = (id, values) => intl.formatMessage({ id, values })
+  const _e = (id, values) => intl.formatMessage({ id }, values)
   return { intl, _e }
 }
 
 export function Provider({ children }) {
-  const locale = 'vi'
+  const locale = 'en'
 
   return (
     <IntlProvider locale={locale} key={locale} messages={messages[locale]}>

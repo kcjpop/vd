@@ -6,4 +6,5 @@ async function request(url, options) {
 // `fetchSingleX` for requests returning only 1 item
 // `fetchAllX...` for requests returning multiple items
 
-export const fetchSingleWord = (word) => request(`/api/words/${word}`)
+export const fetchSingleWord = (word, dict = 'en-vi') =>
+  request(`/api/words/${word}?dict=${dict}`)
