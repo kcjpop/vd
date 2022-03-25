@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { useTranslation } from '@/lib/i18n'
 
 import { VerbTenses } from './VerbTenses'
