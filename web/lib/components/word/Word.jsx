@@ -118,22 +118,18 @@ function SeeAlso({ words }) {
 
 function WordDefinition({ def, tenses }) {
   return (
-    <div>
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="flex flex-col gap-4">
-          <h3 className="font-bold text-sky-600">{def.partOfSpeech}</h3>
+    <div className="grid gap-4 lg:grid-cols-2">
+      <div className="flex flex-col gap-4">
+        <h3 className="font-bold text-sky-600">{def.partOfSpeech}</h3>
 
-          {def.partOfSpeech.includes('động từ') && (
-            <VerbTenses tenses={tenses} />
-          )}
+        {def.partOfSpeech.includes('động từ') && <VerbTenses tenses={tenses} />}
 
-          {def.definitions.map((d, index) => (
-            <Definition def={d} index={index + 1} key={d.meaning} />
-          ))}
-        </div>
-
-        <Idioms idioms={def.idioms} />
+        {def.definitions.map((d, index) => (
+          <Definition def={d} index={index + 1} key={d.meaning} />
+        ))}
       </div>
+
+      <Idioms idioms={def.idioms} />
     </div>
   )
 }
