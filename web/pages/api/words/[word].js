@@ -8,14 +8,14 @@ export default async function handler(req, res) {
     const word = req.query.word?.toLocaleLowerCase()
 
     const entry =
-      dict === 'wordnet' ? await getSingleWord(word) : { word, definitions: [] }
+      dict === 'wordnet'
+        ? await getSingleWord(word)
+        : await getDefinitions(word)
 
     const result = { ...entry }
     const tenses = await getAllTenses(word)
-    const definitions = await getDefinitions(word)
 
     result.tenses = tenses ?? null
-    result.definitions = definitions ?? null
 
     res.status(200).json(result)
   } catch (err) {
