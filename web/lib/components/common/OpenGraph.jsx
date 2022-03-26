@@ -7,7 +7,7 @@ export function OpenGraph() {
 
   React.useEffect(() => {
     window && setLocation(window.location)
-  })
+  }, [])
 
   return (
     <>
