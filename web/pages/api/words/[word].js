@@ -1,5 +1,5 @@
 import { getAllTenses } from '@/lib/domain-logic/verbTenses'
-import { getDefintions } from '@/lib/domain-logic/definitions'
+import { getDefinitions } from '@/lib/domain-logic/definitions'
 import { getSingleWord } from '@/lib/domain-logic/wordnet'
 
 export default async function handler(req, res) {
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     const result = { ...entry }
     const tenses = await getAllTenses(word)
-    const definitions = await getDefintions(word)
+    const definitions = await getDefinitions(word)
 
     result.tenses = tenses ?? null
     result.defintions = definitions ?? null
