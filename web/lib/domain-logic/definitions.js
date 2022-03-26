@@ -14,7 +14,7 @@ export async function getDefinitions(word) {
     ':word': word,
   })
 
-  if (entry.glossary && entry.glossary !== '') {
+  if (entry?.glossary && entry.glossary !== '') {
     return parse(entry.glossary)
   }
 }
