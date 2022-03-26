@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Nav } from '../nav/Nav'
+import { OpenGraph } from '@/lib/components/common/OpenGraph'
 
 export function Layout({ children, navVariant }) {
   return (
@@ -7,6 +8,7 @@ export function Layout({ children, navVariant }) {
       <Head>
         <title>vd</title>
         <link rel="icon" href="/favicon.ico" />
+        <OpenGraph />
       </Head>
 
       <header className="sticky top-0">
