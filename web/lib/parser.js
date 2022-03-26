@@ -75,9 +75,9 @@ const parseIdiom = function (idiom) {
   )
 }
 
-export function parse(source, entry) {
+export function parse(entry) {
   if (entry === '' || Boolean(!entry)) {
-    return { word: source, definitions: [], idioms: [], partOfSpeech: null }
+    return undefined
   }
 
   const [firstline] = entry.split('<br>')

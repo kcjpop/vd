@@ -12,6 +12,11 @@ export default async function handler(req, res) {
         ? await getSingleWord(word)
         : await getDefinitions(word)
 
+    if (!entry) {
+      res.status(404).json({ error: 'Word not found' })
+      return
+    }
+
     const result = { ...entry }
     const tenses = await getAllTenses(word)
 

@@ -14,5 +14,5 @@ export async function getDefinitions(word) {
     ':word': word,
   })
 
-  return parse(word, entry?.glossary)
+  return parse(entry?.glossary)
 }
