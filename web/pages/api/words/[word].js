@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     const definitions = await getDefinitions(word)
 
     result.tenses = tenses ?? null
-    result.defintions = definitions ?? null
+    result.definitions = definitions ?? null
 
     res.status(200).json(result)
   } catch (err) {
