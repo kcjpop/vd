@@ -76,8 +76,8 @@ const parseIdiom = function (idiom) {
 }
 
 export function parse(entry) {
-  if (entry === '' || Boolean(entry)) {
-    return null
+  if (entry === '' || Boolean(!entry)) {
+    return
   }
 
   const [firstline] = entry.split('<br>')

@@ -1,5 +1,5 @@
 import { getAllTenses } from '@/lib/domain-logic/verbTenses'
-import { getDefintions } from '@/lib/domain-logic/definitions'
+import { getDefinitions } from '@/lib/domain-logic/en-vi'
 import { getSingleWord } from '@/lib/domain-logic/wordnet'
 
 export default async function handler(req, res) {
@@ -8,14 +8,19 @@ export default async function handler(req, res) {
     const word = req.query.word?.toLocaleLowerCase()
 
     const entry =
-      dict === 'wordnet' ? await getSingleWord(word) : { word, definitions: [] }
+      dict === 'wordnet'
+        ? await getSingleWord(word)
+        : await getDefinitions(word)
+
+    if (!entry) {
+      res.status(404).json({ error: 'Word not found' })
+      return
+    }
 
     const result = { ...entry }
     const tenses = await getAllTenses(word)
-    const definitions = await getDefintions(word)
 
     result.tenses = tenses ?? null
-    result.defintions = definitions ?? null
 
     res.status(200).json(result)
   } catch (err) {
