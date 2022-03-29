@@ -22,6 +22,10 @@ export function Speech({ word }) {
   const [voice, setVoice] = React.useState(null)
 
   React.useEffect(() => {
+    doGetVoices()
+  }, [])
+
+  const doGetVoices = React.useCallback(() => {
     ;(async function () {
       const voices = await getVoices()
       const selectedVoice = getVoiceSettings().get()
