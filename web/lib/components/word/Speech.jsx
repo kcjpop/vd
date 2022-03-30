@@ -2,53 +2,44 @@ import React from 'react'
 import { getVoiceSettings } from '../../storage'
 import { VolumnIcon } from '../common/Icons'
 
-const LANG = 'en-GB'
-
-function getVoices() {
-  return new Promise((resolve) => {
-    let interval
-
-    interval = setInterval(() => {
-      const voices = window.speechSynthesis.getVoices()
-      if (voices.length > 0) {
-        clearInterval(interval)
-        resolve(voices)
-      }
-    }, 10)
-  })
-}
+const LANG = 'en'
 
 export function Speech({ word }) {
-  const [voice, setVoice] = React.useState(null)
+  const [voices, setVoices] = React.useState(null)
 
   React.useEffect(() => {
     doGetVoices()
+
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = doGetVoices
+    }
   }, [])
 
   const doGetVoices = React.useCallback(() => {
-    ;(async function () {
-      const voices = await getVoices()
-      const selectedVoice = getVoiceSettings().get()
+    const synth = window.speechSynthesis
+    const voices = synth.getVoices()
 
-      const voice = voices.find((voice) =>
-        selectedVoice ? voice.voiceURI === selectedVoice : voice.lang === LANG,
-      )
-
-      if (voice) {
-        setVoice(voice)
-      }
-    })()
+    if (voices.length > 0) {
+      setVoices(voices.filter(({ lang }) => lang.startsWith(LANG)))
+    }
   }, [])
 
   const doSpeak = () => {
     const synth = window.speechSynthesis
     const utterance = new SpeechSynthesisUtterance(word)
-    utterance.lang = voice.lang
-    utterance.voice = voice
-    synth.speak(utterance)
+    const selected = getVoiceSettings().get()
+    let voice = voices.find(({ lang, voiceURI }) =>
+      selected ? selected === voiceURI : lang.startsWith(LANG),
+    )
+
+    if (voice) {
+      utterance.lang = voice.lang
+      utterance.voice = voice
+      synth.speak(utterance)
+    }
   }
 
-  return voice ? (
+  return !voices ? null : (
     <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
-  ) : null
+  )
 }
