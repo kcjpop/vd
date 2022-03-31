@@ -8,24 +8,23 @@ export function Speech({ word }) {
   const [voices, setVoices] = React.useState(null)
 
   React.useEffect(() => {
+    const doGetVoices = () => {
+      const synth = window.speechSynthesis
+      const voices = synth.getVoices()
+
+      if (voices.length > 0) {
+        setVoices(voices.filter(({ lang }) => lang.startsWith(LANG)))
+      }
+    }
+
     doGetVoices()
 
     window.speechSynthesis.addEventListener('voiceschanged', doGetVoices)
 
-    return window.speechSynthesis.removeEventListener(
-      'voiceschanged',
-      doGetVoices,
-    )
-  }, [])
-
-  const doGetVoices = () => {
-    const synth = window.speechSynthesis
-    const voices = synth.getVoices()
-
-    if (voices.length > 0) {
-      setVoices(voices.filter(({ lang }) => lang.startsWith(LANG)))
+    return () => {
+      window.speechSynthesis.removeEventListener('voiceschanged', doGetVoices)
     }
-  }
+  }, [])
 
   const doSpeak = () => {
     const synth = window.speechSynthesis
