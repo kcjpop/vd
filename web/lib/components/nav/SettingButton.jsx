@@ -10,7 +10,7 @@ export function SettingButton() {
   return (
     <div className="relative">
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger asChild>
           <button
             type="button"
             className="rounded bg-gray-900 p-2"
