@@ -22,7 +22,7 @@ export class ErrorBoundary extends Component {
       return (
         <div>
           <h1>Something went wrong.</h1>
-          <pre>{JSON.stringify(this.state.error?.stack)}</pre>
+          <pre>{this.state.error?.stack}</pre>
         </div>
       )
     }
