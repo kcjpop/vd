@@ -20,7 +20,7 @@ export function SettingButton() {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content>
-          <div className="mt-1 w-80 rounded bg-white p-4 text-gray-800 drop-shadow lg:w-60">
+          <div className="mt-1 w-80 rounded bg-white p-4 text-gray-800 drop-shadow lg:w-72">
             <Settings />
           </div>
         </DropdownMenu.Content>
