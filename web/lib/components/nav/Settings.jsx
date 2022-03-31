@@ -22,8 +22,8 @@ export function Settings() {
   }
 
   return (
-    <div className="grid grid-cols-2 items-center">
-      <p className="font-bold">{_e('nav.settings.voice')}</p>
+    <div className="grid items-center gap-2 lg:grid-cols-2">
+      <div className="font-bold">{_e('nav.settings.voice')}</div>
       <select
         className="rounded border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500"
         value={selected}
