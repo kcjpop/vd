@@ -4,6 +4,8 @@ const messages = {
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
 
+  'dictMenu.pick': 'Change dictionary',
+
   'nav.home': 'Home',
   'nav.about': 'About',
   'nav.settings': 'Settings',

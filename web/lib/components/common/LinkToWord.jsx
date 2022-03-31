@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default function LinkToWord({ query, className, children }) {
+export function LinkToWord({ query, className, children }) {
   const router = useRouter()
 
   return (

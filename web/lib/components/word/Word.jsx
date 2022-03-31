@@ -2,7 +2,8 @@ import { useTranslation } from '@/lib/i18n'
 
 import { VerbTenses } from './VerbTenses'
 import { Speech } from './Speech'
-import LinkToWord from '../common/LinkToWord'
+import { LinkToWord } from '../common/LinkToWord'
+import { DictMenu } from './DictMenu'
 
 // There might be multiple pronunciation. Support one for now.
 function Ipa({ ipa }) {
@@ -142,16 +143,6 @@ function WordDefinition({ def, tenses }) {
   )
 }
 
-function LinksToDict({ dict }) {
-  const { _e } = useTranslation()
-
-  return (
-    <LinkToWord query={{ dict }} className="rounded bg-blue-100 px-2">
-      {_e(`dict.${dict}`)}
-    </LinkToWord>
-  )
-}
-
 export function Word({ word: w }) {
   return (
     <div>
@@ -162,7 +153,7 @@ export function Word({ word: w }) {
             <Speech word={w.word} />
           </div>
           <div className="ml-auto">
-            <LinksToDict dict="wordnet" />
+            <DictMenu />
           </div>
         </div>
 
