@@ -1,9 +1,11 @@
 import { Component } from 'react'
+import { Logtail } from '@logtail/browser'
 
 export class ErrorBoundary extends Component {
   constructor(props) {
     super(props)
     this.state = { hasError: false, error: null }
+    this.logtail = new Logtail(process.env.NEXT_PUBLIC_LOGTAIL_SOURCE_TOKEN)
   }
 
   static getDerivedStateFromError(error) {
@@ -11,7 +13,8 @@ export class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error(error)
+    this.logtail.error(error)
+    this.logtail.error(errorInfo, error)
   }
 
   render() {

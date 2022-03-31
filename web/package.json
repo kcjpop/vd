@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@loadable/component": "5.15.2",
+    "@logtail/browser": "0.1.10",
     "@radix-ui/react-dropdown-menu": "0.1.6",
     "next": "12.1.0",
     "react": "17.0.2",
