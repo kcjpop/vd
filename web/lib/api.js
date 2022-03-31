@@ -1,5 +1,13 @@
 async function request(url, options) {
-  return fetch(url, options).then((res) => res.json())
+  const res = await fetch(url, options)
+
+  if (!res.ok) {
+    const ex = new Error(`HTTP error! Status: ${res.status}`)
+    ex.status = res.status
+    throw ex
+  }
+
+  return res.json()
 }
 
 // FUNCTION NAME CONVENTION

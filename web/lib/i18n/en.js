@@ -6,7 +6,9 @@ const messages = {
 
   'dictMenu.pick': 'Change dictionary',
 
+  'error.title': 'Oh snap! An error happened 💥',
   'error.pageNotFound': 'The page you requested is not found',
+  'error.wordNotFound': 'No definition found for “{word}” 😰',
 
   'nav.home': 'Home',
   'nav.about': 'About',
