@@ -8,9 +8,10 @@ export function Speech({ word }) {
   const [voices, setVoices] = React.useState(null)
 
   React.useEffect(() => {
-    const doGetVoices = () => {
-      if (!window.speechSynthesis) return
+    // Too bad window.speechSynthesis isn't widely supported yet on mobile
+    if (!window.speechSynthesis) return
 
+    const doGetVoices = () => {
       const voices = window.speechSynthesis.getVoices()
 
       if (voices.length > 0) {
@@ -43,7 +44,7 @@ export function Speech({ word }) {
     }
   }
 
-  return !voices ? null : (
-    <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
-  )
+  if (!window.speechSynthesis || !voices) return
+
+  return <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
 }
