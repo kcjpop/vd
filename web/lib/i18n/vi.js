@@ -18,6 +18,18 @@ const messages = {
 
   'word.seeAlso': 'Xem thêm',
   'word.copyPermalink': 'Copy đường dẫn đến định nghĩa này',
+
+  'verbTense.infinitive': 'Nguyên mẫu',
+  'verbTense.singular_present_1st': 'Hiện tại ngôi thứ nhất',
+  'verbTense.singular_present_2nd': 'Hiện tại ngôi thứ hai',
+  'verbTense.singular_present_3rd': 'Hiện tại ngôi thứ ba',
+  'verbTense.present_plural': 'Hiện tại ngôi thứ ba',
+  'verbTense.present_participle': 'Hiện tại phân từ (V-ing)',
+  'verbTense.singular_past_1st': 'Quá khứ ngôi thứ nhất',
+  'verbTense.singular_past_2nd': 'Quá khứ ngôi thứ hai',
+  'verbTense.singular_past_3rd': 'Quá khứ ngôi thứ ba',
+  'verbTense.past_plural': 'Quá khứ ngôi thứ ba',
+  'verbTense.past_participle': 'Quá khứ phân từ (V-ed, V3)',
 }
 
 export default messages

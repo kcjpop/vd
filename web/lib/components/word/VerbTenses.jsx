@@ -1,4 +1,8 @@
+import { useTranslation } from '@/lib/i18n'
+import { Fragment } from 'react'
+
 export function VerbTenses({ tenses }) {
+  const { _e } = useTranslation()
   if (!tenses) return null
 
   // This should be translated and follow a specific order
@@ -18,12 +22,12 @@ export function VerbTenses({ tenses }) {
           }
         `}
       </style>
-      {Object.entries(tenses).flatMap(([k, v]) => [
-        <strong className="font-semibold" key={k}>
-          {k}:
-        </strong>,
-        <span key={v}>{v}</span>,
-      ])}
+      {Object.entries(tenses).flatMap(([k, v]) => (
+        <Fragment key={k}>
+          <strong className="font-semibold">{_e(`verbTense.${k}`)}:</strong>
+          <span>{v}</span>
+        </Fragment>
+      ))}
     </div>
   )
 }
