@@ -1,5 +1,3 @@
-import { OpenGraph } from '@/lib/components/common/OpenGraph'
-
 import { Nav } from '../nav/Nav'
 import { ErrorBoundary } from './ErrorBoundary'
 import { OpenGraph } from '@/lib/components/common/OpenGraph'

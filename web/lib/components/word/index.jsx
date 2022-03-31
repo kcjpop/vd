@@ -28,6 +28,11 @@ export function Page({ opengraph }) {
     { retry: 2 },
   )
 
+  // @FIXME This could be translated using word and dict
+  const opengraph = {
+    title: `“${word}” tiếng Việt là gì?`,
+  }
+
   return (
     <Layout navVariant="search" opengraph={opengraph}>
       {isLoading && (
