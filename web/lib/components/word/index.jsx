@@ -22,8 +22,10 @@ export function Page() {
   const router = useRouter()
   const { word, dict } = router.query
 
-  const { data, isLoading, isError } = useQuery(['word', word, dict], () =>
-    word ? fetchSingleWord(word, dict) : null,
+  const { data, isLoading, isError } = useQuery(
+    ['word', word, dict],
+    () => (word ? fetchSingleWord(word, dict) : null),
+    { retry: 2 },
   )
 
   // @FIXME This could be translated using word and dict
