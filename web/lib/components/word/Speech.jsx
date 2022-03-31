@@ -9,8 +9,9 @@ export function Speech({ word }) {
 
   React.useEffect(() => {
     const doGetVoices = () => {
-      const synth = window.speechSynthesis
-      const voices = synth.getVoices()
+      if (!window.speechSynthesis) return
+
+      const voices = window.speechSynthesis.getVoices()
 
       if (voices.length > 0) {
         setVoices(voices.filter(({ lang }) => lang.startsWith(LANG)))
@@ -19,10 +20,11 @@ export function Speech({ word }) {
 
     doGetVoices()
 
-    window.speechSynthesis.addEventListener('voiceschanged', doGetVoices)
+    // Cannot use `addEventListener` on iOS Safari T_T
+    window.speechSynthesis.voiceschanged = doGetVoices
 
     return () => {
-      window.speechSynthesis.removeEventListener('voiceschanged', doGetVoices)
+      window.speechSynthesis.voiceschanged = undefined
     }
   }, [])
 
