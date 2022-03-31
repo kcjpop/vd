@@ -44,7 +44,7 @@ export function Speech({ word }) {
     }
   }
 
-  if (!window.speechSynthesis || !voices) return
+  if (!voices) return null
 
   return <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
 }
