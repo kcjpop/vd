@@ -6,6 +6,8 @@ const messages = {
 
   'dictMenu.pick': 'Chọn từ điển',
 
+  'error.pageNotFound': 'Không tìm thấy đường dẫn bạn yêu cầu',
+
   'nav.home': 'Trang chủ',
   'nav.about': 'Giới thiệu',
   'nav.settings': 'Thiết lập',

@@ -12,7 +12,7 @@ export function useTranslation() {
 }
 
 export function Provider({ children }) {
-  const locale = 'en'
+  const locale = 'vi'
 
   return (
     <IntlProvider locale={locale} key={locale} messages={messages[locale]}>

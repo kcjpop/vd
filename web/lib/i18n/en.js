@@ -6,6 +6,8 @@ const messages = {
 
   'dictMenu.pick': 'Change dictionary',
 
+  'error.pageNotFound': 'The page you requested is not found',
+
   'nav.home': 'Home',
   'nav.about': 'About',
   'nav.settings': 'Settings',
