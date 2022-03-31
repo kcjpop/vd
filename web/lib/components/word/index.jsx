@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
 import { Layout } from '../common/Layout'
+import { Spinner } from '../common/Spinner'
 import { Word } from './Word'
 import { fetchSingleWord } from '../../api'
 
@@ -20,7 +21,12 @@ export function Page() {
 
   return (
     <Layout navVariant="search" opengraph={opengraph}>
-      {isLoading && <p>Loading…</p>}
+      {isLoading && (
+        <div className="flex justify-center">
+          <Spinner />
+        </div>
+      )}
+
       {data && <Word word={data} />}
     </Layout>
   )
