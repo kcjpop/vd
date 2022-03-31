@@ -11,6 +11,11 @@ export function Speech({ word }) {
     doGetVoices()
 
     window.speechSynthesis.addEventListener('voiceschanged', doGetVoices)
+
+    return window.speechSynthesis.removeEventListener(
+      'voiceschanged',
+      doGetVoices,
+    )
   }, [])
 
   const doGetVoices = () => {
