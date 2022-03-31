@@ -12,6 +12,8 @@ export function Speech({ word }) {
     if (!window.speechSynthesis) return
 
     const doGetVoices = () => {
+      if (!window.speechSynthesis) return
+
       const voices = window.speechSynthesis.getVoices()
 
       if (voices.length > 0) {
