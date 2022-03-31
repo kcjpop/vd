@@ -35,12 +35,15 @@ function Definition({ def, index }) {
   return (
     <div className="flex flex-col gap-4" id={id}>
       <p className="font-semibold">
-        <a
-          title={_e('word.copyPermalink')}
-          href={'#' + id}
-          className="text-sm text-slate-400 hover:text-slate-600">
-          {index}.
-        </a>{' '}
+        {index && (
+          <a
+            title={_e('word.copyPermalink')}
+            href={'#' + id}
+            className="mr-1 text-sm text-slate-400 hover:text-slate-600">
+            {index}.
+          </a>
+        )}
+
         <span className="text-pink-700">{def.meaning}</span>
       </p>
 
