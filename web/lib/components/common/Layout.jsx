@@ -1,13 +1,10 @@
-import Head from 'next/head'
 import { Nav } from '../nav/Nav'
+import { OpenGraph } from '@/lib/components/common/OpenGraph'
 
-export function Layout({ children, navVariant }) {
+export function Layout({ children, navVariant, opengraph }) {
   return (
     <section>
-      <Head>
-        <title>vd</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <OpenGraph opengraph={opengraph} />
 
       <header className="sticky top-0">
         <Nav variant={navVariant} />

@@ -3,7 +3,10 @@ import { Search } from './Search'
 
 export function Page() {
   return (
-    <Layout>
+    <Layout
+      opengraph={{
+        title: 'Trang Chủ',
+      }}>
       <Search></Search>
     </Layout>
   )

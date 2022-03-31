@@ -13,8 +13,13 @@ export function Page() {
     word ? fetchSingleWord(word, dict) : null,
   )
 
+  // @FIXME This could be translated using word and dict
+  const opengraph = {
+    title: `“${word}” tiếng Việt là gì?`,
+  }
+
   return (
-    <Layout navVariant="search">
+    <Layout navVariant="search" opengraph={opengraph}>
       {isLoading && <p>Loading…</p>}
       {data && <Word word={data} />}
     </Layout>
