@@ -42,7 +42,9 @@ export function SearchNav() {
     <ul className="space-between flex h-full items-center gap-4 px-4">
       <li>
         <Link href="/">
-          <a className="p-2 font-bold">tudien.io</a>
+          <a className="block rounded-md bg-gray-900 p-2 font-bold">
+            tudien.io
+          </a>
         </Link>
       </li>
       <li className="flex-1 md:ml-auto md:flex-none">

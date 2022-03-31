@@ -135,7 +135,9 @@ function WordDefinition({ def, tenses }) {
         ))}
       </div>
 
-      <Idioms idioms={def.idioms} />
+      <div>
+        <Idioms idioms={def.idioms} />
+      </div>
     </div>
   )
 }
