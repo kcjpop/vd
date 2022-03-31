@@ -5,24 +5,35 @@ export class ErrorBoundary extends Component {
   constructor(props) {
     super(props)
     this.state = { hasError: false, error: null }
-    this.logtail = new Logtail(process.env.NEXT_PUBLIC_LOGTAIL_SOURCE_TOKEN)
+
+    if (process.env.production === 'production') {
+      this.logtail = new Logtail(process.env.NEXT_PUBLIC_LOGTAIL_SOURCE_TOKEN)
+    }
   }
 
   static getDerivedStateFromError(error) {
     return { hasError: true, error }
   }
 
-  componentDidCatch(error, errorInfo) {
-    this.logtail.error(error)
-    this.logtail.error(errorInfo, error)
+  componentDidCatch(error, context) {
+    this.logtail?.error(error?.message ?? 'An error occurred', {
+      context,
+      error,
+    })
   }
 
   render() {
     if (this.state.hasError) {
       return (
         <div>
-          <h1>Something went wrong.</h1>
-          <pre>{this.state.error?.stack}</pre>
+          <h1 className="mb-2 text-3xl font-bold text-gray-600">
+            Đã xảy ra lỗi 😨 Bạn vui lòng tải lại trang hoặc truy cập vào trang
+            chủ để thử lại.
+          </h1>
+          <h2 className="text-2xl text-gray-400">
+            An error has occurred! Please refresh the page or visit the home
+            page to try again.
+          </h2>
         </div>
       )
     }
