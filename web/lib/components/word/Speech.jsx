@@ -30,7 +30,7 @@ export function Speech({ word }) {
     const synth = window.speechSynthesis
     const utterance = new SpeechSynthesisUtterance(word)
     const selected = getVoiceSettings().get()
-    let voice = voices.find(({ lang, voiceURI }) =>
+    const voice = voices.find(({ lang, voiceURI }) =>
       selected ? selected === voiceURI : lang.startsWith(LANG),
     )
 
