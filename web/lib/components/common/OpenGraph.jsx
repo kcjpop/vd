@@ -1,47 +1,35 @@
-import React from 'react'
+import Head from 'next/head'
 
-const description = ''
-
-export function OpenGraph() {
-  const [location, setLocation] = React.useState(null)
-
-  React.useEffect(() => {
-    window && setLocation(window.location)
-  })
+export function OpenGraph({ opengraph = {} }) {
+  const url = new URL(
+    opengraph.url ?? process.env.NEXT_PUBLIC_MAIN_URL ?? 'https://tudien.io',
+  )
+  const domain = url.hostname
+  const title = opengraph.title ? opengraph.title + ' - ' + domain : domain
+  const description =
+    opengraph.description ?? 'Từ điển Anh Việt xịn xò nhất quả đất'
+  const image = opengraph.image ?? 'https://tudien.io/banner.png'
 
   return (
-    <>
-      {/* <!-- HTML Meta Tags --> */}
-      <title>vd</title>
+    <Head>
+      <title>{title}</title>
       <link rel="icon" href="/favicon.ico" />
       <meta name="description" content={description} />
 
-      {/* <!-- Facebook Meta Tags --> */}
-      <meta
-        property="og:url"
-        content={location ? location.origin + location.pathname : ''}
-      />
+      <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={'vd'} />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta
-        property="og:image"
-        content="http://localhost.dev/banner/img.webp"
-      />
+      <meta property="og:image" content={image} />
+      <meta property="og:image:width" content="600" />
+      <meta property="og:image:height" content="431" />
 
-      {/* <!-- Twitter Meta Tags --> */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content={location?.host || ''} />
-      <meta
-        property="twitter:url"
-        content={location ? location.origin + location.pathname : ''}
-      />
-      <meta name="twitter:title" content="vd" />
+      <meta property="twitter:domain" content={domain} />
+      <meta property="twitter:url" content={url} />
+      <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta
-        name="twitter:image"
-        content="http://localhost.dev/banner/img.webp"
-      />
-    </>
+      <meta name="twitter:image" content={image} />
+    </Head>
   )
 }
