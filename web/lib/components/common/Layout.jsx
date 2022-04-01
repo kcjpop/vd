@@ -8,7 +8,7 @@ export function Layout({ children, navVariant, opengraph }) {
     <section>
       <OpenGraph opengraph={opengraph} />
 
-      <header className="sticky top-0">
+      <header className="sticky top-0 z-50">
         <Nav variant={navVariant} />
       </header>
 
