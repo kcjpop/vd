@@ -10,7 +10,6 @@ export function Speech({ word }) {
   React.useEffect(() => {
     // Too bad window.speechSynthesis isn't widely supported yet on mobile
     if (!window.speechSynthesis) return
-
     const doGetVoices = () => {
       if (!window.speechSynthesis) return
 
@@ -24,10 +23,10 @@ export function Speech({ word }) {
     doGetVoices()
 
     // Cannot use `addEventListener` on iOS Safari T_T
-    window.speechSynthesis.voiceschanged = doGetVoices
+    window.speechSynthesis.onvoiceschanged = doGetVoices
 
     return () => {
-      window.speechSynthesis.voiceschanged = undefined
+      window.speechSynthesis.onvoiceschanged = undefined
     }
   }, [])
 

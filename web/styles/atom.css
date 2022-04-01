@@ -1,3 +1,11 @@
 .upper-first::first-letter {
   text-transform: uppercase;
 }
+
+/* Toggle Checkbox */
+.toggle-checkbox:checked {
+  @apply right-0 border-sky-400;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply bg-sky-400;
+}

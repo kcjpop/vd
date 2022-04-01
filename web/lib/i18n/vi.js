@@ -21,6 +21,7 @@ const messages = {
   'nav.settings.voice.en-IE': 'Giọng Anh Ireland',
   'nav.settings.voice.en-IN': 'Giọng Anh Ấn',
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
+  'nav.settings.exampleSpeech': 'Hiển thị đọc ví dụ',
 
   'word.seeAlso': 'Xem thêm',
   'word.examples': 'Ví dụ',
