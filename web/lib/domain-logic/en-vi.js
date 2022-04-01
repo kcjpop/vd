@@ -10,9 +10,12 @@ const EN_VI_DB = 'en-vi.db'
 export async function getDefinitions(word) {
   const db = await getDb(EN_VI_DB)
 
-  const entry = await db.get('SELECT glossary FROM words WHERE word = :word', {
-    ':word': word,
-  })
+  const sql = `
+SELECT id, group_concat(glossary, '<br>') as glossary
+FROM words
+WHERE word = :word`
+
+  const entry = await db.get(sql, { ':word': word })
 
   return parse(entry?.glossary)
 }
