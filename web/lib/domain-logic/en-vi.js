@@ -13,9 +13,9 @@ export async function getDefinitions(word) {
   const sql = `
 SELECT id, group_concat(glossary, '<br>') as glossary
 FROM words
-WHERE word = :word`
+WHERE word = ?`
 
-  const entry = await db.get(sql, { ':word': word })
+  const entry = db.prepare(sql).get(word)
 
   return parse(entry?.glossary)
 }

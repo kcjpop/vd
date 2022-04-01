@@ -9,10 +9,9 @@ const VERB_TENSES_DB = 'verb-tenses.db'
 export async function getAllTenses(verb) {
   const db = await getDb(VERB_TENSES_DB)
 
-  const item = await db.get(
-    'SELECT * FROM verb_tenses WHERE infinitive = ?',
-    verb,
-  )
+  const item = db
+    .prepare('SELECT * FROM verb_tenses WHERE infinitive = ?')
+    .get(verb)
 
   // Strip empty columns
   if (item) {

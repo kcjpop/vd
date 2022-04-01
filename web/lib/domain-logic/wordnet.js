@@ -58,7 +58,7 @@ export async function getSingleWord(word) {
     synsetid
   order by
     tagcount desc`
-  const rows = await db.all(sql, [word])
+  const rows = db.prepare(sql).all(word)
 
   if (rows) {
     const mapped = rows.map((row) => ({
