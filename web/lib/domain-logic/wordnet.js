@@ -31,6 +31,7 @@ export async function getSingleWord(word) {
   with t as (
     select
       s.wordid,
+      s.tagcount,
       ss.*
     from
       words w
@@ -54,7 +55,9 @@ export async function getSingleWord(word) {
     left join samples sp using(synsetid)
     left join words w using(wordid)
   group by
-    synsetid`
+    synsetid
+  order by
+    tagcount desc`
   const rows = await db.all(sql, [word])
 
   if (rows) {
