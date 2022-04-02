@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import '../styles/globals.css'
@@ -13,6 +14,20 @@ const queryClient = new QueryClient({
 })
 
 function MyApp({ Component, pageProps }) {
+  const [session, setSession] = useState(null)
+
+  useEffect(() => {
+    setSession(supabase.auth.session())
+
+    supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  useEffect(() => {
+    console.log({ session })
+  }, [session])
+
   return (
     <QueryClientProvider client={queryClient}>
       <IntlProvider>
