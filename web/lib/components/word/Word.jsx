@@ -11,9 +11,12 @@ function Ipa({ ipa }) {
 }
 
 function Examples({ examples }) {
+  const { _e } = useTranslation()
   return (
     <>
-      <p className="upper-first mb-2 font-semibold">Examples:</p>
+      <p className="upper-first mb-2 font-semibold text-slate-700">
+        {_e('word.examples')}:
+      </p>
       <ul className="flex list-[circle] flex-col gap-2 pl-4" data-list-char="-">
         {examples.map((ex) => (
           <li className="upper-first" key={ex.text}>
@@ -48,6 +51,8 @@ function Definition({ def, index }) {
         <span className="text-pink-700">{def.meaning}</span>
       </p>
 
+      {def.text && <p className="ml-4">{def.text}</p>}
+
       {def.examples && (
         <div className="ml-4">
           <Examples examples={def.examples} />
@@ -68,14 +73,18 @@ function Idiom({ idiom }) {
     <div>
       <div className="flex flex-col gap-2">
         {idiom.text.map((t) => (
-          <p key={t}>{t}</p>
+          <p className="font-semibold text-pink-700" key={t}>
+            {t}
+          </p>
         ))}
         <div className="ml-4">
-          <div className="flex flex-col gap-2">
-            {idiom.definitions.map((d) => (
-              <Definition key={d.meaning} def={d} />
-            ))}
-          </div>
+          <p className="mb-2">{idiom.translation}</p>
+
+          {idiom.examples && (
+            <div className="flex flex-col gap-2">
+              <Examples examples={idiom.examples} />
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -87,7 +96,7 @@ function Idioms({ idioms }) {
 
   return (
     <div className="flex flex-col gap-2 rounded bg-gray-100 p-4">
-      <h3 className="font-bold text-sky-600">thành ngữ</h3>
+      <h3 className="font-bold text-sky-600">Thành ngữ/ Cụm từ</h3>
       {idioms.map((i, index) => (
         <Idiom key={index} idiom={i} />
       ))}
@@ -106,12 +115,12 @@ function SeeAlso({ words }) {
         {_e('word.seeAlso', { count: words.length })}:
       </p>
 
-      <div className="flex flex-wrap items-center gap-1">
+      <div className="flex flex-wrap items-center gap-2">
         {words.map((word) => (
           <LinkToWord
             key={word}
             query={{ word }}
-            className="rounded bg-blue-100 px-2">
+            className="border-b-2 border-sky-600">
             {word}
           </LinkToWord>
         ))}
@@ -122,12 +131,16 @@ function SeeAlso({ words }) {
 
 function WordDefinition({ def, tenses }) {
   const isVerb =
-    def.partOfSpeech.includes('động từ') || def.partOfSpeech === 'verb'
+    def.partOfSpeech?.includes('động từ') || def.partOfSpeech === 'verb'
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="flex flex-col gap-4">
-        <h3 className="font-bold uppercase text-sky-600">{def.partOfSpeech}</h3>
+        <h3 className="mt-2">
+          <span className="rounded bg-sky-100 p-2 font-bold uppercase text-sky-600">
+            {def.partOfSpeech}
+          </span>
+        </h3>
 
         {isVerb && <VerbTenses tenses={tenses} />}
 

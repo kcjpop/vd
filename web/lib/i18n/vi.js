@@ -23,6 +23,7 @@ const messages = {
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
 
   'word.seeAlso': 'Xem thêm',
+  'word.examples': 'Ví dụ',
   'word.copyPermalink': 'Copy đường dẫn đến định nghĩa này',
 
   'verbTense.infinitive': 'Nguyên mẫu',

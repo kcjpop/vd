@@ -1,6 +1,7 @@
 import { getDb } from './db'
 
 const DB = 'wordnet.db'
+const db = getDb(DB)
 
 // @see https://wordnet.princeton.edu/documentation/wndb5wn
 const translatePos = (pos) => {
@@ -26,7 +27,6 @@ const groupBy = (col, keyFn) =>
 const unique = (col) => (col ? [...new Set(col)] : col)
 
 export async function getSingleWord(word) {
-  const db = await getDb(DB)
   const sql = `
   with t as (
     select

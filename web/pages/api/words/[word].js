@@ -5,7 +5,7 @@ import { getSingleWord } from '@/lib/domain-logic/wordnet'
 export default async function handler(req, res) {
   try {
     const { dict } = req.query
-    const word = req.query.word?.toLocaleLowerCase()
+    const { word } = req.query
 
     const entry =
       dict === 'wordnet'
