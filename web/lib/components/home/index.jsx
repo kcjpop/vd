@@ -1,12 +1,9 @@
 import { Layout } from '@/lib/components/common/Layout'
 import { Search } from './Search'
 
-export function Page() {
+export function Page({ opengraph }) {
   return (
-    <Layout
-      opengraph={{
-        title: 'Trang Chủ',
-      }}>
+    <Layout opengraph={opengraph}>
       <Search></Search>
     </Layout>
   )

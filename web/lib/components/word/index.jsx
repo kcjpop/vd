@@ -17,7 +17,7 @@ function Error({ err }) {
   )
 }
 
-export function Page() {
+export function Page({ opengraph }) {
   const { _e } = useTranslation()
   const router = useRouter()
   const { word, dict } = router.query
@@ -27,11 +27,6 @@ export function Page() {
     () => (word ? fetchSingleWord(word, dict) : null),
     { retry: 2 },
   )
-
-  // @FIXME This could be translated using word and dict
-  const opengraph = {
-    title: `“${word}” tiếng Việt là gì?`,
-  }
 
   return (
     <Layout navVariant="search" opengraph={opengraph}>
