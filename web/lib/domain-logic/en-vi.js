@@ -1,14 +1,13 @@
 import { getDb } from './db'
 
 const EN_VI_DB = 'en-vi.db'
+const db = getDb(EN_VI_DB)
 
 /**
  * Get word from db
  * @param {string} word
  */
 export async function getDefinitions(word) {
-  const db = await getDb(EN_VI_DB)
-
   const sql = `
 select part_of_speech, definitions, phrases
 from words
