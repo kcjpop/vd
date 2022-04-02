@@ -24,10 +24,10 @@ export function Speech({ word }) {
     doGetVoices()
 
     // Cannot use `addEventListener` on iOS Safari T_T
-    window.speechSynthesis.voiceschanged = doGetVoices
+    window.speechSynthesis.onvoiceschanged = doGetVoices
 
     return () => {
-      window.speechSynthesis.voiceschanged = undefined
+      window.speechSynthesis.onvoiceschanged = undefined
     }
   }, [])
 
