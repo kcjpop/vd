@@ -6,7 +6,7 @@ const COLOR = { TEXT: '#E5E7EB', BACKGROUND: '#1F2937' }
 const MARGIN = { TOP: 96, RIGHT: 70, BOTTOM: 96, LEFT: 70 }
 
 function wrapText(ctx, text, x, y, lineheight, maxWidth) {
-  let words = [...text.matchAll(/\s?[^\s]+/g)].map(([v]) => v)
+  const words = [...text.matchAll(/\s?[^\s]+/g)].map(([v]) => v)
   let line = ''
 
   do {
@@ -29,7 +29,7 @@ function wrapText(ctx, text, x, y, lineheight, maxWidth) {
 
 async function handler(request, response, lruCache) {
   let input = ''
-  const inputs = request.query['t'] ?? ''
+  const inputs = request.query.t ?? ''
 
   if (typeof inputs !== 'string') {
     input = inputs[0]

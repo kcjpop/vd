@@ -1,6 +1,6 @@
 import { Nav } from '../nav/Nav'
+import { OpenGraph } from '../common/OpenGraph'
 import { ErrorBoundary } from './ErrorBoundary'
-import { OpenGraph } from '@/lib/components/common/OpenGraph'
 
 export function Layout({ children, navVariant, opengraph }) {
   return (
