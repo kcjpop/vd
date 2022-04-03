@@ -17,19 +17,24 @@ export function Search() {
   }
 
   return (
-    <form onSubmit={doSubmit} className="relative">
-      <input
-        name="keyword"
-        id="keyword"
-        autoComplete="en"
-        type="search"
-        required
-        placeholder="Nhập từ cần tra"
-        className="w-full rounded-md border border-slate-300 bg-white py-4 pl-4 pr-10 placeholder-slate-400 shadow-sm focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
-      />
-      <button type="submit" className="absolute inset-y-0 right-0 p-4">
-        <SearchIcon />
-      </button>
+    <form onSubmit={doSubmit}>
+      <div className="relative mb-2">
+        <input
+          name="keyword"
+          id="keyword"
+          autoComplete="en"
+          type="search"
+          required
+          placeholder="Bạn muốn tra gì nè? Ví dụ: dictionary"
+          className="w-full rounded-md border border-slate-300 bg-white py-2 pl-2 pr-10 placeholder-slate-400 shadow-sm focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+        />
+        <button type="submit" className="absolute inset-y-0 right-0 p-2">
+          <SearchIcon />
+        </button>
+      </div>
+      <p className="text-sm text-slate-600">
+        <span className="italic">Nhấn Enter để bắt đầu tra</span> 🥳
+      </p>
     </form>
   )
 }
