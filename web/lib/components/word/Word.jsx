@@ -1,14 +1,11 @@
 import { useTranslation } from '@/lib/i18n'
 
+import { LinkToWord } from '../common/LinkToWord'
+
 import { VerbTenses } from './VerbTenses'
 import { Speech } from './Speech'
-import { LinkToWord } from '../common/LinkToWord'
 import { DictMenu } from './DictMenu'
-
-// There might be multiple pronunciation. Support one for now.
-function Ipa({ ipa }) {
-  return <p>/{ipa}/</p>
-}
+import { Pronunciations } from './Pronunciations'
 
 function Examples({ examples }) {
   const { _e } = useTranslation()
@@ -170,7 +167,7 @@ export function Word({ word: w }) {
           </div>
         </div>
 
-        {w.ipa && <Ipa ipa={w.ipa} />}
+        <Pronunciations entries={w.pronunciations} />
       </div>
 
       <div className="flex flex-col gap-4">
