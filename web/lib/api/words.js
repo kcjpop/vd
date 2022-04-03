@@ -1,4 +1,4 @@
-import { getAllTenses } from '../domain-logic/verbTenses'
+import { getAllTenses } from '../domain-logic/verb-tenses'
 import { getPronunciations } from '../domain-logic/pronunciation'
 import * as Envi from '../domain-logic/en-vi'
 import * as Wordnet from '../domain-logic/wordnet'
@@ -6,7 +6,7 @@ import * as Wordnet from '../domain-logic/wordnet'
 export async function getSingleWord({ word, dict }) {
   const entry =
     dict === 'wordnet'
-      ? await Wordnet.getSingleWord(word)
+      ? await Wordnet.getDefinitions(word)
       : await Envi.getDefinitions(word)
 
   if (!entry) return

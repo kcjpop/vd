@@ -26,7 +26,7 @@ const groupBy = (col, keyFn) =>
 
 const unique = (col) => (col ? [...new Set(col)] : col)
 
-export async function getSingleWord(word) {
+export async function getDefinitions(word) {
   const sql = `
   with t as (
     select
