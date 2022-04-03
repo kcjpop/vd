@@ -1,46 +1,40 @@
 import { createCanvas } from '@napi-rs/canvas'
 
-const IMAGE = { WIDTH: 620, HEIGHT: 451, COLOR: '#E5E5E5' }
-const RECT = {
-  WIDTH: 600,
-  HEIGHT: 431,
-  X: 10,
-  Y: 10,
-  COLOR: '#E0F2FE',
-  RADIUS: 8,
+import { IMAGE, RECT, MARGIN, FONT } from '../config'
+import { getSingleWord } from './words'
+
+function generateContent(word) {
+  return [
+    {
+      TYPE: 'line',
+      TEXT: word.word,
+      COLOR: '#1E293B',
+      STYLE: `bold 48px ${FONT}`,
+      Y: RECT.X + MARGIN.TOP + 100,
+    },
+    {
+      TYPE: 'line',
+      TEXT: word.definitions?.[0]?.partOfSpeech ?? '',
+      COLOR: '#1E293B',
+      STYLE: `italic 18px ${FONT}`,
+      Y: RECT.X + MARGIN.TOP + 138,
+    },
+    {
+      TYPE: 'paragraph',
+      TEXT: word.definitions?.[0]?.definitions?.[0]?.meaning ?? '',
+      COLOR: '#1E293B',
+      STYLE: `normal 20px ${FONT}`,
+      Y: RECT.X + MARGIN.TOP + 200,
+    },
+    {
+      TYPE: 'line',
+      TEXT: 'tudien.io',
+      COLOR: '#0369A1',
+      STYLE: `bold 32px ${FONT}`,
+      Y: RECT.X + MARGIN.TOP + 320,
+    },
+  ]
 }
-const MARGIN = { TOP: 40, RIGHT: 70, BOTTOM: 40, LEFT: 70 }
-const FONT = 'IBM Plex Sans'
-const CONTENT = [
-  {
-    TYPE: 'line',
-    TEXT: 'metaphor',
-    COLOR: '#1E293B',
-    STYLE: `bold 48px ${FONT}`,
-    Y: RECT.X + MARGIN.TOP + 100,
-  },
-  {
-    TYPE: 'line',
-    TEXT: 'noun',
-    COLOR: '#1E293B',
-    STYLE: `italic 18px ${FONT}`,
-    Y: RECT.X + MARGIN.TOP + 138,
-  },
-  {
-    TYPE: 'paragraph',
-    TEXT: 'a figure of speech in which a word or phrase is applied to something to which it is not literally applicable.',
-    COLOR: '#1E293B',
-    STYLE: `normal 20px ${FONT}`,
-    Y: RECT.X + MARGIN.TOP + 200,
-  },
-  {
-    TYPE: 'line',
-    TEXT: 'tudien.io',
-    COLOR: '#0369A1',
-    STYLE: `bold 32px ${FONT}`,
-    Y: RECT.X + MARGIN.TOP + 320,
-  },
-]
 
 function wrapText(ctx, text, x, y, lineheight, maxWidth) {
   const words = [...text.matchAll(/\s?[^\s]+/g)].map(([v]) => v)
@@ -64,10 +58,11 @@ function wrapText(ctx, text, x, y, lineheight, maxWidth) {
   }
 }
 
-export function generateImage() {
+export async function generateImage(keyword) {
   const canvas = createCanvas(IMAGE.WIDTH, IMAGE.HEIGHT)
   const ctx = canvas.getContext('2d')
   const MAX_WIDTH = RECT.WIDTH - MARGIN.LEFT - MARGIN.RIGHT
+  const word = await getSingleWord({ word: keyword })
 
   ctx.imageSmoothingEnabled = true
   ctx.imageSmoothingQuality = 'high'
@@ -94,7 +89,7 @@ export function generateImage() {
     RECT.HEIGHT - RECT.RADIUS,
   )
 
-  CONTENT.forEach((content) => {
+  generateContent(word).forEach((content) => {
     ctx.font = content.STYLE
     ctx.fillStyle = content.COLOR
     if (content.TYPE === 'paragraph') {

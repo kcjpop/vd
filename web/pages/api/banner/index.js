@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import { GlobalFonts } from '@napi-rs/canvas'
 import { cache } from '@/lib/utilities/middleware/cache'
 
-import { generateImage } from '@/lib/generateImage'
+import { generateImage } from '@/lib/api/generateImage'
 
 readdirSync(resolve('./public', 'fonts')).forEach((filename) => {
   GlobalFonts.registerFromPath(resolve('./public', 'fonts', filename))
@@ -11,7 +11,7 @@ readdirSync(resolve('./public', 'fonts')).forEach((filename) => {
 
 async function handler(request, response, lruCache) {
   let input = ''
-  const inputs = request.query.t ?? ''
+  const inputs = request.query.w ?? ''
 
   if (typeof inputs !== 'string') {
     input = inputs[0]
@@ -24,7 +24,7 @@ async function handler(request, response, lruCache) {
   if (lruCache.has(input)) {
     imageData = lruCache.get(input)
   } else {
-    imageData = generateImage()
+    imageData = await generateImage(input)
     lruCache.set(input, imageData)
   }
 
