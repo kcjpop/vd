@@ -33,7 +33,7 @@ export function Search() {
         </button>
       </div>
       <p className="text-sm text-slate-600">
-        <span className="italic">Nhấn Enter để bắt đầu tra</span> 🥳
+        <span className="italic">Nhấn Enter để bắt đầu</span> 🥳
       </p>
     </form>
   )
