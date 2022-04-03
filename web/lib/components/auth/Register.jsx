@@ -1,39 +1,40 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Spinner } from '../common/Spinner'
-import { login } from '../../domain-logic/auth'
+import { register } from '../../domain-logic/auth'
 
-export function Login() {
+export function Register() {
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
+  const [password2, setPassword2] = useState(null)
+  const [fullname, setFullname] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const { _e } = useTranslation()
-  const router = useRouter()
 
   const handleChange = (setter) => (event) => {
     setter(event.target.value)
   }
 
-  const doLogin = async () => {
+  const doRegister = async function () {
     try {
       setLoading(true)
-      // @TODO: user, session returned from login function
-      const { error } = await login({ email, password })
-
+      // @todo: user, session returned from register function
+      const { error } = await register({
+        email,
+        password,
+        fullname,
+      })
       if (error) throw error
     } catch (error) {
-      console.error({ error })
+      console.error(error)
     } finally {
       setLoading(false)
     }
   }
-
-  const redirectRegistration = () => router.push('/auth/register')
 
   return (
     <section className="container h-full">
@@ -48,6 +49,16 @@ export function Login() {
             </div>
             <div className="mb-4 w-full">
               <div className="w-full">
+                <div>
+                  <Input
+                    type="text"
+                    name="fullname"
+                    placeholder={_e('auth.fullname')}
+                    className="w-full"
+                    value={fullname}
+                    onChange={handleChange(setFullname)}
+                  />
+                </div>
                 <div className="">
                   <Input
                     type="text"
@@ -56,7 +67,6 @@ export function Login() {
                     className="w-full"
                     value={email}
                     onChange={handleChange(setEmail)}
-                    disabled={loading}
                   />
                 </div>
                 <div>
@@ -65,50 +75,29 @@ export function Login() {
                     name="password"
                     placeholder={_e('auth.password')}
                     className="w-full"
-                    value="password"
+                    value={password}
                     onChange={handleChange(setPassword)}
-                    disabled={loading}
                   />
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    name="confirm-password"
+                    placeholder={_e('auth.reenterPassword')}
+                    className="w-full"
+                    value={password2}
+                    onChange={handleChange(setPassword2)}></Input>
                 </div>
                 <div className="mt-6">
                   <Button
                     className="w-full bg-gray-700 text-white hover:bg-gray-900"
-                    onClick={doLogin}
+                    onClick={doRegister}
                     disabled={loading}>
-                    {loading ? <Spinner /> : _e('auth.login')}
-                  </Button>
-                </div>
-                <div className="flex justify-center">
-                  <Button
-                    className="text-sm text-slate-400 hover:text-slate-600"
-                    disabled={loading}>
-                    {_e('auth.forgotYourPassword')}
+                    {loading ? <Spinner /> : _e('auth.register')}
                   </Button>
                 </div>
               </div>
             </div>
-            <hr />
-            <div className="mt-4 flex w-full justify-center text-sm">
-              <span>{_e('auth.doNotHaveAnAccount')}</span>
-              <Button
-                onClick={redirectRegistration}
-                className="!p-0 text-sm text-slate-400 hover:text-slate-600"
-                disabled={loading}>
-                &nbsp;
-                {_e('auth.registerHere')}
-              </Button>
-            </div>
-          </div>
-          <div className="w-full border-none bg-gradient-to-br from-gray-300 via-slate-400 to-slate-600 p-5">
-            <p className="mb-4 text-2xl">tudien.io</p>
-            <p className="text-sm">
-              Nullam finibus neque eu neque tincidunt, eget eleifend arcu
-              iaculis. Nulla malesuada efficitur suscipit. Donec et tincidunt
-              turpis. Aenean auctor augue ut nunc tristique bibendum. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec
-              tincidunt leo. Morbi fringilla ornare libero ut rhoncus. Praesent
-              dapibus orci vel ex aliquet varius.
-            </p>
           </div>
         </div>
       </div>

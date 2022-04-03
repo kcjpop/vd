@@ -41,13 +41,18 @@ const messages = {
   'verbTense.past_plural': 'Quá khứ ngôi thứ ba',
   'verbTense.past_participle': 'Quá khứ phân từ (V-ed, V3)',
 
-  'login.welcomeTo': 'Chào mừng bạn đến với',
-  'login.email': 'Email',
-  'login.password': 'Mật khẩu',
-  'login.login': 'Đăng nhập',
-  'login.forgotYourPassword': 'Quên mật khẩu?',
-  'login.doNotHaveAnAccount': 'Chưa có tài khoản?',
-  'login.registerHere': 'Đăng ký tại đây.',
+  'auth.welcomeTo': 'Chào mừng bạn đến với',
+  'auth.email': 'Email',
+  'auth.password': 'Mật khẩu',
+  'auth.login': 'Đăng nhập',
+  'auth.forgotYourPassword': 'Quên mật khẩu?',
+  'auth.doNotHaveAnAccount': 'Chưa có tài khoản?',
+  'auth.registerHere': 'Đăng ký tại đây.',
+  'auth.fullname': 'Họ và tên',
+  // @TODO: what is plan for registration
+  'auth.plan': 'Kế hoạch',
+  'auth.register': 'Đăng ký',
+  'auth.reenterPassword': 'Xác nhận lại mật khẩu',
 }
 
 export default messages

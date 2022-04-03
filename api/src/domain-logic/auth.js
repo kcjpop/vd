@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from './supabaseClient'
 
-export function register({ email, password, fullname, plan }) {
-  return supabase.auth.signUp({ email, password }, { data: { fullname, plan } })
+export function register({ email, password, fullname }) {
+  return supabase.auth.signUp({ email, password }, { data: { fullname } })
 }
 
 export function login({ email, password }) {

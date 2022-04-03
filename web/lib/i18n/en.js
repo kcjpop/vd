@@ -41,13 +41,17 @@ const messages = {
   'verbTense.past_plural': 'Past plural',
   'verbTense.past_participle': 'Past participle',
 
-  'login.welcomeTo': 'Welcome to',
-  'login.email': 'Email',
-  'login.password': 'Password',
-  'login.login': 'Login',
-  'login.forgotYourPassword': 'Forgot your password?',
-  'login.doNotHaveAnAccount': "Haven't register yet?",
-  'login.registerHere': 'Register here.',
+  'auth.welcomeTo': 'Welcome to',
+  'auth.email': 'Email',
+  'auth.password': 'Password',
+  'auth.login': 'Login',
+  'auth.forgotYourPassword': 'Forgot your password?',
+  'auth.doNotHaveAnAccount': "Haven't registered yet?",
+  'auth.registerHere': 'Register here.',
+  'auth.fullname': 'Full name',
+  'auth.plan': 'Plan',
+  'auth.register': 'Register',
+  'auth.reenterPassword': 'Re-enter password',
 }
 
 export default messages
