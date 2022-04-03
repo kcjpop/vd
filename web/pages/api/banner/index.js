@@ -4,6 +4,7 @@ import { GlobalFonts } from '@napi-rs/canvas'
 import { cache } from '@/lib/utilities/middleware/cache'
 
 import { generateImage } from '@/lib/api/generateImage'
+import { getSingleWord } from '@/lib/api/words'
 
 readdirSync(resolve('./public', 'fonts')).forEach((filename) => {
   GlobalFonts.registerFromPath(resolve('./public', 'fonts', filename))
@@ -24,7 +25,12 @@ async function handler(request, response, lruCache) {
   if (lruCache.has(input)) {
     imageData = lruCache.get(input)
   } else {
-    imageData = await generateImage(input)
+    const word = await getSingleWord({ word: inputs })
+
+    imageData = generateImage({
+      word: word.word,
+      definition: word.definitions[0],
+    })
     lruCache.set(input, imageData)
   }
 

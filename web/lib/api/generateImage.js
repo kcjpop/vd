@@ -1,36 +1,45 @@
 import { createCanvas } from '@napi-rs/canvas'
+import { BANNER_FONT } from '../config'
 
-import { IMAGE, RECT, MARGIN, FONT } from '../config'
-import { getSingleWord } from './words'
+const IMAGE = { WIDTH: 620, HEIGHT: 451, COLOR: '#E5E5E5' }
+const RECT = {
+  WIDTH: 600,
+  HEIGHT: 431,
+  X: 10,
+  Y: 10,
+  COLOR: '#E0F2FE',
+  RADIUS: 8,
+}
+const MARGIN = { TOP: 40, RIGHT: 70, BOTTOM: 40, LEFT: 70 }
 
-function generateContent(word) {
+function generateContent(word, definition) {
   return [
     {
       TYPE: 'line',
-      TEXT: word.word,
+      TEXT: word,
       COLOR: '#1E293B',
-      STYLE: `bold 48px ${FONT}`,
+      STYLE: `bold 48px ${BANNER_FONT}`,
       Y: RECT.X + MARGIN.TOP + 100,
     },
     {
       TYPE: 'line',
-      TEXT: word.definitions?.[0]?.partOfSpeech ?? '',
+      TEXT: definition?.partOfSpeech ?? '',
       COLOR: '#1E293B',
-      STYLE: `italic 18px ${FONT}`,
+      STYLE: `italic 18px ${BANNER_FONT}`,
       Y: RECT.X + MARGIN.TOP + 138,
     },
     {
       TYPE: 'paragraph',
-      TEXT: word.definitions?.[0]?.definitions?.[0]?.meaning ?? '',
+      TEXT: definition?.definitions?.[0]?.meaning ?? '',
       COLOR: '#1E293B',
-      STYLE: `normal 20px ${FONT}`,
+      STYLE: `normal 20px ${BANNER_FONT}`,
       Y: RECT.X + MARGIN.TOP + 200,
     },
     {
       TYPE: 'line',
       TEXT: 'tudien.io',
       COLOR: '#0369A1',
-      STYLE: `bold 32px ${FONT}`,
+      STYLE: `bold 32px ${BANNER_FONT}`,
       Y: RECT.X + MARGIN.TOP + 320,
     },
   ]
@@ -58,11 +67,10 @@ function wrapText(ctx, text, x, y, lineheight, maxWidth) {
   }
 }
 
-export async function generateImage(keyword) {
+export function generateImage({ word, definition }) {
   const canvas = createCanvas(IMAGE.WIDTH, IMAGE.HEIGHT)
   const ctx = canvas.getContext('2d')
   const MAX_WIDTH = RECT.WIDTH - MARGIN.LEFT - MARGIN.RIGHT
-  const word = await getSingleWord({ word: keyword })
 
   ctx.imageSmoothingEnabled = true
   ctx.imageSmoothingQuality = 'high'
@@ -89,7 +97,7 @@ export async function generateImage(keyword) {
     RECT.HEIGHT - RECT.RADIUS,
   )
 
-  generateContent(word).forEach((content) => {
+  generateContent(word, definition).forEach((content) => {
     ctx.font = content.STYLE
     ctx.fillStyle = content.COLOR
     if (content.TYPE === 'paragraph') {
