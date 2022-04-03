@@ -1393,6 +1393,11 @@ aria-query@^5.0.0:
   resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-5.0.0.tgz#210c21aaf469613ee8c9a62c7f86525e058db52c"
   integrity sha512-V+SM7AbUwJ+EBnB8+DXs0hPZHO0W6pqBcc0dW90OwtVG02PswOu/teuARoLQjdDOH+t9pJgGnW5/Qmouf3gPJg==
 
+arpabet-and-ipa-convertor-ts@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/arpabet-and-ipa-convertor-ts/-/arpabet-and-ipa-convertor-ts-1.0.3.tgz#25bc64c7821d4607a30c52fd1103b3b1c905a830"
+  integrity sha512-EAb8c6X3/MRp8aEy/WNd0X/A7LGNI7+XZQB/iF5qjC6+jp+RSzOo+r3Gt2HGLr/VjirtI/Z6kC7kV6T8aGkUfA==
+
 array-includes@^3.1.3, array-includes@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/array-includes/-/array-includes-3.1.4.tgz#f5b493162c760f3539631f005ba2bb46acb45ba9"
