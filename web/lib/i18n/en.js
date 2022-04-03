@@ -52,6 +52,12 @@ const messages = {
   'auth.plan': 'Plan',
   'auth.register': 'Register',
   'auth.reenterPassword': 'Re-enter password',
+  'auth.registerSuccessfully': 'Register successfully',
+  'auth.pleaseConfirmYourEmail':
+    'A confirmation link has been sent to your email address. Please confirm it.',
+  'auth.redirectToLoginPage': 'We will redirect you to login page in a minute',
+  'auth.clickHereToRedirect':
+    'If it is not automatically redirect, please click on the following link to redirect to login page.',
 }
 
 export default messages

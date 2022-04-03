@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
@@ -7,13 +9,17 @@ import { Spinner } from '../common/Spinner'
 import { register } from '../../domain-logic/auth'
 
 export function Register() {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [password2, setPassword2] = useState(null)
-  const [fullname, setFullname] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
+  const [fullname, setFullname] = useState('')
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+
+  const [formError, setFormError] = useState(null)
 
   const { _e } = useTranslation()
+  const router = useRouter()
 
   const handleChange = (setter) => (event) => {
     setter(event.target.value)
@@ -22,18 +28,63 @@ export function Register() {
   const doRegister = async function () {
     try {
       setLoading(true)
+      setFormError(null)
       // @todo: user, session returned from register function
-      const { error } = await register({
+      const { user, error } = await register({
         email,
         password,
         fullname,
       })
       if (error) throw error
+
+      if (user) {
+        setSuccess(true)
+      }
     } catch (error) {
-      console.error(error)
+      setFormError(error.message)
     } finally {
       setLoading(false)
     }
+  }
+
+  useEffect(() => {
+    let timeout
+
+    if (success) {
+      timeout = setTimeout(() => {
+        router.push('/auth')
+      }, 1000 * 5)
+    }
+
+    return () => {
+      timeout && clearTimeout(timeout)
+    }
+  }, [success, router])
+
+  if (success) {
+    return (
+      <section className="container h-full">
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="w-1/2 rounded border border-slate-300 px-20 py-10 sm:w-10/12 md:w-5/6">
+            <p className="mb-8 text-center text-3xl text-green-500">
+              {_e('auth.registerSuccessfully')}
+            </p>
+            <p className="text-md my-1 text-center text-slate-600">
+              {_e('auth.pleaseConfirmYourEmail')}
+            </p>
+            <p className="text-md my-1 text-center text-slate-600">
+              {_e('auth.redirectToLoginPage')}
+            </p>
+            <p className="text-md my-1 text-center text-slate-600">
+              {_e('auth.clickHereToRedirect')}
+            </p>
+            <div className="mt-4 flex justify-center">
+              <Link href="/auth">{_e('auth.login')}</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -88,12 +139,21 @@ export function Register() {
                     value={password2}
                     onChange={handleChange(setPassword2)}></Input>
                 </div>
+                {formError && (
+                  <p className="text-red text-md my-2">{formError}</p>
+                )}
                 <div className="mt-6">
                   <Button
                     className="w-full bg-gray-700 text-white hover:bg-gray-900"
                     onClick={doRegister}
                     disabled={loading}>
-                    {loading ? <Spinner /> : _e('auth.register')}
+                    {loading ? (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <Spinner />
+                      </div>
+                    ) : (
+                      _e('auth.register')
+                    )}
                   </Button>
                 </div>
               </div>

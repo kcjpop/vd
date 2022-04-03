@@ -53,6 +53,13 @@ const messages = {
   'auth.plan': 'Kế hoạch',
   'auth.register': 'Đăng ký',
   'auth.reenterPassword': 'Xác nhận lại mật khẩu',
+  'auth.registerSuccessfully': 'Đăng ký thành công!',
+  'auth.pleaseConfirmYourEmail':
+    'Đường dẫn xác nhận đăng nhập đã được gửi vào email của bạn.',
+  'auth.redirectToLoginPage':
+    'Chúng tôi sẽ chuyển bạn đến trang đăng nhập trong ít phút nữa.',
+  'auth.clickHereToRedirect':
+    'Nếu trang web không tự chuyển, bạn có thể nhấn vào đường dẫn này để chuyển trang.',
 }
 
 export default messages

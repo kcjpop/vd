@@ -8,9 +8,10 @@ import { Spinner } from '../common/Spinner'
 import { login } from '../../domain-logic/auth'
 
 export function Login() {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [formError, setFormError] = useState(null)
 
   const { _e } = useTranslation()
   const router = useRouter()
@@ -22,12 +23,16 @@ export function Login() {
   const doLogin = async () => {
     try {
       setLoading(true)
+      setFormError(null)
       // @TODO: user, session returned from login function
-      const { error } = await login({ email, password })
+      const { user, session, error } = await login({ email, password })
 
       if (error) throw error
+
+      console.log({ user, session })
     } catch (error) {
       console.error({ error })
+      setFormError(error.message)
     } finally {
       setLoading(false)
     }
@@ -65,11 +70,18 @@ export function Login() {
                     name="password"
                     placeholder={_e('auth.password')}
                     className="w-full"
-                    value="password"
+                    value={password}
                     onChange={handleChange(setPassword)}
                     disabled={loading}
                   />
                 </div>
+                {formError && (
+                  <div>
+                    <p className="text-center text-sm text-red-500">
+                      {formError}
+                    </p>
+                  </div>
+                )}
                 <div className="mt-6">
                   <Button
                     className="w-full bg-gray-700 text-white hover:bg-gray-900"
