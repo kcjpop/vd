@@ -7,6 +7,7 @@ export async function getServerSideProps(ctx) {
 
   const opengraph = {
     title: `“${word}” tiếng Việt là gì?`,
+    image: `https://${ctx.req.headers.host}/api/banner?w=${word}`,
   }
 
   return { props: { opengraph } }
