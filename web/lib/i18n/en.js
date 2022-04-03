@@ -40,6 +40,14 @@ const messages = {
   'verbTense.singular_past_3rd': '3rd-person past singular',
   'verbTense.past_plural': 'Past plural',
   'verbTense.past_participle': 'Past participle',
+
+  'login.welcomeTo': 'Welcome to',
+  'login.email': 'Email',
+  'login.password': 'Password',
+  'login.login': 'Login',
+  'login.forgotYourPassword': 'Forgot your password?',
+  'login.doNotHaveAnAccount': "Haven't register yet?",
+  'login.registerHere': 'Register here.',
 }
 
 export default messages

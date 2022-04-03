@@ -40,6 +40,14 @@ const messages = {
   'verbTense.singular_past_3rd': 'Quá khứ ngôi thứ ba',
   'verbTense.past_plural': 'Quá khứ ngôi thứ ba',
   'verbTense.past_participle': 'Quá khứ phân từ (V-ed, V3)',
+
+  'login.welcomeTo': 'Chào mừng bạn đến với',
+  'login.email': 'Email',
+  'login.password': 'Mật khẩu',
+  'login.login': 'Đăng nhập',
+  'login.forgotYourPassword': 'Quên mật khẩu?',
+  'login.doNotHaveAnAccount': 'Chưa có tài khoản?',
+  'login.registerHere': 'Đăng ký tại đây.',
 }
 
 export default messages

@@ -1,15 +1,10 @@
-import { Auth } from './Auth'
-import { Account } from './Account'
 import { Layout } from '../common/Layout'
+import { Login } from './Login'
 
-export function Page({ session, opengraph }) {
+export function LoginPage({ opengraph }) {
   return (
     <Layout opengraph={opengraph}>
-      {session ? (
-        <Account session={session} key={session?.user.id} />
-      ) : (
-        <Auth />
-      )}
+      <Login />
     </Layout>
   )
 }

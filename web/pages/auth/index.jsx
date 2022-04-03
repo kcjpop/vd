@@ -1,3 +1,7 @@
-import { Page } from '@/lib/components/auth'
+import { LoginPage } from '@/lib/components/auth'
 
-export default Page
+export default LoginPage
+
+export function getServerSideProps() {
+  return { props: { opengraph: { title: 'Đăng nhập' } } }
+}
