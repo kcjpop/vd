@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
+import { useState } from 'react'
 
 import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
@@ -19,7 +17,6 @@ export function Register() {
   const [formError, setFormError] = useState(null)
 
   const { _e } = useTranslation()
-  const router = useRouter()
 
   const handleChange = (setter) => (event) => {
     setter(event.target.value)
@@ -47,20 +44,6 @@ export function Register() {
     }
   }
 
-  useEffect(() => {
-    let timeout
-
-    if (success) {
-      timeout = setTimeout(() => {
-        router.push('/auth')
-      }, 1000 * 5)
-    }
-
-    return () => {
-      timeout && clearTimeout(timeout)
-    }
-  }, [success, router])
-
   if (success) {
     return (
       <section className="container h-full">
@@ -72,15 +55,6 @@ export function Register() {
             <p className="text-md my-1 text-center text-slate-600">
               {_e('auth.pleaseConfirmYourEmail')}
             </p>
-            <p className="text-md my-1 text-center text-slate-600">
-              {_e('auth.redirectToLoginPage')}
-            </p>
-            <p className="text-md my-1 text-center text-slate-600">
-              {_e('auth.clickHereToRedirect')}
-            </p>
-            <div className="mt-4 flex justify-center">
-              <Link href="/auth">{_e('auth.login')}</Link>
-            </div>
           </div>
         </div>
       </section>

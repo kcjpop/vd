@@ -58,6 +58,8 @@ const messages = {
   'auth.redirectToLoginPage': 'We will redirect you to login page in a minute',
   'auth.clickHereToRedirect':
     'If it is not automatically redirect, please click on the following link to redirect to login page.',
+  'auth.redirectIn': 'Automatically redirect after ...',
+  'auth.emailConfirmed': 'Email confirmed',
 }
 
 export default messages

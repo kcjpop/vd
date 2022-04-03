@@ -60,6 +60,8 @@ const messages = {
     'Chúng tôi sẽ chuyển bạn đến trang đăng nhập trong ít phút nữa.',
   'auth.clickHereToRedirect':
     'Nếu trang web không tự chuyển, bạn có thể nhấn vào đường dẫn này để chuyển trang.',
+  'auth.redirectIn': 'Tự động chuyển trang sau...',
+  'auth.emailConfirmed': 'Email đã được xác nhận.',
 }
 
 export default messages

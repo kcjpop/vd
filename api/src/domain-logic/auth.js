@@ -3,11 +3,21 @@ import { useRouter } from 'next/router'
 import { supabase } from './supabaseClient'
 
 export function register({ email, password, fullname }) {
-  return supabase.auth.signUp({ email, password }, { data: { fullname } })
+  return supabase.auth.signUp(
+    { email, password },
+    {
+      data: { fullname },
+      redirectTo: `${window?.location.origin}/auth/confirm`,
+    },
+  )
 }
 
 export function login({ email, password }) {
   return supabase.auth.signIn({ email, password })
+}
+
+export function logout() {
+  return supabase.auth.signOut()
 }
 
 export function isAuthenticated() {
@@ -38,7 +48,7 @@ export function useUser() {
   }, [])
 
   useEffect(() => {
-    if (!isChecking && !user) router.push('/auth/login')
+    if (!isChecking && !user) router.push('/auth')
   }, [isChecking, user, router])
 
   return { user, token }
