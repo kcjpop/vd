@@ -58,7 +58,7 @@ export function User(userObject) {
   return this
 }
 
-export function useUser() {
+export function useUser({ redirectIfUnauthenticated = true } = {}) {
   const [user, setUser] = useState(null)
   const [isChecking, setIsChecking] = useState(true)
   const [token, setToken] = useState(null)
@@ -80,8 +80,8 @@ export function useUser() {
   }, [])
 
   useEffect(() => {
-    if (!isChecking && !user) router.push('/auth')
-  }, [isChecking, user, router])
+    if (!isChecking && !user && redirectIfUnauthenticated) router.push('/auth')
+  }, [isChecking, user, router, redirectIfUnauthenticated])
 
   return { user, token }
 }

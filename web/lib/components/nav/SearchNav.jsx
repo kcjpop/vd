@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { SearchIcon } from '../common/Icons'
+import { SearchIcon, UserIcon } from '../common/Icons'
 import { SettingButton } from './SettingButton'
+import { useUser } from '../../domain-logic/auth'
 
 function SearchForm() {
   const router = useRouter()
@@ -38,6 +39,8 @@ function SearchForm() {
 }
 
 export function SearchNav() {
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+
   return (
     <ul className="space-between flex h-full items-center gap-4 px-4">
       <li>
@@ -47,9 +50,19 @@ export function SearchNav() {
           </a>
         </Link>
       </li>
+
       <li className="flex-1 md:ml-auto md:flex-none">
         <SearchForm />
       </li>
+
+      {user != null && (
+        <li>
+          <div className="rounded bg-gray-900 p-2">
+            <UserIcon />
+          </div>
+        </li>
+      )}
+
       <li>
         <SettingButton />
       </li>
