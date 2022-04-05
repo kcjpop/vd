@@ -1,0 +1,7 @@
+.toggleCheckbox:checked {
+  @apply right-0 border-sky-400;
+}
+
+.toggleCheckbox:checked + .toggleLabel {
+  @apply bg-sky-400;
+}

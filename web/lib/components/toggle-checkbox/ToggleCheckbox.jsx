@@ -1,3 +1,5 @@
+import s from './style.module.css'
+
 export function ToggleCheckbox({ checked, onChange }) {
   const doChange = (e) => {
     onChange(e.target.checked)
@@ -8,14 +10,14 @@ export function ToggleCheckbox({ checked, onChange }) {
       <input
         type="checkbox"
         name="toggle"
-        id="toggle"
-        className="toggle-checkbox absolute block h-6 w-6 cursor-pointer appearance-none rounded-full border-4 bg-white"
+        className={`absolute block h-6 w-6 cursor-pointer appearance-none rounded-full border-4 bg-white ${s.toggleCheckbox}`}
         checked={checked}
         onChange={doChange}
       />
       <label
         htmlFor="toggle"
-        className="toggle-label block h-6 cursor-pointer overflow-hidden rounded-full bg-gray-300"></label>
+        className={`block h-6 cursor-pointer overflow-hidden rounded-full bg-gray-300 ${s.toggleLabel}`}
+      />
     </div>
   )
 }

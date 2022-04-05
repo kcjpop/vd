@@ -1,7 +1,10 @@
 import { useState, useContext, Fragment } from 'react'
+
 import { useTranslation } from '../../i18n'
 import { getVoiceSettings } from '../../storage'
-import { ToggleCheckbox } from '../common/ToggleCheckbox'
+
+import { ToggleCheckbox } from '../toggle-checkbox/ToggleCheckbox'
+
 import { SettingsContext } from '../../context/Settings'
 
 export function Settings() {

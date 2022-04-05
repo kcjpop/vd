@@ -1,0 +1,16 @@
+.formAnimation {
+  animation: downOut 300ms ease-in-out forwards;
+  transform-origin: center center;
+}
+
+@keyframes downOut {
+  0% {
+    transform: translateZ(200px) transLateY(40px);
+  }
+  80% {
+    transform: translateZ(-10px) transLateY(0px);
+  }
+  100% {
+    transform: translateZ(0px) transLateY(0px);
+  }
+}

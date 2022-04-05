@@ -12,6 +12,8 @@ import {
 import { SearchIcon } from '../common/Icons'
 import { RecentlyViewed } from './RecentlyViewed'
 
+import s from './WordSearchForm.module.css'
+
 export function WordSearchForm() {
   const router = useRouter()
 
@@ -63,7 +65,7 @@ export function WordSearchForm() {
 
       {open && (
         <div
-          className="animation-down-out rounded border border-slate-200 bg-white p-4 shadow-md"
+          className={`rounded border border-slate-200 bg-white p-4 shadow-md ${s.formAnimation}`}
           {...getFloatingProps({
             ref: floating,
             style: {
