@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 @import url('./fonts.css');
+@import url('./keyframes.css');
 @import url('./atom.css');
-/* @import url('./supabase.css'); */

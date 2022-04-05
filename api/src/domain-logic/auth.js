@@ -26,6 +26,24 @@ export function isAuthenticated() {
   return session?.user
 }
 
+export function User(userObject) {
+  Object.entries(userObject).forEach(([key, value]) => (this[key] = value))
+
+  this.getFullname = function () {
+    return this.user_metadata.fullname
+  }
+
+  this.getRole = function () {
+    return this.role
+  }
+
+  this.getEmail = function () {
+    return this.email
+  }
+
+  return this
+}
+
 export function useUser() {
   const [user, setUser] = useState(null)
   const [isChecking, setIsChecking] = useState(true)
@@ -36,7 +54,7 @@ export function useUser() {
   useEffect(() => {
     const handler = (session) => {
       if (session?.user.id) {
-        setUser(session.user)
+        setUser(new User(session.user))
         setToken(session.access_token)
       }
 

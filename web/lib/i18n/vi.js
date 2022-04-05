@@ -62,6 +62,9 @@ const messages = {
     'Nếu trang web không tự chuyển, bạn có thể nhấn vào đường dẫn này để chuyển trang.',
   'auth.redirectIn': 'Tự động chuyển trang sau...',
   'auth.emailConfirmed': 'Email đã được xác nhận.',
+  'auth.welcome': 'Xin chào',
+
+  'toast.dismiss': 'Ẩn',
 }
 
 export default messages

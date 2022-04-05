@@ -22,7 +22,8 @@ export function Register() {
     setter(event.target.value)
   }
 
-  const doRegister = async function () {
+  const doRegister = async function (event) {
+    event.preventDefault()
     try {
       setLoading(true)
       setFormError(null)
@@ -74,62 +75,64 @@ export function Register() {
             </div>
             <div className="mb-4 w-full">
               <div className="w-full">
-                <div>
-                  <Input
-                    type="text"
-                    name="fullname"
-                    placeholder={_e('auth.fullname')}
-                    className="w-full"
-                    value={fullname}
-                    onChange={handleChange(setFullname)}
-                  />
-                </div>
-                <div className="">
-                  <Input
-                    type="text"
-                    name="email"
-                    placeholder={_e('auth.email')}
-                    className="w-full"
-                    value={email}
-                    onChange={handleChange(setEmail)}
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder={_e('auth.password')}
-                    className="w-full"
-                    value={password}
-                    onChange={handleChange(setPassword)}
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="password"
-                    name="confirm-password"
-                    placeholder={_e('auth.reenterPassword')}
-                    className="w-full"
-                    value={password2}
-                    onChange={handleChange(setPassword2)}></Input>
-                </div>
-                {formError && (
-                  <p className="text-red text-md my-2">{formError}</p>
-                )}
-                <div className="mt-6">
-                  <Button
-                    className="w-full bg-gray-700 text-white hover:bg-gray-900"
-                    onClick={doRegister}
-                    disabled={loading}>
-                    {loading ? (
-                      <div className="flex h-full w-full items-center justify-center">
-                        <Spinner />
-                      </div>
-                    ) : (
-                      _e('auth.register')
-                    )}
-                  </Button>
-                </div>
+                <form onSubmit={doRegister}>
+                  <div>
+                    <Input
+                      type="text"
+                      name="fullname"
+                      placeholder={_e('auth.fullname')}
+                      className="w-full"
+                      value={fullname}
+                      onChange={handleChange(setFullname)}
+                    />
+                  </div>
+                  <div className="">
+                    <Input
+                      type="text"
+                      name="email"
+                      placeholder={_e('auth.email')}
+                      className="w-full"
+                      value={email}
+                      onChange={handleChange(setEmail)}
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="password"
+                      name="password"
+                      placeholder={_e('auth.password')}
+                      className="w-full"
+                      value={password}
+                      onChange={handleChange(setPassword)}
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      type="password"
+                      name="confirm-password"
+                      placeholder={_e('auth.reenterPassword')}
+                      className="w-full"
+                      value={password2}
+                      onChange={handleChange(setPassword2)}></Input>
+                  </div>
+                  {formError && (
+                    <p className="text-red text-md my-2">{formError}</p>
+                  )}
+                  <div className="mt-6">
+                    <Button
+                      className="w-full bg-gray-700 text-white hover:bg-gray-900"
+                      type="submit"
+                      disabled={loading}>
+                      {loading ? (
+                        <div className="flex h-full w-full items-center justify-center">
+                          <Spinner />
+                        </div>
+                      ) : (
+                        _e('auth.register')
+                      )}
+                    </Button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

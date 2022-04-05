@@ -1,0 +1,68 @@
+/* @TODO: Remove before merge. */
+
+.upper-first::first-letter {
+  text-transform: uppercase;
+}
+
+/* Toggle Checkbox */
+.toggle-checkbox:checked {
+  @apply right-0 border-sky-400;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply bg-sky-400;
+  
+@media (prefers-reduced-motion: no-preference) {
+  .toast-wrapper[data-state='open'] {
+    animation: toast-slide-in 250ms ease-in;
+  }
+  .toast-wrapper[data-state='closed'] {
+    animation: toast-slide-out 200ms ease-in;
+  }
+  .toast-wrapper[data-swipe='move'] {
+    transform: translateX(var(--radix-toast-swipe-move-x));
+  }
+  .toast-wrapper[data-swipe='cancel'] {
+    transform: translateX(0);
+    transition: transform 200ms ease-out;
+  }
+  .toast-wrapper[data-swipe='end'] {
+    animation: toast-swipe-out 100ms ease-out;
+  }
+}
+
+.toast {
+  @apply relative grid h-full w-full items-center gap-x-3 overflow-hidden rounded-md bg-white py-2 px-4 shadow shadow-slate-600;
+  grid-template-areas: 'title action' 'description action';
+  grid-template-columns: auto max-content;
+}
+
+.toast--success::before {
+  @apply bg-green-500;
+}
+
+.toast--error::before {
+  @apply bg-red-500;
+}
+
+.toast--warning::before {
+  @apply bg-yellow-500;
+}
+
+.toast::before {
+  @apply absolute h-full w-1;
+  content: '';
+}
+
+.toast__title {
+  @apply mb-1 text-xs font-medium text-slate-700;
+  grid-area: title;
+}
+
+.toast__description {
+  @apply m-0 text-sm leading-5 text-slate-600;
+  grid-area: description;
+}
+
+.toast__action {
+  grid-area: action;
+}

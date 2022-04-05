@@ -60,6 +60,9 @@ const messages = {
     'If it is not automatically redirect, please click on the following link to redirect to login page.',
   'auth.redirectIn': 'Automatically redirect after ...',
   'auth.emailConfirmed': 'Email confirmed',
+  'auth.welcome': 'Welcome',
+
+  'toast.dismiss': 'Dismiss',
 }
 
 export default messages
