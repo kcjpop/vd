@@ -1,20 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Spinner } from '../common/Spinner'
-import { Toast } from '../common/Toast'
-import { login, User } from '../../domain-logic/auth'
+import { login, useAuthenticated } from '../../domain-logic/auth'
 
-export function Login() {
+export function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [formError, setFormError] = useState(null)
-  const [open, setOpen] = useState(false)
-  const [user, setUser] = useState(null)
 
   const { _e } = useTranslation()
   const router = useRouter()
@@ -29,12 +26,11 @@ export function Login() {
       setLoading(true)
       setFormError(null)
       // @TODO: user, session returned from login function
-      const { error, user } = await login({ email, password })
+      const { error } = await login({ email, password })
 
       if (error) throw error
 
-      setUser(new User(user))
-      setOpen(true)
+      router.push('/')
     } catch (error) {
       setFormError(error.message)
     } finally {
@@ -42,7 +38,59 @@ export function Login() {
     }
   }
 
+  return (
+    <form onSubmit={doLogin}>
+      <div className="">
+        <Input
+          type="text"
+          name="email"
+          placeholder={_e('auth.email')}
+          className="w-full"
+          value={email}
+          onChange={handleChange(setEmail)}
+          disabled={loading}
+        />
+      </div>
+      <div>
+        <Input
+          type="password"
+          name="password"
+          placeholder={_e('auth.password')}
+          className="w-full"
+          value={password}
+          onChange={handleChange(setPassword)}
+          disabled={loading}
+          autoComplete="off"
+        />
+      </div>
+      {formError && (
+        <div>
+          <p className="text-center text-sm text-red-500">{formError}</p>
+        </div>
+      )}
+      <div className="mt-6">
+        <Button
+          className="w-full bg-gray-700 text-white hover:bg-gray-900"
+          type="submit"
+          disabled={loading}>
+          {loading ? <Spinner /> : _e('auth.login')}
+        </Button>
+      </div>
+    </form>
+  )
+}
+
+export function Login() {
   const redirectRegistration = () => router.push('/auth/register')
+  const { isChecking, authenticated } = useAuthenticated()
+  const { _e } = useTranslation()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isChecking && authenticated) {
+      router.push('/')
+    }
+  }, [isChecking, authenticated, router])
 
   return (
     <section className="container m-auto h-full">
@@ -57,49 +105,9 @@ export function Login() {
             </div>
             <div className="mb-4 w-full">
               <div className="w-full">
-                <form onSubmit={doLogin}>
-                  <div className="">
-                    <Input
-                      type="text"
-                      name="email"
-                      placeholder={_e('auth.email')}
-                      className="w-full"
-                      value={email}
-                      onChange={handleChange(setEmail)}
-                      disabled={loading}
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder={_e('auth.password')}
-                      className="w-full"
-                      value={password}
-                      onChange={handleChange(setPassword)}
-                      disabled={loading}
-                    />
-                  </div>
-                  {formError && (
-                    <div>
-                      <p className="text-center text-sm text-red-500">
-                        {formError}
-                      </p>
-                    </div>
-                  )}
-                  <div className="mt-6">
-                    <Button
-                      className="w-full bg-gray-700 text-white hover:bg-gray-900"
-                      type="submit"
-                      disabled={loading}>
-                      {loading ? <Spinner /> : _e('auth.login')}
-                    </Button>
-                  </div>
-                </form>
+                <LoginForm />
                 <div className="flex justify-center">
-                  <Button
-                    className="text-sm text-slate-400 hover:text-slate-600"
-                    disabled={loading}>
+                  <Button className="text-sm text-slate-400 hover:text-slate-600">
                     {_e('auth.forgotYourPassword')}
                   </Button>
                 </div>
@@ -110,29 +118,14 @@ export function Login() {
               <span>{_e('auth.doNotHaveAnAccount')}</span>
               <Button
                 onClick={redirectRegistration}
-                className="!p-0 text-sm text-slate-400 hover:text-slate-600"
-                disabled={loading}>
+                className="!p-0 text-sm text-slate-400 hover:text-slate-600">
                 &nbsp;
                 {_e('auth.registerHere')}
               </Button>
             </div>
           </div>
-          <div className="w-full border-none bg-gradient-to-br from-gray-300 via-slate-400 to-slate-600 p-5">
-            <p className="mb-4 text-2xl">tudien.io</p>
-            <p className="text-sm">
-              Nullam finibus neque eu neque tincidunt, eget eleifend arcu
-              iaculis. Nulla malesuada efficitur suscipit. Donec et tincidunt
-              turpis. Aenean auctor augue ut nunc tristique bibendum. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec
-              tincidunt leo. Morbi fringilla ornare libero ut rhoncus. Praesent
-              dapibus orci vel ex aliquet varius.
-            </p>
-          </div>
         </div>
       </div>
-      <Toast open={open} onOpenChange={setOpen} title={_e('auth.welcome')}>
-        <p>{user && user.getFullname()}</p>
-      </Toast>
     </section>
   )
 }

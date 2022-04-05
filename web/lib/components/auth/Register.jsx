@@ -1,19 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Spinner } from '../common/Spinner'
-import { register } from '../../domain-logic/auth'
+import { register, useAuthenticated } from '../../domain-logic/auth'
 
-export function Register() {
+function RegisterForm({ setSuccess }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const [fullname, setFullname] = useState('')
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-
   const [formError, setFormError] = useState(null)
 
   const { _e } = useTranslation()
@@ -45,6 +44,78 @@ export function Register() {
     }
   }
 
+  return (
+    <form onSubmit={doRegister}>
+      <div>
+        <Input
+          type="text"
+          name="fullname"
+          placeholder={_e('auth.fullname')}
+          className="w-full"
+          value={fullname}
+          onChange={handleChange(setFullname)}
+        />
+      </div>
+      <div className="">
+        <Input
+          type="text"
+          name="email"
+          placeholder={_e('auth.email')}
+          className="w-full"
+          value={email}
+          onChange={handleChange(setEmail)}
+        />
+      </div>
+      <div>
+        <Input
+          type="password"
+          name="password"
+          placeholder={_e('auth.password')}
+          className="w-full"
+          value={password}
+          onChange={handleChange(setPassword)}
+        />
+      </div>
+      <div>
+        <Input
+          type="password"
+          name="confirm-password"
+          placeholder={_e('auth.reenterPassword')}
+          className="w-full"
+          value={password2}
+          onChange={handleChange(setPassword2)}></Input>
+      </div>
+      {formError && <p className="text-red text-md my-2">{formError}</p>}
+      <div className="mt-6">
+        <Button
+          className="w-full bg-gray-700 text-white hover:bg-gray-900"
+          type="submit"
+          disabled={loading}>
+          {loading ? (
+            <div className="flex h-full w-full items-center justify-center">
+              <Spinner />
+            </div>
+          ) : (
+            _e('auth.register')
+          )}
+        </Button>
+      </div>
+    </form>
+  )
+}
+
+export function Register() {
+  const [success, setSuccess] = useState(false)
+  const { _e } = useTranslation()
+  const { authenticated, isChecking } = useAuthenticated()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!isChecking && authenticated) {
+      router.push('/')
+    }
+  }, [authenticated, isChecking, router])
+
   if (success) {
     return (
       <section className="container h-full">
@@ -75,64 +146,7 @@ export function Register() {
             </div>
             <div className="mb-4 w-full">
               <div className="w-full">
-                <form onSubmit={doRegister}>
-                  <div>
-                    <Input
-                      type="text"
-                      name="fullname"
-                      placeholder={_e('auth.fullname')}
-                      className="w-full"
-                      value={fullname}
-                      onChange={handleChange(setFullname)}
-                    />
-                  </div>
-                  <div className="">
-                    <Input
-                      type="text"
-                      name="email"
-                      placeholder={_e('auth.email')}
-                      className="w-full"
-                      value={email}
-                      onChange={handleChange(setEmail)}
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="password"
-                      name="password"
-                      placeholder={_e('auth.password')}
-                      className="w-full"
-                      value={password}
-                      onChange={handleChange(setPassword)}
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      type="password"
-                      name="confirm-password"
-                      placeholder={_e('auth.reenterPassword')}
-                      className="w-full"
-                      value={password2}
-                      onChange={handleChange(setPassword2)}></Input>
-                  </div>
-                  {formError && (
-                    <p className="text-red text-md my-2">{formError}</p>
-                  )}
-                  <div className="mt-6">
-                    <Button
-                      className="w-full bg-gray-700 text-white hover:bg-gray-900"
-                      type="submit"
-                      disabled={loading}>
-                      {loading ? (
-                        <div className="flex h-full w-full items-center justify-center">
-                          <Spinner />
-                        </div>
-                      ) : (
-                        _e('auth.register')
-                      )}
-                    </Button>
-                  </div>
-                </form>
+                <RegisterForm setSuccess={setSuccess} />
               </div>
             </div>
           </div>

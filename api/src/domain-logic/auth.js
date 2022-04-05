@@ -20,10 +20,24 @@ export function logout() {
   return supabase.auth.signOut()
 }
 
-export function isAuthenticated() {
-  const session = supabase.auth.session()
+export function useAuthenticated() {
+  const [authenticated, setAuthenticated] = useState(false)
+  const [isChecking, setIsChecking] = useState(true)
 
-  return session?.user
+  useEffect(() => {
+    const handler = (session) => {
+      if (session?.user.id) {
+        setAuthenticated(true)
+      }
+
+      setIsChecking(false)
+    }
+
+    supabase.auth.onAuthStateChange((event, session) => handler(session))
+    handler(supabase.auth.session())
+  }, [])
+
+  return { authenticated, isChecking }
 }
 
 export function User(userObject) {
