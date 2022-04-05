@@ -1,10 +1,5 @@
-import { useState } from 'react'
-
 export function ToggleCheckbox({ checked, onChange }) {
-  const [value, setValue] = useState(checked)
-
   const doChange = (e) => {
-    setValue(e.target.checked)
     onChange(e.target.checked)
   }
 
@@ -15,7 +10,7 @@ export function ToggleCheckbox({ checked, onChange }) {
         name="toggle"
         id="toggle"
         className="toggle-checkbox absolute block h-6 w-6 cursor-pointer appearance-none rounded-full border-4 bg-white"
-        checked={value}
+        checked={checked}
         onChange={doChange}
       />
       <label

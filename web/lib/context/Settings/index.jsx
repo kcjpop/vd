@@ -4,24 +4,23 @@ import { getExampleSpeechSettings } from '../../storage'
 export const SettingsContext = createContext()
 
 export const SettingsProvider = ({ children }) => {
-  const [state, setState] = useState({
-    showExampleSpeech: false,
-  })
+  const [showSpeechForExamples, setShowSpeechForExamples] = useState(false)
 
   const toggleShowExampleSpeech = (value) => {
     getExampleSpeechSettings().set(value)
-    setState({ ...setState, showExampleSpeech: value })
+    setShowSpeechForExamples(value)
   }
 
   useEffect(() => {
-    setState((prevState) => ({
+    setShowSpeechForExamples((prevState) => ({
       ...prevState,
-      showExampleSpeech: getExampleSpeechSettings().get(),
+      showSpeechForExamples: getExampleSpeechSettings().get(),
     }))
   }, [])
 
   return (
-    <SettingsContext.Provider value={{ state, toggleShowExampleSpeech }}>
+    <SettingsContext.Provider
+      value={{ settings: { showSpeechForExamples }, toggleShowExampleSpeech }}>
       {children}
     </SettingsContext.Provider>
   )

@@ -11,7 +11,7 @@ import { SettingsContext } from '../../context/Settings'
 
 function Examples({ examples }) {
   const {
-    state: { showExampleSpeech },
+    settings: { showSpeechForExamples },
   } = useContext(SettingsContext)
   const { _e } = useTranslation()
 
@@ -28,7 +28,7 @@ function Examples({ examples }) {
               <span className="italic text-stone-700">= {ex.translation}</span>
             )}
             <span className="float-right">
-              {showExampleSpeech && <Speech word={ex.text} />}
+              {showSpeechForExamples && <Speech word={ex.text} />}
             </span>
           </li>
         ))}

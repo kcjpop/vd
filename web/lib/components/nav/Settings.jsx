@@ -19,7 +19,7 @@ export function Settings() {
   )
 
   const {
-    state: { showExampleSpeech },
+    settings: { showSpeechForExamples },
     toggleShowExampleSpeech,
   } = useContext(SettingsContext)
 
@@ -50,7 +50,7 @@ export function Settings() {
         <div>
           <div className="float-right">
             <ToggleCheckbox
-              checked={showExampleSpeech}
+              checked={showSpeechForExamples}
               onChange={doToggleExampleSpeech}
             />
           </div>
