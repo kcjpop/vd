@@ -1,11 +1,14 @@
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
+
+import { fetchSingleWord } from '@/lib/api'
+import { useTranslation } from '@/lib/i18n'
+import { recentlyViewedWords } from '@/lib/storage'
 
 import { Layout } from '../common/Layout'
 import { Spinner } from '../common/Spinner'
 import { Word } from './Word'
-import { fetchSingleWord } from '../../api'
-import { useTranslation } from '@/lib/i18n'
 
 function Error({ err }) {
   const { _e } = useTranslation()
@@ -27,6 +30,11 @@ export function Page({ opengraph }) {
     () => (word ? fetchSingleWord(word, dict) : null),
     { retry: 2 },
   )
+
+  // 🚨: Set to recently viewed words
+  useEffect(() => {
+    if (data) recentlyViewedWords().set(data.word)
+  }, [data])
 
   return (
     <Layout navVariant="search" opengraph={opengraph}>

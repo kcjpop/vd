@@ -1,5 +1,5 @@
 import { OpenGraph } from '@/lib/components/common/OpenGraph'
-import { Search } from './Search'
+import { WordSearchForm } from '../word-search-form/WordSearchForm'
 
 export function Page({ opengraph }) {
   return (
@@ -11,7 +11,7 @@ export function Page({ opengraph }) {
           <h1 className="mb-4 text-3xl font-bold tracking-wide text-slate-900">
             tudien.io
           </h1>
-          <Search />
+          <WordSearchForm />
         </div>
       </section>
 
