@@ -1,5 +1,3 @@
-import { isTrue } from './helpers'
-
 export function getVoiceSettings() {
   const key = 'selected-voice'
 
@@ -12,7 +10,7 @@ export function getVoiceSettings() {
 export function getExampleSpeechSettings() {
   const key = 'show-example-speech'
 
-  const get = () => isTrue(window?.localStorage.getItem(key))
+  const get = () => window?.localStorage.getItem(key) === 'true'
   const set = (value) => window?.localStorage.setItem(key, value)
 
   return { get, set }
