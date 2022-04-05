@@ -6,3 +6,12 @@ export function getVoiceSettings() {
 
   return { get, set }
 }
+
+export function getExampleSpeechSettings() {
+  const key = 'show-example-speech'
+
+  const get = () => window?.localStorage.getItem(key) === 'true'
+  const set = (value) => window?.localStorage.setItem(key, value)
+
+  return { get, set }
+}
