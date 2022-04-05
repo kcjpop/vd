@@ -10,7 +10,8 @@
 }
 .toggle-checkbox:checked + .toggle-label {
   @apply bg-sky-400;
-  
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .toast-wrapper[data-state='open'] {
     animation: toast-slide-in 250ms ease-in;
