@@ -33,8 +33,9 @@ export function Settings() {
 
   return (
     <Fragment>
-      <div className="grid items-center gap-2 lg:grid-cols-2">
+      <div className="grid items-center gap-2">
         <div className="font-bold">{_e('nav.settings.voice')}</div>
+
         <select
           className="rounded border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500"
           value={selected}
@@ -45,15 +46,16 @@ export function Settings() {
             </option>
           ))}
         </select>
-      </div>
-      <div className="grid items-center gap-2 lg:grid-cols-2">
-        <div className="font-bold">{_e('nav.settings.exampleSpeech')}</div>
-        <div>
-          <div className="float-right">
-            <ToggleCheckbox
-              checked={showSpeechForExamples}
-              onChange={toggleShowExampleSpeech}
-            />
+
+        <div className="flex items-center justify-between">
+          <div className="font-bold">{_e('nav.settings.exampleSpeech')}</div>
+          <div>
+            <div className="float-right">
+              <ToggleCheckbox
+                checked={showSpeechForExamples}
+                onChange={toggleShowExampleSpeech}
+              />
+            </div>
           </div>
         </div>
       </div>
