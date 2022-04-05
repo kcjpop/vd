@@ -27,9 +27,11 @@ function Examples({ examples }) {
             {ex.translation && (
               <span className="italic text-stone-700">= {ex.translation}</span>
             )}
-            <span className="float-right">
-              {showSpeechForExamples && <Speech word={ex.text} />}
-            </span>
+            {showSpeechForExamples && (
+              <span className="float-right">
+                <Speech word={ex.text} />
+              </span>
+            )}
           </li>
         ))}
       </ul>

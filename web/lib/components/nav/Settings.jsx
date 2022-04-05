@@ -28,8 +28,6 @@ export function Settings() {
     setSelected(e.target.value)
   }
 
-  const doToggleExampleSpeech = (value) => toggleShowExampleSpeech(value)
-
   return (
     <Fragment>
       <div className="grid items-center gap-2 lg:grid-cols-2">
@@ -51,7 +49,7 @@ export function Settings() {
           <div className="float-right">
             <ToggleCheckbox
               checked={showSpeechForExamples}
-              onChange={doToggleExampleSpeech}
+              onChange={toggleShowExampleSpeech}
             />
           </div>
         </div>
