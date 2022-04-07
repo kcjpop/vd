@@ -27,6 +27,8 @@ const messages = {
   'word.examples': 'Ví dụ',
   'word.copyPermalink': 'Copy đường dẫn đến định nghĩa này',
 
+  'wordSearchForm.placeholder': 'Bạn muốn tra gì nè?',
+
   'verbTense.infinitive': 'Nguyên mẫu',
   'verbTense.singular_present_1st': 'Hiện tại ngôi thứ nhất',
   'verbTense.singular_present_2nd': 'Hiện tại ngôi thứ hai',

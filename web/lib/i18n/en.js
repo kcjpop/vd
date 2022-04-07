@@ -27,6 +27,8 @@ const messages = {
   'word.examples': 'Examples',
   'word.copyPermalink': 'Copy permalink to this definition',
 
+  'wordSearchForm.placeholder': 'What are you looking up?',
+
   'verbTense.infinitive': 'Infinitive',
   'verbTense.singular_present_1st': '1st-person present singular',
   'verbTense.singular_present_2nd': '2nd-person present singular',

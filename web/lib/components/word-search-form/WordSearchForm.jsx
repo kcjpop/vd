@@ -13,9 +13,11 @@ import { SearchIcon } from '../common/Icons'
 import { RecentlyViewed } from './RecentlyViewed'
 
 import s from './WordSearchForm.module.css'
+import { useTranslation } from '@/lib/i18n'
 
 export function WordSearchForm() {
   const router = useRouter()
+  const { _e } = useTranslation()
 
   const [open, setOpen] = useState(false)
   const [sizeData, setSizeData] = useState()
@@ -55,7 +57,7 @@ export function WordSearchForm() {
           id="keyword"
           type="search"
           required
-          placeholder="Bạn muốn tra gì nè?"
+          placeholder={_e('wordSearchForm.placeholder')}
           className="w-full rounded-md border border-slate-300 bg-white py-2 pl-2 pr-10 placeholder-slate-400 shadow-sm focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
         />
         <button type="submit" className="absolute inset-y-0 right-0 p-2">
