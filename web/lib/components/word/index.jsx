@@ -20,14 +20,14 @@ function Error({ err }) {
   )
 }
 
-export function Page({ opengraph }) {
+export function Page({ opengraph, entry }) {
   const { _e } = useTranslation()
   const router = useRouter()
   const { word, dict } = router.query
 
   const { data, isLoading, isError } = useQuery(
     ['word', word, dict],
-    () => (word ? fetchSingleWord(word, dict) : null),
+    () => entry ?? fetchSingleWord(word, dict),
     { retry: 2 },
   )
 

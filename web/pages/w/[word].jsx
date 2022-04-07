@@ -1,14 +1,18 @@
+import got from 'got'
+
 import { Page } from '@/lib/components/word'
+import { fetchBannerEndpoint, fetchSingleWordEndpoint } from '@/lib/api'
 
 export default Page
 
 export async function getServerSideProps(ctx) {
   const { word } = ctx.query
+  const entry = await got(fetchSingleWordEndpoint(ctx.query)).json()
 
   const opengraph = {
     title: `“${word}” tiếng Việt là gì?`,
-    image: `https://${ctx.req.headers.host}/api/banner?w=${word}`,
+    image: fetchBannerEndpoint(ctx.query),
   }
 
-  return { props: { opengraph } }
+  return { props: { opengraph, entry: entry ?? null } }
 }
