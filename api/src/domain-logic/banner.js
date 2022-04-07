@@ -1,5 +1,15 @@
-const { createCanvas } = require('@napi-rs/canvas')
+const { resolve } = require('path')
+const { readdirSync } = require('fs')
+const { GlobalFonts, createCanvas } = require('@napi-rs/canvas')
+
 const { BANNER_FONT } = require('../config')
+
+const { getSingleWord } = require('./words')
+
+const fontPath = resolve(__dirname, './fonts')
+readdirSync(fontPath).forEach((filename) => {
+  GlobalFonts.registerFromPath(resolve(fontPath, filename))
+})
 
 const IMAGE = { WIDTH: 620, HEIGHT: 451, COLOR: '#E5E5E5' }
 const RECT = {
@@ -67,7 +77,7 @@ function wrapText(ctx, text, x, y, lineheight, maxWidth) {
   }
 }
 
-exports.generateImage = function generateImage({ word, definition }) {
+function generateImage({ word, definition }) {
   const canvas = createCanvas(IMAGE.WIDTH, IMAGE.HEIGHT)
   const ctx = canvas.getContext('2d')
   const MAX_WIDTH = RECT.WIDTH - MARGIN.LEFT - MARGIN.RIGHT
@@ -116,3 +126,14 @@ exports.generateImage = function generateImage({ word, definition }) {
 
   return canvas.toBuffer('image/png')
 }
+
+async function getImage({ word }) {
+  const entry = await getSingleWord({ word })
+
+  return generateImage({
+    word: entry.word,
+    definition: entry.definitions[0],
+  })
+}
+
+module.exports = { getImage }

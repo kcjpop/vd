@@ -1,7 +1,7 @@
-const { getAllTenses } = require('./domain-logic/verb-tenses')
-const { getPronunciations } = require('./domain-logic/pronunciation')
-const Envi = require('./domain-logic/en-vi')
-const Wordnet = require('./domain-logic/wordnet')
+const { getAllTenses } = require('./verb-tenses')
+const { getPronunciations } = require('./pronunciation')
+const Envi = require('./en-vi')
+const Wordnet = require('./wordnet')
 
 exports.getSingleWord = async function getSingleWord({ word, dict }) {
   const entry =

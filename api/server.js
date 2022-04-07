@@ -2,28 +2,17 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 
-const words = require('./src/words')
-const banner = require('./src/banner/banner')
+const { getSingleWordHandler } = require('./src/handlers/words')
+const { getImageHandler } = require('./src/handlers/banner')
 
 const PORT = process.env.PORT ?? 8080
 
 app.use(cors())
 app.use(express.json())
 
-app.get('/words/:word', async (req, res) => {
-  const word = await words.getSingleWord({ ...req.params, ...req.query })
+app.get('/words/:word', getSingleWordHandler)
 
-  if (!word) return res.sendStatus(404)
-
-  res.json(word)
-})
-
-app.get('/banner/:word', async (req, res) => {
-  const image = await banner.getImage({ ...req.params, ...req.query })
-
-  res.setHeader('Content-Type', 'image/png')
-  res.send(image)
-})
+app.get('/banner/:word', getImageHandler)
 
 app.listen(PORT, function (err) {
   if (err) console.log(err)
