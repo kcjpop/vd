@@ -1,4 +1,4 @@
-import { getDb } from './db'
+const { getDb } = require('./db')
 
 const DB = 'pronunciation.db'
 
@@ -6,7 +6,7 @@ const DB = 'pronunciation.db'
  * Get pronunciations of a word
  * @param {string} word
  */
-export async function getPronunciations(word) {
+exports.getPronunciations = async function getPronunciations(word) {
   const db = await getDb(DB)
 
   const rows = db

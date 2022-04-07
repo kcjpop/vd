@@ -1,18 +1,13 @@
-async function request(url, options) {
-  const res = await fetch(url, options)
+import ky from 'ky'
 
-  if (!res.ok) {
-    const ex = new Error(`HTTP error! Status: ${res.status}`)
-    ex.status = res.status
-    throw ex
-  }
+const prefixUrl = process.env.NEXT_PUBLIC_API_URL
+if (!prefixUrl) throw new Error('Missing tudien.io API URL.')
 
-  return res.json()
-}
+const api = ky.create({ prefixUrl })
 
 // FUNCTION NAME CONVENTION
 // `fetchSingleX` for requests returning only 1 item
 // `fetchAllX...` for requests returning multiple items
 
 export const fetchSingleWord = (word, dict = 'en-vi') =>
-  request(`/api/words/${word}?dict=${dict}`)
+  api.get(`words/${word}?dict=${dict}`).json()

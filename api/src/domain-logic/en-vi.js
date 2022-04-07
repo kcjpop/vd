@@ -1,4 +1,4 @@
-import { getDb } from './db'
+const { getDb } = require('./db')
 
 const EN_VI_DB = 'en-vi.db'
 const db = getDb(EN_VI_DB)
@@ -7,7 +7,7 @@ const db = getDb(EN_VI_DB)
  * Get word from db
  * @param {string} word
  */
-export async function getDefinitions(word) {
+exports.getDefinitions = async function getDefinitions(word) {
   const sql = `
 select part_of_speech, definitions, phrases
 from words

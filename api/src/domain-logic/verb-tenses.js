@@ -1,4 +1,4 @@
-import { getDb } from './db'
+const { getDb } = require('./db')
 
 const VERB_TENSES_DB = 'verb-tenses.db'
 
@@ -6,7 +6,7 @@ const VERB_TENSES_DB = 'verb-tenses.db'
  * Get all tenses of a verb
  * @param {string} verb
  */
-export async function getAllTenses(verb) {
+exports.getAllTenses = async function getAllTenses(verb) {
   const db = await getDb(VERB_TENSES_DB)
 
   const item = db

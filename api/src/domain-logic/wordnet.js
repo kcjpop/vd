@@ -1,4 +1,4 @@
-import { getDb } from './db'
+const { getDb } = require('./db')
 
 const DB = 'wordnet.db'
 const db = getDb(DB)
@@ -26,7 +26,7 @@ const groupBy = (col, keyFn) =>
 
 const unique = (col) => (col ? [...new Set(col)] : col)
 
-export async function getDefinitions(word) {
+exports.getDefinitions = async function getDefinitions(word) {
   const sql = `
   with t as (
     select
