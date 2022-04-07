@@ -1,0 +1,7 @@
+{
+  "extends": ["eslint:recommended", "standard", "prettier"],
+  "env": {
+    "es2020": true,
+    "jest": true
+  }
+}
