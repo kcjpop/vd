@@ -64,6 +64,8 @@ const messages = {
   'auth.redirectIn': 'Tự động chuyển trang sau...',
   'auth.emailConfirmed': 'Email đã được xác nhận.',
   'auth.welcome': 'Xin chào',
+  'auth.logout': 'Đăng xuất',
+  'auth.signInAs': 'Đăng nhập:',
 
   'toast.dismiss': 'Ẩn',
 }

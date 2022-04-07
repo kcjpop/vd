@@ -62,6 +62,8 @@ const messages = {
   'auth.redirectIn': 'Automatically redirect after ...',
   'auth.emailConfirmed': 'Email confirmed',
   'auth.welcome': 'Welcome',
+  'auth.logout': 'Log out',
+  'auth.signInAs': 'Signed in as',
 
   'toast.dismiss': 'Dismiss',
 }

@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { SearchIcon, UserIcon } from '../common/Icons'
+import { SearchIcon } from '../common/Icons'
 import { SettingButton } from './SettingButton'
+import { UserDropdown } from '../user-dropdown/UserDropdown'
 import { useUser } from '../../domain-logic/auth'
 
 function SearchForm() {
@@ -57,9 +58,7 @@ export function SearchNav() {
 
       {user != null && (
         <li>
-          <div className="rounded bg-gray-900 p-2">
-            <UserIcon />
-          </div>
+          <UserDropdown />
         </li>
       )}
 
