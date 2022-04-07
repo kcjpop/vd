@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { useTranslation } from '@/lib/i18n'
 
 import { LinkToWord } from '../common/LinkToWord'
@@ -7,37 +6,7 @@ import { VerbTenses } from './VerbTenses'
 import { Speech } from './Speech'
 import { DictMenu } from './DictMenu'
 import { Pronunciations } from './Pronunciations'
-import { SettingsContext } from '../../context/Settings'
-
-function Examples({ examples }) {
-  const {
-    settings: { showSpeechForExamples },
-  } = useContext(SettingsContext)
-  const { _e } = useTranslation()
-
-  return (
-    <>
-      <p className="upper-first mb-2 font-semibold text-slate-700">
-        {_e('word.examples')}:
-      </p>
-      <ul className="flex list-[circle] flex-col gap-2 pl-4" data-list-char="-">
-        {examples.map((ex) => (
-          <li className="upper-first" key={ex.text}>
-            {ex.text}{' '}
-            {ex.translation && (
-              <span className="italic text-stone-700">= {ex.translation}</span>
-            )}
-            {showSpeechForExamples && (
-              <span className="float-right">
-                <Speech word={ex.text} />
-              </span>
-            )}
-          </li>
-        ))}
-      </ul>
-    </>
-  )
-}
+import { Examples } from './Examples'
 
 function Definition({ def, index }) {
   const { _e } = useTranslation()
