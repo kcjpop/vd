@@ -12,10 +12,7 @@ export const SettingsProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    setShowSpeechForExamples((prevState) => ({
-      ...prevState,
-      showSpeechForExamples: getExampleSpeechSettings().get(),
-    }))
+    setShowSpeechForExamples(getExampleSpeechSettings().get())
   }, [])
 
   return (
