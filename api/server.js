@@ -11,12 +11,12 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/words/:word', async (req, res) => {
-  const word = await words.getSingleWord(req.params)
+  const word = await words.getSingleWord({ ...req.params, ...req.query })
   res.send(word)
 })
 
 app.get('/banner/:word', async (req, res) => {
-  const image = await banner.getImage(req.params)
+  const image = await banner.getImage({ ...req.params, ...req.query })
 
   res.setHeader('Content-Type', 'image/png')
   res.send(image)
