@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
 const words = require('./src/words')
@@ -6,10 +7,11 @@ const banner = require('./src/banner/banner')
 
 const PORT = process.env.PORT ?? 8080
 
+app.use(cors())
 app.use(express.json())
 
 app.get('/words/:word', async (req, res) => {
-  const word = await words.getSingleWords(req.params)
+  const word = await words.getSingleWord(req.params)
   res.send(word)
 })
 
