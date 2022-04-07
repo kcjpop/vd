@@ -5,7 +5,7 @@ import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Spinner } from '../common/Spinner'
-import { register, useAuthenticated } from '../../domain-logic/auth'
+import { register, useUser } from '../../domain-logic/auth'
 
 function RegisterForm({ setSuccess }) {
   const [email, setEmail] = useState('')
@@ -107,14 +107,14 @@ function RegisterForm({ setSuccess }) {
 export function Register() {
   const [success, setSuccess] = useState(false)
   const { _e } = useTranslation()
-  const { authenticated, isChecking } = useAuthenticated()
+  const { user } = useUser({ redirectIfUnauthenticated: false })
   const router = useRouter()
 
   useEffect(() => {
-    if (!isChecking && authenticated) {
+    if (user) {
       router.push('/')
     }
-  }, [authenticated, isChecking, router])
+  }, [router, user])
 
   if (success) {
     return (

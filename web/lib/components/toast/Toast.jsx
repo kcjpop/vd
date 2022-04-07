@@ -1,6 +1,7 @@
 import { Root, Title, Description, Action, Close } from '@radix-ui/react-toast'
 import { IoClose } from 'react-icons/io5'
 import { useTranslation } from '../../i18n'
+import s from './style.module.css'
 
 /* Props:
  *  - title
@@ -25,12 +26,12 @@ export function Toast({
   const { _e } = useTranslation()
 
   return (
-    <Root type={type} open={open} {...props} className="toast-wrapper">
-      <div className={`toast toast--${variant}`}>
-        {title && <Title className="toast__title">{title}</Title>}
-        <Description className="toast__description">{children}</Description>
+    <Root type={type} open={open} {...props} className={s.wrapper}>
+      <div className={`${s.main} ${s[variant]}`}>
+        {title && <Title className={s.title}>{title}</Title>}
+        <Description className={s.description}>{children}</Description>
         {action && (
-          <Action className="toast__action" {...actionProps}>
+          <Action className={s.action} {...actionProps}>
             {action}
           </Action>
         )}
