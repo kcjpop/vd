@@ -12,7 +12,10 @@ app.use(express.json())
 
 app.get('/words/:word', async (req, res) => {
   const word = await words.getSingleWord({ ...req.params, ...req.query })
-  res.send(word)
+
+  if (!word) return res.sendStatus(404)
+
+  res.json(word)
 })
 
 app.get('/banner/:word', async (req, res) => {

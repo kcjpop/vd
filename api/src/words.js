@@ -9,7 +9,7 @@ exports.getSingleWord = async function getSingleWord({ word, dict }) {
       ? await Wordnet.getDefinitions(word)
       : await Envi.getDefinitions(word)
 
-  if (!entry) return
+  if (!entry) return null
 
   const [tenses, pronunciations] = await Promise.all([
     getAllTenses(word),
