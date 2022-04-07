@@ -6,6 +6,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@napi-rs/canvas": "0.1.21",
     "better-sqlite3": "7.5.1",
     "express": "4.17.3"
   }

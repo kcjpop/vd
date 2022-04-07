@@ -1,5 +1,5 @@
-import { createCanvas } from '@napi-rs/canvas'
-import { BANNER_FONT } from '../config'
+const { createCanvas } = require('@napi-rs/canvas')
+const { BANNER_FONT } = require('../config')
 
 const IMAGE = { WIDTH: 620, HEIGHT: 451, COLOR: '#E5E5E5' }
 const RECT = {
@@ -67,7 +67,7 @@ function wrapText(ctx, text, x, y, lineheight, maxWidth) {
   }
 }
 
-export function generateImage({ word, definition }) {
+exports.generateImage = function generateImage({ word, definition }) {
   const canvas = createCanvas(IMAGE.WIDTH, IMAGE.HEIGHT)
   const ctx = canvas.getContext('2d')
   const MAX_WIDTH = RECT.WIDTH - MARGIN.LEFT - MARGIN.RIGHT

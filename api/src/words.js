@@ -3,7 +3,7 @@ const { getPronunciations } = require('./domain-logic/pronunciation')
 const Envi = require('./domain-logic/en-vi')
 const Wordnet = require('./domain-logic/wordnet')
 
-exports.getSingleWords = async function getSingleWord({ word, dict }) {
+exports.getSingleWord = async function getSingleWord({ word, dict }) {
   const entry =
     dict === 'wordnet'
       ? await Wordnet.getDefinitions(word)
