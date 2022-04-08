@@ -28,64 +28,64 @@
 }
 
 @keyframes toast-fade-out {
-  from: {
+  from {
     opacity: 1;
   }
-  to: {
+  to {
     opacity: 0;
   }
 }
 
 @keyframes toast-fade-in {
-  0%: {
+  0% {
     opacity: 0;
   }
   ,
-  100%: {
+  100% {
     opacity: 1;
   }
 }
 
 /* Dropdown */
 @keyframes slide-up-n-fade {
-  '0%': {
+  0% {
     opacity: 0;
     transform: translateY(2px);
   }
-  '100%': {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes slide-right-n-fade {
-  '0%': {
+  0% {
     opacity: 0;
     transform: translateX(-2px);
   }
-  '100%': {
+  100% {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes slide-down-n-fade {
-  '0%': {
+  0% {
     opacity: 0;
     transform: translateY(-2px);
   }
-  '100%': {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes slide-left-n-fade {
-  '0%': {
+  0% {
     opacity: 0;
     transform: translateX(2px);
   }
-  '100%': {
+  100% {
     opacity: 1;
     transform: translateX(0);
   }
