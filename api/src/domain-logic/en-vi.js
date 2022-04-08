@@ -27,3 +27,11 @@ where word = ?`
     })),
   }
 }
+
+exports.count = async function count() {
+  const sql = 'SELECT COUNT(DISTINCT word) as count FROM words'
+
+  const summary = db.prepare(sql).get()
+
+  return summary.count
+}
