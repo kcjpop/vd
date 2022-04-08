@@ -1,7 +1,8 @@
 import { OpenGraph } from '@/lib/components/common/OpenGraph'
+import { Stats } from '@/lib/components/home/Stats'
 import { WordSearchForm } from '../word-search-form/WordSearchForm'
 
-export function Page({ opengraph }) {
+export function Page({ opengraph, stats }) {
   return (
     <div className="grid min-h-screen lg:flex lg:flex-col">
       <OpenGraph opengraph={opengraph} />
@@ -28,6 +29,7 @@ export function Page({ opengraph }) {
           </svg>
         </div>
         <div className="flex-1 bg-slate-800" />
+        <Stats stats={stats} />
       </section>
     </div>
   )

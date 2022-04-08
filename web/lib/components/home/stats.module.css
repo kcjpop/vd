@@ -1,0 +1,12 @@
+.row {
+  @apply grid grid-cols-2;
+  grid-template-areas: 'word count';
+}
+
+.word {
+  grid-area: word;
+}
+
+.count {
+  grid-area: count;
+}

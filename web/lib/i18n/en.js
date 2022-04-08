@@ -1,6 +1,7 @@
 const messages = {
   'common.synonymps': 'synonymps',
   'common.pleaseWait': 'Please wait',
+  'common.words': 'words',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
