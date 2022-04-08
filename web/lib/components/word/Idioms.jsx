@@ -1,17 +1,21 @@
-import Link from 'next/link'
 import { Examples } from './Examples'
 import { TextToWords } from './TextToWords'
+import { LinkToWord } from '../common/LinkToWord'
 
 function IdiomTranslation({ translation }) {
   if (translation.startsWith('(xem)')) {
     const [prefix, ...wordToLink] = translation.split(' ')
+    const word = wordToLink.join(' ')
 
     return (
       <>
         {prefix}&nbsp;
-        <Link href={`/w/${wordToLink.join('-')}`}>
-          <a className="font-bold hover:text-sky-500">{wordToLink.join(' ')}</a>
-        </Link>
+        <LinkToWord
+          key={word}
+          query={{ word }}
+          className="border-b-2 border-sky-600">
+          {word}
+        </LinkToWord>
       </>
     )
   }
