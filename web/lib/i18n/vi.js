@@ -65,9 +65,10 @@ const messages = {
   'auth.emailConfirmed': 'Email đã được xác nhận.',
   'auth.welcome': 'Xin chào',
   'auth.logout': 'Đăng xuất',
-  'auth.signInAs': 'Đăng nhập:',
 
   'toast.dismiss': 'Ẩn',
+
+  'user.signInAs': 'Đăng nhập:',
 }
 
 export default messages

@@ -63,9 +63,10 @@ const messages = {
   'auth.emailConfirmed': 'Email confirmed',
   'auth.welcome': 'Welcome',
   'auth.logout': 'Log out',
-  'auth.signInAs': 'Signed in as',
 
   'toast.dismiss': 'Dismiss',
+
+  'user.signInAs': 'Signed in as',
 }
 
 export default messages

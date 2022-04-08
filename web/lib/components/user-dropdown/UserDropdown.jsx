@@ -5,6 +5,7 @@ import {
   Content,
   Item,
   Separator,
+  Arrow,
 } from '@radix-ui/react-dropdown-menu'
 import { useRouter } from 'next/router'
 
@@ -23,7 +24,7 @@ export function UserDropdown() {
 
   return (
     <Root className={s.root}>
-      <Trigger asChild>
+      <Trigger className={s.trigger} asChild>
         <div className="rounded bg-gray-900 p-2" aria-label={''}>
           <UserIcon></UserIcon>
         </div>
@@ -52,6 +53,7 @@ export function UserDropdown() {
             </Item>
           </Fragment>
         )}
+        <Arrow className={s.arrow} offset={10} />
       </Content>
     </Root>
   )

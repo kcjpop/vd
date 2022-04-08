@@ -1,8 +1,48 @@
 .root {
 }
 
+.trigger {
+  @apply cursor-pointer rounded border border-transparent;
+}
+.trigger:hover,
+.trigger[data-state='open'] {
+  @apply border-white;
+}
+
 .content {
+  @apply translate-y-1 rounded bg-slate-100 p-1 shadow-lg duration-300 ease-linear;
+  will-change: 'transform, opacity';
+}
+
+.content[data-state='open'][data-side='top'] {
+  animation-name: slide-down-n-fade;
+}
+.content[data-state='open'][data-side='right'] {
+  animation-name: slide-left-n-fade;
+}
+.content[data-state='open'][data-side='left'] {
+  animation-name: slide-right-n-fade;
+}
+.content[data-state='open'][data-side='bottom'] {
+  animation-name: slide-up-n-fade;
 }
 
 .item {
+  all: unset;
+
+  @apply relative flex h-6 select-none items-center rounded px-1 py-2 text-base;
+  line-height: 1;
+}
+.item:hover {
+  @apply bg-slate-200;
+}
+.item:focus {
+  @apply text-purple-800;
+}
+.item[data-disabled] {
+  @apply pointer-events-none text-slate-400;
+}
+
+.arrow {
+  @apply fill-slate-100;
 }
