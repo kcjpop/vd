@@ -1,5 +1,23 @@
+import Link from 'next/link'
 import { Examples } from './Examples'
 import { TextToWords } from './TextToWords'
+
+function IdiomTranslation({ translation }) {
+  if (translation.startsWith('(xem)')) {
+    const [prefix, ...wordToLink] = translation.split(' ')
+
+    return (
+      <>
+        {prefix}&nbsp;
+        <Link href={`/w/${wordToLink.join('-')}`}>
+          <a className="font-bold hover:text-sky-500">{wordToLink.join(' ')}</a>
+        </Link>
+      </>
+    )
+  }
+
+  return translation
+}
 
 function Idiom({ idiom }) {
   return (
@@ -14,8 +32,9 @@ function Idiom({ idiom }) {
           </p>
         ))}
         <div className="ml-4">
-          <p className="mb-2">{idiom.translation}</p>
-
+          <p className="mb-2">
+            <IdiomTranslation translation={idiom.translation} />
+          </p>
           {idiom.examples && (
             <div className="flex flex-col gap-2">
               <Examples examples={idiom.examples} />
