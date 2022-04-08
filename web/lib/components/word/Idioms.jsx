@@ -1,5 +1,27 @@
 import { Examples } from './Examples'
 import { TextToWords } from './TextToWords'
+import { LinkToWord } from '../common/LinkToWord'
+
+function IdiomTranslation({ translation }) {
+  if (translation.startsWith('(xem)')) {
+    const [prefix, ...wordToLink] = translation.split(' ')
+    const word = wordToLink.join(' ')
+
+    return (
+      <>
+        {prefix}&nbsp;
+        <LinkToWord
+          key={word}
+          query={{ word }}
+          className="border-b-2 border-sky-600">
+          {word}
+        </LinkToWord>
+      </>
+    )
+  }
+
+  return translation
+}
 
 function Idiom({ idiom }) {
   return (
@@ -14,8 +36,9 @@ function Idiom({ idiom }) {
           </p>
         ))}
         <div className="ml-4">
-          <p className="mb-2">{idiom.translation}</p>
-
+          <p className="mb-2">
+            <IdiomTranslation translation={idiom.translation} />
+          </p>
           {idiom.examples && (
             <div className="flex flex-col gap-2">
               <Examples examples={idiom.examples} />
