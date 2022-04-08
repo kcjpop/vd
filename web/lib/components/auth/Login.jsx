@@ -95,7 +95,7 @@ export function Login() {
   return (
     <section className="container m-auto h-full">
       <div className="flex h-full w-full flex-col items-center justify-center">
-        <div className="relative flex h-5/6 w-4/12 flex-col overflow-hidden rounded-lg border border-slate-400 sm:w-11/12 md:w-5/12">
+        <div className="relative flex h-5/6 w-4/12 flex-col overflow-hidden rounded-lg border border-slate-400 sm:w-11/12 md:w-7/12">
           <div className="w-full py-14 px-20">
             <div className="mb-10 w-full">
               <p className="text-center">{_e('auth.welcomeTo')}</p>

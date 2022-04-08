@@ -17,10 +17,17 @@ import s from './style.module.css'
 export function UserDropdown() {
   const { user } = useUser({ redirectIfUnauthenticated: false })
   const { _e } = useTranslation()
-  const router = useRouter
+  const router = useRouter()
 
   const login = () => router.push('/auth')
   const register = () => router.push('/auth/register')
+  const doLogout = async () => {
+    await logout()
+
+    router.push('/')
+  }
+
+  console.log({ user })
 
   return (
     <Root className={s.root}>
@@ -39,7 +46,7 @@ export function UserDropdown() {
               </div>
             </Item>
             <Separator />
-            <Item className={s.item} onClick={logout}>
+            <Item className={s.item} onClick={doLogout}>
               {_e('auth.logout')}
             </Item>
           </Fragment>
