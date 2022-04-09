@@ -20,9 +20,10 @@
     "eslint": "8.11.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
-    "nodemon": "2.0.15",
-    "knex": "1.0.4"
+    "knex": "1.0.4",
+    "nodemon": "2.0.15"
   }
 }
