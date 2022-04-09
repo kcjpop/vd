@@ -4,6 +4,7 @@ const app = express()
 
 const { getSingleWordHandler } = require('./src/handlers/words')
 const { getImageHandler } = require('./src/handlers/banner')
+const { getSummary } = require('./src/handlers/summary')
 
 const PORT = process.env.PORT ?? 8080
 
@@ -13,6 +14,8 @@ app.use(express.json())
 app.get('/words/:word', getSingleWordHandler)
 
 app.get('/banner/:word', getImageHandler)
+
+app.get('/summary', getSummary)
 
 app.listen(PORT, function (err) {
   if (err) console.log(err)

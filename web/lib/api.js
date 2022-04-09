@@ -16,3 +16,5 @@ export const fetchBannerEndpoint = ({ word }) => endpoint(`banner/${word}`)
 
 export const fetchSingleWord = (word, dict = 'en-vi') =>
   ky.get(fetchSingleWordEndpoint({ word, dict })).json()
+
+export const fetchHomepageStats = () => ky.get(endpoint('summary')).json()

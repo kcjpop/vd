@@ -89,3 +89,11 @@ exports.getDefinitions = async function getDefinitions(word) {
     return result
   }
 }
+
+exports.count = async function count() {
+  const sql = `SELECT COUNT(DISTINCT lemma) AS count FROM words`
+
+  const summary = db.prepare(sql).get()
+
+  return summary.count
+}
