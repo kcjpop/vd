@@ -4,7 +4,7 @@ import { VolumnIcon } from '../common/Icons'
 
 const LANG = 'en'
 
-export function Speech({ word }) {
+export function Speech({ word, size = '24px' }) {
   const [voices, setVoices] = React.useState(null)
 
   React.useEffect(() => {
@@ -47,5 +47,5 @@ export function Speech({ word }) {
 
   if (!voices) return null
 
-  return <VolumnIcon size="24px" className="cursor-pointer" onClick={doSpeak} />
+  return <VolumnIcon size={size} className="cursor-pointer" onClick={doSpeak} />
 }

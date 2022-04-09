@@ -21,17 +21,24 @@ export function Examples({ examples }) {
       data-list-char="-">
       {examples.map((ex) => (
         <li key={ex.text}>
-          <div className="flex flex-wrap gap-1">
-            {showSpeechForExamples && <Speech word={ex.text} />}{' '}
-            <TextToWords
-              text={upperFirst(ex.text)}
-              className="hover:underline"
-            />{' '}
-            {ex.translation && (
-              <span className="italic text-stone-700">
-                = {upperFirst(ex.translation)}
+          <div className="flex flex-wrap gap-2">
+            {showSpeechForExamples && (
+              <span className="flex items-center text-sky-600">
+                <Speech word={ex.text} size={18} />
               </span>
             )}
+
+            <div>
+              <TextToWords
+                text={upperFirst(ex.text)}
+                className="hover:underline"
+              />{' '}
+              {ex.translation && (
+                <span className="italic text-stone-700">
+                  = {upperFirst(ex.translation)}
+                </span>
+              )}
+            </div>
           </div>
         </li>
       ))}

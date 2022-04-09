@@ -1,7 +1,36 @@
-.toggleCheckbox:checked {
-  @apply right-0 border-sky-400;
+.formCheckInput:checked {
+  background-color: #0284c7;
+  border-color: #0284c7;
 }
-
-.toggleCheckbox:checked + .toggleLabel {
-  @apply bg-sky-400;
+.formCheckInput:checked[type='checkbox'] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+.formCheckInput:checked[type='radio'] {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-4 -4 8 8%22%3E%3Ccircle r=%222%22 fill=%22%23fff%22/%3E%3C/svg%3E');
+}
+.formCheckInput[type='checkbox']:indeterminate {
+  background-color: #0284c7;
+  border-color: #0284c7;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+}
+.formCheckInput:disabled {
+  pointer-events: none;
+  filter: none;
+  opacity: 0.5;
+}
+.formSwitch {
+  padding-left: 2.5em;
+}
+.formSwitch .formCheckInput {
+  margin-top: 0.1rem;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-4 -4 8 8%22%3E%3Ccircle r=%223%22 fill=%22%23fff%22/%3E%3C/svg%3E');
+  background-position: 0;
+  transition: background-position 0.15s ease-in-out;
+}
+.formSwitch .formCheckInput:focus {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-4 -4 8 8%22%3E%3Ccircle r=%223%22 fill=%22%23fff%22/%3E%3C/svg%3E');
+}
+.formSwitch .formCheckInput:checked {
+  background-position: 100%;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-4 -4 8 8%22%3E%3Ccircle r=%223%22 fill=%22%23fff%22/%3E%3C/svg%3E');
 }

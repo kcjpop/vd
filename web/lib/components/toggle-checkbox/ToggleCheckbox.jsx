@@ -1,22 +1,15 @@
 import s from './style.module.css'
 
-export function ToggleCheckbox({ checked, onChange }) {
-  const doChange = (e) => {
-    onChange(e.target.checked)
-  }
-
+export function ToggleCheckbox({ checked, onChange, disabled }) {
   return (
-    <div className="relative mr-2 inline-block w-10 select-none align-middle transition duration-200 ease-in">
+    <div className={s.formSwitch}>
       <input
-        type="checkbox"
-        name="toggle"
-        className={`absolute block h-6 w-6 cursor-pointer appearance-none rounded-full border-4 bg-white ${s.toggleCheckbox}`}
         checked={checked}
-        onChange={doChange}
-      />
-      <label
-        htmlFor="toggle"
-        className={`block h-6 cursor-pointer overflow-hidden rounded-full bg-gray-300 ${s.toggleLabel}`}
+        onChange={onChange}
+        disabled={disabled}
+        type="checkbox"
+        role="switch"
+        className={`${s.formCheckInput} float-left -ml-10 h-5 w-9 cursor-pointer appearance-none rounded-full bg-white bg-gray-300 bg-contain bg-no-repeat align-top shadow-sm focus:outline-none`}
       />
     </div>
   )
