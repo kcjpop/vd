@@ -16,5 +16,5 @@ app.get('/banner/:word', getImageHandler)
 
 app.listen(PORT, function (err) {
   if (err) console.log(err)
-  console.log('Server listening on PORT', PORT)
+  console.log(`Server listening on http://localhost:${PORT}`)
 })
