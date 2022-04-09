@@ -38,11 +38,14 @@ exports.count = async function count() {
 }
 
 exports.getSuggestions = async function ({ word, limit = 10 }) {
+  let limitNumber = parseInt(limit)
+  limitNumber = limitNumber > 50 || limitNumber < 0 ? 50 : limitNumber
+
   const sql = `SELECT word 
   FROM suggestions 
   WHERE suggestions MATCH ?
   ORDER BY rank
-  LIMIT ${limit}`
+  LIMIT ${limitNumber}`
   const suggestions = db.prepare(sql).all(`${word}*`)
 
   return suggestions
