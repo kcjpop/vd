@@ -1,7 +1,6 @@
 export function Stats({ stats }) {
-  const formatter = new Intl.NumberFormat('vi-VN', {
-    maximumSignificantDigits: 3,
-  })
+  const formatter = new Intl.NumberFormat('vi-VN')
+
   return (
     <div>
       🔢 Hiện đang có {formatter.format(stats.EnVi)} từ{' '}
