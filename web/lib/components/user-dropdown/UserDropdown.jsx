@@ -1,26 +1,25 @@
 import { Fragment } from 'react'
-import {
-  Root,
-  Trigger,
-  Content,
-  Item,
-  Separator,
-  Arrow,
-} from '@radix-ui/react-dropdown-menu'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { UserIcon } from '../common/Icons'
 import { useUser, logout } from '../../domain-logic/auth'
 import { useTranslation } from '../../i18n'
-import s from './style.module.css'
+import { useDropdown } from '@/lib/components/useDropdown'
 
 export function UserDropdown() {
   const { user } = useUser({ redirectIfUnauthenticated: false })
   const { _e } = useTranslation()
   const router = useRouter()
 
-  const login = () => router.push('/auth')
-  const register = () => router.push('/auth/register')
+  const {
+    isOpen,
+    referenceProps,
+    floatingProps,
+    doOpenDropdown,
+    doCloseDropdown,
+  } = useDropdown({ placement: 'bottom-end' })
+
   const doLogout = async () => {
     await logout()
 
@@ -28,38 +27,41 @@ export function UserDropdown() {
   }
 
   return (
-    <Root className={s.root}>
-      <Trigger className={s.trigger} asChild>
-        <div className="rounded bg-gray-900 p-2" aria-label={''}>
-          <UserIcon></UserIcon>
-        </div>
-      </Trigger>
-      <Content className={s.content}>
-        {user ? (
-          <Fragment>
-            <Item className={s.item}>
-              <div className="grid grid-cols-2 gap-2">
-                <span>{_e('user.signInAs')}</span>
+    <>
+      <button
+        className="rounded bg-gray-900 p-2"
+        onClick={doOpenDropdown}
+        onBlur={doCloseDropdown}
+        {...referenceProps()}>
+        <UserIcon />
+      </button>
+
+      {isOpen && (
+        <div
+          className="w-36 bg-white text-gray-800 drop-shadow"
+          {...floatingProps()}>
+          {user ? (
+            <div className="flex flex-col gap-2">
+              <p className="p-2">
+                {_e('user.signInAs')}
                 <span className="font-bold">{user.user_metadata.fullname}</span>
-              </div>
-            </Item>
-            <Separator />
-            <Item className={s.item} onClick={doLogout}>
-              {_e('auth.logout')}
-            </Item>
-          </Fragment>
-        ) : (
-          <Fragment>
-            <Item className={s.item} onClick={login}>
-              {_e('auth.login')}
-            </Item>
-            <Item className={s.item} onClick={register}>
-              {_e('auth.register')}
-            </Item>
-          </Fragment>
-        )}
-        <Arrow className={s.arrow} offset={10} />
-      </Content>
-    </Root>
+              </p>
+              <button onClick={doLogout} className="p-2 hover:bg-slate-100">
+                {_e('auth.logout')}
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <Link href="/auth">
+                <a className="p-2 hover:bg-slate-100">{_e('auth.login')}</a>
+              </Link>
+              <Link href="/auth/regiser">
+                <a className="p-2 hover:bg-slate-100">{_e('auth.register')}</a>
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+    </>
   )
 }

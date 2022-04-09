@@ -40,7 +40,7 @@ export function DictMenu() {
 
       {isOpen && (
         <div
-          className="mt-2 flex w-48 flex-col rounded bg-white drop-shadow"
+          className="mt-2 flex w-48 flex-col bg-white drop-shadow"
           {...floatingProps()}>
           <p className="border-b p-2 text-sm font-semibold text-gray-700">
             {_e('dictMenu.pick')}
