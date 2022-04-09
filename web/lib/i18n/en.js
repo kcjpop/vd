@@ -1,5 +1,6 @@
 const messages = {
   'common.synonymps': 'synonymps',
+  'common.pleaseWait': 'Please wait',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -40,6 +41,32 @@ const messages = {
   'verbTense.singular_past_3rd': '3rd-person past singular',
   'verbTense.past_plural': 'Past plural',
   'verbTense.past_participle': 'Past participle',
+
+  'auth.welcomeTo': 'Welcome to',
+  'auth.email': 'Email',
+  'auth.password': 'Password',
+  'auth.login': 'Login',
+  'auth.forgotYourPassword': 'Forgot your password?',
+  'auth.doNotHaveAnAccount': "Haven't registered yet?",
+  'auth.registerHere': 'Register here.',
+  'auth.fullname': 'Full name',
+  'auth.plan': 'Plan',
+  'auth.register': 'Register',
+  'auth.reenterPassword': 'Re-enter password',
+  'auth.registerSuccessfully': 'Register successfully',
+  'auth.pleaseConfirmYourEmail':
+    'A confirmation link has been sent to your email address. Please confirm it.',
+  'auth.redirectToLoginPage': 'We will redirect you to login page in a minute',
+  'auth.clickHereToRedirect':
+    'If it is not automatically redirect, please click on the following link to redirect to login page.',
+  'auth.redirectIn': 'Automatically redirect after ...',
+  'auth.emailConfirmed': 'Email confirmed',
+  'auth.welcome': 'Welcome',
+  'auth.logout': 'Log out',
+
+  'toast.dismiss': 'Dismiss',
+
+  'user.signInAs': 'Signed in as',
 }
 
 export default messages

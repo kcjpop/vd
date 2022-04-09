@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 import { SearchIcon } from '../common/Icons'
 import { SettingButton } from './SettingButton'
+import { UserDropdown } from '../user-dropdown/UserDropdown'
 
 function SearchForm() {
   const router = useRouter()
@@ -49,6 +50,9 @@ export function SearchNav() {
       </li>
       <li className="flex-1 md:ml-auto md:flex-none">
         <SearchForm />
+      </li>
+      <li>
+        <UserDropdown />
       </li>
       <li>
         <SettingButton />

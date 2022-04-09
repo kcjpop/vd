@@ -1,5 +1,6 @@
 const messages = {
   'common.synonymps': 'từ đồng nghĩa',
+  'common.pleaseWait': 'Bạn vui lòng đợi chút nhé...',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh Wordnet',
@@ -40,6 +41,34 @@ const messages = {
   'verbTense.singular_past_3rd': 'Quá khứ ngôi thứ ba',
   'verbTense.past_plural': 'Quá khứ ngôi thứ ba',
   'verbTense.past_participle': 'Quá khứ phân từ (V-ed, V3)',
+
+  'auth.welcomeTo': 'Chào mừng bạn đến với',
+  'auth.email': 'Email',
+  'auth.password': 'Mật khẩu',
+  'auth.login': 'Đăng nhập',
+  'auth.forgotYourPassword': 'Quên mật khẩu?',
+  'auth.doNotHaveAnAccount': 'Chưa có tài khoản?',
+  'auth.registerHere': 'Đăng ký tại đây.',
+  'auth.fullname': 'Họ và tên',
+  // @TODO: what is plan for registration
+  'auth.plan': 'Kế hoạch',
+  'auth.register': 'Đăng ký',
+  'auth.reenterPassword': 'Xác nhận lại mật khẩu',
+  'auth.registerSuccessfully': 'Đăng ký thành công!',
+  'auth.pleaseConfirmYourEmail':
+    'Đường dẫn xác nhận đăng nhập đã được gửi vào email của bạn.',
+  'auth.redirectToLoginPage':
+    'Chúng tôi sẽ chuyển bạn đến trang đăng nhập trong ít phút nữa.',
+  'auth.clickHereToRedirect':
+    'Nếu trang web không tự chuyển, bạn có thể nhấn vào đường dẫn này để chuyển trang.',
+  'auth.redirectIn': 'Tự động chuyển trang sau...',
+  'auth.emailConfirmed': 'Email đã được xác nhận.',
+  'auth.welcome': 'Xin chào',
+  'auth.logout': 'Đăng xuất',
+
+  'toast.dismiss': 'Ẩn',
+
+  'user.signInAs': 'Đăng nhập:',
 }
 
 export default messages

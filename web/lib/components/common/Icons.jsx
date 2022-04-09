@@ -5,4 +5,5 @@ export {
   FiChevronUp as ChevronUpIcon,
   FiChevronDown as ChevronDownIcon,
   FiCheck as CheckIcon,
+  FiUser as UserIcon,
 } from 'react-icons/fi'
