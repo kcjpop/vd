@@ -11,9 +11,10 @@ WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn --pure-lockfile
 
-COPY ./litestream.yml /etc/litestream.yml
+# COPY ./litestream.yml /etc/litestream.yml
 COPY ./server.js ./server.js
 COPY ./src ./src
 COPY ./db ./db
 
-ENTRYPOINT litestream replicate -exec "node server.js"
+CMD ["node", "server.js"]
+# ENTRYPOINT litestream replicate -exec "node server.js"
