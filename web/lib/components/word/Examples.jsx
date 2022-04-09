@@ -1,12 +1,10 @@
 import { useContext } from 'react'
 
-import { SettingsContext } from '../../context/Settings'
+import { SettingsContext } from '@/lib/context/Settings'
+import { upperFirst } from '@/lib/utils/strings'
 
 import { Speech } from './Speech'
 import { TextToWords } from './TextToWords'
-
-const upperFirst = (text) =>
-  text.substring(0, 1).toLocaleUpperCase() + text.substring(1)
 
 export function Examples({ examples }) {
   const {

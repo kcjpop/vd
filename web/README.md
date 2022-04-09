@@ -16,6 +16,7 @@ lib/
 ├── context/
 ├── domain-logic/
 ├── i18n/
+├── utils/
 ├── api.js
 ├── config.js
 └── storage.js
@@ -25,6 +26,7 @@ lib/
 - `context/`: React Context
 - `domain-logic/`: Backend business logic. Files here should have kebab-case names.
 - `i18n/`: All Translation messages
+- `utils/`: Utility functions. Be aware of [Is putting general-use functions in a "helpers" file an anti-pattern or code smell?](https://softwareengineering.stackexchange.com/questions/422907/is-putting-general-use-functions-in-a-helpers-file-an-anti-pattern-or-code-sme)
 - `api.js`: contains endpoints of all requests made from frontend.
 - `config.js`: More or less a bunch of constants
 - `storage.js`: For interactions with localStorage
