@@ -1,20 +1,14 @@
-import { useTranslation } from '../../i18n'
-
 export function Stats({ stats }) {
-  const { _e } = useTranslation()
-
+  const formatter = new Intl.NumberFormat('vi-VN', {
+    maximumSignificantDigits: 3,
+  })
   return (
-    <div className="absolute bottom-0 right-0 hidden text-white">
-      {Object.entries(stats).map(([db, count]) => (
-        <div
-          key={`${db}-${count}`}
-          className="grid grid-cols-2 text-left text-sm font-bold">
-          <span className="">{db}</span>
-          <span className="text-right text-sm font-thin">
-            {count}&nbsp;{_e('common.words')}
-          </span>
-        </div>
-      ))}
+    <div>
+      🔢 Hiện đang có {formatter.format(stats.EnVi)} từ{' '}
+      <strong className="font-bold">Anh - Việt</strong>,{' '}
+      {formatter.format(stats.Wordnet)} từ{' '}
+      <strong className="font-bold">Anh - Anh</strong>, và đang bổ sung thêm
+      nữa…
     </div>
   )
 }
