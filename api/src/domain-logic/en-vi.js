@@ -37,12 +37,8 @@ exports.count = async function count() {
   return summary.count
 }
 
-exports.getSuggestions = async function ({ word, highlighted }) {
-  const sql = `SELECT ${
-    highlighted === 'true'
-      ? "highlight(suggestions, 0, '<b>', '</b>') word"
-      : 'word'
-  } FROM suggestions WHERE suggestions = ? ORDER BY rank`
+exports.getSuggestions = async function ({ word }) {
+  const sql = `SELECT word FROM suggestions WHERE suggestions MATCH ? ORDER BY rank`
   const suggestions = db.prepare(sql).all(`${word}*`)
 
   return suggestions
