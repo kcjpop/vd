@@ -1,35 +1,28 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import {
-  useDismiss,
-  useInteractions,
-  useFloating,
-  shift,
-  offset,
-  size,
-} from '@floating-ui/react-dom-interactions'
+
+import { useTranslation } from '../../i18n'
 
 import { SearchIcon } from '../common/Icons'
-import { RecentlyViewed } from './RecentlyViewed'
+import { useDropdown, size } from '../useDropdown'
 
 import s from './WordSearchForm.module.css'
-import { useTranslation } from '@/lib/i18n'
+import { RecentlyViewed } from './RecentlyViewed'
 
 export function WordSearchForm() {
   const router = useRouter()
   const { _e } = useTranslation()
 
-  const [open, setOpen] = useState(false)
   const [sizeData, setSizeData] = useState()
-  const { x, y, refs, reference, floating, strategy, context } = useFloating({
-    open,
-    onOpenChange: setOpen,
-    middleware: [shift(), offset(4), size({ apply: setSizeData, padding: 10 })],
+  const {
+    isOpen,
+    referenceProps,
+    doOpenDropdown,
+    doCloseDropdown,
+    floatingProps,
+  } = useDropdown({
+    middleware: [size({ apply: setSizeData, padding: 10 })],
   })
-
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    useDismiss(context),
-  ])
 
   const doSubmit = (e) => {
     e.preventDefault()
@@ -46,13 +39,9 @@ export function WordSearchForm() {
     <form onSubmit={doSubmit} autoComplete="off">
       <div className="relative mb-2">
         <input
-          {...getReferenceProps({ ref: reference })}
-          onFocus={() => setOpen(true)}
-          onBlur={(e) => {
-            if (!refs.floating.current?.contains(e.relatedTarget)) {
-              setOpen(false)
-            }
-          }}
+          {...referenceProps()}
+          onFocus={doOpenDropdown}
+          onBlur={doCloseDropdown}
           name="keyword"
           id="keyword"
           type="search"
@@ -65,19 +54,13 @@ export function WordSearchForm() {
         </button>
       </div>
 
-      {open && (
+      {isOpen && (
         <div
           className={`rounded border border-slate-200 bg-white p-4 shadow-md ${s.formAnimation}`}
-          {...getFloatingProps({
-            ref: floating,
-            style: {
-              position: strategy,
-              left: x ?? '',
-              top: y ?? '',
-              width: sizeData?.reference.width ?? '',
-              maxHeight: sizeData?.height ?? '',
-              perspective: 1000,
-            },
+          {...floatingProps({
+            width: sizeData?.reference.width ?? '',
+            maxHeight: sizeData?.height ?? '',
+            perspective: 1000,
           })}>
           <RecentlyViewed />
         </div>

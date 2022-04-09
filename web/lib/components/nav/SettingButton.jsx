@@ -1,30 +1,39 @@
-import * as DropdownMenu from '../dropdown-menu'
 import { SettingsIcon } from '../common/Icons'
 import { useTranslation } from '../../i18n'
 
 import { Settings } from './Settings'
+import { useDropdown } from '../useDropdown'
 
 export function SettingButton() {
   const { _e } = useTranslation()
 
+  const {
+    isOpen,
+    referenceProps,
+    doOpenDropdown,
+    doCloseDropdown,
+    floatingProps,
+  } = useDropdown({ placement: 'bottom-end' })
+
   return (
     <div className="relative">
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <button
-            type="button"
-            className="rounded bg-gray-900 p-2"
-            title={_e('nav.settings')}>
-            <SettingsIcon />
-          </button>
-        </DropdownMenu.Trigger>
+      <button
+        {...referenceProps()}
+        onClick={doOpenDropdown}
+        onBlur={doCloseDropdown}
+        type="button"
+        className="rounded bg-gray-900 p-2"
+        title={_e('nav.settings')}>
+        <SettingsIcon />
+      </button>
 
-        <DropdownMenu.Content>
-          <div className="mt-1 w-80 rounded bg-white p-4 text-gray-800 drop-shadow lg:w-72">
-            <Settings />
-          </div>
-        </DropdownMenu.Content>
-      </DropdownMenu.Root>
+      {isOpen && (
+        <div
+          className="w-80 rounded bg-white p-4 text-gray-800 drop-shadow lg:w-72"
+          {...floatingProps()}>
+          <Settings />
+        </div>
+      )}
     </div>
   )
 }
