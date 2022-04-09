@@ -9,7 +9,7 @@ function IdiomTranslation({ translation }) {
 
     return (
       <>
-        {prefix}&nbsp;
+        {prefix}{' '}
         <LinkToWord
           key={word}
           query={{ word }}

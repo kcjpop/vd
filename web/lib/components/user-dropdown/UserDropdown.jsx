@@ -55,7 +55,7 @@ export function UserDropdown() {
               <Link href="/auth">
                 <a className="p-2 hover:bg-slate-100">{_e('auth.login')}</a>
               </Link>
-              <Link href="/auth/regiser">
+              <Link href="/auth/register">
                 <a className="p-2 hover:bg-slate-100">{_e('auth.register')}</a>
               </Link>
             </div>
