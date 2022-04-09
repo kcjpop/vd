@@ -27,8 +27,6 @@ export function UserDropdown() {
     router.push('/')
   }
 
-  console.log({ user })
-
   return (
     <Root className={s.root}>
       <Trigger className={s.trigger} asChild>
