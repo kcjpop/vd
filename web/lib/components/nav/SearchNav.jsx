@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { SearchIcon } from '../common/Icons'
-import { SettingButton } from './SettingButton'
+import { SettingDropdown } from './SettingDropdown'
 import { UserDropdown } from '../user-dropdown/UserDropdown'
 
 function SearchForm() {
@@ -55,7 +55,7 @@ export function SearchNav() {
         <UserDropdown />
       </li>
       <li>
-        <SettingButton />
+        <SettingDropdown />
       </li>
     </ul>
   )

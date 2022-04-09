@@ -4,7 +4,7 @@ import { useTranslation } from '../../i18n'
 import { Settings } from './Settings'
 import { useDropdown } from '../useDropdown'
 
-export function SettingButton() {
+export function SettingDropdown() {
   const { _e } = useTranslation()
 
   const {
