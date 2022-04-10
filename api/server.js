@@ -13,6 +13,8 @@ app.use(
     origin: [/\.tudien\.io$/],
   }),
 )
+
+// Disable X-Powered-By header
 app.use(express.json())
 
 app.disable('x-powered-by')
