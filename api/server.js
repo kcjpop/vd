@@ -8,7 +8,11 @@ const { getSummaryHandler } = require('./src/handlers/summary')
 
 const PORT = process.env.PORT ?? 8080
 
-app.use(cors())
+app.use(
+  cors({
+    origin: [/\.tudien\.io$/],
+  }),
+)
 app.use(express.json())
 
 app.get('/words/:word', getSingleWordHandler)
