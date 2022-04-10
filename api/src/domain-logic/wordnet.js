@@ -39,7 +39,7 @@ exports.getDefinitions = async function getDefinitions(word) {
       left join synsets ss using (synsetid)
       left join senses s on s.synsetid = ss.synsetid
     where
-      w.lemma = ?
+      w.lemma = ? or lower(w.lemma) = ?
   )
   select
     lemma,
@@ -58,7 +58,7 @@ exports.getDefinitions = async function getDefinitions(word) {
     synsetid
   order by
     tagcount desc`
-  const rows = db.prepare(sql).all(word)
+  const rows = db.prepare(sql).all(word, word.toLocaleLowerCase())
 
   if (rows) {
     const mapped = rows.map((row) => ({
@@ -82,7 +82,8 @@ exports.getDefinitions = async function getDefinitions(word) {
     const defs = groupBy(mapped, (i) => i.partOfSpeech)
 
     const result = {
-      word,
+      // We'll use the word from database because keyword may be in different cases
+      word: rows?.[0].lemma ?? word,
       definitions: Object.values(defs).map((group) => compress(group)),
     }
 

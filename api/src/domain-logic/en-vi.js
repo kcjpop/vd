@@ -9,17 +9,18 @@ const db = getDb(EN_VI_DB)
  */
 exports.getDefinitions = async function getDefinitions(word) {
   const sql = `
-select part_of_speech, definitions, phrases
+select word, part_of_speech, definitions, phrases
 from words
 join defs using (word_id)
-where word = ?`
+where word = ? or lower(word) = ?`
 
-  const definitions = db.prepare(sql).all(word)
+  const definitions = db.prepare(sql).all(word, word.toLocaleLowerCase())
 
   if (!definitions?.length) return
 
   return {
-    word,
+    // We'll use the word from database because keyword may be in different cases
+    word: definitions?.[0].word ?? word,
     definitions: definitions.map((d) => ({
       partOfSpeech: d.part_of_speech,
       definitions: d.definitions ? JSON.parse(d.definitions) : null,
