@@ -15,6 +15,8 @@ app.use(
 )
 app.use(express.json())
 
+app.disable('x-powered-by')
+
 app.get('/words/:word', getSingleWordHandler)
 
 app.get('/banner/:word', getImageHandler)
