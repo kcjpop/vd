@@ -33,7 +33,11 @@ export function PageWord({ opengraph, entry }) {
 
   // 🚨: Set to recently viewed words
   useEffect(() => {
-    if (data) recentlyViewedWords().set(data.word)
+    if (data) {
+      recentlyViewedWords().set(data.word)
+
+      window.navigator.sendBeacon(`/api/analytics/${data.word}`)
+    }
   }, [data])
 
   return (
