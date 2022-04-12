@@ -7,6 +7,8 @@ const { getImageHandler } = require('./src/handlers/banner')
 const { getSummaryHandler } = require('./src/handlers/summary')
 const { getSuggestions } = require('./src/handlers/suggestions')
 
+const { validateGetSuggestions } = require('./src/validators/suggestions')
+
 const PORT = process.env.PORT ?? 8080
 
 app.use(
@@ -26,7 +28,7 @@ app.get('/banner/:word', getImageHandler)
 
 app.get('/summary', getSummaryHandler)
 
-app.get('/suggestions/:word', getSuggestions)
+app.get('/suggestions/:word', validateGetSuggestions, getSuggestions)
 
 app.listen(PORT, function (err) {
   if (err) console.log(err)
