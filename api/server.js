@@ -8,7 +8,6 @@ const { getSummaryHandler } = require('./src/handlers/summary')
 const { getSuggestions } = require('./src/handlers/suggestions')
 
 const { validateGetSuggestions } = require('./src/validators/suggestions')
-const { validateGetSingleWord } = require('./src/validators/words')
 
 const PORT = process.env.PORT ?? 8080
 
@@ -23,7 +22,7 @@ app.use(express.json())
 // Disable X-Powered-By header
 app.disable('x-powered-by')
 
-app.get('/words/:word', validateGetSingleWord, getSingleWordHandler)
+app.get('/words/:word', getSingleWordHandler)
 
 app.get('/banner/:word', getImageHandler)
 
