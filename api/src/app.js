@@ -6,6 +6,7 @@ const { getSingleWordHandler } = require('./handlers/words')
 const { getImageHandler } = require('./handlers/banner')
 const { getSummaryHandler } = require('./handlers/summary')
 const { getSuggestions } = require('./handlers/suggestions')
+const { updateAnalyticsHandler } = require('./handlers/analytics')
 
 const { validateGetSuggestions } = require('./validators/suggestions')
 
@@ -34,5 +35,7 @@ app.get('/banner/:word', getImageHandler)
 app.get('/summary', getSummaryHandler)
 
 app.get('/suggestions/:word', validateGetSuggestions, getSuggestions)
+
+app.post('/analytics', updateAnalyticsHandler)
 
 module.exports = app
