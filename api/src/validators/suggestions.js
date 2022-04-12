@@ -1,15 +1,7 @@
 const v8n = require('v8n')
 
 const validateGetSuggestions = (req, res, next) => {
-  const { word } = req.params
   const { limit } = req.query
-
-  try {
-    v8n().string().check(word)
-  } catch (e) {
-    res.status(400).json({ error: 'word is not a string' })
-    return
-  }
 
   if (!v8n().undefined().test(limit)) {
     try {
