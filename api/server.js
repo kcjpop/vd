@@ -19,7 +19,6 @@ app.use(
 
 app.use(express.json())
 
-// Disable X-Powered-By header
 app.disable('x-powered-by')
 
 app.get('/words/:word', getSingleWordHandler)
