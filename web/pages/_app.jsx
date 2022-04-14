@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import '../styles/globals.css'
@@ -18,6 +19,10 @@ function MyApp({ Component, pageProps }) {
       <IntlProvider>
         <SettingsProvider>
           <Component {...pageProps} />
+          <Script
+            data-website-id="6b437211-920f-4336-88e6-921624a3ad37"
+            src="https://analytics.tudien.io/umami.js"
+          />
         </SettingsProvider>
       </IntlProvider>
     </QueryClientProvider>
