@@ -4,7 +4,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest",
+    "prepare": "cd .. && husky install api/.husky"
   },
   "engines": {
     "node": "16.x"
@@ -24,7 +26,11 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
+    "husky": "7.0.4",
+    "jest": "27.5.1",
     "knex": "1.0.4",
-    "nodemon": "2.0.15"
+    "nodemon": "2.0.15",
+    "superagent": "7.1.2",
+    "supertest": "6.2.2"
   }
 }
