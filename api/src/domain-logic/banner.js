@@ -130,10 +130,13 @@ function generateImage({ word, definition }) {
 async function getImage({ word }) {
   const entry = await getSingleWord({ word })
 
-  return generateImage({
-    word: entry.word,
-    definition: entry.definitions[0],
-  })
+  if (entry)
+    return generateImage({
+      word: entry.word,
+      definition: entry.definitions[0],
+    })
+
+  throw new Error(`Cannot find any result match "${word}"`)
 }
 
 module.exports = { getImage }
