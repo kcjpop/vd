@@ -99,7 +99,11 @@ export function WordSearchForm() {
   const doSubmit = (e) => {
     e.preventDefault()
 
-    const word = e.target.elements.keyword.value.trim().toLocaleLowerCase()
+    const word =
+      activeIndex != null && options[activeIndex]
+        ? options[activeIndex]
+        : e.target.elements.keyword.value.trim().toLocaleLowerCase()
+
     if (word !== '') doNavigateToWord(word)
   }
 
