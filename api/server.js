@@ -11,11 +11,19 @@ const { validateGetSuggestions } = require('./src/validators/suggestions')
 
 const PORT = process.env.PORT ?? 8080
 
-app.use(
-  cors({
-    origin: process.env.NODE_ENV === 'production' ? [/\.tudien\.io$/] : '*',
-  }),
-)
+if (process.env.NODE_ENV == null || process.env.NODE_ENV === 'local') {
+  app.use(
+    cors({
+      origin: [/localhost/i],
+    }),
+  )
+} else {
+  app.use(
+    cors({
+      origin: [/\.tudien\.io$/i, /.*-kcjpop\.vercel\.app$/i],
+    }),
+  )
+}
 
 app.use(express.json())
 

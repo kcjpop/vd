@@ -1,4 +1,4 @@
-# fly.toml file generated for tudien-io-api on 2022-04-07T08:07:11+03:00
+# fly.toml file generated for tudien-io-api on 2022-04-15T19:45:42+03:00
 
 app = "tudien-io-api"
 
@@ -11,10 +11,6 @@ processes = []
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
-
-[mounts]
-  source="db"
-  destination="/db"
 
 [[services]]
   http_checks = []
