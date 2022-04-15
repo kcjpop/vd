@@ -11,12 +11,12 @@
     "lt": "lt"
   },
   "dependencies": {
-    "@supabase/supabase-js": "1.33.3",
-    "@radix-ui/react-toast": "0.1.1",
-    "@floating-ui/dom": "0.4.1",
-    "@floating-ui/react-dom": "0.6.0",
-    "@floating-ui/react-dom-interactions": "0.0.15",
+    "@floating-ui/dom": "0.4.4",
+    "@floating-ui/react-dom": "0.6.2",
+    "@floating-ui/react-dom-interactions": "0.2.0",
     "@logtail/browser": "0.1.10",
+    "@radix-ui/react-toast": "0.1.1",
+    "@supabase/supabase-js": "1.33.3",
     "got": "12.0.3",
     "ky": "0.30.0",
     "next": "12.1.0",

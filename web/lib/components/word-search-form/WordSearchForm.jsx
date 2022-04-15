@@ -1,28 +1,92 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { useTranslation } from '../../i18n'
 
 import { SearchIcon } from '../common/Icons'
-import { useDropdown, size } from '../useDropdown'
+import {
+  useDismiss,
+  useInteractions,
+  useFloating,
+  shift,
+  flip,
+  size,
+  offset as offsetMiddleware,
+  useListNavigation,
+} from '@floating-ui/react-dom-interactions'
 
 import s from './WordSearchForm.module.css'
 import { RecentlyViewed } from './RecentlyViewed'
+import { Suggestions } from './Suggestions'
 
 export function WordSearchForm() {
   const router = useRouter()
   const { _e } = useTranslation()
+  const [keyword, setKeyword] = useState('')
+
+  const options = [
+    'go',
+    'goad',
+    'goadsman',
+    'goaf',
+    'goafed',
+    'goal',
+    'goalee',
+    'goalie',
+    'goalkeeper',
+    'goalkeeping',
+  ]
+  const listRef = useRef([])
+  const [activeIndex, setActiveIndex] = useState(null)
 
   const [sizeData, setSizeData] = useState()
-  const {
-    isOpen,
-    referenceProps,
-    doOpenDropdown,
-    doCloseDropdown,
-    floatingProps,
-  } = useDropdown({
-    middleware: [size({ apply: setSizeData, padding: 10 })],
+
+  const [open, setOpen] = useState(false)
+
+  const { x, y, refs, reference, floating, strategy, context } = useFloating({
+    open,
+    onOpenChange: setOpen,
+    middleware: [
+      shift(),
+      flip(),
+      offsetMiddleware(4),
+      size({ apply: setSizeData, padding: 10 }),
+    ],
   })
+
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
+    [
+      useDismiss(context),
+      useListNavigation(context, {
+        listRef,
+        activeIndex,
+        onNavigate: setActiveIndex,
+        virtual: true,
+        loop: true,
+      }),
+    ],
+  )
+
+  const referenceProps = () => getReferenceProps({ ref: reference })
+
+  const floatingProps = (style = {}) =>
+    getFloatingProps({
+      ref: floating,
+      style: {
+        position: strategy,
+        left: x ?? '',
+        top: y ?? '',
+        ...style,
+      },
+    })
+
+  const doOpenDropdown = () => setOpen(true)
+
+  const doCloseDropdown = (e) => {
+    if (!refs.floating.current?.contains(e.relatedTarget)) {
+      setOpen(false)
+    }
+  }
 
   const doSubmit = (e) => {
     e.preventDefault()
@@ -35,26 +99,32 @@ export function WordSearchForm() {
       })
   }
 
+  const doSearch = (e) => {
+    setKeyword(e.target.value)
+  }
+
   return (
     <form onSubmit={doSubmit} autoComplete="off">
       <div className="relative mb-2">
         <input
           {...referenceProps()}
-          onFocus={doOpenDropdown}
-          onBlur={doCloseDropdown}
           name="keyword"
           id="keyword"
           type="search"
           required
+          value={keyword}
           placeholder={_e('wordSearchForm.placeholder')}
           className="w-full rounded-md border border-slate-300 bg-white py-2 pl-2 pr-10 text-lg placeholder-slate-400 shadow-sm focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
+          onFocus={doOpenDropdown}
+          onBlur={doCloseDropdown}
+          onChange={doSearch}
         />
         <button type="submit" className="absolute inset-y-0 right-0 p-2">
           <SearchIcon />
         </button>
       </div>
 
-      {isOpen && (
+      {open && (
         <div
           className={`rounded border border-slate-200 bg-white p-4 shadow-md ${s.formAnimation}`}
           {...floatingProps({
@@ -62,7 +132,31 @@ export function WordSearchForm() {
             maxHeight: sizeData?.height ?? '',
             perspective: 1000,
           })}>
-          <RecentlyViewed />
+          {keyword.length > 0 ? (
+            <div>
+              <ul>
+                {options.map((opt, index) => (
+                  <li
+                    {...getItemProps({
+                      ref(node) {
+                        listRef.current[index] = node
+                      },
+                      onClick() {
+                        // Navigate away
+                        setOpen(false)
+                      },
+                    })}
+                    id={opt + '-id'}
+                    key={opt}
+                    style={{ fontWeight: activeIndex === index ? 700 : 400 }}>
+                    {opt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <RecentlyViewed />
+          )}
         </div>
       )}
     </form>
