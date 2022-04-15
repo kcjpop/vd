@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import debounce from 'lodash/debounce'
 
@@ -28,7 +28,7 @@ export function WordSearchForm() {
   const [keyword, setKeyword] = useState('')
   const [debouncedKeyword, _setDebouncedKeyword] = useState('')
 
-  // Because `debounce` stores internal counter, we need to keep it the same
+  // Because `debounce` stores an internal counter, we need to keep it the same
   // in every re-render.
   const setDebouncedKeyword = useMemo(
     () => debounce(_setDebouncedKeyword, 300),

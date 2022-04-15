@@ -18,18 +18,17 @@ export function Suggestions({
       <ul>
         {cachedOptions.map((opt, index) => (
           <li
+            id={opt + '-id'}
+            key={opt}
+            className={`rounded p-2 ${
+              activeIndex === index ? 'bg-sky-100' : ''
+            }`}
             {...getItemProps({
               ref(node) {
                 listRef.current[index] = node
               },
-              onClick: () => {
-                console.log(onItemClick)
-                onItemClick(opt, index)
-              },
-            })}
-            id={opt + '-id'}
-            key={opt}
-            style={{ fontWeight: activeIndex === index ? 700 : 400 }}>
+              onClick: () => onItemClick(opt, index),
+            })}>
             {opt}
           </li>
         ))}
