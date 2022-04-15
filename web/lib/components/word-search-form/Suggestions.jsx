@@ -7,10 +7,14 @@ export function Suggestions({
   activeIndex,
   onItemClick,
 }) {
+  const [firstLoad, setFirstLoad] = useState(true)
   const [cachedOptions, setCachedOptions] = useState([])
 
   useEffect(() => {
-    if (options != null) setCachedOptions(options)
+    if (options != null) {
+      setCachedOptions(options)
+      setFirstLoad(false)
+    }
   }, [options])
 
   return (
@@ -21,7 +25,7 @@ export function Suggestions({
         </p>
       )}
 
-      {cachedOptions.length === 0 && (
+      {!firstLoad && cachedOptions.length === 0 && (
         <p className="mb-2 text-red-700">
           Không tìm thấy gợi ý cho từ khóa này 😨 Bạn vui lòng kiểm tra lại, hay
           có khi đây là một từ mới chăng?
