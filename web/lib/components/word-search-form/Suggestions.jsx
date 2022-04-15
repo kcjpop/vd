@@ -1,24 +1,31 @@
-import { useEffect, useState } from 'react'
-
-import { recentlyViewedWords } from '@/lib/storage'
-
-import { LinkToWord } from '../common/LinkToWord'
-
-export function Suggestions() {
-  const [words, setWords] = useState()
-
-  useEffect(() => {
-    const words = recentlyViewedWords().get()
-    if (words) setWords(words)
-  }, [])
-
-  if (!words) return null
-
+export function Suggestions({
+  listRef,
+  options,
+  getItemProps,
+  activeIndex,
+  onItemClick,
+}) {
   return (
-    <div className="grid grid-cols-2">
-      {words.map((word) => (
-        <LinkToWord key={word} word={word} />
-      ))}
+    <div>
+      <ul>
+        {options.map((opt, index) => (
+          <li
+            {...getItemProps({
+              ref(node) {
+                listRef.current[index] = node
+              },
+              onClick: () => {
+                console.log(onItemClick)
+                onItemClick(opt, index)
+              },
+            })}
+            id={opt + '-id'}
+            key={opt}
+            style={{ fontWeight: activeIndex === index ? 700 : 400 }}>
+            {opt}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

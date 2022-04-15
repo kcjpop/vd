@@ -133,27 +133,13 @@ export function WordSearchForm() {
             perspective: 1000,
           })}>
           {keyword.length > 0 ? (
-            <div>
-              <ul>
-                {options.map((opt, index) => (
-                  <li
-                    {...getItemProps({
-                      ref(node) {
-                        listRef.current[index] = node
-                      },
-                      onClick() {
-                        // Navigate away
-                        setOpen(false)
-                      },
-                    })}
-                    id={opt + '-id'}
-                    key={opt}
-                    style={{ fontWeight: activeIndex === index ? 700 : 400 }}>
-                    {opt}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Suggestions
+              listRef={listRef}
+              options={options}
+              getItemProps={getItemProps}
+              activeIndex={activeIndex}
+              onItemClick={(...args) => console.log(args)}
+            />
           ) : (
             <RecentlyViewed />
           )}
