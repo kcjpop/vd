@@ -4,7 +4,7 @@ const messages = {
   'common.words': 'từ',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
-  'dict.wordnet': '🇬🇧 Anh - Anh Wordnet',
+  'dict.wordnet': '🇬🇧 Anh - Anh',
 
   'dictMenu.pick': 'Chọn từ điển',
 

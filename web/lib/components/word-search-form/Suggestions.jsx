@@ -1,24 +1,55 @@
 import { useEffect, useState } from 'react'
 
-import { recentlyViewedWords } from '@/lib/storage'
-
-import { LinkToWord } from '../common/LinkToWord'
-
-export function Suggestions() {
-  const [words, setWords] = useState()
+export function Suggestions({
+  listRef,
+  options,
+  getItemProps,
+  activeIndex,
+  onItemClick,
+}) {
+  const [firstLoad, setFirstLoad] = useState(true)
+  const [cachedOptions, setCachedOptions] = useState([])
 
   useEffect(() => {
-    const words = recentlyViewedWords().get()
-    if (words) setWords(words)
-  }, [])
-
-  if (!words) return null
+    if (options != null) {
+      setCachedOptions(options)
+      setFirstLoad(false)
+    }
+  }, [options])
 
   return (
-    <div className="grid grid-cols-2">
-      {words.map((word) => (
-        <LinkToWord key={word} word={word} />
-      ))}
+    <div>
+      {cachedOptions.length > 0 && (
+        <p className="mb-2 hidden text-right text-sm text-slate-500 lg:block">
+          Bạn có thể dùng phím mũi tên ↑ ↓ để chọn từ gợi ý ☺️
+        </p>
+      )}
+
+      {!firstLoad && cachedOptions.length === 0 && (
+        <p className="mb-2 text-red-700">
+          Không tìm thấy gợi ý cho từ khóa này 😨 Bạn vui lòng kiểm tra lại, hay
+          có khi đây là một từ mới chăng?
+        </p>
+      )}
+
+      <ul>
+        {cachedOptions.map((opt, index) => (
+          <li
+            id={opt + '-id'}
+            key={opt}
+            className={`cursor-pointer rounded p-2 ${
+              activeIndex === index ? 'bg-sky-100' : ''
+            }`}
+            {...getItemProps({
+              ref(node) {
+                listRef.current[index] = node
+              },
+              onClick: () => onItemClick(opt, index),
+            })}>
+            {opt}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

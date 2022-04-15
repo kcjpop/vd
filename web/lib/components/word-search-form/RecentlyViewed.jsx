@@ -23,12 +23,12 @@ export function RecentlyViewed() {
   return (
     <div>
       <h3 className="mb-2 font-semibold">Những từ vừa tra:</h3>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2">
         {words.map((word) => (
           <LinkToWord
             key={word}
             query={{ word }}
-            className="border-b-2 border-b-sky-700">
+            className="rounded bg-sky-100 px-2 text-sky-700">
             {word}
           </LinkToWord>
         ))}
