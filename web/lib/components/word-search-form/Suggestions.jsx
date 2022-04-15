@@ -4,7 +4,10 @@ export function Suggestions({
   getItemProps,
   activeIndex,
   onItemClick,
+  isLoading,
 }) {
+  if (isLoading) return null
+
   return (
     <div>
       <ul>

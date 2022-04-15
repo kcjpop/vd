@@ -18,3 +18,6 @@ export const fetchSingleWord = (word, dict = 'en-vi') =>
   ky.get(fetchSingleWordEndpoint({ word, dict })).json()
 
 export const fetchHomepageStats = () => ky.get(endpoint('summary')).json()
+
+export const fetchWordSuggestions = (word) =>
+  ky.get(endpoint(`suggestions/${word}`)).json()

@@ -18,24 +18,24 @@ import {
 import s from './WordSearchForm.module.css'
 import { RecentlyViewed } from './RecentlyViewed'
 import { Suggestions } from './Suggestions'
+import { useQuery } from 'react-query'
+import { fetchWordSuggestions } from '@/lib/api'
 
 export function WordSearchForm() {
   const router = useRouter()
   const { _e } = useTranslation()
   const [keyword, setKeyword] = useState('')
 
-  const options = [
-    'go',
-    'goad',
-    'goadsman',
-    'goaf',
-    'goafed',
-    'goal',
-    'goalee',
-    'goalie',
-    'goalkeeper',
-    'goalkeeping',
-  ]
+  const { data: options, isLoading } = useQuery(
+    ['search-suggestions', keyword],
+    async () => {
+      if (keyword.length === 0) return []
+
+      const res = await fetchWordSuggestions(keyword)
+      return res.map((w) => w.word)
+    },
+  )
+
   const listRef = useRef([])
   const [activeIndex, setActiveIndex] = useState(null)
 
@@ -134,6 +134,7 @@ export function WordSearchForm() {
           })}>
           {keyword.length > 0 ? (
             <Suggestions
+              isLoading={isLoading}
               listRef={listRef}
               options={options}
               getItemProps={getItemProps}

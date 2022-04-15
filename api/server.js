@@ -13,7 +13,7 @@ const PORT = process.env.PORT ?? 8080
 
 app.use(
   cors({
-    origin: [/\.tudien\.io$/],
+    origin: process.env.NODE_ENV === 'production' ? [/\.tudien\.io$/] : '*',
   }),
 )
 
