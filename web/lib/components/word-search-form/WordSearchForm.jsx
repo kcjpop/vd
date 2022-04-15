@@ -1,10 +1,7 @@
 import { useState, useRef, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import { useQuery } from 'react-query'
 import debounce from 'lodash/debounce'
-
-import { useTranslation } from '../../i18n'
-
-import { SearchIcon } from '../common/Icons'
 import {
   useDismiss,
   useInteractions,
@@ -16,11 +13,13 @@ import {
   useListNavigation,
 } from '@floating-ui/react-dom-interactions'
 
+import { fetchWordSuggestions } from '@/lib/api'
+import { useTranslation } from '@/lib/i18n'
+import { SearchIcon } from '@/lib/components/common/Icons'
+
 import s from './WordSearchForm.module.css'
 import { RecentlyViewed } from './RecentlyViewed'
 import { Suggestions } from './Suggestions'
-import { useQuery } from 'react-query'
-import { fetchWordSuggestions } from '@/lib/api'
 
 export function WordSearchForm() {
   const router = useRouter()

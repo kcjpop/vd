@@ -15,6 +15,19 @@ export function Suggestions({
 
   return (
     <div>
+      {cachedOptions.length > 0 && (
+        <p className="mb-2 hidden text-right text-sm text-slate-500 lg:block">
+          Bạn có thể dùng phím mũi tên ↑ ↓ để chọn từ gợi ý ☺️
+        </p>
+      )}
+
+      {cachedOptions.length === 0 && (
+        <p className="mb-2 text-red-700">
+          Không tìm thấy gợi ý cho từ khóa này 😨 Bạn vui lòng kiểm tra lại, hay
+          có khi đây là một từ mới chăng?
+        </p>
+      )}
+
       <ul>
         {cachedOptions.map((opt, index) => (
           <li
