@@ -4,14 +4,11 @@ export function Suggestions({
   getItemProps,
   activeIndex,
   onItemClick,
-  isLoading,
 }) {
-  if (isLoading) return null
-
   return (
     <div>
       <ul>
-        {options.map((opt, index) => (
+        {options?.map((opt, index) => (
           <li
             {...getItemProps({
               ref(node) {

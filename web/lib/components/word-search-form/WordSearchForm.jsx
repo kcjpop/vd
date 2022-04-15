@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import debounce from 'lodash/debounce'
 
 import { useTranslation } from '../../i18n'
 
@@ -25,14 +26,21 @@ export function WordSearchForm() {
   const router = useRouter()
   const { _e } = useTranslation()
   const [keyword, setKeyword] = useState('')
+  const [debouncedKeyword, _setDebouncedKeyword] = useState('')
 
-  const { data: options, isLoading } = useQuery(
-    ['search-suggestions', keyword],
-    async () => {
-      if (keyword.length === 0) return []
+  // Because `debounce` stores internal counter, we need to keep it the same
+  // in every re-render.
+  const setDebouncedKeyword = useMemo(
+    () => debounce(_setDebouncedKeyword, 300),
+    [],
+  )
 
-      const res = await fetchWordSuggestions(keyword)
-      return res.map((w) => w.word)
+  const { data: options } = useQuery(
+    ['search-suggestions', debouncedKeyword],
+    async () => fetchWordSuggestions(debouncedKeyword),
+    {
+      enabled: debouncedKeyword.length > 0,
+      retry: 0,
     },
   )
 
@@ -92,15 +100,18 @@ export function WordSearchForm() {
     e.preventDefault()
 
     const word = e.target.elements.keyword.value.trim().toLocaleLowerCase()
-    if (word !== '')
-      router.push({
-        pathname: '/w/[word]',
-        query: { ...router.query, word },
-      })
+    if (word !== '') doNavigateToWord(word)
   }
+
+  const doNavigateToWord = (word) =>
+    router.push({
+      pathname: '/w/[word]',
+      query: { ...router.query, word },
+    })
 
   const doSearch = (e) => {
     setKeyword(e.target.value)
+    setDebouncedKeyword(e.target.value)
   }
 
   return (
@@ -134,12 +145,11 @@ export function WordSearchForm() {
           })}>
           {keyword.length > 0 ? (
             <Suggestions
-              isLoading={isLoading}
               listRef={listRef}
               options={options}
               getItemProps={getItemProps}
               activeIndex={activeIndex}
-              onItemClick={(...args) => console.log(args)}
+              onItemClick={doNavigateToWord}
             />
           ) : (
             <RecentlyViewed />
