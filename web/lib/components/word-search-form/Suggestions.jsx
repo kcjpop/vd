@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 export function Suggestions({
   listRef,
   options,
@@ -5,10 +7,16 @@ export function Suggestions({
   activeIndex,
   onItemClick,
 }) {
+  const [cachedOptions, setCachedOptions] = useState([])
+
+  useEffect(() => {
+    if (options != null) setCachedOptions(options)
+  }, [options])
+
   return (
     <div>
       <ul>
-        {options?.map((opt, index) => (
+        {cachedOptions.map((opt, index) => (
           <li
             {...getItemProps({
               ref(node) {
