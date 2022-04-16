@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { useUser } from '../../domain-logic/auth'
+import { useTranslation } from '../../i18n'
+
 import { SearchIcon } from '../common/Icons'
 import { SettingDropdown } from './SettingDropdown'
 import { UserDropdown } from '../user-dropdown/UserDropdown'
@@ -39,6 +42,9 @@ function SearchForm() {
 }
 
 export function SearchNav() {
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { _e } = useTranslation()
+
   return (
     <ul className="space-between flex h-full items-center gap-4 px-4">
       <li>
@@ -48,6 +54,13 @@ export function SearchNav() {
           </a>
         </Link>
       </li>
+      {user && (
+        <li>
+          <Link href="/flashcards">
+            <a className="block text-sm font-bold">{_e('nav.flashcards')}</a>
+          </Link>
+        </li>
+      )}
       <li className="flex-1 md:ml-auto md:flex-none">
         <SearchForm />
       </li>

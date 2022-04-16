@@ -42,6 +42,7 @@ export function useUser({ redirectIfUnauthenticated = true } = {}) {
   }, [])
 
   useEffect(() => {
+    console.log({ user })
     if (!isChecking && !user && redirectIfUnauthenticated) router.push('/auth')
   }, [isChecking, user, router, redirectIfUnauthenticated])
 

@@ -24,6 +24,7 @@ const messages = {
   'nav.settings.voice.en-IN': 'English (India)',
   'nav.settings.voice.en-ZA': 'English (South Africa)',
   'nav.settings.exampleSpeech': 'Show example speech',
+  'nav.flashcards': 'Flashcards',
 
   'word.seeAlso': 'See also',
   'word.examples': 'Examples',

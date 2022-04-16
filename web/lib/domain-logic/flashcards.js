@@ -1,22 +1,15 @@
+import { useEffect, useState } from 'react'
 import { supabase as sb } from './supabaseClient'
+import { useUser } from './auth'
 
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, no-unused-vars */
 const Tables = { Sets: 'flashcard_sets', Flashcards: 'flashcards' }
 
-export const getFlashcardSets = async ({ user_id }) => {
-  const sets = await sb.from(Tables.Sets).select(`name`).eq('user_id', user_id)
+const fetchFlashcardSets = ({ user_id }) =>
+  sb.from(Tables.Sets).select(`name`).eq('user_id', user_id)
 
-  for (let index = 0; index < sets.length; ++index) {
-    const flashcards = await sb
-      .from(Tables.Flashcards)
-      .select('*')
-      .eq('set_id', sets[index].id)
-
-    sets[index].flashcards = flashcards
-  }
-
-  return sets
-}
+const fetchFlashcards = ({ set_id }) =>
+  sb.from(Tables.Flashcards).select('*').eq('set_id', set_id)
 
 export const upsertFlashcardSet = ({ user_id, ...set }) =>
   sb.from(Tables.Sets).upsert([{ user_id, ...set }])
@@ -30,4 +23,18 @@ export const deleteFlashcardSet = ({ id }) =>
 export const deleteFlashcard = ({ id, set_id }) =>
   sb.from(Tables.Flashcards).delete().match({ id, set_id })
 
-/* eslint-enable camelcase */
+export function useFlashcards() {
+  const [flashcardSets, setFlashcardSets] = useState([])
+
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+
+  // async function getFlashcardSets() {
+  //   const { data: sets, error } = await fetchFlashcardSets({ user_id: user.})
+  // }
+
+  useEffect(() => {}, [])
+
+  return { flashcardSets }
+}
+
+/* eslint-enable camelcase,  */
