@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "prepare": "cd .. && husky install api/.husky"
   },
   "engines": {
