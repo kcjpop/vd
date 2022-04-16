@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { OpenGraph } from '@/lib/components/common/OpenGraph'
 import { Logo } from '@/lib/components/common/Logo'
 import { Wave } from '@/lib/components/common/Wave'
@@ -27,13 +28,17 @@ export function PageHome({ opengraph, stats }) {
 
           <div>
             <div className="flex items-center gap-2">
-              <button className="rounded border border-orange-200 bg-orange-100 p-2 text-sm font-semibold tracking-wide text-orange-700 hover:border-orange-300">
-                Đăng ký tài khoản 🤟
-              </button>
+              <Link href="/auth/register">
+                <a className="rounded border border-orange-200 bg-orange-100 p-2 text-sm font-semibold tracking-wide text-orange-700 hover:border-orange-300">
+                  Đăng ký tài khoản 🤟
+                </a>
+              </Link>
 
-              <button className="rounded border border-orange-200 bg-orange-100 p-2 text-sm font-semibold tracking-wide text-orange-700 hover:border-orange-300">
-                Đăng nhập 👋
-              </button>
+              <Link href="/auth">
+                <a className="rounded border border-orange-200 bg-orange-100 p-2 text-sm font-semibold tracking-wide text-orange-700 hover:border-orange-300">
+                  Đăng nhập 👋
+                </a>
+              </Link>
             </div>
             <button className="p-2 text-sm text-slate-500">
               <p>Ủa tra từ điển mà cũng cần tài khoản à? 🤔</p>
