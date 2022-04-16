@@ -18,7 +18,7 @@ if (process.env.NODE_ENV == null || process.env.NODE_ENV === 'local') {
 } else {
   app.use(
     cors({
-      origin: [/\.tudien\.io$/i, /.*-kcjpop\.vercel\.app$/i],
+      origin: [/tudien\.io$/i, /.*-kcjpop\.vercel\.app$/i],
     }),
   )
 }
