@@ -3,7 +3,7 @@ export function Stats({ stats }) {
 
   return (
     <div>
-      🔢 Hiện đang có {formatter.format(stats.EnVi)} từ{' '}
+      Hiện đang có {formatter.format(stats.EnVi)} từ{' '}
       <strong className="font-bold">Anh - Việt</strong>,{' '}
       {formatter.format(stats.Wordnet)} từ{' '}
       <strong className="font-bold">Anh - Anh</strong>, và đang bổ sung thêm

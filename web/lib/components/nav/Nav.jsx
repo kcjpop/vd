@@ -1,11 +1,9 @@
-import { DefaultNav } from './DefaultNav'
 import { SearchNav } from './SearchNav'
 
-export function Nav({ variant = 'default' }) {
+export function Nav({ variant = 'search' }) {
   return (
-    <nav className="bg-gray-800 text-gray-200">
+    <nav className="bg-white shadow-md">
       <div className="mx-auto h-16 max-w-7xl">
-        {variant === 'default' && <DefaultNav />}
         {variant === 'search' && <SearchNav />}
       </div>
     </nav>

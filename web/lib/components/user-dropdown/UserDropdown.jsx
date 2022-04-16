@@ -29,7 +29,7 @@ export function UserDropdown() {
   return (
     <>
       <button
-        className="rounded bg-gray-900 p-2"
+        className="rounded-full border border-slate-400 p-2 hover:bg-slate-200"
         onClick={doOpenDropdown}
         onBlur={doCloseDropdown}
         {...referenceProps()}>

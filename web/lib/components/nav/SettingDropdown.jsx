@@ -22,7 +22,7 @@ export function SettingDropdown() {
         onClick={doOpenDropdown}
         onBlur={doCloseDropdown}
         type="button"
-        className="rounded bg-gray-900 p-2"
+        className="rounded border border-slate-800 p-2"
         title={_e('nav.settings')}>
         <SettingsIcon />
       </button>

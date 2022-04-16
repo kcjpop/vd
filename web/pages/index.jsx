@@ -1,7 +1,7 @@
-import { Page } from '@/lib/components/home'
+import { PageHome } from '@/lib/components/home/PageHome'
 import { fetchHomepageStats } from '@/lib/api'
 
-export default Page
+export default PageHome
 
 export const getServerSideProps = async () => {
   const stats = await fetchHomepageStats()
