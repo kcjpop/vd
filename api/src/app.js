@@ -7,6 +7,8 @@ const { getImageHandler } = require('./handlers/banner')
 const { getSummaryHandler } = require('./handlers/summary')
 const { getSuggestions } = require('./handlers/suggestions')
 
+const { validateGetSuggestions } = require('./validators/suggestions')
+
 if (process.env.NODE_ENV == null || process.env.NODE_ENV === 'local') {
   app.use(
     cors({
@@ -31,6 +33,6 @@ app.get('/banner/:word', getImageHandler)
 
 app.get('/summary', getSummaryHandler)
 
-app.get('/suggestions/:word', getSuggestions)
+app.get('/suggestions/:word', validateGetSuggestions, getSuggestions)
 
 module.exports = app
