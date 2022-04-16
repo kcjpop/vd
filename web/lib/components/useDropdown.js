@@ -44,6 +44,8 @@ export function useDropdown({ placement, offset = 4, middleware = [] } = {}) {
 
   const doOpenDropdown = () => setOpen(true)
 
+  const doToggleDropdown = () => setOpen((old) => !old)
+
   const doCloseDropdown = (e) => {
     if (!refs.floating.current?.contains(e.relatedTarget)) {
       setOpen(false)
@@ -54,6 +56,7 @@ export function useDropdown({ placement, offset = 4, middleware = [] } = {}) {
     context,
     isOpen: open,
     referenceProps,
+    doToggleDropdown,
     doOpenDropdown,
     doCloseDropdown,
     floatingProps,

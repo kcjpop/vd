@@ -1,5 +1,6 @@
 export {
   FiVolume2 as VolumnIcon,
+  FiMenu as MenuIcon,
   FiSettings as SettingsIcon,
   FiSearch as SearchIcon,
   FiChevronUp as ChevronUpIcon,

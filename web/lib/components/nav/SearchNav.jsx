@@ -2,8 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { FillBookmarkStartIcon, SearchIcon } from '../common/Icons'
-import { SettingDropdown } from './SettingDropdown'
-import { UserDropdown } from '../user-dropdown/UserDropdown'
+import { MenuDropdown } from './MenuDropdown'
 
 function SearchForm() {
   const router = useRouter()
@@ -53,10 +52,7 @@ export function SearchNav() {
         <SearchForm />
       </li>
       <li>
-        <UserDropdown />
-      </li>
-      <li>
-        <SettingDropdown />
+        <MenuDropdown />
       </li>
     </ul>
   )
