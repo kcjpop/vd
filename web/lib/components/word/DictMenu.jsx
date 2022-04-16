@@ -32,7 +32,7 @@ export function DictMenu() {
         onClick={doOpenDropdown}
         onBlur={doCloseDropdown}
         type="button"
-        className="flex items-center gap-2 rounded bg-sky-100 py-1 px-2 text-sky-600"
+        className="flex items-center gap-2 rounded border border-sky-600 py-1 px-2 text-sky-600"
         title={_e('dictMenu.pick')}
         {...referenceProps()}>
         {currentDict} <ChevronDownIcon />

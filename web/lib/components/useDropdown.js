@@ -8,9 +8,14 @@ import {
   flip,
 } from '@floating-ui/react-dom-interactions'
 
-export { size, arrow } from '@floating-ui/react-dom-interactions'
+export {
+  size,
+  arrow,
+  useTypeahead,
+  useListNavigation,
+} from '@floating-ui/react-dom-interactions'
 
-export function useDropdown({ placement, middleware = [], offset = 4 } = {}) {
+export function useDropdown({ placement, offset = 4, middleware = [] } = {}) {
   const [open, setOpen] = useState(false)
 
   const { x, y, refs, reference, floating, strategy, context } = useFloating({
@@ -37,9 +42,7 @@ export function useDropdown({ placement, middleware = [], offset = 4 } = {}) {
       },
     })
 
-  const doOpenDropdown = () => {
-    setOpen(true)
-  }
+  const doOpenDropdown = () => setOpen(true)
 
   const doCloseDropdown = (e) => {
     if (!refs.floating.current?.contains(e.relatedTarget)) {
@@ -48,6 +51,7 @@ export function useDropdown({ placement, middleware = [], offset = 4 } = {}) {
   }
 
   return {
+    context,
     isOpen: open,
     referenceProps,
     doOpenDropdown,

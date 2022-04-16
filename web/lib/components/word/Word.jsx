@@ -116,8 +116,12 @@ export function Word({ word: w }) {
       </div>
 
       <div className="flex flex-col gap-4">
-        {w.definitions.map((def) => (
-          <WordDefinition key={def.partOfSpeech} def={def} tenses={w.tenses} />
+        {w.definitions.map((def, i) => (
+          <WordDefinition
+            key={def.partOfSpeech + i}
+            def={def}
+            tenses={w.tenses}
+          />
         ))}
       </div>
     </div>
