@@ -29,7 +29,7 @@ export function WordMenu() {
 
       {isOpen && (
         <div
-          className="w-80 divide-y divide-dashed rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-md"
+          className="w-80 divide-y divide-dashed rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-lg"
           {...floatingProps()}>
           <div className="mb-2 grid gap-2">
             <DictSelect />
