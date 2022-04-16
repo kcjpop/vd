@@ -14,9 +14,12 @@ export function PageHome({ opengraph, stats }) {
 
       <section className="flex flex-col justify-center lg:flex-1">
         <div className="max-w-xl p-4">
-          <h1 className="mb-4 flex items-center gap-2 text-3xl font-bold tracking-wide text-slate-900">
-            <Logo /> tudien.io
-          </h1>
+          <div className="mb-8">
+            <h1 className=" flex items-center gap-2 text-3xl font-bold tracking-wide text-slate-900">
+              <Logo /> tudien.io
+            </h1>
+            <p className="text-sm text-slate-300">beta af, why are you here?</p>
+          </div>
 
           <div className="mb-8">
             <WordSearchForm />
