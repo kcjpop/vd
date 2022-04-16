@@ -20,7 +20,7 @@ function Error({ err }) {
   )
 }
 
-export function Page({ opengraph, entry }) {
+export function PageWord({ opengraph, entry }) {
   const { _e } = useTranslation()
   const router = useRouter()
   const { word, dict } = router.query

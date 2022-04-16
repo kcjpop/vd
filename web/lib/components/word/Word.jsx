@@ -4,7 +4,7 @@ import { LinkToWord } from '../common/LinkToWord'
 
 import { VerbTenses } from './VerbTenses'
 import { Speech } from './Speech'
-import { DictMenu } from './DictMenu'
+import { WordMenu } from '../word-menu/WordMenu'
 import { Pronunciations } from './Pronunciations'
 import { Examples } from './Examples'
 import { Idioms } from './Idioms'
@@ -100,22 +100,25 @@ function WordDefinition({ def, tenses }) {
 
 export function Word({ word: w }) {
   return (
-    <div>
-      <div className="mb-4">
-        <div className="flex items-center">
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-bold">{w.word}</h1>
+    <div
+      className="relative grid gap-2"
+      style={{ gridTemplateColumns: '1fr auto' }}>
+      <div>
+        <div className="flex items-center gap-2">
+          <h1 className="break-all text-3xl font-bold">{w.word}</h1>
+          <span>
             <Speech word={w.word} />
-          </div>
-          <div className="ml-auto">
-            <DictMenu />
-          </div>
+          </span>
         </div>
 
         <Pronunciations entries={w.pronunciations} />
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="sticky inset-y-20">
+        <WordMenu />
+      </div>
+
+      <div className="col-span-2 flex flex-col gap-4">
         {w.definitions.map((def, i) => (
           <WordDefinition
             key={def.partOfSpeech + i}

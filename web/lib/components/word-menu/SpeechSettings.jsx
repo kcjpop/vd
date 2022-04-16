@@ -7,7 +7,7 @@ import { ToggleCheckbox } from '../toggle-checkbox/ToggleCheckbox'
 
 import { SettingsContext } from '../../context/Settings'
 
-export function Settings() {
+export function SpeechSettings() {
   const { _e } = useTranslation()
 
   const voices = globalThis.window
@@ -41,7 +41,7 @@ export function Settings() {
         <div className="font-bold">{_e('nav.settings.voice')}</div>
 
         <select
-          className="rounded border-gray-300 p-2 focus:border-indigo-500 focus:ring-indigo-500"
+          className="w-full rounded border-gray-300 bg-slate-200 p-2 focus:border-indigo-500 focus:ring-indigo-500"
           value={selected}
           onChange={doSetVoice}>
           {voices.map((voice) => (

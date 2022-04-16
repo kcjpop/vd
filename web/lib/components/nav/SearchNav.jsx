@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { SearchIcon } from '../common/Icons'
-import { SettingDropdown } from './SettingDropdown'
-import { UserDropdown } from '../user-dropdown/UserDropdown'
+import { FillBookmarkStartIcon, SearchIcon } from '../common/Icons'
+import { MenuDropdown } from './MenuDropdown'
 
 function SearchForm() {
   const router = useRouter()
@@ -40,10 +39,11 @@ function SearchForm() {
 
 export function SearchNav() {
   return (
-    <ul className="space-between flex h-full items-center gap-4 px-4">
+    <ul className="space-between flex h-full items-center gap-2 px-4">
       <li>
         <Link href="/">
-          <a className="block rounded-md bg-gray-900 p-2 font-bold">
+          <a className="block flex items-center gap-2 font-bold">
+            <FillBookmarkStartIcon size={32} className="text-rose-700" />
             tudien.io
           </a>
         </Link>
@@ -52,10 +52,7 @@ export function SearchNav() {
         <SearchForm />
       </li>
       <li>
-        <UserDropdown />
-      </li>
-      <li>
-        <SettingDropdown />
+        <MenuDropdown />
       </li>
     </ul>
   )

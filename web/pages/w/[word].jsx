@@ -1,9 +1,9 @@
 import got from 'got'
 
-import { Page } from '@/lib/components/word'
+import { PageWord } from '@/lib/components/word/PageWord'
 import { fetchBannerEndpoint, fetchSingleWordEndpoint } from '@/lib/api'
 
-export default Page
+export default PageWord
 
 export async function getServerSideProps(ctx) {
   const { word } = ctx.query
