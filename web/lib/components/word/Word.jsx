@@ -2,12 +2,14 @@ import { useTranslation } from '@/lib/i18n'
 
 import { LinkToWord } from '../common/LinkToWord'
 
+import { WordMenu } from '../word-menu/WordMenu'
+
 import { VerbTenses } from './VerbTenses'
 import { Speech } from './Speech'
-import { WordMenu } from '../word-menu/WordMenu'
 import { Pronunciations } from './Pronunciations'
 import { Examples } from './Examples'
 import { Idioms } from './Idioms'
+import { FlashcardDialog } from './FlashcardDialog'
 
 function Definition({ def, index }) {
   const { _e } = useTranslation()
@@ -115,7 +117,10 @@ export function Word({ word: w }) {
       </div>
 
       <div className="sticky inset-y-20">
-        <WordMenu />
+        <div className="flex items-center gap-2">
+          <WordMenu />
+          <FlashcardDialog />
+        </div>
       </div>
 
       <div className="col-span-2 flex flex-col gap-4">

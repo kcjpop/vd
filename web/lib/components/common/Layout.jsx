@@ -11,7 +11,9 @@ export function Layout({ children, navVariant, opengraph }) {
     <section className="flex min-h-screen flex-col justify-between">
       <OpenGraph opengraph={opengraph} />
 
-      <header className="sticky top-0 z-50">
+      <header
+        className="sticky top-0"
+        style={{ zIndex: 'var(--z-index-navbar)' }}>
         <Nav variant={navVariant} />
       </header>
 
