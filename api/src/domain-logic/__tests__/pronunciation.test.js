@@ -1,10 +1,10 @@
-const { getPronunciations } = require('../../domain-logic/pronunciation')
+const { getPronunciations } = require('../pronunciation')
 
 describe('getPronunciations', () => {
   it('should return pronunciation for a word', async () => {
-    const pronunciations = await getPronunciations('dick')
+    const pronunciations = await getPronunciations('duck')
 
-    expect(pronunciations).toContain('dɪk')
+    expect(pronunciations).toContain('dʌk')
   })
 
   it('should return null for an un-found word', async () => {
