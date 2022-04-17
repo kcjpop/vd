@@ -7,8 +7,13 @@ import { WordMenu } from '../word-menu/WordMenu'
 import { Speech } from './Speech'
 import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
+import { useTranslation } from '../../i18n'
+import { useUser } from '../../domain-logic/auth'
+import { FlashcardWarningDialog } from '../../components/word/FlashcardWarningDialog'
 
 function BtnCreatFlashcard({ active, onClick }) {
+  const { _e } = useTranslation()
+
   return (
     <button
       type="button"
@@ -17,7 +22,7 @@ function BtnCreatFlashcard({ active, onClick }) {
         active ? 'bg-orange-200' : 'bg-orange-100'
       } `}>
       <span className="hidden text-sm font-semibold tracking-wide lg:inline-block">
-        Tạo flashcard
+        {_e('flashcard.create')}
       </span>
       <ZapIcon />
     </button>
@@ -26,8 +31,12 @@ function BtnCreatFlashcard({ active, onClick }) {
 
 export function Word({ word: w }) {
   const [flashcardMode, setFlashcardMode] = useState(false)
+  const [warningMode, setWarningMode] = useState(false)
+  const { user } = useUser({ redirectIfUnauthenticated: false })
 
-  const doToggleFlashcardMode = () => setFlashcardMode((old) => !old)
+  const doToggleFlashcardMode = () => {
+    !user ? setWarningMode((old) => !old) : setFlashcardMode((old) => !old)
+  }
 
   return (
     <div
@@ -55,6 +64,11 @@ export function Word({ word: w }) {
         </div>
       </div>
 
+      <FlashcardWarningDialog
+        open={warningMode}
+        onOpenChange={setWarningMode}
+      />
+
       <div className="col-span-2 flex flex-col gap-4">
         {w.definitions.map((def, i) => (
           <WordDefinition
@@ -62,6 +76,7 @@ export function Word({ word: w }) {
             def={def}
             tenses={w.tenses}
             flashcardMode={flashcardMode}
+            warningMode={warningMode}
           />
         ))}
       </div>

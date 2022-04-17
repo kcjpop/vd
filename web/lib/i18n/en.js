@@ -68,6 +68,19 @@ const messages = {
   'toast.dismiss': 'Dismiss',
 
   'user.signInAs': 'Signed in as',
+
+  'flashcard.create': 'Create flashcard',
+  'flashcard.dialog.featureForLoggedInUserOnly':
+    'This feature only available for logged in user.',
+  'flashcard.set': 'Flashcard set',
+  'flashcard.word': 'Word',
+  'flashcard.definition': 'Definition',
+  'flashcard.add': 'Add',
+
+  'wordMenu.settings': 'Settings',
+  'wordMenu.addDefinition': 'Add new definition',
+  'wordMenu.addExample': 'Add new example',
+  'wordMenu.reportWrongDefinition': 'Report wrong definition',
 }
 
 export default messages

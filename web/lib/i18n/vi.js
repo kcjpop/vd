@@ -70,6 +70,19 @@ const messages = {
   'toast.dismiss': 'Ẩn',
 
   'user.signInAs': 'Đăng nhập:',
+
+  'flashcard.create': 'Tạo flashcard',
+  'flashcard.dialog.featureForLoggedInUserOnly':
+    'Chức năng này chỉ dành cho thành viên đã đăng nhập.',
+  'flashcard.set': 'Flashcard set',
+  'flashcard.word': 'Từ',
+  'flashcard.definition': 'Định nghĩa',
+  'flashcard.add': 'Thêm',
+
+  'wordMenu.settings': 'Tùy chọn',
+  'wordMenu.addDefinition': 'Thêm định nghĩa mới',
+  'wordMenu.addExample': 'Thêm ví dụ mới',
+  'wordMenu.reportWrongDefinition': 'Báo định nghĩa sai',
 }
 
 export default messages
