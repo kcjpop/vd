@@ -14,16 +14,17 @@ export function WordMenu() {
     doOpenDropdown,
     doCloseDropdown,
   } = useDropdown({ placement: 'bottom-end' })
-
   return (
     <div className="relative">
       <button
         onClick={doOpenDropdown}
         onBlur={doCloseDropdown}
         type="button"
-        className="inline-flex items-center gap-2 rounded-full bg-slate-200 p-2 lg:rounded lg:px-4"
+        className="flex items-center gap-2 rounded-full border border-orange-200 bg-orange-100 p-2 text-orange-700 hover:border-orange-300 lg:rounded lg:px-4"
         {...referenceProps()}>
-        <span className="hidden lg:inline-block">Tùy chọn</span>
+        <span className="hidden text-sm font-semibold tracking-wide lg:inline-block">
+          Tùy chọn
+        </span>
         <SettingsIcon />
       </button>
 

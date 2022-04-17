@@ -9,7 +9,7 @@ export function VerbTenses({ tenses }) {
   // V-inf, V-ing...
 
   return (
-    <div className="tense-grid grid gap-x-2 gap-y-1 rounded bg-orange-100 p-2">
+    <div className="tense-grid grid gap-x-2 gap-y-1 rounded border border-slate-600 p-4">
       <style jsx>
         {`
           .tense-grid {
