@@ -3,7 +3,6 @@ import { cloneElement } from 'react'
 import {
   useFloating,
   useInteractions,
-  useClick,
   useFocusTrap,
   useRole,
   useDismiss,

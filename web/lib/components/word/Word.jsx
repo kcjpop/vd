@@ -46,12 +46,12 @@ export function Word({ word: w }) {
 
       <div className="sticky inset-y-20">
         <div className="flex items-center gap-2">
-          <WordMenu />
-
           <BtnCreatFlashcard
             onClick={doToggleFlashcardMode}
             active={flashcardMode}
           />
+
+          <WordMenu />
         </div>
       </div>
 
