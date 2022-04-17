@@ -5,6 +5,8 @@ import { LinkToWord } from '../common/LinkToWord'
 import { VerbTenses } from './VerbTenses'
 import { Examples } from './Examples'
 import { Idioms } from './Idioms'
+import { FlashcardDialog } from './FlashcardDialog'
+import { useState } from 'react'
 
 function SeeAlso({ words }) {
   const { _e } = useTranslation()
@@ -31,13 +33,18 @@ function SeeAlso({ words }) {
   )
 }
 
-function Definition({ def, index, onClick }) {
+function Definition({ def, index, clickable, onClick }) {
   const { _e } = useTranslation()
 
   const id = `def-${def.id}`
 
   return (
-    <div className="flex flex-col gap-4" id={id} onClick={onClick}>
+    <div
+      className={`flex flex-col gap-4 ${
+        clickable && 'cursor-pointer hover:bg-slate-100'
+      }`}
+      id={id}
+      onClick={onClick}>
       <p className="font-semibold">
         {index && (
           <a
@@ -69,17 +76,22 @@ function Definition({ def, index, onClick }) {
 }
 
 export function WordDefinition({ def, tenses, flashcardMode }) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
   const isVerb =
     def.partOfSpeech?.includes('động từ') || def.partOfSpeech === 'verb'
 
   const doCreateNewFlashcard = () => {
     if (!flashcardMode) return
-    console.log(1)
+
+    setIsDialogOpen(true)
   }
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="flex flex-col gap-4">
+        <FlashcardDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+
         <h3 className="mt-2">
           <span className="rounded bg-sky-100 p-2 font-bold uppercase text-sky-600">
             {def.partOfSpeech}
@@ -93,6 +105,7 @@ export function WordDefinition({ def, tenses, flashcardMode }) {
             def={d}
             index={index + 1}
             key={d.meaning}
+            clickable={flashcardMode}
             onClick={doCreateNewFlashcard}
           />
         ))}
