@@ -76,6 +76,8 @@ const messages = {
   'flashcard.word': 'Word',
   'flashcard.definition': 'Definition',
   'flashcard.add': 'Add',
+  'flashcard.newSetName': 'Name',
+  'flashcard.addNewSet': 'Add new set',
 
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',

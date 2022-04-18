@@ -78,6 +78,8 @@ const messages = {
   'flashcard.word': 'Từ',
   'flashcard.definition': 'Định nghĩa',
   'flashcard.add': 'Thêm',
+  'flashcard.newSetName': 'Tiêu đề',
+  'flashcard.addNewSet': 'Tạo set mới',
 
   'wordMenu.settings': 'Tùy chọn',
   'wordMenu.addDefinition': 'Thêm định nghĩa mới',
