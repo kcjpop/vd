@@ -30,7 +30,7 @@ export function LoginForm() {
 
       if (error) throw error
 
-      router.push('/')
+      router.push(router.query.redirectTo || '/')
     } catch (error) {
       setFormError(error.message)
     } finally {
