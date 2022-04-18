@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { useTranslation } from '../../i18n'
 import { LinkToWord } from '../common/LinkToWord'
@@ -76,21 +77,29 @@ function Definition({ def, index, clickable, onClick }) {
 }
 
 export function WordDefinition({ def, tenses, flashcardMode }) {
+  const router = useRouter()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [selectedDefinition, setSelectedDefinition] = useState(null)
 
   const isVerb =
     def.partOfSpeech?.includes('động từ') || def.partOfSpeech === 'verb'
 
-  const doCreateNewFlashcard = () => {
+  const doCreateNewFlashcard = (definition) => () => {
     if (!flashcardMode) return
 
+    setSelectedDefinition(definition)
     setIsDialogOpen(true)
   }
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="flex flex-col gap-4">
-        <FlashcardDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+        <FlashcardDialog
+          open={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+          word={router.query.word}
+          definition={selectedDefinition}
+        />
 
         <h3 className="mt-2">
           <span className="rounded bg-sky-100 p-2 font-bold uppercase text-sky-600">
@@ -106,7 +115,7 @@ export function WordDefinition({ def, tenses, flashcardMode }) {
             index={index + 1}
             key={d.meaning}
             clickable={flashcardMode}
-            onClick={doCreateNewFlashcard}
+            onClick={doCreateNewFlashcard(d)}
           />
         ))}
       </div>

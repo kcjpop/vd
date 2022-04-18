@@ -13,7 +13,8 @@ export function FlashcardWarningDialog({ open, onOpenChange }) {
         <p>{_e('flashcard.dialog.featureForLoggedInUserOnly')}</p>
         <div className="flex w-full items-center justify-evenly py-2">
           <Link
-            href={{ pathname: '/auth', query: { redirectTo: router.asPath } }}>
+            href={{ pathname: '/auth', query: { redirectTo: router.asPath } }}
+            passHref>
             <button className="rounded-md border bg-sky-200 px-4 py-2 hover:bg-sky-300">
               {_e('auth.login')}
             </button>
@@ -22,7 +23,8 @@ export function FlashcardWarningDialog({ open, onOpenChange }) {
             href={{
               pathname: '/auth/register',
               query: { redirectTo: router.asPath },
-            }}>
+            }}
+            passHref>
             <button className="rounded-md border bg-sky-200 px-4 py-2 hover:bg-sky-300">
               {_e('auth.register')}
             </button>
