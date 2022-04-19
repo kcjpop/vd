@@ -11,6 +11,8 @@ const messages = {
   'error.title': 'Oh snap! An error happened 💥',
   'error.pageNotFound': 'The page you requested is not found',
   'error.wordNotFound': 'No definition found for “{word}” 😰',
+  'error.failedToCreateFlashcardSet': 'Failed to create new flashcard set',
+  'error.failedToCreateFlashcard': 'Failed to create new flashcard',
 
   'nav.home': 'Home',
   'nav.about': 'About',

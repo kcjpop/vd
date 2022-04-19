@@ -11,6 +11,9 @@ const messages = {
   'error.title': 'Úi giời, đã có lỗi xảy ra 💥',
   'error.pageNotFound': 'Không tìm thấy đường dẫn bạn yêu cầu',
   'error.wordNotFound': 'Không tìm thấy định nghĩa cho từ “{word}” 😰',
+  'error.failedToCreateFlashcardSet':
+    'Đã có lỗi xảy ra khi tạo flashcard set mới',
+  'error.failedToCreateFlashcard': 'Đã có lỗi xảy ra khi thêm flashcard mới',
 
   'nav.home': 'Trang chủ',
   'nav.about': 'Giới thiệu',
