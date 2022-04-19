@@ -1,0 +1,28 @@
+button {
+  @apply p-2 disabled:!bg-slate-200 disabled:!opacity-60;
+}
+
+/* variants */
+.btn--text {
+}
+
+.btn--contained {
+  @apply rounded border px-4 py-2;
+}
+
+/* type */
+.btn--primary {
+  @apply bg-sky-200 hover:bg-sky-300;
+}
+
+.btn--success {
+  @apply bg-green-200 hover:bg-green-300;
+}
+
+.btn--error {
+  @apply bg-red-200 hover:bg-red-300;
+}
+
+.btn--warning {
+  @apply bg-yellow-200 hover:bg-yellow-300;
+}

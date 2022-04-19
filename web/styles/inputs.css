@@ -1,0 +1,5 @@
+input,
+textarea,
+select {
+  @apply flex-1 rounded bg-slate-200 !p-2 hover:bg-slate-300 focus:bg-slate-300;
+}
