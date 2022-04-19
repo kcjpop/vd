@@ -78,6 +78,7 @@ const messages = {
   'flashcard.dialog.featureForLoggedInUserOnly':
     'Chức năng này chỉ dành cho thành viên đã đăng nhập.',
   'flashcard.set': 'Flashcard set',
+  'flashcard.sets': 'Flashcard sets',
   'flashcard.word': 'Từ',
   'flashcard.definition': 'Định nghĩa',
   'flashcard.add': 'Thêm',

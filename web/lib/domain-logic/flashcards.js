@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase as sb } from './supabaseClient'
 import { useUser } from './auth'
 
@@ -29,12 +29,12 @@ export function useFlashcardSets() {
   const [flashcardSets, setFlashcardSets] = useState([])
   const { user } = useUser({ redirectIfUnauthenticated: false })
 
-  async function fetchFlashcardSets() {
+  const fetchFlashcardSets = useCallback(async () => {
     const { data: sets, error } = await FlashcardSets.get({ user_id: user.id })
 
     if (error) throw error // catch như thế nào đây
     setFlashcardSets(sets)
-  }
+  }, [user])
 
   async function upsertFlashcardSet(set) {
     const { data, error } = await FlashcardSets.upsert(set)
@@ -65,12 +65,12 @@ export function useFlashcards({ set_id }) {
   const [flashcards, setFlashcards] = useState([])
   const { user } = useUser({ redirectIfUnauthenticated: false })
 
-  async function fetchFlashcards() {
+  const fetchFlashcards = useCallback(async () => {
     const { data: flashcards, error } = await Flashcards.get({ set_id })
 
     if (error) throw error
     setFlashcards(flashcards)
-  }
+  }, [set_id])
 
   async function upsertFlashcard(flashcard) {
     const { data, error } = await Flashcards.upsert(flashcard)

@@ -1,0 +1,59 @@
+.layout {
+  @apply grid;
+  grid-template-columns: minmax(0, 25%) minmax(75%, 100%);
+}
+
+.flipcard {
+  @apply m-auto aspect-video w-9/12 bg-transparent;
+  perspective: 1000px;
+}
+.flipcard__inner {
+  @apply relative box-border h-full w-full rounded-xl border shadow-lg;
+  transition: transform 800ms;
+  transform-style: preserve-3d;
+}
+.flipcard[data-state='flipped'] .flipcard__inner {
+  transform: rotateX(180deg);
+}
+.flipcard__inner > div {
+  @apply absolute flex h-full w-full items-center justify-center rounded-xl bg-white text-3xl;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flipcard__front {
+}
+.flipcard__back {
+  transform: rotateX(180deg);
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: -10px;
+}

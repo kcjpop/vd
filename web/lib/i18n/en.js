@@ -75,6 +75,7 @@ const messages = {
   'flashcard.dialog.featureForLoggedInUserOnly':
     'This feature only available for logged in user.',
   'flashcard.set': 'Flashcard set',
+  'flashcard.sets': 'Flashcard sets',
   'flashcard.word': 'Word',
   'flashcard.definition': 'Definition',
   'flashcard.add': 'Add',
