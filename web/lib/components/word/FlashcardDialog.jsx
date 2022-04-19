@@ -7,43 +7,54 @@ import { useUser } from '../../domain-logic/auth'
 
 export function FlashcardDialog({ open, onOpenChange, word, definition }) {
   const [isCreating, setIsCreating] = useState(false)
-  const [newSet, setNewSet] = useState({ name: '' })
+  const [newSetName, setNewSetName] = useState('')
   const [flashcard, setFlashcard] = useState({
     word,
     definition: definition?.meaning,
     set_id: '',
   })
+  const [error, setError] = useState(null)
   const { _e } = useTranslation()
 
   const { flashcardSets, upsertFlashcardSet } = useFlashcardSets()
   const { upsertFlashcard } = useFlashcards(flashcard.set_id)
-  const { user } = useUser()
+  const { user } = useUser({ redirectIfUnauthenticated: false })
 
   async function doCreate(e) {
     e.preventDefault()
+    setError(null)
 
-    if (!isCreating) {
-      setIsCreating(true)
-    } else {
-      const entry = await upsertFlashcardSet({
-        ...newSet,
-        user_id: user.id,
-      })
+    try {
+      if (!isCreating) {
+        setIsCreating(true)
+      } else {
+        const entry = await upsertFlashcardSet({
+          name: newSetName,
+          user_id: user.id,
+        })
 
-      setIsCreating(false)
-      setFlashcard({ ...flashcard, set_id: entry.id })
+        setIsCreating(false)
+        setFlashcard({ ...flashcard, set_id: entry.id })
+      }
+    } catch (error) {
+      setError(_e('error.failedToCreateFlashcardSet'))
     }
   }
 
   async function doAddFlashcard(e) {
-    e.preventDefault()
+    try {
+      e.preventDefault()
+      setError(null)
 
-    await upsertFlashcard(flashcard)
-    onOpenChange(false)
+      await upsertFlashcard(flashcard)
+      onOpenChange(false)
+    } catch (error) {
+      setError(_e('error.failedToCreateFlashcard'))
+    }
   }
 
-  function updateSetName(e) {
-    setNewSet({ ...newSet, name: e.target.value })
+  function updateNewSetName(e) {
+    setNewSetName(e.target.value)
   }
 
   function updateFlashcard(e) {
@@ -65,16 +76,17 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
           <div className="flex items-center">
             <input
               type="text"
-              value={newSet.name}
-              onChange={updateSetName}
+              value={newSetName}
+              onChange={updateNewSetName}
               placeholder={_e('flashcard.newSetName')}
-              className={`${!isCreating} && hidden`}
+              className={`${!isCreating && 'hidden'}`}
             />
             <select
               name="set_id"
               value={flashcard.set_id}
               onChange={updateFlashcard}
               className={`flex-1 p-2 ${isCreating && 'hidden'}`}>
+              <option value="">-- Select a set --</option>
               {flashcardSets.map((set) => (
                 <option key={set.id} value={set.id}>
                   {set.name}
@@ -83,8 +95,9 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
             </select>
 
             <button
-              className="ml-2 rounded border bg-sky-300 p-2 hover:bg-sky-400"
-              onClick={doCreate}>
+              className="btn btn--contained btn--primary ml-2"
+              onClick={doCreate}
+              disabled={isCreating && newSetName.length === 0}>
               {_e('flashcard.addNewSet')}
             </button>
           </div>
@@ -105,7 +118,12 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
             value={flashcard.definition}
             onChange={updateFlashcard}></textarea>
 
-          <button className="bg-sky-200" onClick={doAddFlashcard}>
+          {error && <p className="text-red-600">{error}</p>}
+
+          <button
+            className="btn btn-contained btn--primary"
+            onClick={doAddFlashcard}
+            disabled={flashcard.set_id === ''}>
             {_e('flashcard.add')}
           </button>
         </form>
