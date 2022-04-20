@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation } from 'swiper'
+import { useRouter } from 'next/router'
+
+import { Layout } from '../common/Layout'
 import { useFlashcards } from '../../domain-logic/flashcards'
 
 // Import Swiper styles
@@ -30,23 +33,24 @@ function FlipCard({ flashcard }) {
   )
 }
 
-export function Content({ selected }) {
-  const { flashcards } = useFlashcards({ set_id: selected })
-
-  console.log({ flashcards })
+export function Page() {
+  const router = useRouter()
+  const { flashcards } = useFlashcards({ set_id: router.query.set_id })
 
   return (
-    <Swiper
-      pagination={{ type: 'fraction' }}
-      navigation={true}
-      modules={[Pagination, Navigation]}>
-      {flashcards.map((flashcard) => (
-        <SwiperSlide key={flashcard.id}>
-          <div className="flex h-full w-full items-center justify-center py-12">
-            <FlipCard flashcard={flashcard} />
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <Layout>
+      <Swiper
+        pagination={{ type: 'fraction' }}
+        navigation={true}
+        modules={[Pagination, Navigation]}>
+        {flashcards.map((flashcard) => (
+          <SwiperSlide key={flashcard.id}>
+            <div className="flex h-full w-full items-center justify-center py-12">
+              <FlipCard flashcard={flashcard} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Layout>
   )
 }

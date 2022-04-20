@@ -1,6 +1,5 @@
 .layout {
-  @apply grid;
-  grid-template-columns: minmax(0, 25%) minmax(75%, 100%);
+  @apply container;
 }
 
 .flipcard {

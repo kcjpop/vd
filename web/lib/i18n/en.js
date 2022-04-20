@@ -71,6 +71,7 @@ const messages = {
 
   'user.signInAs': 'Signed in as',
 
+  'flashcard.flashcards': 'Flashcards',
   'flashcard.create': 'Create flashcard',
   'flashcard.dialog.featureForLoggedInUserOnly':
     'This feature only available for logged in user.',

@@ -16,7 +16,8 @@ const FlashcardSets = {
 }
 
 const Flashcards = {
-  get: ({ set_id }) => sb.from(TB.Flashcards).select('*').eq('set_id', set_id),
+  get: ({ set_id }) =>
+    sb.from(TB.Flashcards).select('*', { count: 'exact' }).eq('set_id', set_id),
   upsert: (flashcard) =>
     sb.from(TB.Flashcards).upsert(flashcard, {
       count: 'exact',
@@ -63,13 +64,15 @@ export function useFlashcardSets() {
 
 export function useFlashcards({ set_id }) {
   const [flashcards, setFlashcards] = useState([])
+  const [total, setTotal] = useState(0)
   const { user } = useUser({ redirectIfUnauthenticated: false })
 
   const fetchFlashcards = useCallback(async () => {
-    const { data: flashcards, error } = await Flashcards.get({ set_id })
+    const { data: flashcards, error, count } = await Flashcards.get({ set_id })
 
     if (error) throw error
     setFlashcards(flashcards)
+    setTotal(count)
   }, [set_id])
 
   async function upsertFlashcard(flashcard) {
@@ -92,7 +95,13 @@ export function useFlashcards({ set_id }) {
     user && set_id && fetchFlashcards()
   }, [user, set_id, fetchFlashcards])
 
-  return { flashcards, fetchFlashcards, upsertFlashcard, deleteFlashcard }
+  return {
+    flashcards,
+    total,
+    fetchFlashcards,
+    upsertFlashcard,
+    deleteFlashcard,
+  }
 }
 
 /* eslint-enable camelcase */

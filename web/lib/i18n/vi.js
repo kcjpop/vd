@@ -74,6 +74,7 @@ const messages = {
 
   'user.signInAs': 'Đăng nhập:',
 
+  'flashcard.flashcards': 'Flashcards',
   'flashcard.create': 'Tạo flashcard',
   'flashcard.dialog.featureForLoggedInUserOnly':
     'Chức năng này chỉ dành cho thành viên đã đăng nhập.',

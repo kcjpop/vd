@@ -1,3 +1,3 @@
-import { Page } from '@/lib/components/flashcards/Page'
+import { Page } from '@/lib/components/flashcards/Flashcards'
 
 export default Page
