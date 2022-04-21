@@ -1,4 +1,4 @@
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .wrapper[data-state='open'] {
     animation: toast-slide-in 250ms ease-in;
   }
@@ -12,12 +12,12 @@
     transform: translateX(0);
     transition: transform 200ms ease-out;
   }
-  . wrapper[data-swipe='end'] {
+  .wrapper[data-swipe='end'] {
     animation: toast-swipe-out 100ms ease-out;
   }
-}
+} */
 
-.main {  s
+.main {
   @apply relative grid h-full w-full items-center gap-x-3 overflow-hidden rounded-md bg-white py-2 px-4 shadow shadow-slate-600;
   grid-template-areas: 'title action' 'description action';
   grid-template-columns: auto max-content;
