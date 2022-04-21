@@ -67,6 +67,8 @@ export function useFlashcardSets() {
     user && fetchFlashcardSets()
   }, [user, fetchFlashcardSets])
 
+  useEffect(() => console.log({ flashcardSets, from: 'hook' }), [flashcardSets])
+
   return { flashcardSets, upsertFlashcardSet, deleteFlashcardSet }
 }
 

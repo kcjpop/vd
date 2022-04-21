@@ -2,6 +2,8 @@ const messages = {
   'common.synonymps': 'synonymps',
   'common.pleaseWait': 'Please wait',
   'common.words': 'words',
+  'common.create': 'Create',
+  'common.cancel': 'Cancel',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -82,6 +84,8 @@ const messages = {
   'flashcard.add': 'Add',
   'flashcard.newSetName': 'Name',
   'flashcard.addNewSet': 'Add new set',
+  'flashcard.createdSetSuccessfully': 'New set added',
+  'flashcard.addedSuccessfully': 'Flashcard added to set',
 
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',

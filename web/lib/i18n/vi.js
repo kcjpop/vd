@@ -2,6 +2,8 @@ const messages = {
   'common.synonymps': 'từ đồng nghĩa',
   'common.pleaseWait': 'Bạn vui lòng đợi chút nhé...',
   'common.words': 'từ',
+  'common.create': 'Tạo',
+  'common.cancel': 'Huỷ',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',
@@ -85,6 +87,8 @@ const messages = {
   'flashcard.add': 'Thêm',
   'flashcard.newSetName': 'Tiêu đề',
   'flashcard.addNewSet': 'Tạo set mới',
+  'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
+  'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
 
   'wordMenu.settings': 'Tùy chọn',
   'wordMenu.addDefinition': 'Thêm định nghĩa mới',
