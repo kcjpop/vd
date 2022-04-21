@@ -4,7 +4,7 @@ import { Pagination, Navigation } from 'swiper'
 import { useRouter } from 'next/router'
 
 import { Layout } from '../common/Layout'
-import { useFlashcards } from '../../domain-logic/flashcards'
+import { useFlashcardSet } from '../../domain-logic/flashcards'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -35,22 +35,32 @@ function FlipCard({ flashcard }) {
 
 export function Page() {
   const router = useRouter()
-  const { flashcards } = useFlashcards({ set_id: router.query.set_id })
+
+  const { currentSet } = useFlashcardSet({ set_id: router.query.set_id })
 
   return (
     <Layout>
-      <Swiper
-        pagination={{ type: 'fraction' }}
-        navigation={true}
-        modules={[Pagination, Navigation]}>
-        {flashcards.map((flashcard) => (
-          <SwiperSlide key={flashcard.id}>
-            <div className="flex h-full w-full items-center justify-center py-12">
-              <FlipCard flashcard={flashcard} />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {!currentSet ? (
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="text-2xl font-bold">Please wait...</div>
+        </div>
+      ) : (
+        <>
+          <h1 className="text-2xl font-bold">{currentSet.name}</h1>
+          <Swiper
+            pagination={{ type: 'fraction' }}
+            navigation={true}
+            modules={[Pagination, Navigation]}>
+            {currentSet.flashcards.map((flashcard) => (
+              <SwiperSlide key={flashcard.id}>
+                <div className="flex h-full w-full items-center justify-center py-12">
+                  <FlipCard flashcard={flashcard} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </>
+      )}
     </Layout>
   )
 }

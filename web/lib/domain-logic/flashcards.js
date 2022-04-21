@@ -3,26 +3,34 @@ import { supabase as sb } from './supabaseClient'
 import { useUser } from './auth'
 
 const TB = { FlashcardSets: 'flashcard_sets', Flashcards: 'flashcards' }
+const getConfig = (config = {}) => ({
+  count: 'exact',
+  returning: 'representation',
+  ...config,
+})
 
 /* eslint-disable camelcase */
 const FlashcardSets = {
   get: ({ user_id }) =>
-    sb.from(TB.FlashcardSets).select('id, name').eq('user_id', user_id),
-  upsert: (set) =>
     sb
       .from(TB.FlashcardSets)
-      .upsert(set, { count: 'exact', returning: 'representation' }),
+      .select('id, name, flashcards(*)')
+      .eq('user_id', user_id),
+  getOne: ({ user_id, id }) =>
+    sb
+      .from(TB.FlashcardSets)
+      .select('id, name, flashcards (*)', getConfig())
+      .eq('id', id)
+      .eq('user_id', user_id)
+      .single(),
+  upsert: (set) => sb.from(TB.FlashcardSets).upsert(set, getConfig()),
   delete: ({ id }) => sb.from(TB.FlashcardSets).delete().match({ id }),
 }
 
 const Flashcards = {
   get: ({ set_id }) =>
     sb.from(TB.Flashcards).select('*', { count: 'exact' }).eq('set_id', set_id),
-  upsert: (flashcard) =>
-    sb.from(TB.Flashcards).upsert(flashcard, {
-      count: 'exact',
-      returning: 'representation',
-    }),
+  upsert: (flashcard) => sb.from(TB.Flashcards).upsert(flashcard, getConfig()),
   delete: ({ id }) => sb.from(TB.Flashcards).delete().match({ id }),
 }
 
@@ -62,6 +70,27 @@ export function useFlashcardSets() {
   return { flashcardSets, upsertFlashcardSet, deleteFlashcardSet }
 }
 
+export function useFlashcardSet({ set_id }) {
+  const [currentSet, setCurrentSet] = useState(null)
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+
+  useEffect(() => {
+    const getCurrentSet = async () => {
+      const { data, error } = await FlashcardSets.getOne({
+        id: set_id,
+        user_id: user.id,
+      })
+
+      if (error) throw error
+      setCurrentSet(data)
+    }
+
+    user && getCurrentSet()
+  }, [user, set_id])
+
+  return { currentSet }
+}
+
 export function useFlashcards({ set_id }) {
   const [flashcards, setFlashcards] = useState([])
   const [total, setTotal] = useState(0)
@@ -71,6 +100,7 @@ export function useFlashcards({ set_id }) {
     const { data: flashcards, error, count } = await Flashcards.get({ set_id })
 
     if (error) throw error
+
     setFlashcards(flashcards)
     setTotal(count)
   }, [set_id])
@@ -88,6 +118,7 @@ export function useFlashcards({ set_id }) {
     const { error } = await Flashcards.delete({ id })
 
     if (error) throw error
+
     setFlashcards(flashcards.filter((fc) => fc.id !== id))
   }
 
