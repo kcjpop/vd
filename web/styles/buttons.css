@@ -3,26 +3,26 @@ button {
 }
 
 /* variants */
-.btn--text {
+.btn__text {
 }
 
-.btn--contained {
+.btn__contained {
   @apply rounded border px-4 py-2;
 }
 
 /* type */
-.btn--primary {
+.btn__primary {
   @apply bg-sky-200 hover:bg-sky-300;
 }
 
-.btn--success {
+.btn__success {
   @apply bg-green-200 hover:bg-green-300;
 }
 
-.btn--error {
+.btn__error {
   @apply bg-red-200 hover:bg-red-300;
 }
 
-.btn--warning {
+.btn__warning {
   @apply bg-yellow-200 hover:bg-yellow-300;
 }
