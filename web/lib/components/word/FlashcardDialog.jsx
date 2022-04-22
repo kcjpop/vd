@@ -2,6 +2,11 @@ import { useState, useEffect, useRef, useContext } from 'react'
 
 import { ToastContext } from '../../context/Toast'
 import { Dialog } from '../common/Dialog'
+import { Button } from '../common/Button'
+import { Input } from '../common/Input'
+import { Textarea } from '../common/Textarea'
+import { Select } from '../common/Select'
+
 import { useTranslation } from '../../i18n'
 import { useFlashcardSets, useFlashcards } from '../../domain-logic/flashcards'
 import { useUser } from '../../domain-logic/auth'
@@ -54,7 +59,7 @@ function CreateFlashcardSetForm({
   return (
     <form className={`flex w-80 flex-col gap-2 ${hidden && 'hidden'}`}>
       <label className="">{_e('flashcard.addNewSet')}</label>
-      <input
+      <Input
         ref={inputRef}
         type="text"
         value={name}
@@ -62,15 +67,15 @@ function CreateFlashcardSetForm({
         placeholder={_e('flashcard.newSetName')}
       />
       <div className="grid w-full grid-cols-2 grid-rows-1 gap-2">
-        <button
-          className="btn btn__contained btn__primary"
+        <Button
+          className="bg-sky-200"
           onClick={doCreate}
           disabled={name.length === 0}>
           {_e('common.create')}
-        </button>
-        <button className="btn__contained" onClick={cancel}>
+        </Button>
+        <Button className="btn__contained" onClick={cancel}>
           {_e('common.cancel')}
-        </button>
+        </Button>
       </div>
       {error && <p className="text-red-500">{error}</p>}
     </form>
@@ -113,7 +118,7 @@ function AddFlashcardForm({
     <form className={`flex w-80 flex-col gap-2 ${hidden && 'hidden'}`}>
       <label className="">{_e('flashcard.set')}</label>
       <div className="flex items-center">
-        <select
+        <Select
           name="set_id"
           value={flashcard.set_id}
           onChange={updateFlashcard}
@@ -124,17 +129,17 @@ function AddFlashcardForm({
               {set.name}
             </option>
           ))}
-        </select>
+        </Select>
 
-        <button
+        <Button
           className="btn btn__contained btn__primary ml-2"
           onClick={toggleIsCreating}>
           {_e('flashcard.addNewSet')}
-        </button>
+        </Button>
       </div>
 
       <label className="">{_e('flashcard.word')}</label>
-      <input
+      <Input
         type="text"
         name="word"
         className="rounded bg-slate-200"
@@ -142,21 +147,21 @@ function AddFlashcardForm({
         onChange={updateFlashcard}
       />
       <label className="">{_e('flashcard.definition')}</label>
-      <textarea
+      <Textarea
         name="definition"
         id=""
         className="rounded bg-slate-200"
         value={flashcard.definition}
-        onChange={updateFlashcard}></textarea>
+        onChange={updateFlashcard}></Textarea>
 
       {error && <p className="text-red-600">{error}</p>}
 
-      <button
-        className="btn btn__contained btn__primary"
+      <Button
+        className="bg-sky-200"
         onClick={doAddFlashcard}
         disabled={flashcard.set_id === ''}>
         {_e('flashcard.add')}
-      </button>
+      </Button>
     </form>
   )
 }
