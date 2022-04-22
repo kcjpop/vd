@@ -22,8 +22,7 @@ export const getFlashcardSet = (
     .eq('id', id)
     .single()
 
-export const upsertFlashcardSets = (sets) =>
-  sb.from(TB.FlashcardSets).upsert(sets, config)
+export const upsertSet = (set) => sb.from(TB.FlashcardSets).upsert(set, config)
 
 export const deleteFlashcardSet = ({ id }) =>
   sb.from(TB.FlashcardSets).delete().match({ id })
@@ -31,8 +30,8 @@ export const deleteFlashcardSet = ({ id }) =>
 export const getFlashcards = ({ setId }, { fields } = { fields: '*' }) =>
   sb.from(TB.Flashcards).select(fields, config).eq('set_id', setId)
 
-export const upsertFlashcards = (flashcards) =>
-  sb.from(TB.Flashcards).upsert(flashcards, config)
+export const upsertFlashcard = (flashcard) =>
+  sb.from(TB.Flashcards).upsert(flashcard, config)
 
 export const deleteFlashcards = ({ id }) =>
   sb.from(TB.Flashcards).delete().match({ id })

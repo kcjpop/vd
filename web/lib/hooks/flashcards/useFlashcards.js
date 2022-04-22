@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { getFlashcards, upsertFlashcards, deleteFlashcards } from './query'
 
-export function useFlashcards({ user, setId }) {
+export function useFlashcards({ user, setId, fetchCardsOfSet = false }) {
   const qc = useQueryClient()
   const queryKey = ['flashcards', user?.id]
 
@@ -9,14 +9,18 @@ export function useFlashcards({ user, setId }) {
     data: flashcards,
     isLoading,
     isError,
-  } = useQuery(['flashcards', user?.id], async () => {
-    if (!user) return
+  } = useQuery(
+    ['flashcards', user?.id],
+    async () => {
+      if (!user) return
 
-    const { data: flashcards, error } = await getFlashcards({ setId })
+      const { data: flashcards, error } = await getFlashcards({ setId })
 
-    if (error) throw error
-    return flashcards
-  })
+      if (error) throw error
+      return flashcards
+    },
+    { enabled: fetchCardsOfSet },
+  )
 
   const modifyFlashcard = useMutation(
     async (flashcard) => {

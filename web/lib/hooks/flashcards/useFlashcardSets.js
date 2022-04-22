@@ -2,11 +2,12 @@ import { useQuery, useMutation, useQueryClient } from 'react-query'
 
 import {
   getFlashcardSets,
-  upsertFlashcardSets,
+  upsertSet,
+  upsertFlashcard,
   deleteFlashcardSet,
 } from './query'
 
-export function useFlashcardSets({ user }) {
+export function useFlashcardSets({ user, fetchAllSets = false }) {
   const queryClient = useQueryClient()
   const queryKey = ['flashcard-sets', user?.id]
 
@@ -14,31 +15,32 @@ export function useFlashcardSets({ user }) {
     data: flashcardSets,
     isError,
     isLoading,
-  } = useQuery(queryKey, async () => {
-    if (!user) return
+  } = useQuery(
+    queryKey,
+    async () => {
+      if (!user) return
 
-    const { data: sets, error } = await getFlashcardSets({ userId: user.id })
-    if (error) throw error
+      const { data: sets, error } = await getFlashcardSets({ userId: user.id })
+      if (error) throw error
 
-    return sets
-  })
+      return sets
+    },
+    { enabled: fetchAllSets },
+  )
 
-  const modifyFlashcardSet = useMutation(
-    async (set) => {
-      if (!set.user_id) set.user_id = user.id
-
-      const { data, error } = await upsertFlashcardSets(set)
+  const createNewSet = useMutation(
+    async ({ name, userId }) => {
+      const { data, error } = await upsertSet({ name, user_id: userId })
 
       if (error) throw error
       return data[0]
     },
     {
-      mutationKey: 'upsert-flashcard-set',
       onSuccess: () => queryClient.invalidateQueries(queryKey),
     },
   )
 
-  const removeFlashcardSet = useMutation(
+  const deleteSet = useMutation(
     async (id) => {
       const { error } = await deleteFlashcardSet({ id })
 
@@ -50,11 +52,24 @@ export function useFlashcardSets({ user }) {
     },
   )
 
+  const addCardToSet = useMutation(async ({ word, definition, setId }) => {
+    const { data, error } = await upsertFlashcard({
+      set_id: setId,
+      word,
+      definition,
+    })
+
+    if (error) throw error
+
+    return data[0]
+  })
+
   return {
     flashcardSets,
     isError,
     isLoading,
-    modifyFlashcardSet,
-    removeFlashcardSet,
+    createNewSet,
+    deleteSet,
+    addCardToSet,
   }
 }

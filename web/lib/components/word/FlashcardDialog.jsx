@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useContext } from 'react'
 
 import { ToastContext } from '../../context/Toast'
 import { Dialog } from '../common/Dialog'
@@ -9,117 +9,57 @@ import { Select } from '../common/Select'
 
 import { useTranslation } from '../../i18n'
 import { useFlashcardSets } from '../../hooks/flashcards/useFlashcardSets'
-import { useFlashcards } from '../../hooks/flashcards/useFlashcards'
 import { useUser } from '../../domain-logic/auth'
 
-function CreateFlashcardSetForm({
-  toggleIsCreating,
-  setMessage,
-  hidden,
-  modifyFlashcardSet,
-  setFSetId,
-}) {
-  const [name, setName] = useState('')
-  const inputRef = useRef()
+const ADD_NEW_CARD = 1
+const ADD_NEW_SET = 2
 
-  const { _e } = useTranslation()
-
-  const updateName = (e) => setName(e.target.value)
-
-  const doCreate = async (e) => {
-    e.preventDefault()
-
-    await modifyFlashcardSet.mutateAsync(
-      { name },
-      {
-        onSuccess: (data, ...rest) => {
-          setFSetId(data.id)
-          setMessage(_e('flashcard.createdSetSuccessfully'))
-          toggleIsCreating()
-        },
-      },
-    )
-  }
-
-  const cancel = (e) => {
-    e.preventDefault()
-    toggleIsCreating()
-  }
-
-  useEffect(() => {
-    if (!hidden && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [inputRef, hidden])
-
-  return (
-    <form className={`flex w-80 flex-col gap-2 ${hidden && 'hidden'}`}>
-      <label className="">{_e('flashcard.addNewSet')}</label>
-      <Input
-        ref={inputRef}
-        type="text"
-        value={name}
-        onChange={updateName}
-        placeholder={_e('flashcard.newSetName')}
-      />
-      <div className="grid w-full grid-cols-2 grid-rows-1 gap-2">
-        <Button
-          className="bg-sky-200 hover:bg-sky-300"
-          onClick={doCreate}
-          disabled={name.length === 0}>
-          {_e('common.create')}
-        </Button>
-        <Button className="bg-slate-200 hover:bg-slate-300" onClick={cancel}>
-          {_e('common.cancel')}
-        </Button>
-      </div>
-      {modifyFlashcardSet.isError && (
-        <p className="text-red-500">{modifyFlashcardSet.error.message}</p>
-      )}
-    </form>
-  )
-}
-
-function AddFlashcardForm({
-  toggleIsCreating,
-  flashcardSets,
-  modifyFlashcard,
-  hidden,
-  fWord,
-  fSetId,
-  fDefinition,
-  handleFlashcardChange,
-  handleOpenChange,
+function FormAddNewCard({
+  doEnterStageAddNewSet,
+  user,
+  className,
+  onFlashcardCreated,
+  ...props
 }) {
   const { _e } = useTranslation()
-  const { notify } = useContext(ToastContext)
 
-  async function doAddFlashcard(e) {
+  const [setId, setSetId] = useState()
+  const [word, setWord] = useState(props.word)
+  const [definition, setDefinition] = useState(props.definition?.meaning ?? '')
+
+  const {
+    flashcardSets = [],
+    addCardToSet,
+    isLoading,
+  } = useFlashcardSets({
+    user,
+    fetchAllSets: true,
+  })
+
+  const doSetValue = (setter) => (e) => setter(e.target.value)
+
+  const doAddFlashcard = async (e) => {
     e.preventDefault()
-
-    await modifyFlashcard.mutateAsync(
-      {
-        word: fWord,
-        definition: fDefinition,
-        set_id: fSetId,
-      },
-      {
-        onSuccess: () => {
-          handleOpenChange(false)
-          notify({ title: _e('flashcard.addedSuccessfully') })
-        },
-      },
-    )
+    const card = await addCardToSet.mutate({ setId, word, definition })
+    onFlashcardCreated(card)
   }
 
+  if (isLoading) return <p>Loading…</p>
+
   return (
-    <form className={`flex w-80 flex-col gap-2 ${hidden && 'hidden'}`}>
+    <form
+      className={`flex w-80 flex-col gap-2 ${className}`}
+      onSubmit={doAddFlashcard}>
+      {/* {modifyFlashcard.isError && (
+        <p className="text-red-600">{modifyFlashcard.error.message}</p>
+      )} */}
+
       <label className="">{_e('flashcard.set')}</label>
       <div className="flex items-center">
         <Select
           name="setId"
-          value={fSetId}
-          onChange={handleFlashcardChange}
+          value={setId}
+          onChange={doSetValue(setSetId)}
           className="flex-1 p-2">
           <option value="">-- Select a set --</option>
           {flashcardSets.map((set) => (
@@ -130,8 +70,9 @@ function AddFlashcardForm({
         </Select>
 
         <Button
+          type="button"
           className="ml-2 bg-sky-200 hover:bg-sky-300"
-          onClick={toggleIsCreating}>
+          onClick={doEnterStageAddNewSet}>
           {_e('flashcard.addNewSet')}
         </Button>
       </div>
@@ -141,8 +82,8 @@ function AddFlashcardForm({
         type="text"
         name="word"
         className="rounded bg-slate-200"
-        value={fWord}
-        onChange={handleFlashcardChange}
+        value={word}
+        onChange={doSetValue(setWord)}
       />
 
       <label className="">{_e('flashcard.definition')}</label>
@@ -150,101 +91,97 @@ function AddFlashcardForm({
         name="definition"
         id=""
         className="rounded bg-slate-200"
-        value={fDefinition}
-        onChange={handleFlashcardChange}></Textarea>
-
-      {modifyFlashcard.isError && (
-        <p className="text-red-600">{modifyFlashcard.error.message}</p>
-      )}
+        value={definition}
+        onChange={doSetValue(setDefinition)}
+      />
 
       <Button
+        type="submit"
         className="bg-sky-200 hover:bg-sky-300"
-        onClick={doAddFlashcard}
-        disabled={fSetId === ''}>
+        disabled={setId == null}>
         {_e('flashcard.add')}
       </Button>
     </form>
   )
 }
 
-export function FlashcardDialog({ open, onOpenChange, word, definition }) {
-  const [isCreating, setIsCreating] = useState(false)
-
-  const [fWord, setFWord] = useState(word)
-  const [fDefinition, setFDefinition] = useState(definition?.meaning)
-  const [fSetId, setFSetId] = useState('')
-  const [message, setMessage] = useState()
-
+function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
   const { _e } = useTranslation()
-  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const [name, setName] = useState('')
+  const { createNewSet } = useFlashcardSets({ user, fetchAllSets: false })
 
-  const { flashcardSets, modifyFlashcardSet } = useFlashcardSets({
-    user,
-  })
-  const { modifyFlashcard } = useFlashcards({ setId: fSetId, user })
+  const doSetName = (e) => setName(e.target.value)
 
-  function toggleIsCreating(e) {
-    e && e.preventDefault()
-
-    setIsCreating((old) => !old)
+  const doCreate = async (e) => {
+    e.preventDefault()
+    await createNewSet.mutate({ name, userId: user.id })
+    doEnterStageAddNewCard()
   }
-
-  function handleOpenChange(state) {
-    setIsCreating(false)
-    onOpenChange(state)
-  }
-
-  function handleFlashcardChange(e) {
-    switch (e.target.name) {
-      case 'word': {
-        setFWord(e.target.value)
-        break
-      }
-      case 'definition': {
-        setFDefinition(e.target.value)
-        break
-      }
-      case 'setId': {
-        setFSetId(e.target.value)
-        break
-      }
-      default:
-        break
-    }
-  }
-
-  useEffect(() => {
-    if (open && definition) {
-      setFDefinition(definition?.meaning || '')
-    }
-  }, [open, definition])
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <form
+      className={`flex w-80 flex-col gap-2 ${className}`}
+      onSubmit={doCreate}>
+      {/* {modifyFlashcardSet.isError && (
+        <p className="text-red-500">{modifyFlashcardSet.error.message}</p>
+      )} */}
+
+      <label className="">{_e('flashcard.addNewSet')}</label>
+      <Input
+        type="text"
+        value={name}
+        onChange={doSetName}
+        placeholder={_e('flashcard.newSetName')}
+      />
+      <div className="grid w-full grid-cols-2 grid-rows-1 gap-2">
+        <Button
+          type="submit"
+          className="bg-sky-200 hover:bg-sky-300"
+          disabled={name.length === 0}>
+          {_e('common.create')}
+        </Button>
+        <Button
+          className="bg-slate-200 hover:bg-slate-300"
+          onClick={doEnterStageAddNewCard}>
+          {_e('common.cancel')}
+        </Button>
+      </div>
+    </form>
+  )
+}
+
+export function FlashcardDialog({ open, onOpenChange, word, definition }) {
+  const { notify } = useContext(ToastContext)
+  const { _e } = useTranslation()
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const [stage, setStage] = useState(ADD_NEW_CARD)
+
+  const doEnterStageAddNewSet = () => setStage(ADD_NEW_SET)
+
+  const doEnterStageAddNewCard = () => setStage(ADD_NEW_CARD)
+
+  const onFlashcardCreated = () => {
+    onOpenChange(false)
+    notify({ title: _e('flashcard.addedSuccessfully') })
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <div className="p-2">
         <h2 className="font-bold">{_e('flashcard.create')}</h2>
-        {message && <p className="text-green-600">{message}</p>}
-        <AddFlashcardForm
-          {...{
-            toggleIsCreating,
-            flashcardSets,
-            fWord,
-            fDefinition,
-            fSetId,
-            modifyFlashcard,
-            hidden: isCreating,
-            handleOpenChange,
-            handleFlashcardChange,
-          }}
+        <FormAddNewSet
+          user={user}
+          doEnterStageAddNewCard={doEnterStageAddNewCard}
+          className={stage === ADD_NEW_CARD && 'hidden'}
         />
-        <CreateFlashcardSetForm
-          {...{
-            toggleIsCreating,
-            setMessage,
-            modifyFlashcardSet,
-            hidden: !isCreating,
-            setFSetId,
-          }}
+
+        <FormAddNewCard
+          user={user}
+          word={word}
+          definition={definition}
+          doEnterStageAddNewSet={doEnterStageAddNewSet}
+          onFlashcardCreated={onFlashcardCreated}
+          className={stage === ADD_NEW_SET && 'hidden'}
         />
       </div>
     </Dialog>
