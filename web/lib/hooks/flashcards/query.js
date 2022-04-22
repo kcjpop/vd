@@ -8,7 +8,7 @@ const config = {
 
 export const getFlashcardSets = (
   { userId },
-  { fields } = { fields: 'id, name, flashcards(*)' },
+  { fields } = { fields: 'id, name, flashcards(id)' },
 ) => sb.from(TB.FlashcardSets).select(fields).eq('user_id', userId)
 
 export const getFlashcardSet = (

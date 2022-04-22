@@ -45,5 +45,5 @@ export function useUser({ redirectIfUnauthenticated = true } = {}) {
     if (!isChecking && !user && redirectIfUnauthenticated) router.push('/auth')
   }, [isChecking, user, router, redirectIfUnauthenticated])
 
-  return { user, token }
+  return { user, token, isChecking }
 }

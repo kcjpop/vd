@@ -16,38 +16,33 @@ function CreateFlashcardSetForm({
   toggleIsCreating,
   setMessage,
   hidden,
-  upsertFlashcardSet,
+  modifyFlashcardSet,
   setFSetId,
 }) {
   const [name, setName] = useState('')
-  const [error, setError] = useState(null)
   const inputRef = useRef()
-  const { user } = useUser()
 
   const { _e } = useTranslation()
 
   const updateName = (e) => setName(e.target.value)
 
   const doCreate = async (e) => {
-    try {
-      e.preventDefault()
+    e.preventDefault()
 
-      const entry = await upsertFlashcardSet({
-        name: name,
-        user_id: user.id,
-      })
-
-      setFSetId(entry.id)
-      setMessage(_e('flashcard.createdSetSuccessfully'))
-      toggleIsCreating()
-    } catch (error) {
-      setError(error)
-    }
+    await modifyFlashcardSet.mutateAsync(
+      { name },
+      {
+        onSuccess: (data, ...rest) => {
+          setFSetId(data.id)
+          setMessage(_e('flashcard.createdSetSuccessfully'))
+          toggleIsCreating()
+        },
+      },
+    )
   }
 
   const cancel = (e) => {
     e.preventDefault()
-
     toggleIsCreating()
   }
 
@@ -78,7 +73,9 @@ function CreateFlashcardSetForm({
           {_e('common.cancel')}
         </Button>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
+      {modifyFlashcardSet.isError && (
+        <p className="text-red-500">{modifyFlashcardSet.error.message}</p>
+      )}
     </form>
   )
 }
@@ -86,7 +83,7 @@ function CreateFlashcardSetForm({
 function AddFlashcardForm({
   toggleIsCreating,
   flashcardSets,
-  upsertFlashcard,
+  modifyFlashcard,
   hidden,
   fWord,
   fSetId,
@@ -95,25 +92,24 @@ function AddFlashcardForm({
   handleOpenChange,
 }) {
   const { _e } = useTranslation()
-  const [error, setError] = useState()
   const { notify } = useContext(ToastContext)
 
   async function doAddFlashcard(e) {
-    try {
-      e.preventDefault()
-      setError(null)
+    e.preventDefault()
 
-      await upsertFlashcard({
+    await modifyFlashcard.mutateAsync(
+      {
         word: fWord,
         definition: fDefinition,
         set_id: fSetId,
-      })
-
-      handleOpenChange(false)
-      notify({ title: _e('flashcard.addedSuccessfully') })
-    } catch (error) {
-      setError(_e('error.failedToCreateFlashcard'))
-    }
+      },
+      {
+        onSuccess: () => {
+          handleOpenChange(false)
+          notify({ title: _e('flashcard.addedSuccessfully') })
+        },
+      },
+    )
   }
 
   return (
@@ -157,7 +153,9 @@ function AddFlashcardForm({
         value={fDefinition}
         onChange={handleFlashcardChange}></Textarea>
 
-      {error && <p className="text-red-600">{error}</p>}
+      {modifyFlashcard.isError && (
+        <p className="text-red-600">{modifyFlashcard.error.message}</p>
+      )}
 
       <Button
         className="bg-sky-200 hover:bg-sky-300"
@@ -179,10 +177,11 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
 
   const { _e } = useTranslation()
   const { user } = useUser({ redirectIfUnauthenticated: false })
-  const { flashcardSets, modify: upsertFlashcardSet } = useFlashcardSets({
+
+  const { flashcardSets, modifyFlashcardSet } = useFlashcardSets({
     user,
   })
-  const { modify: upsertFlashcard } = useFlashcards({ setId: fSetId, user })
+  const { modifyFlashcard } = useFlashcards({ setId: fSetId, user })
 
   function toggleIsCreating(e) {
     e && e.preventDefault()
@@ -232,7 +231,7 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
             fWord,
             fDefinition,
             fSetId,
-            upsertFlashcard,
+            modifyFlashcard,
             hidden: isCreating,
             handleOpenChange,
             handleFlashcardChange,
@@ -242,7 +241,7 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
           {...{
             toggleIsCreating,
             setMessage,
-            upsertFlashcardSet,
+            modifyFlashcardSet,
             hidden: !isCreating,
             setFSetId,
           }}
