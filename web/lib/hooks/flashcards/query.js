@@ -1,37 +1,35 @@
 import { supabase as sb } from '../../domain-logic/supabaseClient'
 
-const TB = { FlashcardSets: 'flashcard_sets', Flashcards: 'flashcards' }
+const TBL_FLASHCARDS = 'flashcards'
+const TBL_SETS = 'flashcard_sets'
+
 const config = {
   count: 'exact',
   returning: 'representation',
 }
 
-export const getFlashcardSets = (
+export const getAllSets = (
   { userId },
   { fields } = { fields: 'id, name, flashcards(id)' },
-) => sb.from(TB.FlashcardSets).select(fields).eq('user_id', userId)
+) => sb.from(TBL_SETS).select(fields).eq('user_id', userId)
 
+// @FIXME
 export const getFlashcardSet = (
   { id, userId },
   { fields } = { fields: 'id, name, flashcards(*)' },
 ) =>
-  sb
-    .from(TB.FlashcardSets)
-    .select(fields)
-    .eq('user_id', userId)
-    .eq('id', id)
-    .single()
+  sb.from(TBL_SETS).select(fields).eq('user_id', userId).eq('id', id).single()
 
-export const upsertSet = (set) => sb.from(TB.FlashcardSets).upsert(set, config)
+export const upsertSet = (set) => sb.from(TBL_SETS).upsert(set, config)
 
 export const deleteFlashcardSet = ({ id }) =>
-  sb.from(TB.FlashcardSets).delete().match({ id })
+  sb.from(TBL_SETS).delete().match({ id })
 
 export const getFlashcards = ({ setId }, { fields } = { fields: '*' }) =>
-  sb.from(TB.Flashcards).select(fields, config).eq('set_id', setId)
+  sb.from(TBL_FLASHCARDS).select(fields, config).eq('set_id', setId)
 
 export const upsertFlashcard = (flashcard) =>
-  sb.from(TB.Flashcards).upsert(flashcard, config)
+  sb.from(TBL_FLASHCARDS).upsert(flashcard, config)
 
 export const deleteFlashcards = ({ id }) =>
-  sb.from(TB.Flashcards).delete().match({ id })
+  sb.from(TBL_FLASHCARDS).delete().match({ id })

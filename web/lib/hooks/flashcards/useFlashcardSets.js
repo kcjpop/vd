@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
 import {
-  getFlashcardSets,
+  getAllSets,
   upsertSet,
   upsertFlashcard,
   deleteFlashcardSet,
@@ -20,7 +20,7 @@ export function useFlashcardSets({ user, fetchAllSets = false }) {
     async () => {
       if (!user) return
 
-      const { data: sets, error } = await getFlashcardSets({ userId: user.id })
+      const { data: sets, error } = await getAllSets({ userId: user.id })
       if (error) throw error
 
       return sets
