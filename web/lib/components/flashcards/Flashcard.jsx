@@ -36,7 +36,7 @@ function FlipCard({ flashcard }) {
 export function Page() {
   const router = useRouter()
 
-  const { currentSet } = useFlashcardSet({ set_id: router.query.set_id })
+  const { currentSet } = useFlashcardSet(router.query)
 
   return (
     <Layout>

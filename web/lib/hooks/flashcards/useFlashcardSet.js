@@ -1,24 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useQuery } from 'react-query'
 import { useUser } from '../../domain-logic/auth'
 import { getFlashcardSet } from './query'
 
 export function useFlashcardSet({ setId }) {
-  const [currentSet, setCurrentSet] = useState(null)
   const { user } = useUser({ redirectIfUnauthenticated: false })
 
-  useEffect(() => {
-    const getCurrentSet = async () => {
-      const { data, error } = await getFlashcardSet({
-        id: setId,
-        userId: user.id,
-      })
+  const {
+    data: currentSet,
+    isLoading,
+    isError,
+  } = useQuery(['flashcard-set', setId], async () => {
+    if (!setId) return
 
-      if (error) throw error
-      setCurrentSet(data)
-    }
+    const { data, error } = await getFlashcardSet({
+      id: setId,
+      userId: user.id,
+    })
 
-    user && getCurrentSet()
-  }, [user, setId])
+    if (error) throw error
+    return data
+  })
 
-  return { currentSet }
+  return { currentSet, isLoading, isError }
 }
