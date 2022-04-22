@@ -166,9 +166,15 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title={
+        stage === ADD_NEW_CARD
+          ? _e('flashcard.create')
+          : _e('flashcard.addNewSet')
+      }>
       <div className="p-2">
-        <h2 className="font-bold">{_e('flashcard.create')}</h2>
         <FormAddNewSet
           user={user}
           doEnterStageAddNewCard={doEnterStageAddNewCard}
