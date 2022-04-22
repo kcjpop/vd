@@ -13,7 +13,7 @@ import {
 
 import { CloseIcon } from './Icons'
 
-export function Dialog({ render, open, onOpenChange, children }) {
+export function Dialog({ title = 'Thông báo', open, onOpenChange, children }) {
   const { floating, context } = useFloating({
     open,
     onOpenChange,
@@ -42,23 +42,30 @@ export function Dialog({ render, open, onOpenChange, children }) {
               'rgba(14, 18, 22, 0.35) 0px 10px 38px -10px, rgba(14, 18, 22, 0.2) 0px 10px 20px -15px',
             zIndex: 'var(--z-index-dialog)',
           }}>
-          <div
+          <section
             {...getFloatingProps({
               ref: floating,
-              className: 'Dialog',
+              className:
+                'relative m-4 rounded bg-white p-2 shadow-md lg:m-0 lg:max-w-5xl',
+              role: 'dialog',
               'aria-labelledby': labelId,
               'aria-describedby': descriptionId,
             })}>
-            <div className="relative m-4 rounded bg-white p-2 shadow-md lg:m-0 lg:max-w-5xl">
-              {cloneElement(children)}
-
+            <header className="flex items-center">
+              {title && (
+                <h3 className="px-2 font-bold" id={labelId}>
+                  {title}
+                </h3>
+              )}
               <button
-                className="absolute top-2 right-2 rounded-full bg-slate-200 p-2 hover:bg-slate-300"
+                className="ml-auto rounded-full bg-slate-200 p-2 hover:bg-slate-300"
                 onClick={() => onOpenChange(false)}>
                 <CloseIcon />
               </button>
-            </div>
-          </div>
+            </header>
+
+            {cloneElement(children)}
+          </section>
         </FloatingOverlay>
       )}
     </FloatingPortal>
