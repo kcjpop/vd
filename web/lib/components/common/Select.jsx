@@ -1,7 +1,7 @@
 export function Select({ children, className, ...props }) {
   return (
     <select
-      className={`my-1 max-w-full rounded border border-slate-400 p-3 py-1 focus:border-slate-600 ${className}`}
+      className={`max-w-full rounded border border-slate-400 focus:border-slate-600 ${className}`}
       {...props}>
       {children}
     </select>

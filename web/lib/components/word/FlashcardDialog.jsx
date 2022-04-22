@@ -55,12 +55,12 @@ function FormAddNewCard({
       )} */}
 
       <label className="">{_e('flashcard.set')}</label>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         <Select
           name="setId"
           value={setId}
           onChange={doSetValue(setSetId)}
-          className="flex-1 p-2">
+          className="flex-1 bg-slate-200 p-2">
           <option value="">-- Select a set --</option>
           {flashcardSets.map((set) => (
             <option key={set.id} value={set.id}>
@@ -71,7 +71,7 @@ function FormAddNewCard({
 
         <Button
           type="button"
-          className="ml-2 bg-sky-200 hover:bg-sky-300"
+          className="border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
           onClick={doEnterStageAddNewSet}>
           {_e('flashcard.addNewSet')}
         </Button>

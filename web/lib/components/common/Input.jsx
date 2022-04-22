@@ -7,7 +7,7 @@ export const Input = forwardRef(function Component(
   return (
     <input
       ref={ref}
-      className={`my-1 max-w-full rounded border border-slate-400 p-3 py-1 focus:border-slate-600 ${className}`}
+      className={`max-w-full rounded border border-slate-400 p-2 focus:border-slate-600 ${className}`}
       {...props}
     />
   )
