@@ -5,7 +5,7 @@ import { useUser } from '../../domain-logic/auth'
 import { Sets } from './Sets'
 
 export function Page() {
-  const { user } = useUser()
+  const { user } = useUser({ redirectIfUnauthenticated: true })
   const { flashcardSets } = useFlashcardSets({ user })
 
   return (

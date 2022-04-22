@@ -107,7 +107,7 @@ function RegisterForm({ setSuccess }) {
 export function Register() {
   const [success, setSuccess] = useState(false)
   const { _e } = useTranslation()
-  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { user } = useUser()
   const router = useRouter()
 
   useEffect(() => {

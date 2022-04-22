@@ -32,7 +32,7 @@ function BtnCreatFlashcard({ active, onClick }) {
 export function Word({ word: w }) {
   const [flashcardMode, setFlashcardMode] = useState(false)
   const [warningMode, setWarningMode] = useState(false)
-  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { user } = useUser()
 
   const doToggleFlashcardMode = () => {
     !user ? setWarningMode((old) => !old) : setFlashcardMode((old) => !old)

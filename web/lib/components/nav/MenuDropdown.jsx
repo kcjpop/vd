@@ -11,7 +11,7 @@ import { UserProfile } from './UserProfile'
 export function MenuDropdown() {
   const router = useRouter()
   const { _e } = useTranslation()
-  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { user } = useUser()
 
   const {
     isOpen,

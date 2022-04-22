@@ -82,7 +82,7 @@ export function LoginForm() {
 
 export function Login() {
   const redirectRegistration = () => router.push('/auth/register')
-  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { user } = useUser()
   const { _e } = useTranslation()
   const router = useRouter()
 

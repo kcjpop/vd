@@ -153,7 +153,7 @@ function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
 export function FlashcardDialog({ open, onOpenChange, word, definition }) {
   const { notify } = useContext(ToastContext)
   const { _e } = useTranslation()
-  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { user } = useUser()
   const [stage, setStage] = useState(ADD_NEW_CARD)
 
   const doEnterStageAddNewSet = () => setStage(ADD_NEW_SET)
