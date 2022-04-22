@@ -1,12 +1,15 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import { MenuIcon } from '../common/Icons'
 import { useTranslation } from '../../i18n'
-import { useUser } from '../../domain-logic/auth'
-
+import { useUser, logout } from '../../domain-logic/auth'
 import { useDropdown } from '../useDropdown'
+
 import { UserProfile } from './UserProfile'
 
 export function MenuDropdown() {
+  const router = useRouter()
   const { _e } = useTranslation()
   const { user } = useUser({ redirectIfUnauthenticated: false })
 
@@ -17,6 +20,13 @@ export function MenuDropdown() {
     doCloseDropdown,
     floatingProps,
   } = useDropdown({ placement: 'bottom-end' })
+
+  const doLogout = async (e) => {
+    e.preventDefault()
+
+    await logout()
+    router.push('/')
+  }
 
   return (
     <div className="relative">
@@ -41,11 +51,12 @@ export function MenuDropdown() {
                   <UserProfile user={user} />
                 </li>
                 <li>
-                  <Link href="/auth/register">
-                    <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      Đăng xuất <span>😘</span>
-                    </a>
-                  </Link>
+                  <a
+                    onClick={doLogout}
+                    href="#"
+                    className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                    Đăng xuất <span>😘</span>
+                  </a>
                 </li>
               </>
             ) : (
