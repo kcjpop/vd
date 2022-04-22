@@ -8,15 +8,15 @@ import { Textarea } from '../common/Textarea'
 import { Select } from '../common/Select'
 
 import { useTranslation } from '../../i18n'
-import { useFlashcardSets, useFlashcards } from '../../domain-logic/flashcards'
+import { useFlashcardSets, useFlashcards } from '../../hooks/useFlashcards'
 import { useUser } from '../../domain-logic/auth'
 
 function CreateFlashcardSetForm({
   toggleIsCreating,
-  setFlashcard,
   setMessage,
   hidden,
   upsertFlashcardSet,
+  setFSetId,
 }) {
   const [name, setName] = useState('')
   const [error, setError] = useState(null)
@@ -36,7 +36,7 @@ function CreateFlashcardSetForm({
         user_id: user.id,
       })
 
-      setFlashcard((old) => ({ ...old, set_id: entry.id }))
+      setFSetId(entry.id)
       setMessage(_e('flashcard.createdSetSuccessfully'))
       toggleIsCreating()
     } catch (error) {
@@ -68,12 +68,12 @@ function CreateFlashcardSetForm({
       />
       <div className="grid w-full grid-cols-2 grid-rows-1 gap-2">
         <Button
-          className="bg-sky-200"
+          className="bg-sky-200 hover:bg-sky-300"
           onClick={doCreate}
           disabled={name.length === 0}>
           {_e('common.create')}
         </Button>
-        <Button className="btn__contained" onClick={cancel}>
+        <Button className="bg-slate-200 hover:bg-slate-300" onClick={cancel}>
           {_e('common.cancel')}
         </Button>
       </div>
@@ -87,8 +87,10 @@ function AddFlashcardForm({
   flashcardSets,
   upsertFlashcard,
   hidden,
-  flashcard,
-  setFlashcard,
+  fWord,
+  fSetId,
+  fDefinition,
+  handleFlashcardChange,
   handleOpenChange,
 }) {
   const { _e } = useTranslation()
@@ -100,28 +102,27 @@ function AddFlashcardForm({
       e.preventDefault()
       setError(null)
 
-      const fc = await upsertFlashcard(flashcard)
+      await upsertFlashcard({
+        word: fWord,
+        definition: fDefinition,
+        set_id: fSetId,
+      })
 
-      setFlashcard(fc)
       handleOpenChange(false)
       notify({ title: _e('flashcard.addedSuccessfully') })
     } catch (error) {
-      console.log({ error })
       setError(_e('error.failedToCreateFlashcard'))
     }
   }
-
-  const updateFlashcard = (e) =>
-    setFlashcard({ ...flashcard, [e.target.name]: e.target.value })
 
   return (
     <form className={`flex w-80 flex-col gap-2 ${hidden && 'hidden'}`}>
       <label className="">{_e('flashcard.set')}</label>
       <div className="flex items-center">
         <Select
-          name="set_id"
-          value={flashcard.set_id}
-          onChange={updateFlashcard}
+          name="setId"
+          value={fSetId}
+          onChange={handleFlashcardChange}
           className="flex-1 p-2">
           <option value="">-- Select a set --</option>
           {flashcardSets.map((set) => (
@@ -132,7 +133,7 @@ function AddFlashcardForm({
         </Select>
 
         <Button
-          className="btn btn__contained btn__primary ml-2"
+          className="ml-2 bg-sky-200 hover:bg-sky-300"
           onClick={toggleIsCreating}>
           {_e('flashcard.addNewSet')}
         </Button>
@@ -143,23 +144,24 @@ function AddFlashcardForm({
         type="text"
         name="word"
         className="rounded bg-slate-200"
-        value={flashcard.word}
-        onChange={updateFlashcard}
+        value={fWord}
+        onChange={handleFlashcardChange}
       />
+
       <label className="">{_e('flashcard.definition')}</label>
       <Textarea
         name="definition"
         id=""
         className="rounded bg-slate-200"
-        value={flashcard.definition}
-        onChange={updateFlashcard}></Textarea>
+        value={fDefinition}
+        onChange={handleFlashcardChange}></Textarea>
 
       {error && <p className="text-red-600">{error}</p>}
 
       <Button
-        className="bg-sky-200"
+        className="bg-sky-200 hover:bg-sky-300"
         onClick={doAddFlashcard}
-        disabled={flashcard.set_id === ''}>
+        disabled={fSetId === ''}>
         {_e('flashcard.add')}
       </Button>
     </form>
@@ -168,16 +170,15 @@ function AddFlashcardForm({
 
 export function FlashcardDialog({ open, onOpenChange, word, definition }) {
   const [isCreating, setIsCreating] = useState(false)
-  const [flashcard, setFlashcard] = useState({
-    word,
-    definition: definition?.meaning,
-    set_id: '',
-  })
+
+  const [fWord, setFWord] = useState(word)
+  const [fDefinition, setFDefinition] = useState(definition?.meaning)
+  const [fSetId, setFSetId] = useState('')
   const [message, setMessage] = useState()
 
   const { _e } = useTranslation()
-  const { flashcardSets, upsertFlashcardSet } = useFlashcardSets()
-  const { upsertFlashcard } = useFlashcards(flashcard.set_id)
+  const { flashcardSets, modify: upsertFlashcardSet } = useFlashcardSets()
+  const { modify: upsertFlashcard } = useFlashcards({ setId: fSetId })
 
   function toggleIsCreating(e) {
     e && e.preventDefault()
@@ -190,40 +191,56 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
     onOpenChange(state)
   }
 
+  function handleFlashcardChange(e) {
+    switch (e.target.name) {
+      case 'word': {
+        setFWord(e.target.value)
+        break
+      }
+      case 'definition': {
+        setFDefinition(e.target.value)
+        break
+      }
+      case 'setId': {
+        setFSetId(e.target.value)
+        break
+      }
+      default:
+        break
+    }
+  }
+
   useEffect(() => {
     if (open && definition) {
-      setFlashcard((flashcard) => ({
-        ...flashcard,
-        definition: definition.meaning,
-      }))
+      setFDefinition(definition?.meaning || '')
     }
   }, [open, definition])
-
-  useEffect(() => console.log({ flashcardSets }), [flashcardSets])
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <div className="p-2">
         <h2 className="font-bold">{_e('flashcard.create')}</h2>
-        {message && <p className="text-sky-400">{message}</p>}
+        {message && <p className="text-green-600">{message}</p>}
         <AddFlashcardForm
           {...{
-            setFlashcard,
             toggleIsCreating,
             flashcardSets,
-            flashcard,
+            fWord,
+            fDefinition,
+            fSetId,
             upsertFlashcard,
             hidden: isCreating,
             handleOpenChange,
+            handleFlashcardChange,
           }}
         />
         <CreateFlashcardSetForm
           {...{
             toggleIsCreating,
-            setFlashcard,
             setMessage,
             upsertFlashcardSet,
             hidden: !isCreating,
+            setFSetId,
           }}
         />
       </div>

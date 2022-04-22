@@ -1,5 +1,5 @@
 import { Layout } from '../common/Layout'
-import { useFlashcardSets } from '../../domain-logic/flashcards'
+import { useFlashcardSets } from '../../hooks/useFlashcards'
 
 import { Sets } from './Sets'
 
