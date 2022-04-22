@@ -1,10 +1,7 @@
 import { useQuery } from 'react-query'
-import { useUser } from '../../domain-logic/auth'
 import { getFlashcardSet } from './query'
 
-export function useFlashcardSet({ setId }) {
-  const { user } = useUser({ redirectIfUnauthenticated: false })
-
+export function useFlashcardSet({ user, setId }) {
   const {
     data: currentSet,
     isLoading,

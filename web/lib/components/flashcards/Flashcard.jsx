@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Layout } from '../common/Layout'
 import { useFlashcardSet } from '../../hooks/flashcards/useFlashcardSet'
+import { useUser } from '../../domain-logic/auth'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -36,7 +37,8 @@ function FlipCard({ flashcard }) {
 export function Page() {
   const router = useRouter()
 
-  const { currentSet } = useFlashcardSet(router.query)
+  const { user } = useUser()
+  const { currentSet } = useFlashcardSet({ ...router.query, user })
 
   return (
     <Layout>

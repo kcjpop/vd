@@ -5,11 +5,9 @@ import {
   upsertFlashcardSets,
   deleteFlashcardSet,
 } from './query'
-import { useUser } from '../../domain-logic/auth'
 
-export function useFlashcardSets() {
+export function useFlashcardSets({ user }) {
   const [flashcardSets, setFlashcardSets] = useState([])
-  const { user } = useUser({ redirectIfUnauthenticated: false })
 
   const fetchFlashcardSets = useCallback(async () => {
     const { data: sets, error } = await getFlashcardSets({ userId: user.id })

@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useUser } from '../../domain-logic/auth'
 import { getFlashcards, upsertFlashcards, deleteFlashcards } from './query'
 
-export function useFlashcards({ setId }) {
+export function useFlashcards({ user, setId }) {
   const [flashcards, setFlashcards] = useState([])
   const [total, setTotal] = useState(0)
-  const { user } = useUser({ redirectIfUnauthenticated: false })
 
   const fetch = useCallback(async () => {
     const { data: flashcards, error, count } = await getFlashcards({ setId })

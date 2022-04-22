@@ -178,8 +178,11 @@ export function FlashcardDialog({ open, onOpenChange, word, definition }) {
   const [message, setMessage] = useState()
 
   const { _e } = useTranslation()
-  const { flashcardSets, modify: upsertFlashcardSet } = useFlashcardSets()
-  const { modify: upsertFlashcard } = useFlashcards({ setId: fSetId })
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+  const { flashcardSets, modify: upsertFlashcardSet } = useFlashcardSets({
+    user,
+  })
+  const { modify: upsertFlashcard } = useFlashcards({ setId: fSetId, user })
 
   function toggleIsCreating(e) {
     e && e.preventDefault()
