@@ -8,7 +8,8 @@ import { Textarea } from '../common/Textarea'
 import { Select } from '../common/Select'
 
 import { useTranslation } from '../../i18n'
-import { useFlashcardSets, useFlashcards } from '../../hooks/useFlashcards'
+import { useFlashcardSets } from '../../hooks/flashcards/useFlashcardSets'
+import { useFlashcards } from '../../hooks/flashcards/useFlashcards'
 import { useUser } from '../../domain-logic/auth'
 
 function CreateFlashcardSetForm({

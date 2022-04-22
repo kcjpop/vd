@@ -15,6 +15,7 @@ lib/
 ├── components/
 ├── context/
 ├── domain-logic/
+|-- hooks/
 ├── i18n/
 ├── utils/
 ├── api.js

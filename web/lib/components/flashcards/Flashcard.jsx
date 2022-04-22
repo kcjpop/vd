@@ -4,7 +4,7 @@ import { Pagination, Navigation } from 'swiper'
 import { useRouter } from 'next/router'
 
 import { Layout } from '../common/Layout'
-import { useFlashcardSet } from '../../hooks/useFlashcards'
+import { useFlashcardSet } from '../../hooks/flashcards/useFlashcardSet'
 
 // Import Swiper styles
 import 'swiper/css'

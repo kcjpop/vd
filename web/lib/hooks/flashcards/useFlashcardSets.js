@@ -1,0 +1,43 @@
+import { useState, useEffect, useCallback } from 'react'
+
+import {
+  getFlashcardSets,
+  upsertFlashcardSets,
+  deleteFlashcardSet,
+} from './query'
+import { useUser } from '../../domain-logic/auth'
+
+export function useFlashcardSets() {
+  const [flashcardSets, setFlashcardSets] = useState([])
+  const { user } = useUser({ redirectIfUnauthenticated: false })
+
+  const fetchFlashcardSets = useCallback(async () => {
+    const { data: sets, error } = await getFlashcardSets({ userId: user.id })
+
+    if (error) throw error
+    setFlashcardSets(sets)
+  }, [user])
+
+  async function modify(set) {
+    const { data, error } = await upsertFlashcardSets(set)
+
+    if (error) throw error
+    setFlashcardSets([...flashcardSets, ...data])
+
+    return data[0]
+  }
+
+  async function remove(id) {
+    const { error } = await deleteFlashcardSet({ id })
+
+    if (error) throw error
+
+    setFlashcardSets(flashcardSets.filter((set) => set.id !== id))
+  }
+
+  useEffect(() => {
+    user && fetchFlashcardSets()
+  }, [user, fetchFlashcardSets])
+
+  return { flashcardSets, modify, remove }
+}

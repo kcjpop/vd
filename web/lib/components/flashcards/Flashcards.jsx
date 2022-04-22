@@ -1,16 +1,14 @@
 import { Layout } from '../common/Layout'
-import { useFlashcardSets } from '../../hooks/useFlashcards'
+import { useFlashcardSets } from '../../hooks/flashcards/useFlashcardSets'
 
 import { Sets } from './Sets'
-
-import s from './style.module.css'
 
 export function Page() {
   const { flashcardSets } = useFlashcardSets()
 
   return (
     <Layout>
-      <div className={s.layout}>
+      <div className="container">
         <Sets flashcardSets={flashcardSets} />
       </div>
     </Layout>
