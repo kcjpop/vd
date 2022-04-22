@@ -41,7 +41,7 @@ export function MenuDropdown() {
                   <UserProfile user={user} />
                 </li>
                 <li>
-                  <Link href="/auth/register">
+                  <Link href="/auth/logout">
                     <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
                       Đăng xuất <span>😘</span>
                     </a>
