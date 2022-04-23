@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useTranslation } from '../../i18n'
 
-function Set({ set }) {
+function Set({ set = [] }) {
   const { _e } = useTranslation()
 
   return (
