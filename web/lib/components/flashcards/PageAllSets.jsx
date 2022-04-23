@@ -26,6 +26,7 @@ export function PageAllSets({ page }) {
     fetchAllSets: true,
     perPage: PER_PAGE,
     page: currentPage,
+    fields: 'id, name, user_id, flashcards(id)',
   })
 
   const next = (e) => {
@@ -65,7 +66,7 @@ export function PageAllSets({ page }) {
         </div>
 
         <div className="mb-4">
-          <Sets flashcardSets={flashcardSets} />
+          <Sets flashcardSets={flashcardSets} updateSet={updateSet} />
         </div>
 
         <div className="flex items-center justify-center gap-2">

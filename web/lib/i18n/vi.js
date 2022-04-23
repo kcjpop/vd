@@ -112,6 +112,8 @@ const messages = {
   'flashcardset.modal.confirm': 'Xác nhận xoá set',
   'flashcardset.modal.doYouWantToDeleteThisSet':
     'Bạn có muốn xoá set này không? Hành động này không thể thay đổi được',
+  'flashcardset.updateNameSuccessfully': 'Cập nhật tên set thành công',
+  'flashcardset.error.updateNameFail': 'Đã có lỗi xảy ra khi cập nhật tên set',
 
   'wordMenu.settings': 'Tùy chọn',
   'wordMenu.addDefinition': 'Thêm định nghĩa mới',
