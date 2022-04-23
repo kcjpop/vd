@@ -7,7 +7,11 @@ import {
   deleteFlashcardSet,
 } from './query'
 
-export function useAllSets({ user, fetchAllSets = false }) {
+export function useAllSets({
+  user,
+  fetchAllSets = false,
+  fields = 'id, name, flashcards(id)',
+}) {
   const queryClient = useQueryClient()
   const queryKey = ['flashcard-sets', user?.id]
 
@@ -20,7 +24,10 @@ export function useAllSets({ user, fetchAllSets = false }) {
     async () => {
       if (!user) return
 
-      const { data: sets, error } = await getAllSets({ userId: user.id })
+      const { data: sets, error } = await getAllSets(
+        { userId: user.id },
+        { fields },
+      )
       if (error) throw error
 
       return sets
@@ -52,6 +59,18 @@ export function useAllSets({ user, fetchAllSets = false }) {
     },
   )
 
+  const updateSet = useMutation(
+    async ({ id, name, userId }) => {
+      const { error } = await upsertSet({ id, name, user_id: userId })
+
+      if (error) throw error
+    },
+    {
+      mutationKey: 'update-flashcard-set',
+      onSuccess: () => queryClient.invalidateQueries(queryKey),
+    },
+  )
+
   const addCardToSet = useMutation(async ({ word, definition, setId }) => {
     const { data, error } = await upsertFlashcard({
       set_id: setId,
@@ -69,6 +88,7 @@ export function useAllSets({ user, fetchAllSets = false }) {
     isError,
     isLoading,
     createNewSet,
+    updateSet,
     deleteSet,
     addCardToSet,
   }
