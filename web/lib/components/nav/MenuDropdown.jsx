@@ -50,12 +50,19 @@ export function MenuDropdown() {
                 <li className="mb-2">
                   <UserProfile user={user} />
                 </li>
+                <li className="mb-2">
+                  <Link href="/flashcards">
+                    <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                      {_e('nav.flashcards')}
+                    </a>
+                  </Link>
+                </li>
                 <li>
                   <a
                     onClick={doLogout}
                     href="#"
                     className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                    Đăng xuất <span>😘</span>
+                    {_e('nav.auth.logout')} <span>😘</span>
                   </a>
                 </li>
               </>
@@ -64,14 +71,14 @@ export function MenuDropdown() {
                 <li>
                   <Link href="/auth/register">
                     <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      Đăng ký tài khoản <span>🤩</span>
+                      {_e('nav.auth.signUp')} <span>🤩</span>
                     </a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/auth">
                     <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      Đăng nhập <span>🤗</span>
+                      {_e('nav.auth.login')} <span>🤗</span>
                     </a>
                   </Link>
                 </li>

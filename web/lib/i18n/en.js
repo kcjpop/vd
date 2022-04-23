@@ -28,6 +28,10 @@ const messages = {
   'nav.settings.voice.en-IN': 'English (India)',
   'nav.settings.voice.en-ZA': 'English (South Africa)',
   'nav.settings.exampleSpeech': 'Show example speech',
+  'nav.flashcards': 'Flashcards',
+  'nav.auth.logout': 'Log out',
+  'nav.auth.signUp': 'Sign up',
+  'nav.auth.login': 'Log in',
 
   'word.seeAlso': 'See also',
   'word.examples': 'Examples',
