@@ -23,7 +23,11 @@ function EditSetDialog({ set, onOpenChange, updateSet, ...props }) {
 
     await updateSet.mutateAsync({ id: set.id, name: name, userId: set.user_id })
 
-    if (updateSet.status === 'success') {
+    /* Cannot use `updateSet.status === 'success'` somehow.
+     * First time always return status as 'idle' which cause the
+     * dialog remain open.
+     */
+    if (updateSet.status !== 'error') {
       notify({ title: _e('flashcardset.updateNameSuccessfully') })
       onOpenChange(false)
     }
@@ -120,7 +124,6 @@ function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
 
   const doRemoveSet = async () => {
     // @TODO: replace this with remove set action
-    console.log('action done')
     await deleteSet.mutateAsync({ id: set.id })
 
     if (deleteSet.status === 'error') {
