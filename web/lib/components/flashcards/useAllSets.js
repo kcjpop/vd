@@ -17,6 +17,7 @@ export function useAllSets({
   fetchAllSets = false,
   perPage = null,
   page = 0,
+  fields = 'id, name, flashcards(id)',
 }) {
   const queryClient = useQueryClient()
   const queryKey = ['flashcard-sets', user?.id, page]
@@ -31,11 +32,14 @@ export function useAllSets({
       if (!user) return []
 
       const { data: sets, error } = perPage
-        ? await getPaginatedSets({
-            userId: user.id,
-            ...getRange(page, perPage),
-          })
-        : await getAllSets({ userId: user.id })
+        ? await getPaginatedSets(
+            {
+              userId: user.id,
+              ...getRange(page, perPage),
+            },
+            { fields },
+          )
+        : await getAllSets({ userId: user.id }, { fields })
       if (error) throw error
 
       return sets
@@ -67,6 +71,18 @@ export function useAllSets({
     },
   )
 
+  const updateSet = useMutation(
+    async ({ id, name, userId }) => {
+      const { error } = await upsertSet({ id, name, user_id: userId })
+
+      if (error) throw error
+    },
+    {
+      mutationKey: 'update-flashcard-set',
+      onSuccess: () => queryClient.invalidateQueries(queryKey),
+    },
+  )
+
   const addCardToSet = useMutation(async ({ word, definition, setId }) => {
     const { data, error } = await upsertFlashcard({
       set_id: setId,
@@ -84,6 +100,7 @@ export function useAllSets({
     isError,
     isLoading,
     createNewSet,
+    updateSet,
     deleteSet,
     addCardToSet,
   }
