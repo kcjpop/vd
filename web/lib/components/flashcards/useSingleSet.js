@@ -18,7 +18,5 @@ export function useSingleSet({ user, setId }) {
     return data
   })
 
-  console.log({ user, setId })
-
   return { currentSet, isLoading, isError }
 }

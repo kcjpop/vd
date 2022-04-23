@@ -1,8 +1,8 @@
 import { Layout } from '../common/Layout'
 import { Loading } from '../common/Loading'
-import { useAllSets } from '../../hooks/flashcards/useAllSets'
 import { useUser } from '../../domain-logic/auth'
 
+import { useAllSets } from './useAllSets'
 import { Sets } from './Sets'
 
 export function Page() {

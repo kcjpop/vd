@@ -8,7 +8,7 @@ import { Textarea } from '../common/Textarea'
 import { Select } from '../common/Select'
 
 import { useTranslation } from '../../i18n'
-import { useAllSets } from '../../hooks/flashcards/useAllSets'
+import { useAllSets } from '../flashcards/useAllSets'
 import { useUser } from '../../domain-logic/auth'
 
 const ADD_NEW_CARD = 1

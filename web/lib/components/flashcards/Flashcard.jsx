@@ -4,7 +4,6 @@ import { Pagination, Navigation } from 'swiper'
 import { useRouter } from 'next/router'
 
 import { Layout } from '../common/Layout'
-import { useSingleSet } from '../../hooks/flashcards/useSingleSet'
 import { useUser } from '../../domain-logic/auth'
 
 // Import Swiper styles
@@ -12,6 +11,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
+import { useSingleSet } from './useSingleSet'
 import s from './style.module.css'
 
 function FlipCard({ flashcard }) {
