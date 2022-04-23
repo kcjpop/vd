@@ -113,7 +113,7 @@ function FlashcardSetDropdown({ set }) {
   return (
     <div className="relative">
       <Button
-        className="rounded-full px-1 py-1 text-slate-400 hover:text-slate-600 hover:shadow-sm"
+        className="rounded-full px-0 py-1 text-slate-400 hover:text-slate-600 hover:shadow-sm"
         onClick={toggleDropdown}
         onBlur={doCloseDropdown}
         {...referenceProps()}>
@@ -121,7 +121,7 @@ function FlashcardSetDropdown({ set }) {
       </Button>
       {isOpen && (
         <div
-          className="z-30 w-36 rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-lg"
+          className="z-30 w-36 rounded border border-slate-200 bg-white p-1 text-gray-800 shadow-lg"
           {...floatingProps({ right: 0 })}>
           <ul>
             <li
