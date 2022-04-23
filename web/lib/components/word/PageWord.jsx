@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 
-import { fetchSingleWord } from '@/lib/api'
+import { fetchSingleWord, updateAnalyticsEndpoint } from '@/lib/api'
 import { useTranslation } from '@/lib/i18n'
 import { recentlyViewedWords } from '@/lib/storage'
 
@@ -33,7 +33,13 @@ export function PageWord({ opengraph, entry }) {
 
   // 🚨: Set to recently viewed words
   useEffect(() => {
-    if (data) recentlyViewedWords().set(data.word)
+    if (data) {
+      recentlyViewedWords().set(data.word)
+
+      window.navigator.sendBeacon(
+        updateAnalyticsEndpoint({ word: data.word, action: 'page-view' }),
+      )
+    }
   }, [data])
 
   return (

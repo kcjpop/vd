@@ -14,6 +14,13 @@ export const fetchSingleWordEndpoint = ({ word, dict }) =>
 
 export const fetchBannerEndpoint = ({ word }) => endpoint(`banner/${word}`)
 
+export const updateAnalyticsEndpoint = ({ word, action }) =>
+  endpoint(`analytics?action=${action}&meta[word]=${word}`)
+
+// FUNCTION NAME CONVENTION
+// `fetchSingleX` for requests returning only 1 item
+// `fetchAllX...` for requests returning multiple items
+
 export const fetchSingleWord = (word, dict = 'en-vi') =>
   ky.get(fetchSingleWordEndpoint({ word, dict })).json()
 
