@@ -7,6 +7,7 @@ export {
   FiChevronDown as ChevronDownIcon,
   FiCheck as CheckIcon,
   FiZap as ZapIcon,
+  FiX as CloseIcon,
   FiUser as UserIcon,
 } from 'react-icons/fi'
 

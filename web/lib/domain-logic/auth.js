@@ -20,7 +20,7 @@ export function logout() {
   return supabase.auth.signOut()
 }
 
-export function useUser({ redirectIfUnauthenticated = true } = {}) {
+export function useUser({ redirectIfUnauthenticated = false } = {}) {
   const [user, setUser] = useState(null)
   const [isChecking, setIsChecking] = useState(true)
   const [token, setToken] = useState(null)
@@ -45,5 +45,5 @@ export function useUser({ redirectIfUnauthenticated = true } = {}) {
     if (!isChecking && !user && redirectIfUnauthenticated) router.push('/auth')
   }, [isChecking, user, router, redirectIfUnauthenticated])
 
-  return { user, token }
+  return { user, token, isChecking }
 }

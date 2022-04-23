@@ -2,6 +2,8 @@ const messages = {
   'common.synonymps': 'synonymps',
   'common.pleaseWait': 'Please wait',
   'common.words': 'words',
+  'common.create': 'Create',
+  'common.cancel': 'Cancel',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -11,6 +13,8 @@ const messages = {
   'error.title': 'Oh snap! An error happened 💥',
   'error.pageNotFound': 'The page you requested is not found',
   'error.wordNotFound': 'No definition found for “{word}” 😰',
+  'error.failedToCreateFlashcardSet': 'Failed to create new flashcard set',
+  'error.failedToCreateFlashcard': 'Failed to create new flashcard',
 
   'nav.home': 'Home',
   'nav.about': 'About',
@@ -24,6 +28,10 @@ const messages = {
   'nav.settings.voice.en-IN': 'English (India)',
   'nav.settings.voice.en-ZA': 'English (South Africa)',
   'nav.settings.exampleSpeech': 'Show example speech',
+  'nav.flashcards': 'Flashcards',
+  'nav.auth.logout': 'Log out',
+  'nav.auth.signUp': 'Sign up',
+  'nav.auth.login': 'Log in',
 
   'word.seeAlso': 'See also',
   'word.examples': 'Examples',
@@ -68,6 +76,25 @@ const messages = {
   'toast.dismiss': 'Dismiss',
 
   'user.signInAs': 'Signed in as',
+
+  'flashcard.flashcards': 'Flashcards',
+  'flashcard.create': 'Create flashcard',
+  'flashcard.dialog.featureForLoggedInUserOnly':
+    'This feature only available for logged in user.',
+  'flashcard.set': 'Flashcard set',
+  'flashcard.sets': 'Flashcard sets',
+  'flashcard.word': 'Word',
+  'flashcard.definition': 'Definition',
+  'flashcard.add': 'Add',
+  'flashcard.newSetName': 'Name',
+  'flashcard.addNewSet': 'Add new set',
+  'flashcard.createdSetSuccessfully': 'New set added',
+  'flashcard.addedSuccessfully': 'Flashcard added to set',
+
+  'wordMenu.settings': 'Settings',
+  'wordMenu.addDefinition': 'Add new definition',
+  'wordMenu.addExample': 'Add new example',
+  'wordMenu.reportWrongDefinition': 'Report wrong definition',
 }
 
 export default messages

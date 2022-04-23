@@ -2,6 +2,8 @@ const messages = {
   'common.synonymps': 'từ đồng nghĩa',
   'common.pleaseWait': 'Bạn vui lòng đợi chút nhé...',
   'common.words': 'từ',
+  'common.create': 'Tạo',
+  'common.cancel': 'Huỷ',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',
@@ -11,6 +13,9 @@ const messages = {
   'error.title': 'Úi giời, đã có lỗi xảy ra 💥',
   'error.pageNotFound': 'Không tìm thấy đường dẫn bạn yêu cầu',
   'error.wordNotFound': 'Không tìm thấy định nghĩa cho từ “{word}” 😰',
+  'error.failedToCreateFlashcardSet':
+    'Đã có lỗi xảy ra khi tạo flashcard set mới',
+  'error.failedToCreateFlashcard': 'Đã có lỗi xảy ra khi thêm flashcard mới',
 
   'nav.home': 'Trang chủ',
   'nav.about': 'Giới thiệu',
@@ -24,6 +29,10 @@ const messages = {
   'nav.settings.voice.en-IN': 'Giọng Anh Ấn',
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
   'nav.settings.exampleSpeech': 'Hiển thị đọc ví dụ',
+  'nav.flashcards': 'Flashcards',
+  'nav.auth.logout': 'Đăng xuất',
+  'nav.auth.signUp': 'Đăng ký tài khoản',
+  'nav.auth.login': 'Đăng nhập',
 
   'word.seeAlso': 'Xem thêm',
   'word.examples': 'Ví dụ',
@@ -70,6 +79,25 @@ const messages = {
   'toast.dismiss': 'Ẩn',
 
   'user.signInAs': 'Đăng nhập:',
+
+  'flashcard.flashcards': 'Flashcards',
+  'flashcard.create': 'Tạo flashcard',
+  'flashcard.dialog.featureForLoggedInUserOnly':
+    'Chức năng này chỉ dành cho thành viên đã đăng nhập.',
+  'flashcard.set': 'Flashcard set',
+  'flashcard.sets': 'Flashcard sets',
+  'flashcard.word': 'Từ',
+  'flashcard.definition': 'Định nghĩa',
+  'flashcard.add': 'Thêm',
+  'flashcard.newSetName': 'Tiêu đề',
+  'flashcard.addNewSet': 'Tạo set mới',
+  'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
+  'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
+
+  'wordMenu.settings': 'Tùy chọn',
+  'wordMenu.addDefinition': 'Thêm định nghĩa mới',
+  'wordMenu.addExample': 'Thêm ví dụ mới',
+  'wordMenu.reportWrongDefinition': 'Báo định nghĩa sai',
 }
 
 export default messages

@@ -1,8 +1,14 @@
-export function Input({ className, ...props }) {
+import { forwardRef } from 'react'
+
+export const Input = forwardRef(function Component(
+  { className, ...props },
+  ref,
+) {
   return (
     <input
-      className={`my-1 max-w-full rounded border border-slate-400 p-3 py-1 focus:border-slate-600 ${className}`}
+      ref={ref}
+      className={`max-w-full rounded border border-slate-400 p-2 focus:border-slate-600 ${className}`}
       {...props}
     />
   )
-}
+})
