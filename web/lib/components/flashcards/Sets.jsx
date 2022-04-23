@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { HiDotsVertical, HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi'
 
@@ -7,26 +7,45 @@ import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Dialog } from '../common/Dialog'
 import { useDropdown } from '../useDropdown'
+import { ToastContext } from '../../context/Toast'
 
-function EditSetDialog({ set, ...props }) {
+function EditSetDialog({ set, onOpenChange, updateSet, ...props }) {
   const [name, setName] = useState(set.name)
   const { _e } = useTranslation()
+  const { notify } = useContext(ToastContext)
 
   const updateName = (e) => {
-    e.preventDefault()
     setName(e.target.value)
   }
 
+  const doUpdateSet = async (e) => {
+    e.preventDefault()
+
+    await updateSet.mutateAsync({ id: set.id, name: name, userId: set.user_id })
+
+    if (updateSet.status === 'success') {
+      notify({ title: _e('flashcardset.updateNameSuccessfully') })
+      onOpenChange(false)
+    }
+  }
+
   return (
-    <Dialog title={_e('flashcardset.form.name')} {...props}>
+    <Dialog
+      title={_e('flashcardset.form.name')}
+      onOpenChange={onOpenChange}
+      {...props}>
       <div className="p-2">
         <form className="flex w-80 flex-col gap-2">
+          {updateSet.error && (
+            <p className="my-2 text-sm text-red-500">
+              {_e('flashcardset.error.updateNameFail')}
+            </p>
+          )}
           <div className="grid grid-cols-2 gap-2">
             <Input name="name" value={name} onChange={updateName} />
             <Button
               className="border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
-              // onClick={}
-            >
+              onClick={doUpdateSet}>
               {_e('flashcardset.form.updateName')}
             </Button>
           </div>
@@ -75,7 +94,7 @@ function ConfirmSetDeletionModal({ action, open, onOpenChange }) {
   )
 }
 
-function FlashcardSetDropdown({ set }) {
+function FlashcardSetDropdown({ set, updateSet }) {
   const { _e } = useTranslation()
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
@@ -141,6 +160,7 @@ function FlashcardSetDropdown({ set }) {
       <EditSetDialog
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
+        updateSet={updateSet}
         set={set}
       />
       <ConfirmSetDeletionModal
@@ -152,7 +172,7 @@ function FlashcardSetDropdown({ set }) {
   )
 }
 
-function Set({ set }) {
+function Set({ set, updateSet }) {
   const { _e } = useTranslation()
   const router = useRouter()
 
@@ -167,7 +187,7 @@ function Set({ set }) {
         ({set.flashcards.length}&nbsp;{_e('flashcard.flashcards')})
       </p>
       <div id="options" className="absolute top-1 right-1 z-20 aspect-square">
-        <FlashcardSetDropdown set={set} />
+        <FlashcardSetDropdown set={set} updateSet={updateSet} />
       </div>
       <div
         id="overlay"
@@ -177,11 +197,11 @@ function Set({ set }) {
   )
 }
 
-export function Sets({ flashcardSets = [] }) {
+export function Sets({ flashcardSets = [], updateSet }) {
   return (
     <div className="grid grid-cols-3 gap-3">
       {flashcardSets.map((set) => (
-        <Set key={set.id} set={set} />
+        <Set key={set.id} set={set} updateSet={updateSet} />
       ))}
     </div>
   )

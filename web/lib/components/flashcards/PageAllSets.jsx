@@ -7,7 +7,11 @@ import { Sets } from './Sets'
 
 export function PageAllSets() {
   const { user } = useUser({ redirectIfUnauthenticated: true })
-  const { flashcardSets, isLoading } = useAllSets({ user, fetchAllSets: true })
+  const { flashcardSets, isLoading, updateSet } = useAllSets({
+    user,
+    fetchAllSets: true,
+    fields: 'id, name, user_id, flashcards(id)',
+  })
 
   if (isLoading) {
     return (
@@ -20,7 +24,7 @@ export function PageAllSets() {
   return (
     <Layout>
       <div className="container">
-        <Sets flashcardSets={flashcardSets} />
+        <Sets flashcardSets={flashcardSets} updateSet={updateSet} />
       </div>
     </Layout>
   )
