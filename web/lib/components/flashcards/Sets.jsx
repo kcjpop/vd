@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useTranslation } from '../../i18n'
 
-function Set({ set = [] }) {
+function Set({ set }) {
   const { _e } = useTranslation()
 
   return (
@@ -18,7 +18,7 @@ function Set({ set = [] }) {
   )
 }
 
-export function Sets({ flashcardSets }) {
+export function Sets({ flashcardSets = [] }) {
   return (
     <div className="grid grid-cols-3 gap-3">
       {flashcardSets.map((set) => (
