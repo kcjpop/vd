@@ -11,6 +11,7 @@ const messages = {
   'common.create': 'Create',
   'common.cancel': 'Cancel',
   'common.goBack': 'Go back',
+  'common.confirm': 'Confirm',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -101,6 +102,14 @@ const messages = {
   'flashcard.createdSetSuccessfully': 'New set added',
   'flashcard.addedSuccessfully': 'Flashcard added to set',
   'flashcard.errors.notFound': 'We could not find this flashcard set.',
+
+  'flashcardset.dropdown.rename': 'Rename',
+  'flashcardset.dropdown.delete': 'Delete',
+  'flashcardset.form.name': 'Set name',
+  'flashcardset.form.updateName': 'Update',
+  'flashcardset.modal.confirm': 'Confirm set deletion',
+  'flashcardset.modal.doYouWantToDeleteThisSet':
+    'Do you want to delete this set? This action is not reversible.',
 
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',
