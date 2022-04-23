@@ -13,7 +13,13 @@ import {
 
 import { CloseIcon } from './Icons'
 
-export function Dialog({ title = 'Thông báo', open, onOpenChange, children }) {
+export function Dialog({
+  title = 'Thông báo',
+  open,
+  onOpenChange,
+  children,
+  dismissable = true,
+}) {
   const { floating, context } = useFloating({
     open,
     onOpenChange,
@@ -26,7 +32,7 @@ export function Dialog({ title = 'Thông báo', open, onOpenChange, children }) 
   const { getFloatingProps } = useInteractions([
     useFocusTrap(context),
     useRole(context),
-    useDismiss(context),
+    useDismiss(context, { enabled: dismissable }),
   ])
 
   return (
@@ -57,11 +63,13 @@ export function Dialog({ title = 'Thông báo', open, onOpenChange, children }) 
                   {title}
                 </h3>
               )}
-              <button
-                className="ml-auto rounded-full bg-slate-200 p-2 hover:bg-slate-300"
-                onClick={() => onOpenChange(false)}>
-                <CloseIcon />
-              </button>
+              {dismissable && (
+                <button
+                  className="ml-auto rounded-full bg-slate-200 p-2 hover:bg-slate-300"
+                  onClick={() => onOpenChange(false)}>
+                  <CloseIcon />
+                </button>
+              )}
             </header>
 
             {cloneElement(children)}
