@@ -55,15 +55,15 @@ function EditSetDialog({ set, onOpenChange, updateSet, ...props }) {
   )
 }
 
-function ConfirmSetDeletionModal({ action, open, onOpenChange }) {
+function ConfirmSetDeletionModal({ doAction, open, onOpenChange }) {
   const { _e } = useTranslation()
 
   const handleClick =
     (confirm = false) =>
-    (e) => {
+    async (e) => {
       e.preventDefault()
 
-      confirm && action()
+      confirm && (await doAction())
       onOpenChange(false)
     }
 
@@ -94,10 +94,11 @@ function ConfirmSetDeletionModal({ action, open, onOpenChange }) {
   )
 }
 
-function FlashcardSetDropdown({ set, updateSet }) {
+function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
   const { _e } = useTranslation()
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
+  const { notify } = useContext(ToastContext)
 
   const {
     isOpen,
@@ -117,9 +118,20 @@ function FlashcardSetDropdown({ set, updateSet }) {
     setIsEditDialogOpen(true)
   }
 
-  const doRemoveSet = () => {
+  const doRemoveSet = async () => {
     // @TODO: replace this with remove set action
     console.log('action done')
+    await deleteSet.mutateAsync({ id: set.id })
+
+    if (deleteSet.status === 'error') {
+      notify({ title: _e('flashcardset.error.deleleSet') })
+    }
+
+    if (deleteSet.status === 'success') {
+      notify({
+        title: _e('flashcardset.deleteSetSuccessfully'),
+      })
+    }
   }
 
   const confirmRemoveSet = (e) => {
@@ -166,13 +178,13 @@ function FlashcardSetDropdown({ set, updateSet }) {
       <ConfirmSetDeletionModal
         open={isConfirmModalOpen}
         onOpenChange={setIsConfirmModalOpen}
-        action={doRemoveSet}
+        doAction={doRemoveSet}
       />
     </div>
   )
 }
 
-function Set({ set, updateSet }) {
+function Set({ set, updateSet, deleteSet }) {
   const { _e } = useTranslation()
   const router = useRouter()
 
@@ -187,7 +199,11 @@ function Set({ set, updateSet }) {
         ({set.flashcards.length}&nbsp;{_e('flashcard.flashcards')})
       </p>
       <div id="options" className="absolute top-1 right-1 z-20 aspect-square">
-        <FlashcardSetDropdown set={set} updateSet={updateSet} />
+        <FlashcardSetDropdown
+          set={set}
+          updateSet={updateSet}
+          deleteSet={deleteSet}
+        />
       </div>
       <div
         id="overlay"
@@ -197,11 +213,16 @@ function Set({ set, updateSet }) {
   )
 }
 
-export function Sets({ flashcardSets = [], updateSet }) {
+export function Sets({ flashcardSets = [], updateSet, deleteSet }) {
   return (
     <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
       {flashcardSets.map((set) => (
-        <Set key={set.id} set={set} updateSet={updateSet} />
+        <Set
+          key={set.id}
+          set={set}
+          updateSet={updateSet}
+          deleteSet={deleteSet}
+        />
       ))}
     </div>
   )

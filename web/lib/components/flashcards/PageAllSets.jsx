@@ -21,7 +21,7 @@ export function PageAllSets({ page }) {
 
   const [currentPage, setCurrentPage] = useState(Number(page) - 1)
 
-  const { flashcardSets, isLoading } = useAllSets({
+  const { flashcardSets, isLoading, updateSet, deleteSet } = useAllSets({
     user,
     fetchAllSets: true,
     perPage: PER_PAGE,
@@ -66,7 +66,11 @@ export function PageAllSets({ page }) {
         </div>
 
         <div className="mb-4">
-          <Sets flashcardSets={flashcardSets} updateSet={updateSet} />
+          <Sets
+            flashcardSets={flashcardSets}
+            updateSet={updateSet}
+            deleteSet={deleteSet}
+          />
         </div>
 
         <div className="flex items-center justify-center gap-2">

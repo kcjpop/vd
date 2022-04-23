@@ -60,7 +60,7 @@ export function useAllSets({
   )
 
   const deleteSet = useMutation(
-    async (id) => {
+    async ({ id }) => {
       const { error } = await deleteFlashcardSet({ id })
 
       if (error) throw error
