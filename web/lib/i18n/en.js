@@ -110,7 +110,9 @@ const messages = {
   'flashcardset.modal.confirm': 'Confirm set deletion',
   'flashcardset.modal.doYouWantToDeleteThisSet':  'Do you want to delete this set? This action is not reversible.',
   'flashcardset.updateNameSuccessfully': "Update set's name successfully",
-  'flashcardset.error.updateNameFail': "Unable to update set's name",
+  'flashcardset.deleteSetSuccessfully': 'Delete set successfully',
+  'flashcardset.error.updateNameFail': "There is an error when updating set's name",
+  'flashcardset.error.deleleSet': 'There is an error when deleting set',
   
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',
