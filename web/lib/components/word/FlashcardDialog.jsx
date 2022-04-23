@@ -8,7 +8,7 @@ import { Textarea } from '../common/Textarea'
 import { Select } from '../common/Select'
 
 import { useTranslation } from '../../i18n'
-import { useFlashcardSets } from '../../hooks/flashcards/useFlashcardSets'
+import { useAllSets } from '../../hooks/flashcards/useAllSets'
 import { useUser } from '../../domain-logic/auth'
 
 const ADD_NEW_CARD = 1
@@ -31,7 +31,7 @@ function FormAddNewCard({
     flashcardSets = [],
     addCardToSet,
     isLoading,
-  } = useFlashcardSets({
+  } = useAllSets({
     user,
     fetchAllSets: true,
   })
@@ -108,7 +108,7 @@ function FormAddNewCard({
 function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
   const { _e } = useTranslation()
   const [name, setName] = useState('')
-  const { createNewSet } = useFlashcardSets({ user, fetchAllSets: false })
+  const { createNewSet } = useAllSets({ user, fetchAllSets: false })
 
   const doSetName = (e) => setName(e.target.value)
 

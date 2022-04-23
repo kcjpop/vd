@@ -7,7 +7,7 @@ import {
   deleteFlashcardSet,
 } from './query'
 
-export function useFlashcardSets({ user, fetchAllSets = false }) {
+export function useAllSets({ user, fetchAllSets = false }) {
   const queryClient = useQueryClient()
   const queryKey = ['flashcard-sets', user?.id]
 

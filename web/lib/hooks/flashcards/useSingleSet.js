@@ -1,13 +1,13 @@
 import { useQuery } from 'react-query'
 import { getFlashcardSet } from './query'
 
-export function useFlashcardSet({ user, setId }) {
+export function useSingleSet({ user, setId }) {
   const {
     data: currentSet,
     isLoading,
     isError,
   } = useQuery(['flashcard-set', setId], async () => {
-    if (!setId) return
+    if (!setId || !user) return
 
     const { data, error } = await getFlashcardSet({
       id: setId,
@@ -17,6 +17,8 @@ export function useFlashcardSet({ user, setId }) {
     if (error) throw error
     return data
   })
+
+  console.log({ user, setId })
 
   return { currentSet, isLoading, isError }
 }

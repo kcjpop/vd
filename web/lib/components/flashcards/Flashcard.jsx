@@ -4,7 +4,7 @@ import { Pagination, Navigation } from 'swiper'
 import { useRouter } from 'next/router'
 
 import { Layout } from '../common/Layout'
-import { useFlashcardSet } from '../../hooks/flashcards/useFlashcardSet'
+import { useSingleSet } from '../../hooks/flashcards/useSingleSet'
 import { useUser } from '../../domain-logic/auth'
 
 // Import Swiper styles
@@ -38,7 +38,7 @@ export function Page() {
   const router = useRouter()
 
   const { user } = useUser({ redirectIfUnauthenticated: true })
-  const { currentSet } = useFlashcardSet({ ...router.query, user })
+  const { currentSet } = useSingleSet({ ...router.query, user })
 
   return (
     <Layout>
