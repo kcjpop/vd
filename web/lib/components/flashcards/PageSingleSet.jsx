@@ -15,6 +15,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
 import { useSingleSet } from './useSingleSet'
+import { Breadcrumb } from './Breadcrumb'
 import s from './style.module.css'
 import { useTranslation } from '@/lib/i18n'
 
@@ -72,7 +73,8 @@ export function PageSingleSet() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold">{currentSet.name}</h1>
+      <h1 className="mb-4 text-2xl font-bold">{currentSet.name}</h1>
+      <Breadcrumb set={currentSet} />
       <Swiper
         pagination={{ type: 'fraction' }}
         navigation={true}
