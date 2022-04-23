@@ -7,7 +7,7 @@ import { LinkToWord } from '../common/LinkToWord'
 import { VerbTenses } from './VerbTenses'
 import { Examples } from './Examples'
 import { Idioms } from './Idioms'
-import { FlashcardDialog } from './FlashcardDialog'
+import { FlashcardDialog } from '../flashcards/FlashcardDialog'
 
 function SeeAlso({ words }) {
   const { _e } = useTranslation()

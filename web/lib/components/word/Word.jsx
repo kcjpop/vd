@@ -9,7 +9,7 @@ import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
 import { useTranslation } from '../../i18n'
 import { useUser } from '../../domain-logic/auth'
-import { FlashcardWarningDialog } from '../../components/word/FlashcardWarningDialog'
+import { FlashcardWarningDialog } from '../flashcards/FlashcardWarningDialog'
 
 function BtnCreatFlashcard({ active, onClick }) {
   const { _e } = useTranslation()
