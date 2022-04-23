@@ -35,7 +35,7 @@ function FlipCard({ flashcard }) {
   )
 }
 
-export function Page() {
+export function PageSingleSet() {
   const router = useRouter()
   const { setId } = router.query
   const { user } = useUser({ redirectIfUnauthenticated: true })

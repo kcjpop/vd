@@ -5,7 +5,7 @@ import { useUser } from '../../auth'
 import { useAllSets } from './useAllSets'
 import { Sets } from './Sets'
 
-export function Page() {
+export function PageAllSets() {
   const { user } = useUser({ redirectIfUnauthenticated: true })
   const { flashcardSets, isLoading } = useAllSets({ user, fetchAllSets: true })
 

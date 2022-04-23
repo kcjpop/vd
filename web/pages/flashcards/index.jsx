@@ -1,3 +1,3 @@
-import { Page } from '@/lib/components/flashcards/Flashcards'
+import { PageAllSets } from '@/lib/components/flashcards/PageAllSets'
 
-export default Page
+export default PageAllSets
