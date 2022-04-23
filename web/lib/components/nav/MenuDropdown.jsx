@@ -42,7 +42,7 @@ export function MenuDropdown() {
 
       {isOpen && (
         <div
-          className="w-80 rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-lg"
+          className="w-72 rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-lg"
           {...floatingProps()}>
           <ul>
             {user ? (
