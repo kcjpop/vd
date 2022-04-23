@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { MenuIcon } from '../common/Icons'
 import { useTranslation } from '../../i18n'
-import { useUser, logout } from '../../domain-logic/auth'
+import { useUser, logout } from '../../auth'
+
+import { MenuIcon } from '../common/Icons'
 import { useDropdown } from '../useDropdown'
 
 import { UserProfile } from './UserProfile'

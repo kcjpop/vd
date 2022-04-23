@@ -1,6 +1,6 @@
 import { Layout } from '../common/Layout'
 import { Loading } from '../common/Loading'
-import { useUser } from '../../domain-logic/auth'
+import { useUser } from '../../auth'
 
 import { useAllSets } from './useAllSets'
 import { Sets } from './Sets'

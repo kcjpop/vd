@@ -5,7 +5,7 @@ import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Spinner } from '../common/Spinner'
-import { register, useUser } from '../../domain-logic/auth'
+import { register, useUser } from '../../auth'
 
 function RegisterForm({ setSuccess }) {
   const [email, setEmail] = useState('')

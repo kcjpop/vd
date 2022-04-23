@@ -1,4 +1,4 @@
-import { supabase as sb } from '../../domain-logic/supabaseClient'
+import { supabase as sb } from '../../supabaseClient'
 
 const TBL_FLASHCARDS = 'flashcards'
 const TBL_SETS = 'flashcard_sets'
@@ -13,7 +13,6 @@ export const getAllSets = (
   { fields } = { fields: 'id, name, flashcards(id)' },
 ) => sb.from(TBL_SETS).select(fields).eq('user_id', userId)
 
-// @FIXME
 export const getFlashcardSet = (
   { id, userId },
   { fields } = { fields: 'id, name, flashcards(*)' },

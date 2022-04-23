@@ -1,15 +1,16 @@
 import { useState } from 'react'
 
-import { ZapIcon } from '../common/Icons'
+import { useTranslation } from '../../i18n'
+import { useUser } from '../../auth'
 
+import { ZapIcon } from '../common/Icons'
 import { WordMenu } from '../word-menu/WordMenu'
+
+import { FlashcardWarningDialog } from '../flashcards/FlashcardWarningDialog'
 
 import { Speech } from './Speech'
 import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
-import { useTranslation } from '../../i18n'
-import { useUser } from '../../domain-logic/auth'
-import { FlashcardWarningDialog } from '../flashcards/FlashcardWarningDialog'
 
 function BtnCreatFlashcard({ active, onClick }) {
   const { _e } = useTranslation()

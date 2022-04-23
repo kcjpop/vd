@@ -5,7 +5,7 @@ import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Spinner } from '../common/Spinner'
-import { login, useUser } from '../../domain-logic/auth'
+import { login, useUser } from '../../auth'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')

@@ -9,7 +9,7 @@ import { Select } from '../common/Select'
 
 import { useTranslation } from '../../i18n'
 import { useAllSets } from '../flashcards/useAllSets'
-import { useUser } from '../../domain-logic/auth'
+import { useUser } from '../../auth'
 
 const ADD_NEW_CARD = 1
 const ADD_NEW_SET = 2

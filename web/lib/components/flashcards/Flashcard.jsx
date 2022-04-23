@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { Loading } from '../common/Loading'
 import { Layout } from '../common/Layout'
-import { useUser } from '../../domain-logic/auth'
+import { useUser } from '../../auth'
 
 // Import Swiper styles
 import 'swiper/css'
