@@ -105,17 +105,20 @@ const messages = {
   'flashcard.addedSuccessfully': 'Flashcard added to set',
   'flashcard.errors.notFound': 'We could not find this flashcard set.',
   
+  'flashcardset.create': 'Create new set',
   'flashcardset.dropdown.rename': 'Rename',
   'flashcardset.dropdown.delete': 'Delete',
   'flashcardset.form.name': 'Set name',
   'flashcardset.form.updateName': 'Update',
   'flashcardset.modal.confirm': 'Confirm set deletion',
-  'flashcardset.modal.doYouWantToDeleteThisSet':  'Do you want to delete this set? This action is not reversible.',
+  'flashcardset.modal.doYouWantToDeleteThisSet': 'Do you want to delete this set? This action is not reversible.',
   'flashcardset.updateNameSuccessfully': "Update set's name successfully",
   'flashcardset.deleteSetSuccessfully': 'Delete set successfully',
+  'flashcardset.createNewSetSuccessfully': 'Create new set successfully',
   'flashcardset.error.updateNameFail': "There is an error when updating set's name",
   'flashcardset.error.deleleSet': 'There is an error when deleting set',
-  
+  'flashcardset.error.createNewSet': 'There is an error when creating a new set',
+
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',
   'wordMenu.addExample': 'Add new example',
