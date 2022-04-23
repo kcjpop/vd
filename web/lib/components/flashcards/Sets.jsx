@@ -6,7 +6,6 @@ import { useTranslation } from '../../i18n'
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Dialog } from '../common/Dialog'
-import { Modal } from '../common/Modal'
 import { useDropdown } from '../useDropdown'
 
 function EditSetDialog({ set, ...props }) {
@@ -19,10 +18,9 @@ function EditSetDialog({ set, ...props }) {
   }
 
   return (
-    <Dialog {...props}>
+    <Dialog title={_e('flashcardset.form.name')} {...props}>
       <div className="p-2">
         <form className="flex w-80 flex-col gap-2">
-          <label className="">{_e('flashcardset.form.name')}</label>
           <div className="grid grid-cols-2 gap-2">
             <Input name="name" value={name} onChange={updateName} />
             <Button
@@ -51,10 +49,11 @@ function ConfirmSetDeletionModal({ action, open, onOpenChange }) {
     }
 
   return (
-    <Modal
+    <Dialog
       title={_e('flashcardset.modal.confirm')}
       open={open}
-      onOpenChange={onOpenChange}>
+      onOpenChange={onOpenChange}
+      dismissable={false}>
       <div className="p-2">
         <p className="mb-5 text-red-500">
           {_e('flashcardset.modal.doYouWantToDeleteThisSet')}
@@ -72,7 +71,7 @@ function ConfirmSetDeletionModal({ action, open, onOpenChange }) {
           </Button>
         </div>
       </div>
-    </Modal>
+    </Dialog>
   )
 }
 
