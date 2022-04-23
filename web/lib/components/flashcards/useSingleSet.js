@@ -6,7 +6,7 @@ export function useSingleSet({ user, setId }) {
     data: currentSet,
     isLoading,
     isError,
-  } = useQuery(['flashcard-set', setId], async () => {
+  } = useQuery(['flashcard-set', user?.id, setId], async () => {
     if (!setId || !user) return
 
     const { data, error } = await getFlashcardSet({
@@ -15,6 +15,7 @@ export function useSingleSet({ user, setId }) {
     })
 
     if (error) throw error
+
     return data
   })
 

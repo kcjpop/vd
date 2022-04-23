@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper'
 import { useRouter } from 'next/router'
+import { Pagination, Navigation } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
+import { Loading } from '../common/Loading'
 import { Layout } from '../common/Layout'
 import { useUser } from '../../domain-logic/auth'
 
@@ -34,35 +35,40 @@ function FlipCard({ flashcard }) {
   )
 }
 
-export function Page() {
+export function Page({}) {
   const router = useRouter()
-
   const { user } = useUser({ redirectIfUnauthenticated: true })
-  const { currentSet } = useSingleSet({ ...router.query, user })
+  const { currentSet, isLoading, isError } = useSingleSet({
+    setId: router.query.setId,
+    user,
+  })
 
+  if (isLoading) {
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    )
+  }
+
+  if (isError) {
+    return <>wtf</>
+  }
   return (
     <Layout>
-      {!currentSet ? (
-        <div className="flex h-full w-full items-center justify-center">
-          <div className="text-2xl font-bold">Please wait...</div>
-        </div>
-      ) : (
-        <>
-          <h1 className="text-2xl font-bold">{currentSet.name}</h1>
-          <Swiper
-            pagination={{ type: 'fraction' }}
-            navigation={true}
-            modules={[Pagination, Navigation]}>
-            {currentSet.flashcards.map((flashcard) => (
-              <SwiperSlide key={flashcard.id}>
-                <div className="flex h-full w-full items-center justify-center py-12">
-                  <FlipCard flashcard={flashcard} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </>
-      )}
+      <h1 className="text-2xl font-bold">{currentSet.name}</h1>
+      <Swiper
+        pagination={{ type: 'fraction' }}
+        navigation={true}
+        modules={[Pagination, Navigation]}>
+        {currentSet.flashcards.map((flashcard) => (
+          <SwiperSlide key={flashcard.id}>
+            <div className="flex h-full w-full items-center justify-center py-12">
+              <FlipCard flashcard={flashcard} />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Layout>
   )
 }
