@@ -45,60 +45,68 @@ export function MenuDropdown() {
         <div
           className="w-72 rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-lg"
           {...floatingProps()}>
-          <ul>
+          <ul className="divide-y divide-dashed">
             {user ? (
-              <>
-                <li className="mb-2">
-                  <UserProfile user={user} />
-                </li>
-                <li className="mb-2">
-                  <Link href="/flashcards">
-                    <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      {_e('nav.flashcards')}
+              <li>
+                <ul>
+                  <li>
+                    <UserProfile user={user} />
+                  </li>
+                  <li>
+                    <Link href="/flashcards">
+                      <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                        {_e('nav.flashcards')} <span>🃏</span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      onClick={doLogout}
+                      href="#"
+                      className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                      {_e('nav.auth.logout')} <span>😌</span>
                     </a>
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    onClick={doLogout}
-                    href="#"
-                    className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                    {_e('nav.auth.logout')} <span>😘</span>
-                  </a>
-                </li>
-              </>
+                  </li>
+                </ul>
+              </li>
             ) : (
-              <>
-                <li>
-                  <Link href="/auth/register">
-                    <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      {_e('nav.auth.signUp')} <span>🤩</span>
-                    </a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/auth">
-                    <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      {_e('nav.auth.login')} <span>🤗</span>
-                    </a>
-                  </Link>
-                </li>
-              </>
+              <li>
+                <ul>
+                  <li>
+                    <Link href="/auth/register">
+                      <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                        {_e('nav.auth.signUp')} <span>🥰</span>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/auth">
+                      <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                        {_e('nav.auth.login')} <span>🤗</span>
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+              </li>
             )}
             <li>
-              <a
-                href="#"
-                className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                Giới thiệu <span>🤔</span>
-              </a>
-            </li>
+              <ul>
+                <li>
+                  <a
+                    href="#"
+                    className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                    {_e('nav.about')} <span>🤔</span>
+                  </a>
+                </li>
 
-            <li>
-              <a
-                href="#"
-                className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                Liên hệ <span>🥰</span>
-              </a>
+                <li>
+                  <a
+                    href="#"
+                    className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
+                    {_e('nav.contact')} <span>🤩</span>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

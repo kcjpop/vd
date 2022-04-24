@@ -26,6 +26,8 @@ const messages = {
 
   'nav.home': 'Trang chủ',
   'nav.about': 'Giới thiệu',
+  'nav.flashcards': 'Flashcards',
+  'nav.contact': 'Liên hệ',
   'nav.settings': 'Thiết lập',
   'nav.settings.voice': 'Giọng đọc',
   'nav.settings.voice.en-US': 'Giọng Anh Mỹ',
@@ -36,7 +38,6 @@ const messages = {
   'nav.settings.voice.en-IN': 'Giọng Anh Ấn',
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
   'nav.settings.exampleSpeech': 'Hiển thị đọc ví dụ',
-  'nav.flashcards': 'Flashcards',
   'nav.auth.logout': 'Đăng xuất',
   'nav.auth.signUp': 'Đăng ký tài khoản',
   'nav.auth.login': 'Đăng nhập',

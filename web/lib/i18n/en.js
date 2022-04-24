@@ -26,6 +26,8 @@ const messages = {
 
   'nav.home': 'Home',
   'nav.about': 'About',
+  'nav.flashcards': 'Flashcards',
+  'nav.contact': 'Contact',
   'nav.settings': 'Settings',
   'nav.settings.voice': 'Voice',
   'nav.settings.voice.en-US': 'American English',
@@ -36,7 +38,6 @@ const messages = {
   'nav.settings.voice.en-IN': 'English (India)',
   'nav.settings.voice.en-ZA': 'English (South Africa)',
   'nav.settings.exampleSpeech': 'Show example speech',
-  'nav.flashcards': 'Flashcards',
   'nav.auth.logout': 'Log out',
   'nav.auth.signUp': 'Sign up',
   'nav.auth.login': 'Log in',
