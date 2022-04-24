@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 import { Pagination, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { Loading } from '../common/Loading'
 import { Layout } from '../common/Layout'
+import { Alert } from '../common/Alert'
 import { useUser } from '../../auth'
 
 // Import Swiper styles
@@ -14,6 +17,7 @@ import 'swiper/css/navigation'
 
 import { useSingleSet } from './useSingleSet'
 import s from './style.module.css'
+import { useTranslation } from '@/lib/i18n'
 
 function FlipCard({ flashcard }) {
   const [flipped, setFlipped] = useState(false)
@@ -36,6 +40,7 @@ function FlipCard({ flashcard }) {
 }
 
 export function PageSingleSet() {
+  const { _e } = useTranslation()
   const router = useRouter()
   const { setId } = router.query
   const { user } = useUser({ redirectIfUnauthenticated: true })
@@ -49,9 +54,27 @@ export function PageSingleSet() {
     )
   }
 
-  if (isError) {
-    return <>wtf</>
+  if (!currentSet && !isLoading) {
+    return (
+      <Layout>
+        <Alert variant="danger">
+          {_e('flashcard.errors.notFound')}{' '}
+          <Link href="/flashcards">
+            <a className="font-semibold">{_e('common.goBack')}</a>
+          </Link>
+        </Alert>
+      </Layout>
+    )
   }
+
+  if (isError) {
+    return (
+      <Layout>
+        <Alert variant="danger">{_e('error.general')}</Alert>
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
       <h1 className="text-2xl font-bold">{currentSet.name}</h1>

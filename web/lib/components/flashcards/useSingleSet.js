@@ -9,12 +9,10 @@ export function useSingleSet({ user, setId }) {
   } = useQuery(['flashcard-set', user?.id, setId], async () => {
     if (!setId || !user) return
 
-    const { data, error } = await getFlashcardSet({
+    const { data } = await getFlashcardSet({
       id: setId,
       userId: user.id,
     })
-
-    if (error) throw error
 
     return data
   })

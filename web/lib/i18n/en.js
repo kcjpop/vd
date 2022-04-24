@@ -17,6 +17,7 @@ const messages = {
 
   'dictMenu.pick': 'Change dictionary',
 
+  'error.general': 'We’re experiencing an error. Please try again later.',
   'error.title': 'Oh snap! An error happened 💥',
   'error.pageNotFound': 'The page you requested is not found',
   'error.wordNotFound': 'No definition found for “{word}” 😰',
