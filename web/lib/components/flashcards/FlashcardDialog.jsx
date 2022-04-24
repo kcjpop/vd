@@ -7,6 +7,7 @@ import { Input } from '../common/Input'
 import { Textarea } from '../common/Textarea'
 import { Select } from '../common/Select'
 import { Spinner } from '../common/Spinner'
+import { Label } from '../common/Label'
 
 import { useTranslation } from '../../i18n'
 import { useAllSets } from '../flashcards/useAllSets'
@@ -60,43 +61,46 @@ function FormAddNewCard({
         <p className="text-red-600">{modifyFlashcard.error.message}</p>
       )} */}
 
-      <label className="">{_e('flashcard.set')}</label>
-      <div className="flex items-center gap-2">
-        <Select
-          name="setId"
-          value={setId}
-          onChange={doSetValue(setSetId)}
-          className="flex-1 bg-slate-200 p-2">
-          <option value="">-- Select a set --</option>
-          {flashcardSets.map((set) => (
-            <option key={set.id} value={set.id}>
-              {set.name}
-            </option>
-          ))}
-        </Select>
+      <Label label={_e('flashcard.set')}>
+        <div className="flex items-center gap-2">
+          <Select
+            name="setId"
+            value={setId}
+            onChange={doSetValue(setSetId)}
+            className="flex-1 bg-slate-200 p-2">
+            <option value="">-- Select a set --</option>
+            {flashcardSets.map((set) => (
+              <option key={set.id} value={set.id}>
+                {set.name}
+              </option>
+            ))}
+          </Select>
 
-        <Button onClick={doEnterStageAddNewSet}>
-          {_e('flashcard.addNewSet')}
-        </Button>
-      </div>
+          <Button onClick={doEnterStageAddNewSet}>
+            {_e('flashcard.addNewSet')}
+          </Button>
+        </div>
+      </Label>
 
-      <label className="">{_e('flashcard.word')}</label>
-      <Input
-        type="text"
-        name="word"
-        className="rounded bg-slate-200"
-        value={word}
-        onChange={doSetValue(setWord)}
-      />
+      <Label label={_e('flashcard.word')}>
+        <Input
+          type="text"
+          name="word"
+          className="rounded bg-slate-200"
+          value={word}
+          onChange={doSetValue(setWord)}
+        />
+      </Label>
 
-      <label className="">{_e('flashcard.definition')}</label>
-      <Textarea
-        name="definition"
-        id=""
-        className="rounded bg-slate-200"
-        value={definition}
-        onChange={doSetValue(setDefinition)}
-      />
+      <Label label={_e('flashcard.definition')}>
+        <Textarea
+          name="definition"
+          id=""
+          className="rounded bg-slate-200"
+          value={definition}
+          onChange={doSetValue(setDefinition)}
+        />
+      </Label>
 
       <Button variant="primary" type="submit" disabled={setId == null}>
         {_e('flashcard.add')}
@@ -125,13 +129,16 @@ function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
       {/* {modifyFlashcardSet.isError && (
         <p className="text-red-500">{modifyFlashcardSet.error.message}</p>
       )} */}
+      <Label label={_e('flashcard.newSetName') + '*'}>
+        <Input
+          type="text"
+          value={name}
+          onChange={doSetName}
+          required
+          placeholder="e.g. Animals"
+        />
+      </Label>
 
-      <Input
-        type="text"
-        value={name}
-        onChange={doSetName}
-        placeholder={_e('flashcard.newSetName')}
-      />
       <div className="grid w-full grid-cols-2 grid-rows-1 gap-2">
         <Button
           loading={createNewSet.isLoading}
