@@ -1,19 +1,18 @@
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useState } from 'react'
+import Link from 'next/link'
 
-import { useTranslation } from '../../i18n'
+import { useTranslation } from '@/lib/i18n'
+import { register } from '@/lib/auth'
+
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
-import { Spinner } from '../common/Spinner'
-import { register, useUser } from '../../auth'
+import { Alert } from '../common/Alert'
 
-function RegisterForm({ setSuccess }) {
+function RegisterForm({ onSubmit, loading }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const [fullname, setFullname] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [formError, setFormError] = useState(null)
 
   const { _e } = useTranslation()
 
@@ -21,136 +20,129 @@ function RegisterForm({ setSuccess }) {
     setter(event.target.value)
   }
 
-  const doRegister = async function (event) {
-    event.preventDefault()
-    try {
-      setLoading(true)
-      setFormError(null)
-      // @todo: user, session returned from register function
-      const { user, error } = await register({
-        email,
-        password,
-        fullname,
-      })
-      if (error) throw error
+  const doSubmit = (e) => {
+    e.preventDefault()
+    typeof onSubmit === 'function' && onSubmit(e, { email, password, fullname })
+  }
 
-      if (user) {
-        setSuccess(true)
-      }
-    } catch (error) {
-      setFormError(error.message)
+  return (
+    <form
+      onSubmit={doSubmit}
+      className="flex flex-col gap-4"
+      disabled={loading}>
+      <label className="flex flex-col gap-2">
+        <span className="text-sm font-semibold tracking-wide">
+          {_e('auth.fullname')}*
+        </span>
+
+        <Input
+          required
+          type="text"
+          name="fullname"
+          placeholder="e.g. John Doe"
+          value={fullname}
+          onChange={handleChange(setFullname)}
+        />
+      </label>
+
+      <label className="flex flex-col gap-2">
+        <span className="text-sm font-semibold tracking-wide">
+          {_e('auth.email')}*
+        </span>
+
+        <Input
+          required
+          type="email"
+          name="email"
+          placeholder="e.g. john@tudien.io"
+          value={email}
+          onChange={handleChange(setEmail)}
+        />
+      </label>
+
+      <label className="flex flex-col gap-2">
+        <span className="text-sm font-semibold tracking-wide">
+          {_e('auth.password')}*
+        </span>
+
+        <Input
+          required
+          type="password"
+          name="password"
+          placeholder={_e('auth.passwordPlaceholder')}
+          value={password}
+          onChange={handleChange(setPassword)}
+          minLength="8"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2">
+        <span className="text-sm font-semibold tracking-wide">
+          {_e('auth.reenterPassword')}*
+        </span>
+
+        <Input
+          required
+          type="password"
+          name="confirm-password"
+          placeholder={_e('auth.passwordConfirmationPlaceholder')}
+          value={password2}
+          onChange={handleChange(setPassword2)}
+          minLength="8"
+        />
+      </label>
+
+      <Button type="submit" loading={loading}>
+        {_e('auth.register')}
+      </Button>
+    </form>
+  )
+}
+
+export function Register() {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [user, setUser] = useState(null)
+
+  const { _e } = useTranslation()
+
+  const doRegister = async function (e, input) {
+    setError(null)
+    setLoading(true)
+    try {
+      const { user, error } = await register(input)
+      if (error) throw error
+      setUser(user)
+    } catch (err) {
+      setError(err)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <form onSubmit={doRegister}>
-      <div>
-        <Input
-          type="text"
-          name="fullname"
-          placeholder={_e('auth.fullname')}
-          className="w-full"
-          value={fullname}
-          onChange={handleChange(setFullname)}
-        />
-      </div>
-      <div className="">
-        <Input
-          type="text"
-          name="email"
-          placeholder={_e('auth.email')}
-          className="w-full"
-          value={email}
-          onChange={handleChange(setEmail)}
-        />
-      </div>
-      <div>
-        <Input
-          type="password"
-          name="password"
-          placeholder={_e('auth.password')}
-          className="w-full"
-          value={password}
-          onChange={handleChange(setPassword)}
-        />
-      </div>
-      <div>
-        <Input
-          type="password"
-          name="confirm-password"
-          placeholder={_e('auth.reenterPassword')}
-          className="w-full"
-          value={password2}
-          onChange={handleChange(setPassword2)}></Input>
-      </div>
-      {formError && <p className="text-red text-md my-2">{formError}</p>}
-      <div className="mt-6">
-        <Button
-          className="w-full bg-gray-700 text-white hover:bg-gray-900"
-          type="submit"
-          disabled={loading}>
-          {loading ? (
-            <div className="flex h-full w-full items-center justify-center">
-              <Spinner />
-            </div>
-          ) : (
-            _e('auth.register')
-          )}
-        </Button>
-      </div>
-    </form>
-  )
-}
+    <section className="mx-auto flex flex-col gap-4 rounded bg-slate-100 p-8 md:max-w-lg">
+      <h1 className="text-xl font-bold">{_e('auth.registerTitle')}</h1>
 
-export function Register() {
-  const [success, setSuccess] = useState(false)
-  const { _e } = useTranslation()
-  const { user } = useUser()
-  const router = useRouter()
+      {error && (
+        <Alert variant="danger">
+          <p>{_e('auth.errors.register')}</p>
+        </Alert>
+      )}
 
-  useEffect(() => {
-    if (user) {
-      router.push('/')
-    }
-  }, [router, user])
+      {user && (
+        <Alert variant="success">
+          <p>{_e('auth.registerSuccessfully')}</p>
+        </Alert>
+      )}
 
-  if (success) {
-    return (
-      <section className="container h-full">
-        <div className="flex h-full w-full items-center justify-center">
-          <div className="w-1/2 rounded border border-slate-300 px-20 py-10 sm:w-10/12 md:w-5/6">
-            <p className="mb-8 text-center text-3xl text-green-500">
-              {_e('auth.registerSuccessfully')}
-            </p>
-            <p className="text-md my-1 text-center text-slate-600">
-              {_e('auth.pleaseConfirmYourEmail')}
-            </p>
-          </div>
-        </div>
-      </section>
-    )
-  }
+      <RegisterForm onSubmit={doRegister} loading={loading} />
 
-  return (
-    <section className="container h-full">
-      <div className="flex h-full w-full flex-col items-center justify-center">
-        <div className="relative flex h-5/6 w-4/12 flex-col overflow-hidden rounded-lg border border-slate-400 sm:w-11/12 md:w-8/12">
-          <div className="w-full py-14 px-20">
-            <div className="mb-10 w-full">
-              <p className="text-center">{_e('auth.welcomeTo')}</p>
-              <p className="slate-700 text-center text-6xl font-bold">
-                tudien.io
-              </p>
-            </div>
-            <div className="mb-4 w-full">
-              <div className="w-full">
-                <RegisterForm setSuccess={setSuccess} />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="text-center text-sm">
+        <span>{_e('auth.alreadyHaveAnAccount')}</span>{' '}
+        <Link href="/auth">
+          <a className="text-sky-600">{_e('auth.loginHere')}</a>
+        </Link>
       </div>
     </section>
   )
