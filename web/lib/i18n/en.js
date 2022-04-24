@@ -6,7 +6,7 @@
 
 const messages = {
   'common.synonymps': 'synonymps',
-  'common.pleaseWait': 'Please wait',
+  'common.loading': 'Loading…',
   'common.words': 'words',
   'common.create': 'Create',
   'common.cancel': 'Cancel',

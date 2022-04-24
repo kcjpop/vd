@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Pagination, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { Loading } from '../common/Loading'
 import { Layout } from '../common/Layout'
 import { Alert } from '../common/Alert'
 import { useUser } from '../../auth'
@@ -47,11 +46,7 @@ export function PageSingleSet() {
   const { currentSet, isLoading, isError } = useSingleSet({ setId, user })
 
   if (isLoading) {
-    return (
-      <Layout>
-        <Loading />
-      </Layout>
-    )
+    return <Layout loading />
   }
 
   if (!currentSet && !isLoading) {

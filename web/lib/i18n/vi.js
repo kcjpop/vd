@@ -6,7 +6,7 @@
 
 const messages = {
   'common.synonymps': 'từ đồng nghĩa',
-  'common.pleaseWait': 'Bạn vui lòng đợi chút nhé…',
+  'common.loading': 'Đang tải dữ liệu…',
   'common.words': 'từ',
   'common.create': 'Tạo',
   'common.cancel': 'Huỷ',

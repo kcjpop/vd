@@ -8,8 +8,9 @@ import { Toast } from '../toast/Toast'
 import { OpenGraph } from './OpenGraph'
 import { ErrorBoundary } from './ErrorBoundary'
 import { Wave } from './Wave'
+import { Loading } from './Loading'
 
-export function Layout({ children, navVariant, opengraph }) {
+export function Layout({ children, navVariant, opengraph, loading }) {
   const { props: toastProps } = useContext(ToastContext)
 
   return (
@@ -23,13 +24,17 @@ export function Layout({ children, navVariant, opengraph }) {
       </header>
 
       <main className="flex-1">
-        <ToastProvider swipeDirection={'right'}>
-          <div className="mx-auto max-w-7xl p-4 text-base">
-            <ErrorBoundary>{children}</ErrorBoundary>
-          </div>
-          <ToastViewport className="fixed top-16 right-0 z-50 m-0 flex w-60 max-w-full list-none flex-col gap-2 p-6" />
-          <Toast {...toastProps} />
-        </ToastProvider>
+        {loading ? (
+          <Loading />
+        ) : (
+          <ToastProvider swipeDirection="right">
+            <div className="mx-auto max-w-7xl p-4 text-base">
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </div>
+            <ToastViewport className="fixed top-16 right-0 z-50 m-0 flex w-60 max-w-full list-none flex-col gap-2 p-6" />
+            <Toast {...toastProps} />
+          </ToastProvider>
+        )}
       </main>
 
       <footer className="text-slate-800">
