@@ -6,6 +6,7 @@ import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Textarea } from '../common/Textarea'
 import { Select } from '../common/Select'
+import { Spinner } from '../common/Spinner'
 
 import { useTranslation } from '../../i18n'
 import { useAllSets } from '../flashcards/useAllSets'
@@ -44,7 +45,12 @@ function FormAddNewCard({
     onFlashcardCreated(card)
   }
 
-  if (isLoading) return <p>Loading…</p>
+  if (isLoading)
+    return (
+      <div className="w-80">
+        <Spinner />
+      </div>
+    )
 
   return (
     <form
@@ -126,7 +132,6 @@ function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
         <p className="text-red-500">{modifyFlashcardSet.error.message}</p>
       )} */}
 
-      <label className="">{_e('flashcard.addNewSet')}</label>
       <Input
         type="text"
         value={name}
@@ -135,6 +140,7 @@ function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
       />
       <div className="grid w-full grid-cols-2 grid-rows-1 gap-2">
         <Button
+          loading={createNewSet.isLoading}
           type="submit"
           className="bg-sky-200 hover:bg-sky-300"
           disabled={name.length === 0}>
