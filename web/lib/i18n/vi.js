@@ -82,6 +82,7 @@ const messages = {
   'auth.emailConfirmed': 'Email đã được xác nhận.',
   'auth.welcome': 'Xin chào',
   'auth.logout': 'Đăng xuất',
+  'auth.errors.register': 'Đã xảy ra lỗi khi khởi tạo tài khoản. Vui lòng thử lại.',
 
   'toast.dismiss': 'Ẩn',
 
