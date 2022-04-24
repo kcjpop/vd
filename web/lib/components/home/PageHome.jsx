@@ -6,6 +6,7 @@ import { Wave } from '@/lib/components/common/Wave'
 import { WordSearchForm } from '@/lib/components/word-search-form/WordSearchForm'
 
 import { Stats } from './Stats'
+import { LinkButton } from '../common/Button'
 
 export function PageHome({ opengraph, stats }) {
   return (
@@ -31,16 +32,14 @@ export function PageHome({ opengraph, stats }) {
 
           <div>
             <div className="flex items-center gap-2">
-              <Link href="/auth/register">
-                <a className="rounded border border-orange-200 bg-orange-100 p-2 text-sm font-semibold tracking-wide text-orange-700 hover:border-orange-300">
+              <Link href="/auth/register" passHref>
+                <LinkButton variant="secondary">
                   Đăng ký tài khoản 🤟
-                </a>
+                </LinkButton>
               </Link>
 
-              <Link href="/auth">
-                <a className="rounded border border-orange-200 bg-orange-100 p-2 text-sm font-semibold tracking-wide text-orange-700 hover:border-orange-300">
-                  Đăng nhập 👋
-                </a>
+              <Link href="/auth" passHref>
+                <LinkButton variant="secondary">Đăng nhập 👋</LinkButton>
               </Link>
             </div>
             <button className="p-2 text-sm text-slate-500">

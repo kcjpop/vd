@@ -92,7 +92,7 @@ function RegisterForm({ onSubmit, loading }) {
         />
       </label>
 
-      <Button type="submit" loading={loading}>
+      <Button variant="primary" type="submit" loading={loading}>
         {_e('auth.register')}
       </Button>
     </form>

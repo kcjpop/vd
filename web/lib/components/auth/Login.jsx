@@ -84,11 +84,15 @@ export function LoginForm() {
           value={password}
           onChange={handleChange(setPassword)}
           disabled={loading}
-          placeholder="••••••••••••••••"
+          placeholder="••••••••"
         />
       </label>
 
-      <Button type="submit" loading={loading} disabled={loading}>
+      <Button
+        variant="primary"
+        type="submit"
+        loading={loading}
+        disabled={loading}>
         {_e('auth.login')}
       </Button>
     </form>

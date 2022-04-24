@@ -97,7 +97,7 @@ const messages = {
   'flashcard.definition': 'Definition',
   'flashcard.add': 'Add',
   'flashcard.newSetName': 'Name',
-  'flashcard.addNewSet': 'Add new set',
+  'flashcard.addNewSet': 'Create new set',
   'flashcard.createdSetSuccessfully': 'New set added',
   'flashcard.addedSuccessfully': 'Flashcard added to set',
   'flashcard.errors.notFound': 'We could not find this flashcard set.',

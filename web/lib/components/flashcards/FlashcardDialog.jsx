@@ -75,10 +75,7 @@ function FormAddNewCard({
           ))}
         </Select>
 
-        <Button
-          type="button"
-          className="border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
-          onClick={doEnterStageAddNewSet}>
+        <Button onClick={doEnterStageAddNewSet}>
           {_e('flashcard.addNewSet')}
         </Button>
       </div>
@@ -101,10 +98,7 @@ function FormAddNewCard({
         onChange={doSetValue(setDefinition)}
       />
 
-      <Button
-        type="submit"
-        className="bg-sky-200 hover:bg-sky-300"
-        disabled={setId == null}>
+      <Button variant="primary" type="submit" disabled={setId == null}>
         {_e('flashcard.add')}
       </Button>
     </form>
@@ -142,15 +136,11 @@ function FormAddNewSet({ doEnterStageAddNewCard, user, className }) {
         <Button
           loading={createNewSet.isLoading}
           type="submit"
-          className="bg-sky-200 hover:bg-sky-300"
+          variant="primary"
           disabled={name.length === 0}>
           {_e('common.create')}
         </Button>
-        <Button
-          className="bg-slate-200 hover:bg-slate-300"
-          onClick={doEnterStageAddNewCard}>
-          {_e('common.cancel')}
-        </Button>
+        <Button onClick={doEnterStageAddNewCard}>{_e('common.cancel')}</Button>
       </div>
     </form>
   )
