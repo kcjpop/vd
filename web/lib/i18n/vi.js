@@ -17,6 +17,7 @@ const messages = {
 
   'dictMenu.pick': 'Chọn từ điển',
 
+  'error.general': 'Đã có lỗi xảy ra. Bạn vui lòng thử lại sau 😰',
   'error.title': 'Úi giời, đã có lỗi xảy ra 💥',
   'error.pageNotFound': 'Không tìm thấy đường dẫn bạn yêu cầu',
   'error.wordNotFound': 'Không tìm thấy định nghĩa cho từ “{word}” 😰',

@@ -1,13 +1,23 @@
 import en from './en'
 import vi from './vi'
 
-describe('i18n', () => {
-  test('en and vi should have the same set of keys', () => {
-    const pivot = Object.keys(en).length > Object.keys(vi).length ? en : vi
-    const other = pivot === en ? vi : en
+expect.extend({
+  toBeInObject(key, obj) {
+    const pass = key in obj
 
-    for (const key in pivot) {
-      expect(key in other).toBe(true)
+    return {
+      message: () =>
+        pass ? `All good` : `Missing property "${key}" in object.`,
+      pass,
     }
-  })
+  },
+})
+
+test('all locales should have the same messages', () => {
+  const pivot = Object.keys(en).length > Object.keys(vi).length ? en : vi
+  const other = pivot === en ? vi : en
+
+  for (const key in pivot) {
+    expect(key).toBeInObject(other)
+  }
 })
