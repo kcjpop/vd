@@ -41,7 +41,7 @@ function Definition({ def, index, clickable, onClick }) {
 
   return (
     <div
-      className={`flex flex-col gap-4 border border-transparent p-2 ${
+      className={`flex flex-col gap-4 border border-transparent px-2 ${
         clickable &&
         'cursor-pointer rounded hover:border-orange-300 hover:bg-orange-100'
       }`}
