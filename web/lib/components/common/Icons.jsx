@@ -9,6 +9,10 @@ export {
   FiZap as ZapIcon,
   FiX as CloseIcon,
   FiUser as UserIcon,
+  FiAlertCircle as AlertCircleIcon,
+  FiAlertTriangle as AlertTriangleIcon,
+  FiHelpCircle as HelpCircleIcon,
+  FiCheckCircle as CheckCircleIcon,
 } from 'react-icons/fi'
 
 export { BsFillBookmarkStarFill as FillBookmarkStartIcon } from 'react-icons/bs'
