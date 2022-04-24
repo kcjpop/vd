@@ -1,9 +1,16 @@
+/* prettier-ignore */
+
+/*
+ * KEEP MESSAGES IN ONE LINE FOR EASIER COMPARISON.
+ */
+
 const messages = {
   'common.synonymps': 'synonymps',
   'common.pleaseWait': 'Please wait',
   'common.words': 'words',
   'common.create': 'Create',
   'common.cancel': 'Cancel',
+  'common.goBack': 'Go back',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -63,11 +70,9 @@ const messages = {
   'auth.register': 'Register',
   'auth.reenterPassword': 'Re-enter password',
   'auth.registerSuccessfully': 'Register successfully',
-  'auth.pleaseConfirmYourEmail':
-    'A confirmation link has been sent to your email address. Please confirm it.',
+  'auth.pleaseConfirmYourEmail': 'A confirmation link has been sent to your email address. Please confirm it.',
   'auth.redirectToLoginPage': 'We will redirect you to login page in a minute',
-  'auth.clickHereToRedirect':
-    'If it is not automatically redirect, please click on the following link to redirect to login page.',
+  'auth.clickHereToRedirect': 'If it is not automatically redirect, please click on the following link to redirect to login page.',
   'auth.redirectIn': 'Automatically redirect after ...',
   'auth.emailConfirmed': 'Email confirmed',
   'auth.welcome': 'Welcome',
@@ -79,8 +84,7 @@ const messages = {
 
   'flashcard.flashcards': 'Flashcards',
   'flashcard.create': 'Create flashcard',
-  'flashcard.dialog.featureForLoggedInUserOnly':
-    'This feature only available for logged in user.',
+  'flashcard.dialog.featureForLoggedInUserOnly': 'This feature only available for logged in user.',
   'flashcard.set': 'Flashcard set',
   'flashcard.sets': 'Flashcard sets',
   'flashcard.word': 'Word',
@@ -90,6 +94,7 @@ const messages = {
   'flashcard.addNewSet': 'Add new set',
   'flashcard.createdSetSuccessfully': 'New set added',
   'flashcard.addedSuccessfully': 'Flashcard added to set',
+  'flashcard.errors.notFound': 'We could not find this flashcard set.',
 
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',

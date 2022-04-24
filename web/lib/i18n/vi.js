@@ -1,9 +1,16 @@
+/* prettier-ignore */
+
+/*
+ * KEEP MESSAGES IN ONE LINE FOR EASIER COMPARISON.
+ */
+
 const messages = {
   'common.synonymps': 'từ đồng nghĩa',
-  'common.pleaseWait': 'Bạn vui lòng đợi chút nhé...',
+  'common.pleaseWait': 'Bạn vui lòng đợi chút nhé…',
   'common.words': 'từ',
   'common.create': 'Tạo',
   'common.cancel': 'Huỷ',
+  'common.goBack': 'Quay lại',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',
@@ -13,8 +20,7 @@ const messages = {
   'error.title': 'Úi giời, đã có lỗi xảy ra 💥',
   'error.pageNotFound': 'Không tìm thấy đường dẫn bạn yêu cầu',
   'error.wordNotFound': 'Không tìm thấy định nghĩa cho từ “{word}” 😰',
-  'error.failedToCreateFlashcardSet':
-    'Đã có lỗi xảy ra khi tạo flashcard set mới',
+  'error.failedToCreateFlashcardSet': 'Đã có lỗi xảy ra khi tạo flashcard set mới',
   'error.failedToCreateFlashcard': 'Đã có lỗi xảy ra khi thêm flashcard mới',
 
   'nav.home': 'Trang chủ',
@@ -60,17 +66,14 @@ const messages = {
   'auth.doNotHaveAnAccount': 'Chưa có tài khoản?',
   'auth.registerHere': 'Đăng ký tại đây.',
   'auth.fullname': 'Họ và tên',
-  // @TODO: what is plan for registration
+
   'auth.plan': 'Kế hoạch',
   'auth.register': 'Đăng ký',
   'auth.reenterPassword': 'Xác nhận lại mật khẩu',
   'auth.registerSuccessfully': 'Đăng ký thành công!',
-  'auth.pleaseConfirmYourEmail':
-    'Đường dẫn xác nhận đăng nhập đã được gửi vào email của bạn.',
-  'auth.redirectToLoginPage':
-    'Chúng tôi sẽ chuyển bạn đến trang đăng nhập trong ít phút nữa.',
-  'auth.clickHereToRedirect':
-    'Nếu trang web không tự chuyển, bạn có thể nhấn vào đường dẫn này để chuyển trang.',
+  'auth.pleaseConfirmYourEmail': 'Đường dẫn xác nhận đăng nhập đã được gửi vào email của bạn.',
+  'auth.redirectToLoginPage': 'Chúng tôi sẽ chuyển bạn đến trang đăng nhập trong ít phút nữa.',
+  'auth.clickHereToRedirect': 'Nếu trang web không tự chuyển, bạn có thể nhấn vào đường dẫn này để chuyển trang.',
   'auth.redirectIn': 'Tự động chuyển trang sau...',
   'auth.emailConfirmed': 'Email đã được xác nhận.',
   'auth.welcome': 'Xin chào',
@@ -82,8 +85,7 @@ const messages = {
 
   'flashcard.flashcards': 'Flashcards',
   'flashcard.create': 'Tạo flashcard',
-  'flashcard.dialog.featureForLoggedInUserOnly':
-    'Chức năng này chỉ dành cho thành viên đã đăng nhập.',
+  'flashcard.dialog.featureForLoggedInUserOnly': 'Chức năng này chỉ dành cho thành viên đã đăng nhập.',
   'flashcard.set': 'Flashcard set',
   'flashcard.sets': 'Flashcard sets',
   'flashcard.word': 'Từ',
@@ -93,6 +95,7 @@ const messages = {
   'flashcard.addNewSet': 'Tạo set mới',
   'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
   'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
+  'flashcard.errors.notFound': 'Không tìm thấy bộ flashcard này',
 
   'wordMenu.settings': 'Tùy chọn',
   'wordMenu.addDefinition': 'Thêm định nghĩa mới',
