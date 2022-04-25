@@ -11,6 +11,8 @@ const messages = {
   'common.create': 'Create',
   'common.cancel': 'Cancel',
   'common.goBack': 'Go back',
+  'common.previous': 'Previous',
+  'common.next': 'Next',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
