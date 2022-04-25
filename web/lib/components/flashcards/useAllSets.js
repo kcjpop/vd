@@ -9,7 +9,7 @@ import {
 } from './query'
 
 function getRange(page, perPage) {
-  return { from: (page + 1) * perPage - perPage, to: (page + 1) * perPage - 1 }
+  return { from: page * perPage - perPage, to: page * perPage - 1 }
 }
 
 export function useAllSets({

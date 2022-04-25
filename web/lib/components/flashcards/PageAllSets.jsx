@@ -19,7 +19,7 @@ export function PageAllSets({ page }) {
   const { user } = useUser({ redirectIfUnauthenticated: true })
   const router = useRouter()
 
-  const [currentPage, setCurrentPage] = useState(Number(page) - 1)
+  const [currentPage, setCurrentPage] = useState(Number(page))
 
   const { flashcardSets, isLoading } = useAllSets({
     user,
@@ -31,23 +31,27 @@ export function PageAllSets({ page }) {
   const next = (e) => {
     e.preventDefault()
 
-    flashcardSets.length >= PER_PAGE && setCurrentPage(currentPage + 1)
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage + 2 } },
-      undefined,
-      { shallow: true },
-    )
+    if (flashcardSets.length >= PER_PAGE) {
+      router.push(
+        { pathName: router.pathname, query: { page: currentPage + 1 } },
+        undefined,
+        { shallow: true },
+      )
+      setCurrentPage(currentPage + 1)
+    }
   }
 
   const prev = (e) => {
     e.preventDefault()
 
-    currentPage > 0 && setCurrentPage(currentPage - 1)
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage } },
-      undefined,
-      { shallow: true },
-    )
+    if (currentPage > 1) {
+      router.push(
+        { pathName: router.pathname, query: { page: currentPage } },
+        undefined,
+        { shallow: true },
+      )
+      setCurrentPage(currentPage - 1)
+    }
   }
 
   if (isLoading) return <Layout loading />
@@ -78,7 +82,7 @@ export function PageAllSets({ page }) {
           </Button>
           <Button
             onClick={next}
-            disabled={flashcardSets.length <= PER_PAGE}
+            disabled={flashcardSets.length < PER_PAGE}
             className="inline-flex items-center gap-2">
             {_e('common.next')}
             <ArrowRightIcon />
