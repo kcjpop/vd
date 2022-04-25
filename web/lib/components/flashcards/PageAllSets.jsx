@@ -1,12 +1,15 @@
+
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+import { useUser } from '@/lib/auth'
+import { useTranslation } from '@/lib/i18n'
+
 import { Layout } from '../common/Layout'
+import { Breadcrumb } from '../common/Breadcrumb'
 import { Loading } from '../common/Loading'
 import { Button } from '../common/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '../common/Icons'
-import { useUser } from '../../auth'
-import { useTranslation } from '../../i18n'
 
 import { useAllSets } from './useAllSets'
 import { Sets } from './Sets'
@@ -14,6 +17,8 @@ import { Sets } from './Sets'
 const PER_PAGE = 9
 
 export function PageAllSets({ page }) {
+  const { _e } = useTranslation()
+
   const { user } = useUser({ redirectIfUnauthenticated: true })
   const router = useRouter()
   const { _e } = useTranslation()
@@ -29,7 +34,7 @@ export function PageAllSets({ page }) {
   const next = (e) => {
     e.preventDefault()
 
-    flashcardSets.length >= 9 && setCurrentPage(currentPage + 1)
+    flashcardSets.length >= PER_PAGE && setCurrentPage(currentPage + 1)
     router.push(
       { pathName: router.pathname, query: { page: currentPage + 2 } },
       undefined,
@@ -48,17 +53,20 @@ export function PageAllSets({ page }) {
     )
   }
 
-  if (isLoading) {
-    return (
-      <Layout>
-        <Loading />
-      </Layout>
-    )
-  }
+  if (isLoading) return <Layout loading />
+
+  const links = [
+    { href: '/', name: _e('nav.home') },
+    { href: '/flashcards', name: _e('nav.flashcards') },
+  ]
 
   return (
     <Layout>
       <div className="container">
+        <div className="mb-4">
+          <Breadcrumb links={links} />
+        </div>
+
         <Sets flashcardSets={flashcardSets} />
         <div className="mt-5 flex w-full flex-row items-center justify-center gap-5">
           <Button

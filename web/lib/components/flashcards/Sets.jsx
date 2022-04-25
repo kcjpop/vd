@@ -11,7 +11,7 @@ function Set({ set }) {
           {set.name}
         </p>
         <p className="pointer-events-none mt-1 text-center text-sm text-slate-400">
-          ({set.flashcards.length}&nbsp;{_e('flashcard.flashcards')})
+          {set.flashcards.length} {_e('flashcard.flashcards')}
         </p>
       </div>
     </Link>
@@ -20,7 +20,7 @@ function Set({ set }) {
 
 export function Sets({ flashcardSets = [] }) {
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
       {flashcardSets.map((set) => (
         <Set key={set.id} set={set} />
       ))}

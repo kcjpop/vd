@@ -35,7 +35,6 @@ export function LoginForm() {
       router.push(router.query.redirectTo || '/')
     } catch (error) {
       setFormError(error.message)
-    } finally {
       setLoading(false)
     }
   }
