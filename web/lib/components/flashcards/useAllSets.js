@@ -30,8 +30,6 @@ export function useAllSets({
     async () => {
       if (!user) return []
 
-      console.log({ perPage, page, r: getRange(page, perPage) })
-
       const { data: sets, error } = perPage
         ? await getPaginatedSets({
             userId: user.id,
