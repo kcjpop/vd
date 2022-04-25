@@ -1,5 +1,5 @@
 import { Root, Title, Description, Action, Close } from '@radix-ui/react-toast'
-import { IoClose } from 'react-icons/io5'
+import { CloseIcon } from '../common/Icons'
 import { useTranslation } from '../../i18n'
 import s from './style.module.css'
 
@@ -39,7 +39,7 @@ export function Toast({
           className="rounded-full bg-white p-1 hover:bg-slate-100"
           aria-label={_e('toast.dismiss')}>
           <span aria-hidden>
-            <IoClose />
+            <CloseIcon />
           </span>
         </Close>
       </div>
