@@ -75,7 +75,7 @@ export function PageAllSets({ page }) {
         <div className="flex items-center justify-center gap-2">
           <Button
             onClick={prev}
-            disabled={currentPage === 0}
+            disabled={currentPage === 1}
             className="inline-flex items-center gap-2">
             <ArrowLeftIcon />
             {_e('common.previous')}
