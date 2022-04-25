@@ -11,6 +11,8 @@ const messages = {
   'common.create': 'Tạo',
   'common.cancel': 'Huỷ',
   'common.goBack': 'Quay lại',
+  'common.previous': 'Trước',
+  'common.next': 'Sau',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',
