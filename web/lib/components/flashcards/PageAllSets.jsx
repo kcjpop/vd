@@ -1,14 +1,12 @@
 import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { HiPlus } from 'react-icons/hi'
 
 import { Input } from '../common/Input'
 import { Button } from '../common/Button'
 import { Dialog } from '../common/Dialog'
 import { Layout } from '../common/Layout'
-import { Loading } from '../common/Loading'
 import { Breadcrumb } from '../common/Breadcrumb'
-import { ArrowLeftIcon, ArrowRightIcon } from '../common/Icons'
+import { ArrowLeftIcon, ArrowRightIcon, PlusIcon } from '../common/Icons'
 
 import { useUser } from '../../auth'
 import { useTranslation } from '../../i18n'
@@ -19,34 +17,11 @@ import { Sets } from './Sets'
 
 const PER_PAGE = 9
 
-export function CreateNewSetDialog({
-  createNewSet,
-  onOpenChange,
-  user,
-  ...props
-}) {
+export function CreateNewSetDialog({ onCreateNewSet, onOpenChange, ...props }) {
   const [name, setName] = useState('')
   const { _e } = useTranslation()
-  const { notify } = useContext(ToastContext)
 
   const updateName = (e) => setName(e.target.value)
-
-  const doCreateNewSet = async (e) => {
-    e.preventDefault()
-
-    await createNewSet.mutateAsync({ name, userId: user.id })
-
-    if (createNewSet.status !== 'error') {
-      notify({ title: _e('flashcardset.createNewSetSuccessfully') })
-    } else {
-      notify({
-        title: _e('flashcardset.error.createNewSet'),
-        variant: 'error',
-      })
-    }
-
-    onOpenChange(false)
-  }
 
   return (
     <Dialog
@@ -58,7 +33,7 @@ export function CreateNewSetDialog({
           <Input name="name" value={name} onChange={updateName} />
           <Button
             className="border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
-            onClick={doCreateNewSet}>
+            onClick={onCreateNewSet(name)}>
             {_e('common.create')}
           </Button>
         </div>
@@ -67,11 +42,14 @@ export function CreateNewSetDialog({
   )
 }
 
-export function PageAllSets() {
+export function PageAllSets({ page }) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState(Number(page) - 1)
+
   const { _e } = useTranslation()
   const router = useRouter()
+  const { notify } = useContext(ToastContext)
   const { user } = useUser({ redirectIfUnauthenticated: true })
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const { flashcardSets, isLoading, updateSet, deleteSet, createNewSet } =
     useAllSets({
       user,
@@ -103,6 +81,23 @@ export function PageAllSets() {
     )
   }
 
+  const doCreateNewSet = (name) => async (e) => {
+    e.preventDefault()
+
+    await createNewSet.mutateAsync({ name, userId: user.id })
+
+    if (createNewSet.status !== 'error') {
+      notify({ title: _e('flashcardset.createNewSetSuccessfully') })
+    } else {
+      notify({
+        title: _e('flashcardset.error.createNewSet'),
+        variant: 'error',
+      })
+    }
+
+    setIsDialogOpen(false)
+  }
+
   if (isLoading) return <Layout loading />
 
   const links = [
@@ -115,22 +110,23 @@ export function PageAllSets() {
   return (
     <Layout>
       <div className="container">
-        <div className="mb-4">
-          <Breadcrumb links={links} />
-        </div>
-        <div className="mb-2 flex w-full flex-row items-center justify-end">
-          <Button
-            className="grid-rows-2-min-fr grid auto-cols-min grid-cols-2 gap-2 rounded border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
-            onClick={openDialog}>
-            <HiPlus className="h-5 w-5" />{' '}
-            <span className="">{_e('flashcardset.create')}</span>
-          </Button>
+        <div className="mb-2 grid w-full grid-cols-2 grid-rows-1">
+          <div className="flex w-full items-center">
+            <Breadcrumb links={links} />
+          </div>
+          <div className="flex w-full flex-row items-center justify-end">
+            <Button
+              className="grid-rows-2-min-fr grid auto-cols-min grid-cols-2 gap-2 rounded border border-sky-300 bg-sky-100 p-2 text-sm font-semibold text-sky-700 hover:border-sky-400"
+              onClick={openDialog}>
+              <PlusIcon className="h-5 w-5" />{' '}
+              <span className="">{_e('flashcardset.create')}</span>
+            </Button>
+          </div>
         </div>
         <CreateNewSetDialog
-          createNewSet={createNewSet}
+          onCreateNewSet={doCreateNewSet}
           open={isDialogOpen}
           onOpenChange={setIsDialogOpen}
-          user={user}
         />
 
         <div className="mb-4">

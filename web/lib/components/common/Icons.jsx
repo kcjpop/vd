@@ -19,4 +19,11 @@ export {
   FiArrowRight as ArrowRightIcon,
 } from 'react-icons/fi'
 
+export {
+  HiPlus as PlusIcon,
+  HiDotsVertical as DotsVerticalIcon,
+  HiOutlineTrash as TrashIcon,
+  HiOutlinePencil as EditIcon,
+} from 'react-icons/hi'
+
 export { BsFillBookmarkStarFill as FillBookmarkStartIcon } from 'react-icons/bs'

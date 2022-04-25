@@ -1,36 +1,22 @@
 import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { HiDotsVertical, HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi'
 
 import { useTranslation } from '../../i18n'
+import { useDropdown } from '../useDropdown'
+
+import { ToastContext } from '../../context/Toast'
+
 import { Button } from '../common/Button'
 import { Input } from '../common/Input'
 import { Dialog } from '../common/Dialog'
-import { useDropdown } from '../useDropdown'
-import { ToastContext } from '../../context/Toast'
+import { DotsVerticalIcon, TrashIcon, EditIcon } from '../common/Icons'
 
-function EditSetDialog({ set, onOpenChange, updateSet, ...props }) {
+function EditSetDialog({ set, onOpenChange, onUpdateSet, ...props }) {
   const [name, setName] = useState(set.name)
   const { _e } = useTranslation()
-  const { notify } = useContext(ToastContext)
 
   const updateName = (e) => {
     setName(e.target.value)
-  }
-
-  const doUpdateSet = async (e) => {
-    e.preventDefault()
-
-    await updateSet.mutateAsync({ id: set.id, name: name, userId: set.user_id })
-
-    /* Cannot use `updateSet.status === 'success'` somehow.
-     * First time always return status as 'idle' which cause the
-     * dialog remain open.
-     */
-    if (updateSet.status !== 'error') {
-      notify({ title: _e('flashcardset.updateNameSuccessfully') })
-      onOpenChange(false)
-    }
   }
 
   return (
@@ -40,16 +26,16 @@ function EditSetDialog({ set, onOpenChange, updateSet, ...props }) {
       {...props}>
       <div className="p-2">
         <form className="flex w-80 flex-col gap-2">
-          {updateSet.error && (
+          {/* {updateSet.error && (
             <p className="my-2 text-sm text-red-500">
               {_e('flashcardset.error.updateNameFail')}
             </p>
-          )}
+          )} */}
           <div className="grid grid-cols-2 gap-2">
             <Input name="name" value={name} onChange={updateName} />
             <Button
               className="border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
-              onClick={doUpdateSet}>
+              onClick={onUpdateSet(name)}>
               {_e('flashcardset.form.updateName')}
             </Button>
           </div>
@@ -83,12 +69,12 @@ function ConfirmSetDeletionModal({ doAction, open, onOpenChange }) {
         </p>
         <div className="grid grid-cols-2 gap-2">
           <Button
-            className="rounded border border-sky-300 bg-sky-100 text-sm font-semibold text-sky-700 hover:border-sky-400"
+            className="rounded border border-sky-300 bg-sky-100 py-2 text-sm font-semibold text-sky-700 hover:border-sky-400"
             onClick={handleClick(true)}>
             {_e('common.confirm')}
           </Button>
           <Button
-            className="rounded border border-slate-300 bg-slate-100 text-sm font-semibold text-slate-700 hover:border-slate-400"
+            className="rounded border border-slate-300 bg-slate-100 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
             onClick={handleClick()}>
             {_e('common.cancel')}
           </Button>
@@ -127,7 +113,7 @@ function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
     await deleteSet.mutateAsync({ id: set.id })
 
     if (deleteSet.status === 'error') {
-      notify({ title: _e('flashcardset.error.deleleSet') })
+      notify({ title: _e('flashcardset.error.deleleSet'), variant: 'error' })
     }
 
     if (deleteSet.status === 'success') {
@@ -137,7 +123,21 @@ function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
     }
   }
 
-  const confirmRemoveSet = (e) => {
+  const doUpdateSet = (name) => async (e) => {
+    e.preventDefault()
+
+    await updateSet.mutateAsync({ id: set.id, name: name, userId: set.user_id })
+    /* Cannot use `updateSet.status === 'success'` somehow.
+     * First time always return status as 'idle' which cause the
+     * dialog remain open.
+     */
+    if (updateSet.status !== 'error') {
+      notify({ title: _e('flashcardset.updateNameSuccessfully') })
+      setIsEditDialogOpen(false)
+    }
+  }
+
+  const openDeleteConfimDialog = (e) => {
     e.preventDefault()
 
     setIsConfirmModalOpen(true)
@@ -150,7 +150,7 @@ function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
         onClick={toggleDropdown}
         onBlur={doCloseDropdown}
         {...referenceProps()}>
-        <HiDotsVertical className="h-6 w-6" />
+        <DotsVerticalIcon className="h-6 w-6" />
       </Button>
       {isOpen && (
         <div
@@ -161,13 +161,13 @@ function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
               className="mb-1 flex flex-row items-center justify-between rounded px-2 py-1 hover:bg-slate-100"
               onClick={openEditDialog}>
               {_e('flashcardset.dropdown.rename')}{' '}
-              <HiOutlinePencil className="h-4 w-4" />
+              <EditIcon className="h-4 w-4" />
             </li>
             <li
               className="mb-1 flex flex-row items-center justify-between rounded px-2 py-1 hover:bg-slate-100"
-              onClick={confirmRemoveSet}>
+              onClick={openDeleteConfimDialog}>
               {_e('flashcardset.dropdown.delete')}{' '}
-              <HiOutlineTrash className="h-4 w-4 text-red-400" />
+              <TrashIcon className="h-4 w-4 text-red-400" />
             </li>
           </ul>
         </div>
@@ -175,7 +175,7 @@ function FlashcardSetDropdown({ set, updateSet, deleteSet }) {
       <EditSetDialog
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
-        updateSet={updateSet}
+        onUpdateSet={doUpdateSet}
         set={set}
       />
       <ConfirmSetDeletionModal
