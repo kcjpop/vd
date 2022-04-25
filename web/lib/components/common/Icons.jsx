@@ -5,6 +5,8 @@ export {
   FiSearch as SearchIcon,
   FiChevronUp as ChevronUpIcon,
   FiChevronDown as ChevronDownIcon,
+  FiChevronLeft as ChevronLeftIcon,
+  FiChevronRight as ChevronRightIcon,
   FiCheck as CheckIcon,
   FiZap as ZapIcon,
   FiX as CloseIcon,
