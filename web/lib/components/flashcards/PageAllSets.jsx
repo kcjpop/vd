@@ -31,7 +31,7 @@ export function PageAllSets({ page }) {
 
     flashcardSets.length >= 9 && setCurrentPage(currentPage + 1)
     router.push(
-      { pathName: router.pathname, query: { page: currentPage + 1 } },
+      { pathName: router.pathname, query: { page: currentPage + 2 } },
       undefined,
       { shallow: true },
     )
@@ -42,7 +42,7 @@ export function PageAllSets({ page }) {
 
     currentPage > 0 && setCurrentPage(currentPage - 1)
     router.push(
-      { pathName: router.pathname, query: { page: currentPage + 1 } },
+      { pathName: router.pathname, query: { page: currentPage } },
       undefined,
       { shallow: true },
     )
