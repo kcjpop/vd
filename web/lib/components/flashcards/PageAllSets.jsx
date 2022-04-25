@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { Alert } from '../common/Alert'
@@ -59,14 +59,16 @@ function CreateNewSetDialog({
 }
 
 function EditSetDialog({ set, onOpenChange, onSetUpdate, loading, ...props }) {
-  if (!set) return null
-
-  const [name, setName] = useState(set.name)
+  const [name, setName] = useState(set?.name)
   const { _e } = useTranslation()
 
   const updateName = (e) => {
     setName(e.target.value)
   }
+
+  useEffect(() => {
+    setName(set?.name || '')
+  }, [set])
 
   return (
     <Dialog
