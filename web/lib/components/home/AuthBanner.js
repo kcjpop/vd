@@ -1,8 +1,16 @@
 import { useUser, logout } from '@/lib/auth'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { LinkButton } from '../common/Button'
 
 function UserProfile({ user }) {
+  const router = useRouter()
+
+  const doLogout = async () => {
+    await logout()
+    router.reload()
+  }
+
   return (
     <div className="flex flex-col gap-2 rounded border-2 border-orange-300 bg-orange-100 p-4 text-slate-700">
       <div className="flex items-center gap-2">
@@ -27,7 +35,7 @@ function UserProfile({ user }) {
         <li>
           <button
             className="text-sm font-semibold tracking-wide text-orange-700"
-            onClick={() => logout()}>
+            onClick={doLogout}>
             Logout
           </button>
         </li>
