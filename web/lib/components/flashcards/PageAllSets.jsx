@@ -289,7 +289,7 @@ export function PageAllSets({ page }) {
 
   return (
     <Layout>
-      <div className="mb-2 grid w-full grid-cols-2 grid-rows-1">
+      <div className="mb-4 grid w-full grid-cols-2 grid-rows-1">
         <div className="flex w-full items-center">
           <Breadcrumb links={links} />
         </div>
