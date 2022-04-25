@@ -62,16 +62,16 @@ export function PageAllSets({ page }) {
           <Button
             onClick={prev}
             disabled={currentPage === 0}
-            className="mr-3 inline-flex items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <ArrowLeftIcon className="mr-2 h-5 w-5" />
+            className="mr-3 inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <ArrowLeftIcon className="h-5 w-5" />
             {_e('common.previous')}
           </Button>
           <Button
             onClick={next}
             disabled={flashcardSets.length < 9}
-            className="inline-flex items-center rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
             {_e('common.next')}
-            <ArrowRightIcon className="ml-2 h-5 w-5" />
+            <ArrowRightIcon className="h-5 w-5" />
           </Button>
         </div>
       </div>
