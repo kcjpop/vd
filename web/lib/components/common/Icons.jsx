@@ -13,6 +13,8 @@ export {
   FiAlertTriangle as AlertTriangleIcon,
   FiHelpCircle as HelpCircleIcon,
   FiCheckCircle as CheckCircleIcon,
+  FiArrowLeft as ArrowLeftIcon,
+  FiArrowRight as ArrowRightIcon,
 } from 'react-icons/fi'
 
 export { BsFillBookmarkStarFill as FillBookmarkStartIcon } from 'react-icons/bs'
