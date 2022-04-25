@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { Layout } from '../common/Layout'
 import { Alert } from '../common/Alert'
+import { Breadcrumb } from '../common/Breadcrumb'
+import { useTranslation } from '../../i18n'
 import { useUser } from '../../auth'
 
 // Import Swiper styles
@@ -16,7 +18,6 @@ import 'swiper/css/navigation'
 
 import { useSingleSet } from './useSingleSet'
 import s from './style.module.css'
-import { useTranslation } from '@/lib/i18n'
 
 function FlipCard({ flashcard }) {
   const [flipped, setFlipped] = useState(false)
@@ -38,10 +39,9 @@ function FlipCard({ flashcard }) {
   )
 }
 
-export function PageSingleSet() {
-  const { _e } = useTranslation()
+export function PageSingleSet({ setId }) {
   const router = useRouter()
-  const { setId } = router.query
+  const { _e } = useTranslation()
   const { user } = useUser({ redirectIfUnauthenticated: true })
   const { currentSet, isLoading, isError } = useSingleSet({ setId, user })
 
@@ -62,6 +62,12 @@ export function PageSingleSet() {
     )
   }
 
+  const links = [
+    { href: '/', name: _e('nav.home') },
+    { href: '/flashcards', name: _e('nav.flashcards') },
+    { href: router.asPath, name: currentSet?.name },
+  ]
+
   if (isError) {
     return (
       <Layout>
@@ -72,7 +78,8 @@ export function PageSingleSet() {
 
   return (
     <Layout>
-      <h1 className="text-2xl font-bold">{currentSet.name}</h1>
+      <h1 className="mb-4 text-2xl font-bold">{currentSet?.name}</h1>
+      <Breadcrumb links={links} />
       <Swiper
         pagination={{ type: 'fraction' }}
         navigation={true}
