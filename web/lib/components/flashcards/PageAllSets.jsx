@@ -55,7 +55,7 @@ function CreateNewSetDialog({ onCreateNewSet, onOpenChange, ...props }) {
   )
 }
 
-function EditSetDialog({ set, onOpenChange, onUpdateSet, ...props }) {
+function EditSetDialog({ set, onOpenChange, onSetUpdate, ...props }) {
   if (!set) return null
 
   const [name, setName] = useState(set.name)
@@ -71,7 +71,7 @@ function EditSetDialog({ set, onOpenChange, onUpdateSet, ...props }) {
       onOpenChange={onOpenChange}
       {...props}>
       <div className="p-2">
-        <form className="flex w-80 flex-col gap-2" onSubmit={onUpdateSet(name)}>
+        <form className="flex w-80 flex-col gap-2" onSubmit={onSetUpdate(name)}>
           <div className="grid grid-cols-2 gap-2">
             <Input name="name" value={name} onChange={updateName} />
             <Button
@@ -87,7 +87,7 @@ function EditSetDialog({ set, onOpenChange, onUpdateSet, ...props }) {
   )
 }
 
-function ConfirmSetDeletionModal({ doAction, open, onOpenChange }) {
+function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange }) {
   const { _e } = useTranslation()
 
   const handleClick =
@@ -95,7 +95,7 @@ function ConfirmSetDeletionModal({ doAction, open, onOpenChange }) {
     async (e) => {
       e.preventDefault()
 
-      confirm && (await doAction())
+      confirm && (await onSetDelete())
       onOpenChange(false)
     }
 
@@ -333,7 +333,7 @@ export function PageAllSets({ page }) {
       <EditSetDialog
         open={isEditDialogOpen}
         onOpenChange={setIsEditDialogOpen}
-        onUpdateSet={doUpdateSet}
+        onSetUpdate={doUpdateSet}
         set={editedSet}
       />
 
@@ -341,7 +341,7 @@ export function PageAllSets({ page }) {
       <ConfirmSetDeletionModal
         open={isConfirmModalOpen}
         onOpenChange={setIsConfirmModalOpen}
-        doAction={doDeleteSet}
+        onSetDelete={doDeleteSet}
       />
 
       <div className="mb-4">
