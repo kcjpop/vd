@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 
+import { Alert } from '../common/Alert'
 import { Input } from '../common/Input'
 import { Button } from '../common/Button'
 import { Dialog } from '../common/Dialog'
@@ -24,7 +25,12 @@ import { useAllSets } from './useAllSets'
 
 const PER_PAGE = 9
 
-function CreateNewSetDialog({ onCreateNewSet, onOpenChange, ...props }) {
+function CreateNewSetDialog({
+  onCreateNewSet,
+  onOpenChange,
+  loading,
+  ...props
+}) {
   const [name, setName] = useState('')
   const { _e } = useTranslation()
 
@@ -43,10 +49,7 @@ function CreateNewSetDialog({ onCreateNewSet, onOpenChange, ...props }) {
             placeholder="e.g Subject"
             onChange={updateName}
           />
-          <Button
-            variant="primary"
-            className="border  bg-sky-100 text-sm font-semibold text-sky-700"
-            type="submit">
+          <Button loading={loading} variant="primary" type="submit">
             {_e('common.create')}
           </Button>
         </div>
@@ -55,7 +58,7 @@ function CreateNewSetDialog({ onCreateNewSet, onOpenChange, ...props }) {
   )
 }
 
-function EditSetDialog({ set, onOpenChange, onSetUpdate, ...props }) {
+function EditSetDialog({ set, onOpenChange, onSetUpdate, loading, ...props }) {
   if (!set) return null
 
   const [name, setName] = useState(set.name)
@@ -74,10 +77,7 @@ function EditSetDialog({ set, onOpenChange, onSetUpdate, ...props }) {
         <form className="flex w-80 flex-col gap-2" onSubmit={onSetUpdate(name)}>
           <div className="grid grid-cols-2 gap-2">
             <Input name="name" value={name} onChange={updateName} />
-            <Button
-              className="border  bg-sky-100 text-sm font-semibold text-sky-700 "
-              variant="primary"
-              type="submit">
+            <Button loading={loading} variant="primary" type="submit">
               {_e('flashcardset.form.updateName')}
             </Button>
           </div>
@@ -87,7 +87,7 @@ function EditSetDialog({ set, onOpenChange, onSetUpdate, ...props }) {
   )
 }
 
-function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange }) {
+function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange, loading }) {
   const { _e } = useTranslation()
 
   const handleClick =
@@ -110,15 +110,10 @@ function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange }) {
           {_e('flashcardset.modal.doYouWantToDeleteThisSet')}
         </p>
         <div className="grid grid-cols-2 gap-2">
-          <Button
-            className="rounded border  bg-sky-100 py-2 text-sm font-semibold text-sky-700 "
-            variant="primary"
-            type="submit">
+          <Button loading={loading} variant="primary" type="submit">
             {_e('common.confirm')}
           </Button>
-          <Button
-            className="rounded border border-slate-300 bg-slate-100 py-2 text-sm font-semibold text-slate-700 hover:border-slate-400"
-            onClick={handleClick()}>
+          <Button disabled={loading} onClick={handleClick()}>
             {_e('common.cancel')}
           </Button>
         </div>
@@ -157,7 +152,6 @@ function FlashcardSet({ set, openDeleteConfimDialog, openEditDialog }) {
       <div id="options" className="absolute top-1 right-1 z-20 aspect-square">
         <div className="relative">
           <Button
-            className="rounded-full px-1 py-1 text-slate-400 hover:text-slate-600 hover:shadow-sm"
             onClick={toggleDropdown}
             onBlur={doCloseDropdown}
             {...referenceProps()}>
@@ -241,16 +235,10 @@ export function PageAllSets({ page }) {
 
     await createNewSet.mutateAsync({ name, userId: user.id })
 
-    if (createNewSet.status !== 'error') {
+    if (createNewSet.isSuccess) {
       notify({ title: _e('flashcardset.createNewSetSuccessfully') })
-    } else {
-      notify({
-        title: _e('flashcardset.error.createNewSet'),
-        variant: 'error',
-      })
+      setIsDialogOpen(false)
     }
-
-    setIsDialogOpen(false)
   }
 
   const doUpdateSet = (name) => async (e) => {
@@ -261,32 +249,23 @@ export function PageAllSets({ page }) {
       name: name,
       userId: editedSet.user_id,
     })
-    /* Cannot use `updateSet.status === 'success'` somehow.
-     * First time always return status as 'idle' which cause the
-     * dialog remain open.
-     */
-    // @todo: using alert
-    if (updateSet.status !== 'error') {
+
+    if (updateSet.isSuccess) {
       notify({ title: _e('flashcardset.updateNameSuccessfully') })
       setIsEditDialogOpen(false)
+      setEditedSet(null)
     }
-
-    setEditedSet(null)
   }
 
   const doDeleteSet = async () => {
     await deleteSet.mutateAsync({ id: editedSet.id })
 
-    if (deleteSet.isError) {
-      // @todo: using Alert instead
-      notify({ title: _e('flashcardset.error.deleleSet'), variant: 'error' })
-    } else {
+    if (deleteSet.isSuccess) {
       notify({
         title: _e('flashcardset.deleteSetSuccessfully'),
       })
+      setEditedSet(null)
     }
-
-    setEditedSet(null)
   }
 
   if (isLoading) return <Layout loading />
@@ -313,9 +292,7 @@ export function PageAllSets({ page }) {
           <Breadcrumb links={links} />
         </div>
         <div className="flex w-full flex-row items-center justify-end">
-          <Button
-            className="grid-rows-2-min-fr grid auto-cols-min grid-cols-2 gap-2 rounded border  bg-sky-100 p-2 text-sm font-semibold text-sky-700 "
-            onClick={openDialog}>
+          <Button className="flex items-center gap-2" onClick={openDialog}>
             <PlusIcon className="h-5 w-5" />{' '}
             <span className="">{_e('flashcardset.create')}</span>
           </Button>
@@ -327,7 +304,11 @@ export function PageAllSets({ page }) {
         onCreateNewSet={doCreateNewSet}
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
+        loading={createNewSet.isLoading}
       />
+      {createNewSet.isError && (
+        <Alert variant="danger">{_e('flashcardset.error.createNewSet')}</Alert>
+      )}
 
       {/* Edit flashcard set */}
       <EditSetDialog
@@ -335,14 +316,24 @@ export function PageAllSets({ page }) {
         onOpenChange={setIsEditDialogOpen}
         onSetUpdate={doUpdateSet}
         set={editedSet}
+        loading={updateSet.isLoading}
       />
+      {updateSet.isError && (
+        <Alert variant="danger">
+          {_e('flashcardset.error.updateNameFail')}
+        </Alert>
+      )}
 
       {/* Delete flashcard set */}
       <ConfirmSetDeletionModal
         open={isConfirmModalOpen}
         onOpenChange={setIsConfirmModalOpen}
         onSetDelete={doDeleteSet}
+        loading={deleteSet.isLoading}
       />
+      {deleteSet.isError && (
+        <Alert variant="danger">{_e('flashcardset.error.deleleSet')}</Alert>
+      )}
 
       <div className="mb-4">
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
