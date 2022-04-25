@@ -35,7 +35,7 @@ export function Alert({ variant = 'info', children }) {
     <div className={`rounded p-4 ${v.bg}`} role="alert" data-variant={variant}>
       <div className="flex items-center gap-2">
         <div className="w-8">{v.icon}</div>
-        <p>{children}</p>
+        <div>{children}</div>
       </div>
     </div>
   )

@@ -50,7 +50,7 @@ export const Button = forwardRef(function Btn(
 })
 
 export const LinkButton = forwardRef(function LinkBtn(
-  { children, loading = false, variant = 'primary', className, ...props },
+  { children, loading = false, variant = 'default', className, ...props },
   ref,
 ) {
   return (
