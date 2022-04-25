@@ -22,7 +22,7 @@ export const getFlashcardSet = (
 export const upsertSet = (set) => sb.from(TBL_SETS).upsert(set, config)
 
 export const deleteFlashcardSet = ({ id }) =>
-  sb.from(TBL_SETS).delete().match({ id })
+  sb.from(TBL_SETS).delete().match({ id }).not('is_default', 'eq', true)
 
 export const getFlashcards = ({ setId }, { fields } = { fields: '*' }) =>
   sb.from(TBL_FLASHCARDS).select(fields, config).eq('set_id', setId)
