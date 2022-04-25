@@ -31,4 +31,4 @@ export const upsertFlashcard = (flashcard) =>
   sb.from(TBL_FLASHCARDS).upsert(flashcard, config)
 
 export const deleteFlashcards = ({ id }) =>
-  sb.from(TBL_FLASHCARDS).delete().match({ id })
+  sb.from(TBL_FLASHCARDS).delete().match({ id }).not('is_default', 'eq', true)
