@@ -62,12 +62,6 @@ export function PageSingleSet({ setId }) {
     )
   }
 
-  const links = [
-    { href: '/', name: _e('nav.home') },
-    { href: '/flashcards', name: _e('nav.flashcards') },
-    { href: router.asPath, name: currentSet?.name },
-  ]
-
   if (isError) {
     return (
       <Layout>
@@ -76,10 +70,18 @@ export function PageSingleSet({ setId }) {
     )
   }
 
+  const links = [
+    { href: '/', name: _e('nav.home') },
+    { href: '/flashcards', name: _e('nav.flashcards') },
+    { href: router.asPath, name: currentSet?.name },
+  ]
+
   return (
     <Layout>
-      <h1 className="mb-4 text-2xl font-bold">{currentSet?.name}</h1>
-      <Breadcrumb links={links} />
+      <div className="mb-4">
+        <Breadcrumb links={links} />
+      </div>
+
       <Swiper
         pagination={{ type: 'fraction' }}
         navigation={true}

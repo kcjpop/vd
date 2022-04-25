@@ -25,7 +25,9 @@ export function Layout({ children, navVariant, opengraph, loading }) {
 
       <main className="flex-1">
         {loading ? (
-          <Loading />
+          <div className="my-8">
+            <Loading />
+          </div>
         ) : (
           <ToastProvider swipeDirection="right">
             <div className="mx-auto max-w-7xl p-4 text-base">
