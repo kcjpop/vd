@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -7,7 +6,6 @@ import { useTranslation } from '@/lib/i18n'
 
 import { Layout } from '../common/Layout'
 import { Breadcrumb } from '../common/Breadcrumb'
-import { Loading } from '../common/Loading'
 import { Button } from '../common/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '../common/Icons'
 
@@ -18,10 +16,9 @@ const PER_PAGE = 9
 
 export function PageAllSets({ page }) {
   const { _e } = useTranslation()
-
   const { user } = useUser({ redirectIfUnauthenticated: true })
   const router = useRouter()
-  const { _e } = useTranslation()
+
   const [currentPage, setCurrentPage] = useState(Number(page) - 1)
 
   const { flashcardSets, isLoading } = useAllSets({
