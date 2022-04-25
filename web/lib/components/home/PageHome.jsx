@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { OpenGraph } from '@/lib/components/common/OpenGraph'
 import { Logo } from '@/lib/components/common/Logo'
 import { Wave } from '@/lib/components/common/Wave'
@@ -6,7 +5,7 @@ import { Wave } from '@/lib/components/common/Wave'
 import { WordSearchForm } from '@/lib/components/word-search-form/WordSearchForm'
 
 import { Stats } from './Stats'
-import { LinkButton } from '../common/Button'
+import { AuthBanner } from './AuthBanner'
 
 export function PageHome({ opengraph, stats }) {
   return (
@@ -30,22 +29,7 @@ export function PageHome({ opengraph, stats }) {
             <Stats stats={stats} />
           </div>
 
-          <div>
-            <div className="flex items-center gap-2">
-              <Link href="/auth/register" passHref>
-                <LinkButton variant="secondary">
-                  Đăng ký tài khoản 🤟
-                </LinkButton>
-              </Link>
-
-              <Link href="/auth" passHref>
-                <LinkButton variant="secondary">Đăng nhập 👋</LinkButton>
-              </Link>
-            </div>
-            <button className="p-2 text-sm text-slate-500">
-              <p>Ủa tra từ điển mà cũng cần tài khoản à? 🤔</p>
-            </button>
-          </div>
+          <AuthBanner />
         </div>
       </section>
 
