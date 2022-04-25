@@ -16,15 +16,12 @@ function getClasses(variant) {
  * @param {object} props
  * @param {"default" | "primary" | "secondary"} props.variant
  */
-export function Button({
-  children,
-  type = 'button',
-  loading = false,
-  variant = 'default',
-  ...props
-}) {
+export const Button = forwardRef(function Btn(
+  { children, type = 'button', loading = false, variant = 'default', ...props },
+  ref,
+) {
   return (
-    <button type={type} className={getClasses(variant)} {...props}>
+    <button ref={ref} type={type} className={getClasses(variant)} {...props}>
       {loading ? (
         <div className="flex items-center justify-center">
           <Spinner />
@@ -34,9 +31,9 @@ export function Button({
       )}
     </button>
   )
-}
+})
 
-export const LinkButton = forwardRef(function LinkButton(
+export const LinkButton = forwardRef(function LinkBtn(
   { children, loading = false, variant = 'primary', ...props },
   ref,
 ) {
