@@ -64,21 +64,24 @@ export function PageAllSets({ page }) {
           <Breadcrumb links={links} />
         </div>
 
-        <Sets flashcardSets={flashcardSets} />
-        <div className="mt-5 flex w-full flex-row items-center justify-center gap-5">
+        <div className="mb-4">
+          <Sets flashcardSets={flashcardSets} />
+        </div>
+
+        <div className="flex items-center justify-center gap-2">
           <Button
             onClick={prev}
             disabled={currentPage === 0}
-            className="mr-3 inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <ArrowLeftIcon className="h-5 w-5" />
+            className="inline-flex items-center gap-2">
+            <ArrowLeftIcon />
             {_e('common.previous')}
           </Button>
           <Button
             onClick={next}
-            disabled={flashcardSets.length < PER_PAGE}
-            className="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            disabled={flashcardSets.length <= PER_PAGE}
+            className="inline-flex items-center gap-2">
             {_e('common.next')}
-            <ArrowRightIcon className="h-5 w-5" />
+            <ArrowRightIcon />
           </Button>
         </div>
       </div>

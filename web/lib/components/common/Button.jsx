@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { forwardRef } from 'react'
 import { Spinner } from './Spinner'
 
@@ -17,11 +18,26 @@ function getClasses(variant) {
  * @param {"default" | "primary" | "secondary"} props.variant
  */
 export const Button = forwardRef(function Btn(
-  { children, type = 'button', loading = false, variant = 'default', ...props },
+  {
+    children,
+    type = 'button',
+    loading = false,
+    variant = 'default',
+    className,
+    ...props
+  },
   ref,
 ) {
   return (
-    <button ref={ref} type={type} className={getClasses(variant)} {...props}>
+    <button
+      ref={ref}
+      type={type}
+      className={clsx(
+        'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
+        getClasses(variant),
+        className,
+      )}
+      {...props}>
       {loading ? (
         <div className="flex items-center justify-center">
           <Spinner />
@@ -34,11 +50,18 @@ export const Button = forwardRef(function Btn(
 })
 
 export const LinkButton = forwardRef(function LinkBtn(
-  { children, loading = false, variant = 'primary', ...props },
+  { children, loading = false, variant = 'primary', className, ...props },
   ref,
 ) {
   return (
-    <a ref={ref} className={getClasses(variant)} {...props}>
+    <a
+      ref={ref}
+      className={clsx(
+        'cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
+        getClasses(variant),
+        className,
+      )}
+      {...props}>
       {loading ? (
         <div className="flex items-center justify-center">
           <Spinner />
