@@ -13,6 +13,7 @@ const messages = {
   'common.goBack': 'Quay lại',
   'common.previous': 'Trước',
   'common.next': 'Sau',
+  'common.confirm': 'Xác nhận',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',
@@ -103,6 +104,21 @@ const messages = {
   'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
   'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
   'flashcard.errors.notFound': 'Không tìm thấy bộ flashcard này',
+
+  'flashcardset.create': 'Tạo set mới',
+  'flashcardset.dropdown.rename': 'Thay tên',
+  'flashcardset.dropdown.delete': 'Xoá',
+  'flashcardset.form.name': 'Thay tên set',
+  'flashcardset.form.updateName': 'Cập nhật',
+  'flashcardset.modal.confirm': 'Xác nhận xoá set',
+  'flashcardset.modal.doYouWantToDeleteThisSet':
+    'Bạn có muốn xoá set này không? Hành động này không thể thay đổi được',
+  'flashcardset.updateNameSuccessfully': 'Cập nhật tên set thành công',
+  'flashcardset.deleteSetSuccessfully': 'Set đã được xoá thành công',
+  'flashcardset.createNewSetSuccessfully': 'Set mới đã được tạo',
+  'flashcardset.error.updateNameFail': 'Đã có lỗi xảy ra khi cập nhật tên set',
+  'flashcardset.error.deleleSet': 'Đã có lỗi xảy ra khi xoá set',
+  'flashcardset.error.createNewSet': ' Đã có lỗi xảy ra khi tạo set mới',
 
   'wordMenu.settings': 'Tùy chọn',
   'wordMenu.addDefinition': 'Thêm định nghĩa mới',

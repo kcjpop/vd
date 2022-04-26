@@ -9,3 +9,7 @@
   --z-index-navbar: 50;
   --z-index-dialog: 100;
 }
+
+.grid-rows-2-min-fr {
+  grid-template-columns: min-content 1fr;
+}
