@@ -53,7 +53,6 @@ function CreateNewSetDialog({
 
 export function PageAllSets({ page }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState(Number(page))
 
   const { _e } = useTranslation()
   const { notify } = useContext(ToastContext)
@@ -69,7 +68,7 @@ export function PageAllSets({ page }) {
     user,
     fetchAllSets: true,
     perPage: PER_PAGE,
-    page: currentPage,
+    page: page,
     fields: 'id, name, user_id, flashcards(id)',
   })
 
@@ -165,10 +164,9 @@ export function PageAllSets({ page }) {
       {/* Navigators */}
       {total > PER_PAGE && (
         <PageNavigation
-          currentPage={currentPage}
-          onUpdateCurrentPage={setCurrentPage}
+          page={page}
           isNextDisabled={flashcardSets.length < PER_PAGE}
-          isPrevDisabled={currentPage === 1}
+          isPrevDisabled={page === 1}
         />
       )}
     </Layout>

@@ -4,35 +4,20 @@ import { Button } from '../common/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '../common/Icons'
 import { useTranslation } from '../../i18n'
 
-export function PageNavigation({
-  currentPage,
-  onUpdateCurrentPage,
-  isPrevDisabled,
-  isNextDisabled,
-}) {
+export function PageNavigation({ page, isPrevDisabled, isNextDisabled }) {
   const { _e } = useTranslation()
   const router = useRouter()
 
   const next = (e) => {
     e.preventDefault()
 
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage + 1 } },
-      undefined,
-      { shallow: true },
-    )
-    onUpdateCurrentPage(currentPage + 1)
+    router.push({ pathName: router.pathname, query: { page: page + 1 } })
   }
 
   const prev = (e) => {
     e.preventDefault()
 
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage - 1 } },
-      undefined,
-      { shallow: true },
-    )
-    onUpdateCurrentPage(currentPage - 1)
+    router.push({ pathName: router.pathname, query: { page: page - 1 } })
   }
 
   return (
