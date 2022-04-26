@@ -7,6 +7,8 @@ const { getImageHandler } = require('./handlers/banner')
 const { getSummaryHandler } = require('./handlers/summary')
 const { getSuggestions } = require('./handlers/suggestions')
 
+const { getWordsOfDictHandler } = require('./dict/handler')
+
 const { validateGetSuggestions } = require('./validators/suggestions')
 
 if (process.env.NODE_ENV == null || process.env.NODE_ENV === 'local') {
@@ -28,6 +30,8 @@ app.use(express.json())
 app.disable('x-powered-by')
 
 app.get('/words/:word', getSingleWordHandler)
+
+app.get('/dict/:name', getWordsOfDictHandler)
 
 app.get('/banner/:word', getImageHandler)
 
