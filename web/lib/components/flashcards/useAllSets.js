@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
 import {
@@ -9,7 +10,7 @@ import {
 } from './query'
 
 function getRange(page, perPage) {
-  return { from: (page + 1) * perPage - perPage, to: (page + 1) * perPage - 1 }
+  return { from: page * perPage - perPage, to: page * perPage - 1 }
 }
 
 export function useAllSets({
@@ -21,6 +22,7 @@ export function useAllSets({
 }) {
   const queryClient = useQueryClient()
   const queryKey = ['flashcard-sets', user?.id, page]
+  const [total, setTotal] = useState(0)
 
   const {
     data: flashcardSets,
@@ -31,7 +33,11 @@ export function useAllSets({
     async () => {
       if (!user) return []
 
-      const { data: sets, error } = perPage
+      const {
+        data: sets,
+        error,
+        count,
+      } = perPage
         ? await getPaginatedSets(
             {
               userId: user.id,
@@ -41,6 +47,8 @@ export function useAllSets({
           )
         : await getAllSets({ userId: user.id }, { fields })
       if (error) throw error
+
+      count !== undefined && setTotal(count)
 
       return sets
     },
@@ -97,6 +105,7 @@ export function useAllSets({
 
   return {
     flashcardSets,
+    total,
     isError,
     isLoading,
     createNewSet,

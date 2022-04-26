@@ -16,23 +16,23 @@ export function PageNavigation({
   const next = (e) => {
     e.preventDefault()
 
-    onUpdateCurrentPage(currentPage + 1)
     router.push(
-      { pathName: router.pathname, query: { page: currentPage + 2 } },
+      { pathName: router.pathname, query: { page: currentPage + 1 } },
       undefined,
       { shallow: true },
     )
+    onUpdateCurrentPage(currentPage + 1)
   }
 
   const prev = (e) => {
     e.preventDefault()
 
-    onUpdateCurrentPage(currentPage - 1)
     router.push(
-      { pathName: router.pathname, query: { page: currentPage } },
+      { pathName: router.pathname, query: { page: currentPage - 1 } },
       undefined,
       { shallow: true },
     )
+    onUpdateCurrentPage(currentPage - 1)
   }
 
   return (
