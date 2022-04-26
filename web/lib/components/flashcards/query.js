@@ -16,13 +16,19 @@ export const getAllSets = (
 export const getPaginatedSets = (
   { userId, from, to },
   { fields } = { fields: 'id, name, flashcards(id)' },
-) => sb.from(TBL_SETS).select(fields).eq('user_id', userId).range(from, to)
+) =>
+  sb.from(TBL_SETS).select(fields, config).eq('user_id', userId).range(from, to)
 
 export const getFlashcardSet = (
   { id, userId },
   { fields } = { fields: 'id, name, flashcards(*)' },
 ) =>
-  sb.from(TBL_SETS).select(fields).eq('user_id', userId).eq('id', id).single()
+  sb
+    .from(TBL_SETS)
+    .select(fields, config)
+    .eq('user_id', userId)
+    .eq('id', id)
+    .single()
 
 export const upsertSet = (set) => sb.from(TBL_SETS).upsert(set, config)
 

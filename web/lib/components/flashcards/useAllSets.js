@@ -9,7 +9,7 @@ import {
 } from './query'
 
 function getRange(page, perPage) {
-  return { from: (page + 1) * perPage - perPage, to: (page + 1) * perPage - 1 }
+  return { from: page * perPage - perPage, to: page * perPage - 1 }
 }
 
 export function useAllSets({
@@ -22,16 +22,12 @@ export function useAllSets({
   const queryClient = useQueryClient()
   const queryKey = ['flashcard-sets', user?.id, page]
 
-  const {
-    data: flashcardSets,
-    isError,
-    isLoading,
-  } = useQuery(
+  const { data, isError, isLoading } = useQuery(
     queryKey,
     async () => {
       if (!user) return []
 
-      const { data: sets, error } = perPage
+      const { data, error, count } = perPage
         ? await getPaginatedSets(
             {
               userId: user.id,
@@ -42,7 +38,7 @@ export function useAllSets({
         : await getAllSets({ userId: user.id }, { fields })
       if (error) throw error
 
-      return sets
+      return { flashcardSets: data, total: count }
     },
     { enabled: fetchAllSets },
   )
@@ -96,7 +92,8 @@ export function useAllSets({
   })
 
   return {
-    flashcardSets,
+    flashcardSets: data?.flashcardSets,
+    total: data?.total ?? 0,
     isError,
     isLoading,
     createNewSet,

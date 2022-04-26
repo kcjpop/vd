@@ -4,49 +4,32 @@ import { Button } from '../common/Button'
 import { ArrowLeftIcon, ArrowRightIcon } from '../common/Icons'
 import { useTranslation } from '../../i18n'
 
-export function PageNavigation({
-  currentPage,
-  onUpdateCurrentPage,
-  isPrevDisabled,
-  isNextDisabled,
-}) {
+export function PageNavigation({ page, total, perPage }) {
   const { _e } = useTranslation()
   const router = useRouter()
 
   const next = (e) => {
     e.preventDefault()
-
-    onUpdateCurrentPage(currentPage + 1)
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage + 2 } },
-      undefined,
-      { shallow: true },
-    )
+    router.push({ pathName: router.pathname, query: { page: page + 1 } })
   }
 
   const prev = (e) => {
     e.preventDefault()
-
-    onUpdateCurrentPage(currentPage - 1)
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage } },
-      undefined,
-      { shallow: true },
-    )
+    router.push({ pathName: router.pathname, query: { page: page - 1 } })
   }
 
   return (
     <div className="flex items-center justify-center gap-2">
       <Button
         onClick={prev}
-        disabled={isPrevDisabled}
+        disabled={page === 1}
         className="inline-flex items-center gap-2">
         <ArrowLeftIcon />
         {_e('common.previous')}
       </Button>
       <Button
         onClick={next}
-        disabled={isNextDisabled}
+        disabled={page === Math.ceil(total / perPage)}
         className="inline-flex items-center gap-2">
         {_e('common.next')}
         <ArrowRightIcon />

@@ -53,19 +53,24 @@ function CreateNewSetDialog({
 
 export function PageAllSets({ page }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState(Number(page) - 1)
 
   const { _e } = useTranslation()
   const { notify } = useContext(ToastContext)
   const { user } = useUser({ redirectIfUnauthenticated: true })
-  const { flashcardSets, isLoading, updateSet, deleteSet, createNewSet } =
-    useAllSets({
-      user,
-      fetchAllSets: true,
-      perPage: PER_PAGE,
-      page: currentPage,
-      fields: 'id, name, user_id, flashcards(id)',
-    })
+  const {
+    flashcardSets,
+    total,
+    isLoading,
+    updateSet,
+    deleteSet,
+    createNewSet,
+  } = useAllSets({
+    user,
+    fetchAllSets: true,
+    perPage: PER_PAGE,
+    page: page,
+    fields: 'id, name, user_id, flashcards(id)',
+  })
 
   const doCreateNewSet = (name) => (e) => {
     e.preventDefault()
@@ -157,12 +162,9 @@ export function PageAllSets({ page }) {
       </div>
 
       {/* Navigators */}
-      <PageNavigation
-        currentPage={currentPage}
-        onUpdateCurrentPage={setCurrentPage}
-        isNextDisabled={flashcardSets.length < PER_PAGE}
-        isPrevDisabled={currentPage === 0}
-      />
+      {total > PER_PAGE && (
+        <PageNavigation page={page} total={total} perPage={PER_PAGE} />
+      )}
     </Layout>
   )
 }
