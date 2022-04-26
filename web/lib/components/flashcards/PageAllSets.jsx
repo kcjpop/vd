@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react'
-import { useRouter } from 'next/router'
 
 import { Alert } from '../common/Alert'
 import { Input } from '../common/Input'
@@ -7,13 +6,14 @@ import { Button } from '../common/Button'
 import { Dialog } from '../common/Dialog'
 import { Layout } from '../common/Layout'
 import { Breadcrumb } from '../common/Breadcrumb'
-import { ArrowLeftIcon, ArrowRightIcon, PlusIcon } from '../common/Icons'
+import { PlusIcon } from '../common/Icons'
 
 import { useUser } from '../../auth'
 import { useTranslation } from '../../i18n'
 import { ToastContext } from '../../context/Toast'
 
 import { FlashcardSet } from './FlashcardSet'
+import { PageNavigation } from './PageNavigation'
 import { useAllSets } from './useAllSets'
 
 const PER_PAGE = 9
@@ -51,40 +51,11 @@ function CreateNewSetDialog({
   )
 }
 
-function PageNavigation({
-  onClickNext,
-  onClickPrev,
-  prevDisabled,
-  nextDisabled,
-}) {
-  const { _e } = useTranslation()
-
-  return (
-    <div className="flex items-center justify-center gap-2">
-      <Button
-        onClick={onClickPrev}
-        disabled={prevDisabled}
-        className="inline-flex items-center gap-2">
-        <ArrowLeftIcon />
-        {_e('common.previous')}
-      </Button>
-      <Button
-        onClick={onClickNext}
-        disabled={nextDisabled}
-        className="inline-flex items-center gap-2">
-        {_e('common.next')}
-        <ArrowRightIcon />
-      </Button>
-    </div>
-  )
-}
-
 export function PageAllSets({ page }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(Number(page) - 1)
 
   const { _e } = useTranslation()
-  const router = useRouter()
   const { notify } = useContext(ToastContext)
   const { user } = useUser({ redirectIfUnauthenticated: true })
   const { flashcardSets, isLoading, updateSet, deleteSet, createNewSet } =
@@ -95,28 +66,6 @@ export function PageAllSets({ page }) {
       page: currentPage,
       fields: 'id, name, user_id, flashcards(id)',
     })
-
-  const next = (e) => {
-    e.preventDefault()
-
-    flashcardSets.length >= PER_PAGE && setCurrentPage(currentPage + 1)
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage + 2 } },
-      undefined,
-      { shallow: true },
-    )
-  }
-
-  const prev = (e) => {
-    e.preventDefault()
-
-    currentPage > 0 && setCurrentPage(currentPage - 1)
-    router.push(
-      { pathName: router.pathname, query: { page: currentPage } },
-      undefined,
-      { shallow: true },
-    )
-  }
 
   const doCreateNewSet = (name) => (e) => {
     e.preventDefault()
@@ -209,10 +158,10 @@ export function PageAllSets({ page }) {
 
       {/* Navigators */}
       <PageNavigation
-        onClickPrev={prev}
-        onClickNext={next}
-        prevDisabled={currentPage === 0}
-        nextDisabled={flashcardSets.length < PER_PAGE}
+        currentPage={currentPage}
+        onUpdateCurrentPage={setCurrentPage}
+        isNextDisabled={flashcardSets.length < PER_PAGE}
+        isPrevDisabled={currentPage === 0}
       />
     </Layout>
   )

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { useTranslation } from '../../i18n'
@@ -10,16 +10,12 @@ import { Input } from '../common/Input'
 import { Button } from '../common/Button'
 
 function EditSetDialog({ set, onOpenChange, onSetUpdate, loading, ...props }) {
-  const [name, setName] = useState(set?.name)
+  const [name, setName] = useState(set.name)
   const { _e } = useTranslation()
 
   const updateName = (e) => {
     setName(e.target.value)
   }
-
-  useEffect(() => {
-    setName(set?.name || '')
-  }, [set])
 
   return (
     <Dialog
@@ -43,14 +39,17 @@ function EditSetDialog({ set, onOpenChange, onSetUpdate, loading, ...props }) {
 function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange, loading }) {
   const { _e } = useTranslation()
 
-  const handleClick =
-    (confirm = false) =>
-    async (e) => {
-      e.preventDefault()
+  const onSubmit = (e) => {
+    e.preventDefault()
 
-      confirm && (await onSetDelete())
-      onOpenChange(false)
-    }
+    onSetDelete()
+    onOpenChange(false)
+  }
+
+  const onCancel = (e) => {
+    e.preventDefault()
+    onOpenChange(false)
+  }
 
   return (
     <Dialog
@@ -58,7 +57,7 @@ function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange, loading }) {
       open={open}
       onOpenChange={onOpenChange}
       dismissable={false}>
-      <form className="p-2" onSubmit={handleClick(true)}>
+      <form className="p-2" onSubmit={onSubmit}>
         <p className="mb-5 text-red-500">
           {_e('flashcardset.modal.doYouWantToDeleteThisSet')}
         </p>
@@ -66,7 +65,7 @@ function ConfirmSetDeletionModal({ onSetDelete, open, onOpenChange, loading }) {
           <Button loading={loading} variant="primary" type="submit">
             {_e('common.confirm')}
           </Button>
-          <Button disabled={loading} onClick={handleClick()}>
+          <Button disabled={loading} onClick={onCancel}>
             {_e('common.cancel')}
           </Button>
         </div>
@@ -108,13 +107,13 @@ function FlashcardSetDropdown({ openEditDialog, openDeleteConfimDialog }) {
             <li
               className="mb-1 flex flex-row items-center justify-between rounded px-2 py-1 hover:bg-slate-100"
               onClick={openEditDialog}>
-              {_e('flashcardset.dropdown.rename')} <EditIcon size="18px" />
+              {_e('flashcardset.dropdown.rename')} <EditIcon size="16px" />
             </li>
             <li
               className="mb-1 flex flex-row items-center justify-between rounded px-2 py-1 hover:bg-slate-100"
               onClick={openDeleteConfimDialog}>
               {_e('flashcardset.dropdown.delete')}{' '}
-              <TrashIcon size="18px" className="text-red-400" />
+              <TrashIcon size="16px" className="text-red-400" />
             </li>
           </ul>
         </div>
