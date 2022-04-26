@@ -12,12 +12,16 @@ exports.getWordsOfDict = function getWordsOfDict({
 }) {
   const limit = Math.min(MAX_LIMIT, _limit)
 
-  const sql = `
-select distinct word
+  const sql = `select distinct word
 from words
 order by word asc
 limit ? offset ?`
 
   const words = db.prepare(sql).all(limit, offset)
-  return words
+
+  const totalSql = `select count(distinct word) as counter
+from words`
+  const total = db.prepare(totalSql).get()
+
+  return { words, offset, limit, total: total.counter }
 }
