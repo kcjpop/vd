@@ -21,3 +21,7 @@ export const fetchHomepageStats = () => ky.get(endpoint('summary')).json()
 
 export const fetchWordSuggestions = (word) =>
   ky.get(endpoint(`suggestions/${word}`)).json()
+
+export function fetchAllWordsOfDict({ offset, limit }) {
+  return ky.get(endpoint(`dict/en-vi?offset=${offset}&limit=${limit}`)).json()
+}

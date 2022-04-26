@@ -13,7 +13,7 @@ exports.getWordsOfDict = function getWordsOfDict({
   const limit = Math.min(MAX_LIMIT, _limit)
 
   const sql = `
-select word
+select distinct word
 from words
 order by word asc
 limit ? offset ?`
