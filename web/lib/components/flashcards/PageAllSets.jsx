@@ -163,11 +163,7 @@ export function PageAllSets({ page }) {
 
       {/* Navigators */}
       {total > PER_PAGE && (
-        <PageNavigation
-          page={page}
-          isNextDisabled={flashcardSets.length < PER_PAGE}
-          isPrevDisabled={page === 1}
-        />
+        <PageNavigation page={page} total={total} perPage={PER_PAGE} />
       )}
     </Layout>
   )
