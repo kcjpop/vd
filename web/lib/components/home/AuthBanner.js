@@ -26,6 +26,13 @@ function UserProfile({ user }) {
       <p>There is nothing much you can do here for now. How about…?</p>
       <ul className="ml-2">
         <li>
+          <Link href="/dict/en-vi">
+            <a className="text-sm font-semibold tracking-wide text-orange-700">
+              Browse our dictionary
+            </a>
+          </Link>
+        </li>
+        <li>
           <Link href="/flashcards">
             <a className="text-sm font-semibold tracking-wide text-orange-700">
               View some flashcards
