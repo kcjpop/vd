@@ -162,9 +162,7 @@ export function PageAllSets({ page }) {
       </div>
 
       {/* Navigators */}
-      {total > PER_PAGE && (
-        <PageNavigation page={page} total={total} perPage={PER_PAGE} />
-      )}
+      <PageNavigation page={page} total={total} perPage={PER_PAGE} />
     </Layout>
   )
 }

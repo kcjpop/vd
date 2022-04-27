@@ -18,6 +18,8 @@ export function PageNavigation({ page, total, perPage }) {
     router.push({ pathName: router.pathname, query: { page: page - 1 } })
   }
 
+  if (total < perPage) return null
+
   return (
     <div className="flex items-center justify-center gap-2">
       <Button
