@@ -20,15 +20,16 @@ export const InstructionModal = function ({ open, onOpenChange }) {
           {_e('flashcard.instructions.clickOnDefinition')}
         </p>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm text-slate-400">
+          <label className="flex items-center gap-2 text-sm text-slate-400">
             <input
               className="!border-slate-300"
               type="checkbox"
               value={getHideFlashcardTip().get()}
               onChange={toggleHideFlashcardTip}
+              name="doNotShowAgain"
             />
             {_e('flashcard.instructions.doNotShowFlashcardInstructionAgain')}
-          </div>
+          </label>
           <Button onClick={() => onOpenChange(false)}>
             {_e('common.dismiss')}
           </Button>

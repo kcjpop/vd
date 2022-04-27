@@ -12,7 +12,7 @@ import { FlashcardWarningDialog } from '../flashcards/FlashcardWarningDialog'
 import { Speech } from './Speech'
 import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
-import { InstructionModal } from './FlashcardInstruction'
+import { InstructionModal } from '../flashcards/FlashcardInstruction'
 
 function BtnCreateFlashcard({ active, onClick }) {
   const { _e } = useTranslation()
