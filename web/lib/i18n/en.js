@@ -16,6 +16,7 @@ const messages = {
   'common.confirm': 'Confirm',
   'common.tips': 'Tips',
   'common.notification': 'Notification',
+  'common.dismiss': 'Dismiss',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -109,6 +110,7 @@ const messages = {
   'flashcard.errors.notFound': 'We could not find this flashcard set.',
   'flashcard.instructions.doNotShowFlashcardInstructionAgain': 'Do not show this dialog again',
   'flashcard.instructions.clickOnDefinition': 'You can create a flashcard by clicking on a definition', 
+  'flashcard.instructions.howToCreateAFlashcard': 'How to create a flashcard',
   
   'flashcardset.create': 'Create new set',
   'flashcardset.dropdown.rename': 'Rename',
