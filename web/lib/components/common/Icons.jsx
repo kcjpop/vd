@@ -27,3 +27,5 @@ export {
 } from 'react-icons/hi'
 
 export { BsFillBookmarkStarFill as FillBookmarkStartIcon } from 'react-icons/bs'
+
+export { FaRegLightbulb as LightbulbIcon } from 'react-icons/fa'
