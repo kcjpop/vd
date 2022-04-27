@@ -1,8 +1,12 @@
+import { forwardRef } from 'react'
 import { useTranslation } from '../../i18n'
 import { getStopShowFlashcardInstruction } from '../../storage'
 import { LightbulbIcon } from '../common/Icons'
 
-export function FlashcardInstructionAction() {
+export const FlashcardInstructionAction = forwardRef(function Action(
+  props,
+  ref,
+) {
   const { _e } = useTranslation()
   const value = getStopShowFlashcardInstruction().get()
 
@@ -10,7 +14,7 @@ export function FlashcardInstructionAction() {
     getStopShowFlashcardInstruction().set(e.target.checked)
 
   return (
-    <div className="flex items-center gap-2 text-xs text-slate-300">
+    <div ref={ref} className="flex items-center gap-2 text-xs text-slate-300">
       <input
         className="!border-slate-300"
         type="checkbox"
@@ -20,7 +24,7 @@ export function FlashcardInstructionAction() {
       {_e('flashcard.instructions.doNotShowFlashcardInstructionAgain')}
     </div>
   )
-}
+})
 
 export function FlashcardInstructionTitle() {
   const { _e } = useTranslation()

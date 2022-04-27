@@ -25,7 +25,6 @@ export function Toast({
 }) {
   const { _e } = useTranslation()
 
-  console.log({ ...props })
   return (
     <Root type={type} open={open} {...props} className={s.wrapper}>
       <div className={`${s.main} ${s[variant]}`}>
@@ -40,9 +39,11 @@ export function Toast({
         <Description className={s.description}>
           <div className="my-1">{description}</div>
 
-          <Action className={s.action} {...actionProps}>
-            {action}
-          </Action>
+          {action && (
+            <Action className={s.action} {...actionProps}>
+              {action}
+            </Action>
+          )}
         </Description>
       </div>
     </Root>
