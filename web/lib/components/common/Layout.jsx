@@ -33,7 +33,7 @@ export function Layout({ children, navVariant, opengraph, loading }) {
             <div className="mx-auto max-w-7xl p-4 text-base">
               <ErrorBoundary>{children}</ErrorBoundary>
             </div>
-            <ToastViewport className="fixed top-16 right-0 z-50 m-0 flex w-60 max-w-full list-none flex-col gap-2 p-6" />
+            <ToastViewport className="fixed top-16 right-0 z-50 m-0 flex w-auto max-w-full list-none flex-col gap-2 p-6" />
             <Toast {...toastProps} />
           </ToastProvider>
         )}
