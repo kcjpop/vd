@@ -45,6 +45,8 @@ function pagination(current, length, delta = 4) {
 }
 
 function DefaultLinkComponent({ page, currentPage }) {
+  if (page === null) return <span>…</span>
+
   return (
     <span
       className={clsx({
