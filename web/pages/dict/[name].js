@@ -1,6 +1,6 @@
 import { fetchAllWordsOfDict } from '@/lib/api'
 
-export { PageDict as default } from '@/lib/components/dict/Page'
+export { PageDict as default } from '@/lib/components/dict/PageDict'
 
 export const getServerSideProps = async (ctx) => {
   const result = await fetchAllWordsOfDict({

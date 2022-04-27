@@ -7,9 +7,11 @@ import { Layout } from '../common/Layout'
 import { Select } from '../common/Select'
 import { LinkToWord } from '../common/LinkToWord'
 
+const DEFAULT_LIMIT = 100
+
 function PageLink({ page, currentPage }) {
   const router = useRouter()
-  const newOffset = (page - 1) * Number(router.query.limit)
+  const newOffset = (page - 1) * Number(router.query.limit ?? DEFAULT_LIMIT)
 
   if (page === null) return <span className="text-slate-400">…</span>
 
