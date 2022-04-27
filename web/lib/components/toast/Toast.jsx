@@ -15,7 +15,7 @@ import s from './style.module.css'
 
 export function Toast({
   title,
-  children,
+  description,
   action,
   actionProps = {},
   type = 'background',
@@ -25,23 +25,25 @@ export function Toast({
 }) {
   const { _e } = useTranslation()
 
+  console.log({ ...props })
   return (
     <Root type={type} open={open} {...props} className={s.wrapper}>
       <div className={`${s.main} ${s[variant]}`}>
-        {title && <Title className={s.title}>{title}</Title>}
-        <Description className={s.description}>{children}</Description>
-        {action && (
-          <Action className={s.action} {...actionProps}>
-            {action}
-          </Action>
-        )}
-        <Close
-          className="rounded-full bg-white p-1 hover:bg-slate-100"
-          aria-label={_e('toast.dismiss')}>
+        <Title className={s.title}>{title || _e('common.notification')}</Title>
+
+        <Close className={s.dismiss} aria-label={_e('toast.dismiss')}>
           <span aria-hidden>
             <CloseIcon />
           </span>
         </Close>
+
+        <Description className={s.description}>
+          <div className="my-1">{description}</div>
+
+          <Action className={s.action} {...actionProps}>
+            {action}
+          </Action>
+        </Description>
       </div>
     </Root>
   )
