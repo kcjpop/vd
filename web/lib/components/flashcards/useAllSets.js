@@ -79,17 +79,20 @@ export function useAllSets({
     },
   )
 
-  const addCardToSet = useMutation(async ({ word, definition, setId }) => {
-    const { data, error } = await upsertFlashcard({
-      set_id: setId,
-      word,
-      definition,
-    })
+  const addCardToSet = useMutation(
+    async ({ word, definition, setId, userId }) => {
+      const { data, error } = await upsertFlashcard({
+        set_id: setId,
+        word,
+        definition,
+        user_id: userId,
+      })
 
-    if (error) throw error
+      if (error) throw error
 
-    return data[0]
-  })
+      return data[0]
+    },
+  )
 
   return {
     flashcardSets: data?.flashcardSets,

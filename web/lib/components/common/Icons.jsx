@@ -19,6 +19,9 @@ export {
   FiArrowRight as ArrowRightIcon,
   FiMoreVertical as DotsVerticalIcon,
   FiPlus as PlusIcon,
+  FiLayers as DeckIcon,
+  FiList as ListIcon,
+  FiStar as StarIcon,
 } from 'react-icons/fi'
 
 export { BsFillBookmarkStarFill as FillBookmarkStartIcon } from 'react-icons/bs'
