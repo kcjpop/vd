@@ -90,7 +90,7 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col items-center gap-2 lg:flex-row">
           <span className="font-semibold">Change to page:</span>
           <TruncatedPagination
             currentPage={currentPage}
