@@ -3,15 +3,7 @@ const { getDb } = require('../domain-logic/db')
 const EN_VI_DB = 'en-vi.db'
 const db = getDb(EN_VI_DB)
 
-const MAX_LIMIT = 1000
-
-exports.getWordsOfDict = function getWordsOfDict({
-  dict,
-  limit: _limit = MAX_LIMIT,
-  offset = 0,
-}) {
-  const limit = Math.min(MAX_LIMIT, _limit)
-
+exports.getWordsOfDict = function getWordsOfDict({ dict, limit, offset }) {
   const sql = `select distinct word
 from words
 order by word asc

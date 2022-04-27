@@ -7,7 +7,7 @@ const { getImageHandler } = require('./handlers/banner')
 const { getSummaryHandler } = require('./handlers/summary')
 const { getSuggestions } = require('./handlers/suggestions')
 
-const { getWordsOfDictHandler } = require('./dict/handler')
+const getWordsOfDict = require('./dict/getWordsOfDict')
 
 const { validateGetSuggestions } = require('./validators/suggestions')
 
@@ -31,7 +31,7 @@ app.disable('x-powered-by')
 
 app.get('/words/:word', getSingleWordHandler)
 
-app.get('/dict/:name', getWordsOfDictHandler)
+app.get('/dict/:name', getWordsOfDict.validator, getWordsOfDict.handler)
 
 app.get('/banner/:word', getImageHandler)
 
