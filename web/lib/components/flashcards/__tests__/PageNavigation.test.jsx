@@ -3,11 +3,12 @@ import { PageNavigation } from '../PageNavigation'
 
 describe('/flashcards/PageNavigation', () => {
   it('should render PageNavigation', () => {
-    const { container } = rdr(
+    const { getByText } = rdr(
       <PageNavigation page={1} total={20} perPage={9} />,
     )
 
-    expect(container.querySelectorAll('svg')).toHaveLength(2)
+    expect(getByText(/Next/i)).toBeDefined()
+    expect(getByText(/Previous/i)).toBeDefined()
   })
 
   it('should NOT render PageNavigation if total sets smaller than perPage', () => {
