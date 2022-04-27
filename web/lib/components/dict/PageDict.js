@@ -47,6 +47,8 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
     })
   }
 
+  const formatter = new Intl.NumberFormat('vi-VN')
+
   return (
     <Layout opengraph={opengraph}>
       <div className="mt-4 flex flex-col gap-4">
@@ -55,7 +57,9 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
           <span>
             Showing{' '}
             <strong className="font-bold">
-              {offset} - {offset + words.length}/{total}
+              {formatter.format(offset)} -{' '}
+              {formatter.format(offset + words.length)}/
+              {formatter.format(total)}
             </strong>{' '}
             words
           </span>
@@ -74,7 +78,7 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mb-4 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
           {words.map(({ word }) => (
             <LinkToWord
               mergeQuery={false}
@@ -87,7 +91,7 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
         </div>
 
         <div className="flex items-center gap-2">
-          Change to page:
+          <span className="font-semibold">Change to page:</span>
           <TruncatedPagination
             currentPage={currentPage}
             totalPage={totalPage}

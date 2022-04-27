@@ -4,6 +4,7 @@ export { PageDict as default } from '@/lib/components/dict/PageDict'
 
 export const getServerSideProps = async (ctx) => {
   const result = await fetchAllWordsOfDict({
+    dict: ctx.query.name,
     offset: ctx.query.offset ?? 0,
     limit: ctx.query.limit ?? 100,
   })
