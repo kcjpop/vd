@@ -12,7 +12,7 @@ import { Speech } from './Speech'
 import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
 
-function BtnCreatFlashcard({ active, onClick }) {
+function BtnCreateFlashcard({ active, onClick }) {
   const { _e } = useTranslation()
 
   return (
@@ -56,7 +56,7 @@ export function Word({ word: w }) {
 
       <div className="sticky inset-y-20">
         <div className="flex items-center gap-2">
-          <BtnCreatFlashcard
+          <BtnCreateFlashcard
             onClick={doToggleFlashcardMode}
             active={flashcardMode}
           />
