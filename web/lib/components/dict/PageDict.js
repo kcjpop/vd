@@ -34,7 +34,7 @@ function PageLink({ page, currentPage }) {
   )
 }
 
-export function PageDict({ words, total, offset, limit }) {
+export function PageDict({ opengraph, words, total, offset, limit }) {
   const router = useRouter()
 
   const totalPage = Math.ceil(total / limit)
@@ -48,8 +48,8 @@ export function PageDict({ words, total, offset, limit }) {
   }
 
   return (
-    <Layout>
-      <div className="flex flex-col gap-4">
+    <Layout opengraph={opengraph}>
+      <div className="mt-4 flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Từ điển Anh Việt</h1>
         <div className="flex items-center justify-between">
           <span>

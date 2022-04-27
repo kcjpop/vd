@@ -11,7 +11,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       opengraph: {
-        title: 'Từ điển',
+        title: 'Từ điển Anh - Việt',
       },
       ...result,
     },
