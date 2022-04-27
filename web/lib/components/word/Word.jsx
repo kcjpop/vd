@@ -1,16 +1,23 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
 import { useTranslation } from '../../i18n'
 import { useUser } from '../../auth'
+import { getStopShowFlashcardInstruction } from '../../storage'
 
 import { ZapIcon } from '../common/Icons'
 import { WordMenu } from '../word-menu/WordMenu'
+import { ToastContext } from '../../context/Toast'
 
 import { FlashcardWarningDialog } from '../flashcards/FlashcardWarningDialog'
 
 import { Speech } from './Speech'
 import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
+import {
+  FlashcardInstructionAction,
+  FlashcardInstructionDescription,
+  FlashcardInstructionTitle,
+} from './FlashcardInstruction'
 
 function BtnCreateFlashcard({ active, onClick }) {
   const { _e } = useTranslation()
@@ -34,9 +41,30 @@ export function Word({ word: w }) {
   const [flashcardMode, setFlashcardMode] = useState(false)
   const [warningMode, setWarningMode] = useState(false)
   const { user } = useUser()
+  const { notify } = useContext(ToastContext)
+  const { _e } = useTranslation()
 
   const doToggleFlashcardMode = () => {
-    !user ? setWarningMode((old) => !old) : setFlashcardMode((old) => !old)
+    if (!user) {
+      setWarningMode((old) => !old)
+    } else {
+      setFlashcardMode((old) => !old)
+
+      !flashcardMode &&
+        getStopShowFlashcardInstruction().get() === false &&
+        notify({
+          title: <FlashcardInstructionTitle />,
+          description: <FlashcardInstructionDescription />,
+          action: <FlashcardInstructionAction />,
+          actionProps: {
+            asChild: true,
+            altText: _e(
+              'flashcard.instructions.doNotShowFlashcardInstructionAgain',
+            ),
+          },
+          variant: 'warning',
+        })
+    }
   }
 
   return (
