@@ -4,6 +4,7 @@ import { SettingsIcon } from '../common/Icons'
 import { useDropdown } from '../useDropdown'
 
 import { SpeechSettings } from './SpeechSettings'
+import { FlashcardTipSettings } from './FlashcardTipSettings'
 import { DictSelect } from './DictSelect'
 import { useTranslation } from '../../i18n'
 
@@ -39,6 +40,7 @@ export function WordMenu() {
             <DictSelect />
 
             <SpeechSettings />
+            <FlashcardTipSettings />
           </div>
 
           <div className="flex flex-col">

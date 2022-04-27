@@ -49,8 +49,8 @@ export function recentlyViewedWords() {
   return { get, set }
 }
 
-export function getStopShowFlashcardInstruction() {
-  const key = 'stop-show-flashcard-instructions'
+export function getHideFlashcardTip() {
+  const key = 'hide-flashcard-tip'
 
   const get = () => window?.localStorage.getItem(key) === 'true'
   const set = (value) => window?.localStorage.setItem(key, value)

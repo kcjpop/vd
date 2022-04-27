@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 
 import { useTranslation } from '../../i18n'
 import { useUser } from '../../auth'
-import { getStopShowFlashcardInstruction } from '../../storage'
+import { SettingsContext } from '../../context/Settings'
 
 import { ZapIcon } from '../common/Icons'
 import { WordMenu } from '../word-menu/WordMenu'
@@ -42,6 +42,9 @@ export function Word({ word: w }) {
   const [warningMode, setWarningMode] = useState(false)
   const { user } = useUser()
   const { notify } = useContext(ToastContext)
+  const {
+    settings: { hideFlashcardTip },
+  } = useContext(SettingsContext)
   const { _e } = useTranslation()
 
   const doToggleFlashcardMode = () => {
@@ -51,7 +54,7 @@ export function Word({ word: w }) {
       setFlashcardMode((old) => !old)
 
       !flashcardMode &&
-        getStopShowFlashcardInstruction().get() === false &&
+        !hideFlashcardTip &&
         notify({
           title: <FlashcardInstructionTitle />,
           description: <FlashcardInstructionDescription />,
