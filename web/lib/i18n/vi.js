@@ -14,6 +14,9 @@ const messages = {
   'common.previous': 'Trước',
   'common.next': 'Sau',
   'common.confirm': 'Xác nhận',
+  'common.tips': 'Gợi ý',
+  'common.notification': 'Thông báo',
+  'common.dismiss': 'Tắt',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',
@@ -41,6 +44,7 @@ const messages = {
   'nav.settings.voice.en-IN': 'Giọng Anh Ấn',
   'nav.settings.voice.en-ZA': 'Giọng Anh Nam Phi',
   'nav.settings.exampleSpeech': 'Hiển thị đọc ví dụ',
+  'nav.settings.hideFlashcardTip': 'Ẩn gợi ý cho flashcard',
   'nav.auth.logout': 'Đăng xuất',
   'nav.auth.signUp': 'Đăng ký tài khoản',
   'nav.auth.login': 'Đăng nhập',
@@ -104,6 +108,9 @@ const messages = {
   'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
   'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
   'flashcard.errors.notFound': 'Không tìm thấy bộ flashcard này',
+  'flashcard.instructions.doNotShowFlashcardInstructionAgain': 'Ẩn thông báo này vĩnh vỉễn',
+  'flashcard.instructions.clickOnDefinition': 'Bạn có thể tạo flashcard bằng cách nhấn vào 1 định nghĩa',
+  'flashcard.instructions.howToCreateAFlashcard': 'Cách tạo flashcard',
 
   'flashcardset.create': 'Tạo set mới',
   'flashcardset.dropdown.rename': 'Thay tên',

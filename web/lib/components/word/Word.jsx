@@ -1,16 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useTranslation } from '../../i18n'
 import { useUser } from '../../auth'
 
 import { ZapIcon } from '../common/Icons'
 import { WordMenu } from '../word-menu/WordMenu'
+import { getHideFlashcardTip } from '../../storage'
 
 import { FlashcardWarningDialog } from '../flashcards/FlashcardWarningDialog'
 
 import { Speech } from './Speech'
 import { Pronunciations } from './Pronunciations'
 import { WordDefinition } from './WordDefinition'
+import { InstructionModal } from '../flashcards/FlashcardInstruction'
 
 function BtnCreateFlashcard({ active, onClick }) {
   const { _e } = useTranslation()
@@ -33,11 +35,22 @@ function BtnCreateFlashcard({ active, onClick }) {
 export function Word({ word: w }) {
   const [flashcardMode, setFlashcardMode] = useState(false)
   const [warningMode, setWarningMode] = useState(false)
+  const [isInstructionOpen, setIsInstructionOpen] = useState(false)
   const { user } = useUser()
 
   const doToggleFlashcardMode = () => {
-    !user ? setWarningMode((old) => !old) : setFlashcardMode((old) => !old)
+    if (!user) {
+      setWarningMode((old) => !old)
+    } else {
+      setFlashcardMode((old) => !old)
+    }
   }
+
+  useEffect(() => {
+    if (flashcardMode && !getHideFlashcardTip().get()) {
+      setIsInstructionOpen(true)
+    }
+  }, [setIsInstructionOpen, flashcardMode])
 
   return (
     <div
@@ -68,6 +81,11 @@ export function Word({ word: w }) {
       <FlashcardWarningDialog
         open={warningMode}
         onOpenChange={setWarningMode}
+      />
+
+      <InstructionModal
+        open={isInstructionOpen}
+        onOpenChange={setIsInstructionOpen}
       />
 
       <div className="col-span-2 flex flex-col gap-4">

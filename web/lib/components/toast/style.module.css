@@ -19,7 +19,7 @@
 
 .main {
   @apply relative grid h-full w-full items-center gap-x-3 overflow-hidden rounded-md bg-white py-2 px-4 shadow shadow-slate-600;
-  grid-template-areas: 'title action' 'description action';
+  grid-template-areas: 'title dismiss' 'description none';
   grid-template-columns: auto max-content;
 }
 
@@ -50,6 +50,7 @@
   grid-area: description;
 }
 
-.ction {
-  grid-area: action;
+.dismiss {
+  @apply rounded-full bg-white p-1 hover:bg-slate-100;
+  grid-area: dismiss;
 }

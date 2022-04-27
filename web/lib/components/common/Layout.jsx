@@ -4,6 +4,7 @@ import { Provider as ToastProvider, ToastViewport } from '@radix-ui/react-toast'
 import { Nav } from '../nav/Nav'
 import { ToastContext } from '../../context/Toast'
 import { Toast } from '../toast/Toast'
+import { TOAST_DURATION } from '../../config'
 
 import { OpenGraph } from './OpenGraph'
 import { ErrorBoundary } from './ErrorBoundary'
@@ -29,11 +30,11 @@ export function Layout({ children, navVariant, opengraph, loading }) {
             <Loading />
           </div>
         ) : (
-          <ToastProvider swipeDirection="right">
+          <ToastProvider swipeDirection="right" duration={TOAST_DURATION}>
             <div className="mx-auto max-w-7xl p-4 text-base">
               <ErrorBoundary>{children}</ErrorBoundary>
             </div>
-            <ToastViewport className="fixed top-16 right-0 z-50 m-0 flex w-60 max-w-full list-none flex-col gap-2 p-6" />
+            <ToastViewport className="fixed top-16 right-0 z-50 m-0 flex w-auto max-w-full list-none flex-col gap-2 p-6" />
             <Toast {...toastProps} />
           </ToastProvider>
         )}

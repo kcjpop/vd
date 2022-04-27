@@ -14,6 +14,9 @@ const messages = {
   'common.previous': 'Previous',
   'common.next': 'Next',
   'common.confirm': 'Confirm',
+  'common.tips': 'Tips',
+  'common.notification': 'Notification',
+  'common.dismiss': 'Dismiss',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -41,6 +44,7 @@ const messages = {
   'nav.settings.voice.en-IN': 'English (India)',
   'nav.settings.voice.en-ZA': 'English (South Africa)',
   'nav.settings.exampleSpeech': 'Show example speech',
+  'nav.settings.hideFlashcardTip': 'Hide flashcard tip',
   'nav.auth.logout': 'Log out',
   'nav.auth.signUp': 'Sign up',
   'nav.auth.login': 'Log in',
@@ -104,6 +108,9 @@ const messages = {
   'flashcard.createdSetSuccessfully': 'New set added',
   'flashcard.addedSuccessfully': 'Flashcard added to set',
   'flashcard.errors.notFound': 'We could not find this flashcard set.',
+  'flashcard.instructions.doNotShowFlashcardInstructionAgain': 'Do not show this dialog again',
+  'flashcard.instructions.clickOnDefinition': 'You can create a flashcard by clicking on a definition', 
+  'flashcard.instructions.howToCreateAFlashcard': 'How to create a flashcard',
   
   'flashcardset.create': 'Create new set',
   'flashcardset.dropdown.rename': 'Rename',

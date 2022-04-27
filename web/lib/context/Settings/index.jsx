@@ -17,7 +17,10 @@ export const SettingsProvider = ({ children }) => {
 
   return (
     <SettingsContext.Provider
-      value={{ settings: { showSpeechForExamples }, toggleShowExampleSpeech }}>
+      value={{
+        settings: { showSpeechForExamples },
+        toggleShowExampleSpeech,
+      }}>
       {children}
     </SettingsContext.Provider>
   )
