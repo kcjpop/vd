@@ -52,7 +52,7 @@ export function Dialog({
             {...getFloatingProps({
               ref: floating,
               className:
-                'relative m-4 rounded bg-white p-2 shadow-md lg:m-0 lg:max-w-5xl',
+                'relative m-4 rounded-md bg-white p-4 shadow-md lg:m-0',
               role: 'dialog',
               'aria-labelledby': labelId,
               'aria-describedby': descriptionId,
@@ -65,7 +65,7 @@ export function Dialog({
               )}
               {dismissable && (
                 <button
-                  className="ml-auto rounded-full bg-slate-200 p-2 hover:bg-slate-300"
+                  className="absolute top-2 right-2 p-2 hover:rounded-full hover:bg-slate-100"
                   onClick={() => onOpenChange(false)}>
                   <CloseIcon />
                 </button>
