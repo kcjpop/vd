@@ -25,7 +25,9 @@ create or replace function limit_number_of_flashcards_fn() returns trigger as $f
     select count(*) into total from public.flashcard_sets where user_id=new.user_id;
 
     if total  >= 24 then
-      raise exception 'User has exceeded the amount of flashcard sets allowed (24).';
+      raise exception using
+        message='MAX_ALLOWED_SETS_CREATED',
+        hint='User has exceeded the amount of flashcard sets allowed (24).';
     end if;
 
     return new;
