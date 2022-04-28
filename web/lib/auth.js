@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { supabase } from './supabaseClient'
+import { clearStorage } from './storage'
 
 export function register({ email, password, fullname }) {
   return supabase.auth.signUp(
@@ -16,8 +17,12 @@ export function login({ email, password }) {
   return supabase.auth.signIn({ email, password })
 }
 
-export function logout() {
-  return supabase.auth.signOut()
+export async function logout() {
+  const { error } = await supabase.auth.signOut()
+
+  if (error) throw error
+
+  clearStorage()
 }
 
 export function useUser({ redirectIfUnauthenticated = false } = {}) {

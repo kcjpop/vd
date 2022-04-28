@@ -57,3 +57,7 @@ export function getHideFlashcardTip() {
 
   return { get, set }
 }
+
+export function clearStorage() {
+  window?.localStorage.clear()
+}
