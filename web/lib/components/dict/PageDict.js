@@ -53,7 +53,7 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
     <Layout opengraph={opengraph}>
       <div className="mt-4 flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Từ điển Anh Việt</h1>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <span>
             Showing{' '}
             <strong className="font-bold">
@@ -65,7 +65,7 @@ export function PageDict({ opengraph, words, total, offset, limit }) {
           </span>
 
           <div>
-            Words per page{' '}
+            <span className="font-semibold">Words per page</span>{' '}
             <Select
               className="py-1 px-2"
               value={limit}
