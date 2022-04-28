@@ -5,6 +5,7 @@ export function ButtonGroup({ children, className }) {
     <div className={`flex ${className}`}>
       {children.map((child, index) =>
         cloneElement(child, {
+          key: `button-${index}`,
           className: `border border-slate-300 box-border ${
             index === 0
               ? 'rounded-md !rounded-r-none'

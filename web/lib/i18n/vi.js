@@ -105,6 +105,8 @@ const messages = {
   'flashcard.add': 'Thêm',
   'flashcard.newSetName': 'Tiêu đề',
   'flashcard.addNewSet': 'Tạo set mới',
+  'flashcard.addNewCard': 'Thêm card mới',
+  'flashcard.deleteSet': 'Xoá set này',
   'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
   'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
   'flashcard.errors.notFound': 'Không tìm thấy bộ flashcard này',
