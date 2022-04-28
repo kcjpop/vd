@@ -35,28 +35,28 @@ export function WordMenu() {
         <div
           className="w-80 divide-y divide-dashed rounded border border-slate-200 bg-white p-4 text-gray-800 shadow-lg"
           {...floatingProps()}>
-          <div className="mb-2 grid gap-2">
+          <div className="mb-2 grid gap-2 pb-2">
             <DictSelect />
 
             <SpeechSettings />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col pt-2">
             <Link href="/">
               <a className="rounded p-2 hover:bg-slate-200">
-                🤩&nbsp;{_e('wordMenu.addDefinition')}
+                {_e('wordMenu.addDefinition')}
               </a>
             </Link>
 
             <Link href="/">
               <a className="rounded p-2 hover:bg-slate-200">
-                🥳&nbsp;{_e('wordMenu.addExample')}
+                {_e('wordMenu.addExample')}
               </a>
             </Link>
 
             <Link href="/">
               <a className="rounded p-2 hover:bg-slate-200">
-                😨&nbsp;{_e('wordMenu.reportWrongDefinition')}
+                {_e('wordMenu.reportWrongDefinition')}
               </a>
             </Link>
           </div>

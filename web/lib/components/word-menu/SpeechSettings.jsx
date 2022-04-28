@@ -37,19 +37,21 @@ export function SpeechSettings() {
 
   return (
     <Fragment>
-      <div className="grid items-center gap-2">
-        <div className="font-bold">{_e('nav.settings.voice')}</div>
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <div className="font-bold">{_e('nav.settings.voice')}</div>
 
-        <select
-          className="w-full rounded border-gray-300 bg-slate-200 p-2 focus:border-indigo-500 focus:ring-indigo-500"
-          value={selected}
-          onChange={doSetVoice}>
-          {voices.map((voice) => (
-            <option value={voice.voiceURI} key={voice.voiceURI}>
-              {voice.name} - {_e('nav.settings.voice.' + voice.lang)}
-            </option>
-          ))}
-        </select>
+          <select
+            className="w-full rounded border-gray-300 bg-slate-200 p-2 focus:border-indigo-500 focus:ring-indigo-500"
+            value={selected}
+            onChange={doSetVoice}>
+            {voices.map((voice) => (
+              <option value={voice.voiceURI} key={voice.voiceURI}>
+                {voice.name} - {_e('nav.settings.voice.' + voice.lang)}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <div className="flex items-center justify-between">
           <div className="font-bold">{_e('nav.settings.exampleSpeech')}</div>

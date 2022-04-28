@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useTranslation } from '../../i18n'
 import { useDropdown } from '../useDropdown'
 
-import { DotsVerticalIcon, TrashIcon, EditIcon } from '../common/Icons'
+import { DotsVerticalIcon } from '../common/Icons'
 import { Dialog } from '../common/Dialog'
 import { Input } from '../common/Input'
 import { Button } from '../common/Button'
@@ -101,19 +101,18 @@ function FlashcardSetDropdown({ openEditDialog, openDeleteConfimDialog }) {
       </button>
       {isOpen && (
         <div
-          className="z-30 w-36 rounded border border-slate-200 bg-white p-1 text-gray-800 shadow-lg"
+          className="z-30 w-36 rounded border border-slate-200 bg-white p-2 text-gray-800 shadow-lg"
           {...floatingProps({ right: 0 })}>
           <ul>
             <li
-              className="mb-1 flex flex-row items-center justify-between rounded px-2 py-1 hover:bg-slate-100"
+              className="rounded p-2 hover:bg-slate-100"
               onClick={openEditDialog}>
-              {_e('flashcardset.dropdown.rename')} <EditIcon size="16px" />
+              {_e('flashcardset.dropdown.rename')}
             </li>
             <li
-              className="mb-1 flex flex-row items-center justify-between rounded px-2 py-1 hover:bg-slate-100"
+              className="rounded p-2 text-red-700 hover:bg-slate-100"
               onClick={openDeleteConfimDialog}>
               {_e('flashcardset.dropdown.delete')}{' '}
-              <TrashIcon size="16px" className="text-red-400" />
             </li>
           </ul>
         </div>

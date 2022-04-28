@@ -55,7 +55,7 @@ export function MenuDropdown() {
                   <li>
                     <Link href="/flashcards">
                       <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                        {_e('nav.flashcards')} <span>🃏</span>
+                        {_e('nav.flashcards')}
                       </a>
                     </Link>
                   </li>
@@ -64,7 +64,7 @@ export function MenuDropdown() {
                       onClick={doLogout}
                       href="#"
                       className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                      {_e('nav.auth.logout')} <span>😌</span>
+                      {_e('nav.auth.logout')}
                     </a>
                   </li>
                 </ul>
@@ -75,14 +75,14 @@ export function MenuDropdown() {
                   <li>
                     <Link href="/auth/register">
                       <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                        {_e('nav.auth.signUp')} <span>🥰</span>
+                        {_e('nav.auth.signUp')}
                       </a>
                     </Link>
                   </li>
                   <li>
                     <Link href="/auth">
                       <a className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                        {_e('nav.auth.login')} <span>🤗</span>
+                        {_e('nav.auth.login')}
                       </a>
                     </Link>
                   </li>
@@ -95,7 +95,7 @@ export function MenuDropdown() {
                   <a
                     href="#"
                     className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                    {_e('nav.about')} <span>🤔</span>
+                    {_e('nav.about')}
                   </a>
                 </li>
 
@@ -103,7 +103,7 @@ export function MenuDropdown() {
                   <a
                     href="#"
                     className="flex justify-between rounded p-4 font-semibold hover:bg-slate-100">
-                    {_e('nav.contact')} <span>🤩</span>
+                    {_e('nav.contact')}
                   </a>
                 </li>
               </ul>

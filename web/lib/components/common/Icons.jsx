@@ -17,15 +17,8 @@ export {
   FiCheckCircle as CheckCircleIcon,
   FiArrowLeft as ArrowLeftIcon,
   FiArrowRight as ArrowRightIcon,
+  FiMoreVertical as DotsVerticalIcon,
+  FiPlus as PlusIcon,
 } from 'react-icons/fi'
 
-export {
-  HiPlus as PlusIcon,
-  HiDotsVertical as DotsVerticalIcon,
-  HiOutlineTrash as TrashIcon,
-  HiOutlinePencil as EditIcon,
-} from 'react-icons/hi'
-
 export { BsFillBookmarkStarFill as FillBookmarkStartIcon } from 'react-icons/bs'
-
-export { FaRegLightbulb as LightbulbIcon } from 'react-icons/fa'
