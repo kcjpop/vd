@@ -1,3 +1,4 @@
 {
-  "eslint.workingDirectories": ["./web"]
+  "eslint.workingDirectories": ["./web", "./api"],
+  "files.insertFinalNewline": true
 }
