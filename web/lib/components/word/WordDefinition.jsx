@@ -102,11 +102,13 @@ export function WordDefinition({ def, tenses, flashcardMode }) {
           definition={selectedDefinition}
         />
 
-        <h3 className="mt-2">
-          <span className="rounded bg-sky-100 p-2 font-bold uppercase text-sky-600">
-            {def.partOfSpeech}
-          </span>
-        </h3>
+        {def.partOfSpeech && (
+          <h3 className="mt-2">
+            <span className="rounded bg-sky-100 p-2 font-bold uppercase text-sky-600">
+              {def.partOfSpeech}
+            </span>
+          </h3>
+        )}
 
         {isVerb && <VerbTenses tenses={tenses} />}
 
