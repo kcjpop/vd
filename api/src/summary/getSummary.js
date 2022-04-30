@@ -1,7 +1,7 @@
-const { getSummary } = require('./model')
+const { getDictSummaries } = require('../domain-logic/getDictSummaries')
 
 async function handler(req, res) {
-  const summary = await getSummary()
+  const summary = await getDictSummaries()
 
   res.json(summary)
 }
