@@ -1,8 +1,7 @@
-const { getDb } = require('../db')
+const { getEnViDb, getWordnetDb } = require('../db')
 
 async function getFromEnVi(word) {
-  const EN_VI_DB = 'en-vi.db'
-  const db = getDb(EN_VI_DB)
+  const db = getEnViDb()
 
   const sql = `
 select word, part_of_speech, definitions, phrases
@@ -49,8 +48,7 @@ const groupBy = (col, keyFn) =>
 const unique = (col) => (col ? [...new Set(col)] : col)
 
 async function getFromWordnet(word) {
-  const DB = 'wordnet.db'
-  const db = getDb(DB)
+  const db = getWordnetDb()
 
   const sql = `
   with t as (

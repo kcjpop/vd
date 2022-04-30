@@ -10,17 +10,3 @@ exports.count = async function count() {
 
   return summary.count
 }
-
-exports.getSuggestions = async function ({ word, limit = 10 }) {
-  let limitNumber = Number(limit)
-  limitNumber = limitNumber > 50 || limitNumber < 0 ? 50 : limitNumber
-
-  const sql = `SELECT DISTINCT word, rank
-  FROM suggestions
-  WHERE suggestions MATCH ?
-  ORDER BY rank
-  LIMIT ?`
-  const suggestions = db.prepare(sql).all(`^${word}*`, limitNumber)
-
-  return suggestions
-}
