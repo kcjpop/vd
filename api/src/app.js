@@ -3,8 +3,9 @@ const cors = require('cors')
 const app = express()
 
 const { getSingleWordHandler } = require('./handlers/words')
-const { getSummaryHandler } = require('./handlers/summary')
 const { getSuggestions } = require('./handlers/suggestions')
+
+const getSummary = require('./summary/getSummary')
 
 const getWordsOfDict = require('./dict/getWordsOfDict')
 
@@ -36,7 +37,7 @@ app.get('/dict/:name', getWordsOfDict.validator, getWordsOfDict.handler)
 
 app.get('/banner/:word', getBanner.handler)
 
-app.get('/summary', getSummaryHandler)
+app.get('/summary', getSummary.handler)
 
 app.get('/suggestions/:word', validateGetSuggestions, getSuggestions)
 
