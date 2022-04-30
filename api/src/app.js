@@ -3,15 +3,11 @@ const cors = require('cors')
 const app = express()
 
 const { getSingleWordHandler } = require('./handlers/words')
-const { getSuggestions } = require('./handlers/suggestions')
 
+const getSuggestions = require('./suggestions/getSuggestions')
 const getSummary = require('./summary/getSummary')
-
 const getWordsOfDict = require('./dict/getWordsOfDict')
-
 const getBanner = require('./banner/getBanner')
-
-const { validateGetSuggestions } = require('./validators/suggestions')
 
 if (process.env.NODE_ENV == null || process.env.NODE_ENV === 'local') {
   app.use(
@@ -39,6 +35,6 @@ app.get('/banner/:word', getBanner.handler)
 
 app.get('/summary', getSummary.handler)
 
-app.get('/suggestions/:word', validateGetSuggestions, getSuggestions)
+app.get('/suggestions/:word', getSuggestions.validator, getSuggestions.handler)
 
 module.exports = app

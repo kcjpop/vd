@@ -1,6 +1,8 @@
 const v8n = require('v8n')
 
-const validateGetSuggestions = (req, res, next) => {
+const { getSuggestions: querySuggestions } = require('../domain-logic/en-vi')
+
+const validator = (req, res, next) => {
   const { limit } = req.query
 
   if (!v8n().undefined().test(limit)) {
@@ -19,4 +21,10 @@ const validateGetSuggestions = (req, res, next) => {
   next()
 }
 
-module.exports = { validateGetSuggestions }
+const handler = async (req, res) => {
+  const suggestions = await querySuggestions({ ...req.params, ...req.query })
+
+  res.json(suggestions?.map((w) => w.word) ?? [])
+}
+
+module.exports = { handler, validator }
