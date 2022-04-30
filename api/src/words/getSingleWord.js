@@ -1,4 +1,4 @@
-const { getSingleWord } = require('./model')
+const { getSingleWord } = require('../domain-logic/getSingleWord')
 
 async function handler(req, res) {
   const word = await getSingleWord({ ...req.params, ...req.query })

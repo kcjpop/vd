@@ -1,4 +1,4 @@
-const { getSingleWord } = require('../../domain-logic/words')
+const { getSingleWord } = require('../getSingleWord')
 
 describe('getSingleWord', () => {
   it('should return definitions of a word', async () => {
