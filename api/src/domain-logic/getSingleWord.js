@@ -1,5 +1,5 @@
-const { getAllTenses } = require('./verb-tenses')
-const { getPronunciations } = require('./pronunciation')
+const { getAllTenses } = require('./getAllTenses')
+const { getPronunciations } = require('./getPronunciations')
 const { getDefinitions } = require('./getDefinitions')
 
 async function getSingleWord({ word, dict = 'en-vi' }) {

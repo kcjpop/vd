@@ -1,4 +1,4 @@
-const { getSuggestions } = require('../../domain-logic/en-vi')
+const { getSuggestions } = require('../getSuggestions')
 
 describe('getSuggestions', () => {
   it('should get array of suggestions of an input', async () => {

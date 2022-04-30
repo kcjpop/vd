@@ -1,4 +1,4 @@
-const { getPronunciations } = require('../pronunciation')
+const { getPronunciations } = require('../getPronunciations')
 
 describe('getPronunciations', () => {
   it('should return pronunciation for a word', async () => {
