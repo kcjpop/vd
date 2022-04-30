@@ -1,4 +1,4 @@
-const { getImage } = require('./model')
+const { getImage } = require('./getImage')
 
 async function handler(req, res) {
   try {
