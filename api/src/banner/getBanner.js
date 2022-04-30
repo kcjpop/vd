@@ -1,6 +1,6 @@
-const { getImage } = require('../domain-logic/banner')
+const { getImage } = require('./model')
 
-async function getImageHandler(req, res) {
+async function handler(req, res) {
   try {
     const image = await getImage({ ...req.params, ...req.query })
 
@@ -11,4 +11,4 @@ async function getImageHandler(req, res) {
   }
 }
 
-module.exports = { getImageHandler }
+module.exports = { handler }
