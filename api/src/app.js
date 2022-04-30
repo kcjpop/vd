@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 
-const { getSingleWordHandler } = require('./handlers/words')
+const getSingleWord = require('./words/getSingleWord')
 
 const getSuggestions = require('./suggestions/getSuggestions')
 const getSummary = require('./summary/getSummary')
@@ -27,7 +27,7 @@ app.use(express.json())
 
 app.disable('x-powered-by')
 
-app.get('/words/:word', getSingleWordHandler)
+app.get('/words/:word', getSingleWord.handler)
 
 app.get('/dict/:name', getWordsOfDict.validator, getWordsOfDict.handler)
 

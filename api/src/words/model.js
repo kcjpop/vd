@@ -1,9 +1,9 @@
-const { getAllTenses } = require('./verb-tenses')
-const { getPronunciations } = require('./pronunciation')
-const Envi = require('./en-vi')
-const Wordnet = require('./wordnet')
+const { getAllTenses } = require('../domain-logic/verb-tenses')
+const { getPronunciations } = require('../domain-logic/pronunciation')
+const Envi = require('../domain-logic/en-vi')
+const Wordnet = require('../domain-logic/wordnet')
 
-exports.getSingleWord = async function getSingleWord({ word, dict }) {
+async function getSingleWord({ word, dict }) {
   const entry =
     dict === 'wordnet'
       ? await Wordnet.getDefinitions(word)
@@ -21,3 +21,5 @@ exports.getSingleWord = async function getSingleWord({ word, dict }) {
 
   return entry
 }
+
+module.exports = { getSingleWord }
