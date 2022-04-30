@@ -1,4 +1,4 @@
-const { getDb } = require('./db')
+const { getDb } = require('../db')
 
 const EN_VI_DB = 'en-vi.db'
 const db = getDb(EN_VI_DB)
@@ -42,7 +42,7 @@ exports.getSuggestions = async function ({ word, limit = 10 }) {
   limitNumber = limitNumber > 50 || limitNumber < 0 ? 50 : limitNumber
 
   const sql = `SELECT DISTINCT word, rank
-  FROM suggestions 
+  FROM suggestions
   WHERE suggestions MATCH ?
   ORDER BY rank
   LIMIT ?`

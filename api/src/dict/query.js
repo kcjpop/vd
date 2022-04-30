@@ -1,4 +1,4 @@
-const { getDb } = require('../domain-logic/db')
+const { getDb } = require('../db')
 
 const EN_VI_DB = 'en-vi.db'
 const db = getDb(EN_VI_DB)

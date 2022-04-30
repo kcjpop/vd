@@ -1,4 +1,4 @@
-const { getDb } = require('./db')
+const { getDb } = require('../db')
 
 const DB = 'wordnet.db'
 const db = getDb(DB)
