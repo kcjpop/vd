@@ -1,6 +1,6 @@
 const v8n = require('v8n')
 
-const { getWordsOfDict } = require('./query')
+const { getWordsOfDict } = require('../domain-logic/getWordsOfDict')
 
 const MIN_LIMIT = 100
 const MAX_LIMIT = 1000

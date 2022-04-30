@@ -1,9 +1,7 @@
-const { getDb } = require('../db')
-
-const EN_VI_DB = 'en-vi.db'
-const db = getDb(EN_VI_DB)
+const { getEnViDb } = require('../db')
 
 exports.getWordsOfDict = function getWordsOfDict({ dict, limit, offset }) {
+  const db = getEnViDb()
   const sql = `select distinct word
 from words
 order by word asc
