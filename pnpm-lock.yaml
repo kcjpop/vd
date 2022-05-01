@@ -2,6 +2,12 @@ lockfileVersion: 5.4
 
 importers:
 
+  .:
+    specifiers:
+      husky: 7.0.4
+    devDependencies:
+      husky: 7.0.4
+
   api:
     specifiers:
       '@napi-rs/canvas': 0.1.21
@@ -16,7 +22,6 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
       express: 4.17.3
-      husky: 7.0.4
       jest: 27.5.1
       knex: 1.0.4
       nodemon: 2.0.15
@@ -38,7 +43,6 @@ importers:
       eslint-plugin-n: 15.2.0_eslint@8.14.0
       eslint-plugin-node: 11.1.0_eslint@8.14.0
       eslint-plugin-promise: 6.0.0_eslint@8.14.0
-      husky: 7.0.4
       jest: 27.5.1
       knex: 1.0.4_better-sqlite3@7.5.1
       nodemon: 2.0.15
@@ -70,7 +74,6 @@ importers:
       eslint-plugin-react: 7.29.4
       eslint-plugin-react-hooks: 4.5.0
       got: 12.0.3
-      husky: 7.0.4
       jest: 27.5.1
       ky: 0.30.0
       localtunnel: 2.0.2
@@ -120,7 +123,6 @@ importers:
       eslint-plugin-promise: 6.0.0_eslint@8.14.0
       eslint-plugin-react: 7.29.4_eslint@8.14.0
       eslint-plugin-react-hooks: 4.5.0_eslint@8.14.0
-      husky: 7.0.4
       jest: 27.5.1
       localtunnel: 2.0.2
       lodash: 4.17.21

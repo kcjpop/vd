@@ -1,0 +1,11 @@
+{
+  "name": "tu-dien",
+  "version": "0.1.0",
+  "license": "MPL-2.0",
+  "scripts": {
+    "prepare": "husky install ./.husky"
+  },
+  "devDependencies": {
+    "husky": "7.0.4"
+  }
+}

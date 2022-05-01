@@ -1,6 +1,4 @@
 {
-  "name": "tudien-io-api",
-  "version": "0.1.0",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
