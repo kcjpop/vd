@@ -3,4 +3,6 @@
 
 cd api && yarn test
 
+cd ..
+
 cd web && yarn lint && yarn test
