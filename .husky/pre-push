@@ -1,8 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd api && yarn test
+cd api
 
-cd ..
+pnpm test
 
-cd web && yarn lint && yarn test
+cd ../web
+
+pnpm lint
+
+pnpm test
