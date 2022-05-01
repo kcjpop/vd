@@ -7,7 +7,7 @@ const validator = (req, res, next) => {
 
   if (!v8n().undefined().test(limit)) {
     try {
-      v8n().numeric().between(-1, 50).check(Number(limit))
+      v8n().numeric().between(1, 50).check(Number(limit))
     } catch (exception) {
       res.status(400).json({
         error: `limit is not ${
