@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "NODE_ENV=test jest",
-    "prepare": "cd .. && husky install api/.husky"
+    "test": "NODE_ENV=test jest"
   },
   "engines": {
     "node": "16.x"
@@ -27,7 +26,6 @@
     "eslint-plugin-n": "15.2.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
-    "husky": "7.0.4",
     "jest": "27.5.1",
     "knex": "1.0.4",
     "nodemon": "2.0.15",
