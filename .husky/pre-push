@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd api && yarn test
+
+cd web && yarn lint && yarn test
