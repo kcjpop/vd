@@ -122,7 +122,7 @@ async function getDefinitions(dict, word) {
   if (dict === 'en-vi') return getFromEnVi(word)
   if (dict === 'wordnet') return getFromWordnet(word)
 
-  throw new Error('Unknow dictionary: ' + dict)
+  throw new TypeError('Unknow dictionary: ' + dict)
 }
 
 module.exports = { getDefinitions }

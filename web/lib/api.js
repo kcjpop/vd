@@ -10,7 +10,7 @@ const endpoint = (path) => prefixUrl + '/' + path
 // `fetchAllX...` for requests returning multiple items
 
 export const fetchSingleWordEndpoint = ({ word, dict }) =>
-  endpoint(`words/${word}?dict=${dict}`)
+  endpoint(dict != null ? `words/${word}?dict=${dict}` : `words/${word}`)
 
 export const fetchBannerEndpoint = ({ word }) => endpoint(`banner/${word}`)
 
