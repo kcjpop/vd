@@ -110,10 +110,11 @@ const messages = {
   'flashcard.deleteSet': 'Delete this set',
   'flashcard.createdSetSuccessfully': 'New set added',
   'flashcard.addedSuccessfully': 'Flashcard added to set',
-  'flashcard.errors.notFound': 'We could not find this flashcard set.',
   'flashcard.instructions.doNotShowFlashcardInstructionAgain': 'Do not show this dialog again',
   'flashcard.instructions.clickOnDefinition': 'You can create a flashcard by clicking on a definition', 
   'flashcard.instructions.howToCreateAFlashcard': 'How to create a flashcard',
+  'flashcard.errors.notFound': 'We could not find this flashcard set.',
+  'flashcard.errors.onlyCreatorIsAllowedToAddModifyFlashcards': 'Only creator of this set is allowed to add/modify flashcards',
   
   'flashcardset.create': 'Create new set',
   'flashcardset.dropdown.rename': 'Rename',
@@ -128,6 +129,7 @@ const messages = {
   'flashcardset.error.updateNameFail': "There is an error when updating set's name",
   'flashcardset.error.deleleSet': 'There is an error when deleting set',
   'flashcardset.error.createNewSet': 'There is an error when creating a new set',
+  'flashcardset.error.exceedMaxNumberOfSets': 'You have exceeded maximum number of allowed created sets (24).',
 
   'wordMenu.settings': 'Settings',
   'wordMenu.addDefinition': 'Add new definition',
