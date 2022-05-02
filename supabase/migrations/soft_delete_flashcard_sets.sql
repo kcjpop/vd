@@ -12,7 +12,7 @@ ADD
 
 -- Create or replace function to soft delete public.flashcard_sets and public.flashcards
 CREATE
-OR REPLACE FUNCTION flashcard_sets_soft_delete() RETURNS TRIGGER AS $fn$
+OR REPLACE FUNCTION flashcard_sets_soft_delete_fn() RETURNS TRIGGER AS $fn$
   BEGIN
     UPDATE public.flashcard_sets SET deleted_at=now() WHERE id=OLD.id;
     UPDATE public.flashcards SET deleted_at=now() WHERE set_id=OLD.id;
