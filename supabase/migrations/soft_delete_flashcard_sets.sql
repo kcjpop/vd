@@ -1,33 +1,21 @@
--- Add is_deleted column to public.flashcard_sets
-ALTER TABLE
-  public.flashcard_sets
-ADD
-  COLUMN IF NOT EXISTS is_deleted BOOLEAN NOT NULL DEFAULT FALSE;
-
 -- Add deleted_at column to public.flashcard_sets
 ALTER TABLE
   public.flashcard_sets
 ADD
-  COLUMN IF NOT EXISTS deleted_at timestamp WITH TIME ZONE;
-
--- Add is_deleted column to public.flashcards
-ALTER TABLE
-  public.flashcards
-ADD
-  COLUMN IF NOT EXISTS is_deleted BOOLEAN NOT NULL DEFAULT FALSE;
+  COLUMN IF NOT EXISTS deleted_at timestampz;
 
 -- Add deleted_at column to public.flashcards
 ALTER TABLE
   public.flashcards
 ADD
-  COLUMN IF NOT EXISTS deleted_at timestamp WITH TIME ZONE;
+  COLUMN IF NOT EXISTS deleted_at timestampz;
 
 -- Create or replace function to soft delete public.flashcard_sets and public.flashcards
 CREATE
-OR REPLACE FUNCTION flashcard_sets_soft_delete_fn() RETURNS TRIGGER AS $fn$
+OR REPLACE FUNCTION flashcard_sets_soft_delete() RETURNS TRIGGER AS $fn$
   BEGIN
-    UPDATE public.flashcard_sets SET is_deleted=true, deleted_at=now() WHERE id=OLD.id;
-    UPDATE public.flashcards SET is_deleted=true, deleted_at=now() WHERE set_id=OLD.id;
+    UPDATE public.flashcard_sets SET deleted_at=now() WHERE id=OLD.id;
+    UPDATE public.flashcards SET deleted_at=now() WHERE set_id=OLD.id;
     RETURN NULL;
   END;
 $fn$ LANGUAGE plpgsql;
@@ -42,11 +30,13 @@ CREATE TRIGGER flashcard_sets_soft_delete_trigger BEFORE DELETE ON public.flashc
 CREATE
 OR REPLACE VIEW flashcard_sets_view AS
 SELECT
+
+CREATE INDEX IF NOT EXISTS deleted_at_idx ON public.flashcard_sets (deleted_at);
   *
 FROM
   public.flashcard_sets
 WHERE
-  is_deleted = false;
+  deleted_at = null;
 
 -- Create a view to hide deleted flashcards
 CREATE
@@ -56,4 +46,6 @@ SELECT
 FROM
   public.flashcards
 WHERE
-  is_deleted = false;
+  deleted_at = null;
+
+CREATE INDEX IF NOT EXISTS deleted_at_idx ON public.flashcards (deleted_at);
