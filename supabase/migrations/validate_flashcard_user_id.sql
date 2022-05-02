@@ -5,7 +5,9 @@ create or replace function validate_upsert_flashcard_fn() returns trigger as $fn
     select user_id into setUserId from public.flashcard_sets where id=new.set_id;
     
     if setUserId <> new.user_id then
-      raise exception 'User not allow to modify flashcard in the other flashcard_set';
+      raise exception using
+        message='UNAUTHORIZED_MODIFY_FLASHCARDS',
+        hint='User not allow to modify flashcard in the other flashcard_set';
     end if;
 
     return new;
