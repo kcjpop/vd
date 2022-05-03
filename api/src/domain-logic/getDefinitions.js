@@ -1,10 +1,27 @@
 const { getEnViDb, getWordnetDb } = require('../db')
 
+const parseDefinitions = (id, raw) => {
+  try {
+    const defs = JSON.parse(raw)
+    return defs.map((d, index) => ({ ...d, id: id + '-' + index }))
+  } catch (e) {
+    return null
+  }
+}
+
+const parsePhrases = (raw) => {
+  try {
+    return JSON.parse(raw)
+  } catch (e) {
+    return null
+  }
+}
+
 async function getFromEnVi(word) {
   const db = getEnViDb()
 
   const sql = `
-select word, part_of_speech, definitions, phrases
+select defs.rowid as id, word, part_of_speech, definitions, phrases
 from words
 join defs using (word_id)
 where word = ? or lower(word) = ?`
@@ -18,8 +35,8 @@ where word = ? or lower(word) = ?`
     word: definitions?.[0].word ?? word,
     definitions: definitions.map((d) => ({
       partOfSpeech: d.part_of_speech,
-      definitions: d.definitions ? JSON.parse(d.definitions) : null,
-      idioms: d.phrases ? JSON.parse(d.phrases) : null,
+      definitions: parseDefinitions(d.id, d.definitions),
+      idioms: parsePhrases(d.phrases),
     })),
   }
 }
