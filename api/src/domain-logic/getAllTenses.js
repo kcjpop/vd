@@ -1,4 +1,4 @@
-const { getDb } = require('./db')
+const { getDb } = require('../db')
 
 const VERB_TENSES_DB = 'verb-tenses.db'
 

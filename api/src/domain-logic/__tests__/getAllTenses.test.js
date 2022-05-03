@@ -1,4 +1,4 @@
-const { getAllTenses } = require('../../domain-logic/verb-tenses')
+const { getAllTenses } = require('../getAllTenses')
 
 describe('getAllTenses', () => {
   it('should get tenses for a verb', async () => {

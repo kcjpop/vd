@@ -1,7 +1,28 @@
-const { getDb } = require('./db')
+const { getEnViDb, getWordnetDb } = require('../db')
 
-const DB = 'wordnet.db'
-const db = getDb(DB)
+async function getFromEnVi(word) {
+  const db = getEnViDb()
+
+  const sql = `
+select word, part_of_speech, definitions, phrases
+from words
+join defs using (word_id)
+where word = ? or lower(word) = ?`
+
+  const definitions = db.prepare(sql).all(word, word.toLocaleLowerCase())
+
+  if (!definitions?.length) return
+
+  return {
+    // We'll use the word from database because keyword may be in different cases
+    word: definitions?.[0].word ?? word,
+    definitions: definitions.map((d) => ({
+      partOfSpeech: d.part_of_speech,
+      definitions: d.definitions ? JSON.parse(d.definitions) : null,
+      idioms: d.phrases ? JSON.parse(d.phrases) : null,
+    })),
+  }
+}
 
 // @see https://wordnet.princeton.edu/documentation/wndb5wn
 const translatePos = (pos) => {
@@ -26,7 +47,9 @@ const groupBy = (col, keyFn) =>
 
 const unique = (col) => (col ? [...new Set(col)] : col)
 
-exports.getDefinitions = async function getDefinitions(word) {
+async function getFromWordnet(word) {
+  const db = getWordnetDb()
+
   const sql = `
   with t as (
     select
@@ -91,10 +114,15 @@ exports.getDefinitions = async function getDefinitions(word) {
   }
 }
 
-exports.count = async function count() {
-  const sql = `SELECT COUNT(DISTINCT lemma) AS count FROM words`
+/**
+ * Get word from db
+ * @param {string} word
+ */
+async function getDefinitions(dict, word) {
+  if (dict === 'en-vi') return getFromEnVi(word)
+  if (dict === 'wordnet') return getFromWordnet(word)
 
-  const summary = db.prepare(sql).get()
-
-  return summary.count
+  throw new TypeError('Unknow dictionary: ' + dict)
 }
+
+module.exports = { getDefinitions }

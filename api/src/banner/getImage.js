@@ -4,7 +4,7 @@ const { GlobalFonts, createCanvas } = require('@napi-rs/canvas')
 
 const { BANNER_FONT } = require('../config')
 
-const { getSingleWord } = require('./words')
+const { getSingleWord } = require('../domain-logic/getSingleWord')
 
 const fontPath = resolve(__dirname, './fonts')
 readdirSync(fontPath).forEach((filename) => {

@@ -1,8 +1,8 @@
 const request = require('supertest')
 const app = require('../app')
 
-describe('Test endpoints /banner', () => {
-  test('It should return 200 for GET /banner/:word', () =>
+describe('/banner/:word', () => {
+  it('should return 200 for GET /banner/:word', () =>
     request(app)
       .get('/banner/hello')
       .then((response) => {
@@ -10,7 +10,7 @@ describe('Test endpoints /banner', () => {
         expect(response.headers['content-type']).toBe('image/png')
       }))
 
-  test('It should return 500 for GET /banner/:word for word that not exists', () =>
+  it('should return 500 for GET /banner/:word for word that not exists', () =>
     request(app)
       .get('/banner/hsdf')
       .then((response) => {
