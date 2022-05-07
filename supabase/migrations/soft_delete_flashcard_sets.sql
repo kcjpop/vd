@@ -2,13 +2,13 @@
 ALTER TABLE
   public.flashcard_sets
 ADD
-  COLUMN IF NOT EXISTS deleted_at timestampz;
+  COLUMN IF NOT EXISTS deleted_at timestamptz;
 
 -- Add deleted_at column to public.flashcards
 ALTER TABLE
   public.flashcards
 ADD
-  COLUMN IF NOT EXISTS deleted_at timestampz;
+  COLUMN IF NOT EXISTS deleted_at timestamptz;
 
 -- Create or replace function to soft delete public.flashcard_sets and public.flashcards
 CREATE
