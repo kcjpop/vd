@@ -17,6 +17,7 @@ const messages = {
   'common.tips': 'Gợi ý',
   'common.notification': 'Thông báo',
   'common.dismiss': 'Tắt',
+  'common.featureComingSoon': 'Tính năng sẽ được thêm vào sớm nhé',
 
   'dict.en-vi': '🇻🇳 Anh - Việt',
   'dict.wordnet': '🇬🇧 Anh - Anh',

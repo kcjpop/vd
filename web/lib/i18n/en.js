@@ -17,6 +17,7 @@ const messages = {
   'common.tips': 'Tips',
   'common.notification': 'Notification',
   'common.dismiss': 'Dismiss',
+  'common.featureComingSoon': 'This feature is coming in near future',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',

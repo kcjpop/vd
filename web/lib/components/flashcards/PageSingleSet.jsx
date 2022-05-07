@@ -5,24 +5,26 @@ import Link from 'next/link'
 import { Pagination, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { Layout } from '../common/Layout'
+import { Tooltip } from '../common/Tooltip'
 import { Alert } from '../common/Alert'
-import { Breadcrumb } from '../common/Breadcrumb'
 import { Button } from '../common/Button'
+import { Layout } from '../common/Layout'
+import { Breadcrumb } from '../common/Breadcrumb'
 import { ButtonGroup } from '../common/ButtonGroup'
 import { DeckIcon, ListIcon } from '../common/Icons'
+
 import { useTranslation } from '../../i18n'
 import { useUser } from '../../auth'
 import { getFlashcardMode } from '../../storage'
+
+import { FlipCard } from './FlashcardDeck'
+import { FlashcardRow } from './FlashcardRow'
+import { useSingleSet } from './useSingleSet'
 
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-
-import { FlipCard } from './FlashcardDeck'
-import { FlashcardRow } from './FlashcardRow'
-import { useSingleSet } from './useSingleSet'
 
 const LIST_MODE = 'list'
 const DECK_MODE = 'deck'
@@ -99,12 +101,16 @@ export function PageSingleSet({ setId }) {
               <ListIcon size="20px" />
             </Button>
           </ButtonGroup>
-          <Button>{_e('flashcard.addNewCard')}</Button>
-          <Button
-            className="text-red-500"
-            disabled={currentSet.user_id !== user.id}>
-            {_e('flashcard.deleteSet')}
-          </Button>
+          <Tooltip tooltip={_e('common.featureComingSoon')}>
+            <Button>{_e('flashcard.addNewCard')}</Button>
+          </Tooltip>
+          <Tooltip tooltip={_e('common.featureComingSoon')}>
+            <Button
+              className="text-red-500"
+              disabled={currentSet.user_id !== user.id}>
+              {_e('flashcard.deleteSet')}
+            </Button>
+          </Tooltip>
         </div>
       </div>
 
