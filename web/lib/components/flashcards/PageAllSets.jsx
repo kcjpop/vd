@@ -82,9 +82,6 @@ export function PageAllSets({ page }) {
           notify({ title: _e('flashcardset.createNewSetSuccessfully') })
           setIsDialogOpen(false)
         },
-        onError: (...args) => {
-          console.log(...args)
-        },
       },
     )
   }
