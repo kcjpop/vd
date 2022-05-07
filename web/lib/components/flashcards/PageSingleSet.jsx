@@ -33,7 +33,10 @@ export function PageSingleSet({ setId }) {
   const router = useRouter()
   const { _e } = useTranslation()
   const { user } = useUser({ redirectIfUnauthenticated: true })
-  const { currentSet, isLoading, isError } = useSingleSet({ setId, user })
+  const { currentSet, isLoading, isError } = useSingleSet(
+    { setId, user },
+    { fields: 'id, user_id, flashcards(*)' },
+  )
 
   const switchViewMode = (mode) => (e) => {
     getFlashcardMode().set(mode)

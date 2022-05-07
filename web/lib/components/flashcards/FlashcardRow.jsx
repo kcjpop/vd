@@ -2,6 +2,7 @@ import { Button } from '../common/Button'
 import { VolumnIcon, TrashIcon, EditIcon } from '../common/Icons'
 
 export function FlashcardRow({ flashcard, editable }) {
+  console.log({ flashcard })
   return (
     <div
       key={flashcard.id}
