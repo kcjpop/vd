@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react'
 
-import { Alert } from '../common/Alert'
 import { Input } from '../common/Input'
 import { Button } from '../common/Button'
 import { Dialog } from '../common/Dialog'
 import { Layout } from '../common/Layout'
 import { Breadcrumb } from '../common/Breadcrumb'
 import { PlusIcon } from '../common/Icons'
+import { SupabaseAlert } from '../common/SupabaseAlert'
 
 import { useUser } from '../../auth'
 import { useTranslation } from '../../i18n'
@@ -125,6 +125,33 @@ export function PageAllSets({ page }) {
         </Button>
       </div>
 
+      {createNewSet.isError && (
+        <div className="mb-2">
+          <SupabaseAlert
+            defaultMessage={_e('flashcardset.error.createNewSet')}
+            error={createNewSet.error}
+          />
+        </div>
+      )}
+
+      {updateSet.isError && (
+        <div className="mb-2">
+          <SupabaseAlert
+            defaultMessage={_e('flashcardset.error.updateNameFail')}
+            error={updateSet.error}
+          />
+        </div>
+      )}
+
+      {deleteSet.isError && (
+        <div className="mb-2">
+          <SupabaseAlert
+            defaultMessage={_e('flashcardset.error.deleleSet')}
+            error={deleteSet.error}
+          />
+        </div>
+      )}
+
       {/* Create new flashcard set */}
       <CreateNewSetDialog
         onCreateNewSet={doCreateNewSet}
@@ -132,19 +159,6 @@ export function PageAllSets({ page }) {
         onOpenChange={setIsDialogOpen}
         loading={createNewSet.isLoading}
       />
-      {createNewSet.isError && (
-        <Alert variant="danger">{_e('flashcardset.error.createNewSet')}</Alert>
-      )}
-
-      {updateSet.isError && (
-        <Alert variant="danger">
-          {_e('flashcardset.error.updateNameFail')}
-        </Alert>
-      )}
-
-      {deleteSet.isError && (
-        <Alert variant="danger">{_e('flashcardset.error.deleleSet')}</Alert>
-      )}
 
       <div className="mb-4">
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3">

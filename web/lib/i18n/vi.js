@@ -110,10 +110,11 @@ const messages = {
   'flashcard.deleteSet': 'Xoá set này',
   'flashcard.createdSetSuccessfully': 'Tạo flashcard set thành công',
   'flashcard.addedSuccessfully': 'Flashcard đã được thêm vào set',
-  'flashcard.errors.notFound': 'Không tìm thấy bộ flashcard này',
   'flashcard.instructions.doNotShowFlashcardInstructionAgain': 'Ẩn thông báo này vĩnh vỉễn',
   'flashcard.instructions.clickOnDefinition': 'Bạn có thể tạo flashcard bằng cách nhấn vào 1 định nghĩa',
   'flashcard.instructions.howToCreateAFlashcard': 'Cách tạo flashcard',
+  'flashcard.errors.notFound': 'Không tìm thấy bộ flashcard này',
+  'flashcard.errors.onlyCreatorIsAllowedToAddModifyFlashcards': 'Bạn không được phép thêm/sửa flashcard vào set này',
 
   'flashcardset.create': 'Tạo set mới',
   'flashcardset.dropdown.rename': 'Thay tên',
@@ -129,6 +130,7 @@ const messages = {
   'flashcardset.error.updateNameFail': 'Đã có lỗi xảy ra khi cập nhật tên set',
   'flashcardset.error.deleleSet': 'Đã có lỗi xảy ra khi xoá set',
   'flashcardset.error.createNewSet': ' Đã có lỗi xảy ra khi tạo set mới',
+  'flashcardset.error.exceedMaxNumberOfSets': 'Bạn chỉ được phép tạo 24 flashcard sets thôi nhé.',
 
   'wordMenu.settings': 'Tùy chọn',
   'wordMenu.addDefinition': 'Thêm định nghĩa mới',
