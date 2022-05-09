@@ -1,4 +1,14 @@
 {
+  "rules": {
+    "no-console": [
+      2,
+      {
+        "allow": [
+          "error"
+        ]
+      }
+    ]
+  },
   "extends": [
     "eslint:recommended",
     "standard",

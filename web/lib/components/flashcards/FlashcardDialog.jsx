@@ -42,7 +42,12 @@ function FormAddNewCard({
 
   const doAddFlashcard = async (e) => {
     e.preventDefault()
-    const card = await addCardToSet.mutate({ setId, word, definition })
+    const card = await addCardToSet.mutate({
+      setId,
+      word,
+      definition,
+      userId: user.id,
+    })
     onFlashcardCreated(card)
   }
 

@@ -53,6 +53,17 @@ export function getHideFlashcardTip() {
   const key = 'hide-flashcard-tip'
 
   const get = () => window?.localStorage.getItem(key) === 'true'
+
+  const set = (value) => window?.localStorage.setItem(key, value)
+
+  return { get, set }
+}
+
+// @deprecated
+export function getFlashcardMode() {
+  const key = 'flashcard-view-mode'
+
+  const get = () => window?.localStorage.getItem(key)
   const set = (value) => window?.localStorage.setItem(key, value)
 
   return { get, set }

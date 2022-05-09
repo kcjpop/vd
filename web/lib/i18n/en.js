@@ -17,6 +17,7 @@ const messages = {
   'common.tips': 'Tips',
   'common.notification': 'Notification',
   'common.dismiss': 'Dismiss',
+  'common.featureComingSoon': 'This feature is coming in near future',
 
   'dict.en-vi': '🇻🇳 English - Vietnamese',
   'dict.wordnet': '🇬🇧 Wordnet English',
@@ -105,6 +106,8 @@ const messages = {
   'flashcard.add': 'Add',
   'flashcard.newSetName': 'Name',
   'flashcard.addNewSet': 'Create new set',
+  'flashcard.addNewCard': 'Create new card',
+  'flashcard.deleteSet': 'Delete this set',
   'flashcard.createdSetSuccessfully': 'New set added',
   'flashcard.addedSuccessfully': 'Flashcard added to set',
   'flashcard.errors.notFound': 'We could not find this flashcard set.',
