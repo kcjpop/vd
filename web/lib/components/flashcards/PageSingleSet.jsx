@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -15,7 +15,6 @@ import { DeckIcon, ListIcon } from '../common/Icons'
 
 import { useTranslation } from '../../i18n'
 import { useUser } from '../../auth'
-import { getFlashcardMode } from '../../storage'
 
 import { FlipCard } from './FlashcardDeck'
 import { FlashcardRow } from './FlashcardRow'
@@ -30,7 +29,7 @@ const LIST_MODE = 'list'
 const DECK_MODE = 'deck'
 
 export function PageSingleSet({ setId }) {
-  const [viewMode, setViewMode] = useState()
+  const [viewMode, setViewMode] = useState(DECK_MODE)
 
   const router = useRouter()
   const { _e } = useTranslation()
@@ -41,13 +40,8 @@ export function PageSingleSet({ setId }) {
   )
 
   const switchViewMode = (mode) => (e) => {
-    getFlashcardMode().set(mode)
     setViewMode(mode)
   }
-
-  useEffect(() => {
-    setViewMode(getFlashcardMode().get())
-  }, [])
 
   const links = [
     { href: '/', name: _e('nav.home') },

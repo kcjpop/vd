@@ -59,6 +59,7 @@ export function getHideFlashcardTip() {
   return { get, set }
 }
 
+// @deprecated
 export function getFlashcardMode() {
   const key = 'flashcard-view-mode'
 
