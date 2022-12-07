@@ -68,7 +68,7 @@ export function PageAllSets({ page }) {
     user,
     fetchAllSets: true,
     perPage: PER_PAGE,
-    page: page,
+    page,
     fields: 'id, name, user_id, flashcards(id)',
   })
 
@@ -88,7 +88,7 @@ export function PageAllSets({ page }) {
 
   const doUpdateSet = (set) => (name) =>
     updateSet.mutate(
-      { id: set.id, name: name, userId: set.user_id },
+      { id: set.id, name, userId: set.user_id },
       {
         onSuccess: () => {
           notify({ title: _e('flashcardset.updateNameSuccessfully') })

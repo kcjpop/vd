@@ -7,7 +7,6 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "cd .. && husky install web/.husky",
     "lt": "lt"
   },
   "dependencies": {
@@ -29,17 +28,21 @@
     "swiper": "8.1.1"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "12.1.5",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.4",
     "@testing-library/user-event": "13.5.0",
     "autoprefixer": "10.4.2",
-    "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0",
+    "eslint": "8.14.0",
+    "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "8.5.0",
-    "eslint-config-standard": "16.0.3",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "15.2.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
-    "husky": "7.0.4",
+    "eslint-plugin-react": "7.29.4",
+    "eslint-plugin-react-hooks": "4.5.0",
     "jest": "27.5.1",
     "localtunnel": "2.0.2",
     "lodash": "4.17.21",
