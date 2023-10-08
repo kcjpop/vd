@@ -1,32 +1,22 @@
 (use joy)
 
+(use ./routes/home)
+(use ./vi-vi/main)
+
 # Layout
 (defn app-layout [{:body body :request request}]
   (text/html
     (doctype :html5)
-    [:html {:lang "en"}
+    [:html {:lang "vi-VN"}
      [:head
-      [:title "www"]
+      [:title "tudien.io - Từ điển thế hệ mới keng xà beng"]
       [:meta {:charset "utf-8"}]
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
       [:meta {:name "csrf-token" :content (csrf-token-value request)}]
-      [:link {:href "/app.css" :rel "stylesheet"}]
+      [:link {:href "/styles/main.css" :rel "stylesheet"}]
       [:script {:src "/app.js" :defer ""}]]
      [:body
-       body]]))
-
-# Routes
-(route :get "/" :home)
-
-(defn home [request]
-  [:div {:class "tc"}
-   [:h1 "You found joy!"]
-   [:p {:class "code"}
-    [:b "Joy Version 2:"]
-    [:span (string " " version)]]
-   [:p {:class "code"}
-    [:b "Janet Version 1:"]
-    [:span janet/version]]])
+      body]]))
 
 # Middleware
 (def app (-> (handler)
@@ -47,5 +37,6 @@
 (defn main [& args]
   (let [port (get args 1 (os/getenv "PORT" "9001"))
         host (get args 2 "localhost")]
-      (print "Server is running at http://127.0.0.1:" port)
+    (print "Server is running at http://127.0.0.1:" port)
+    (db/connect)
     (server app port host)))

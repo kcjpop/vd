@@ -1,0 +1,38 @@
+:root {
+  --font-primary: "Hanken Grotesk", "Familjen Grotesk", "Jost", "Space Grotesk",
+    "IBM Plex Sans", "Figtree", "Input Sans", "Barlow", "Public Sans", "Inter",
+    sans-serif, system-ui;
+}
+
+*,
+html {
+  font-family: var(--font-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block-start: 1em;
+  margin-block-end: 1rem;
+}
+
+/* Flow for some extra spaces in content */
+.flow > * + * {
+  margin-block-start: var(--flow-space, 1em);
+}
+
+:is(h1, h2, h3, blockquote) {
+  --flow-space: 1.5em;
+}
+
+:is(h1, h2, h3) + * {
+  --flow-space: 0.5em;
+}
+
+/* Line length */
+article > * {
+  max-width: 65ch;
+}
