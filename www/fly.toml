@@ -1,0 +1,34 @@
+# fly.toml app configuration file generated for tudien-io-www on 2023-10-10T10:08:13+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "tudien-io-www"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "ams"
+processes = []
+
+[env]
+HOST = "0.0.0.0"
+
+[build]
+
+[[services]]
+internal_port = 9001
+processes = ["app"]
+protocol = "tcp"
+[services.concurrency]
+hard_limit = 25
+soft_limit = 20
+type = "connections"
+
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
