@@ -29,6 +29,7 @@
   "Get all words from the database, supporting cursor-based pagination."
   [&named before after limit]
   (default limit 100)
+  (default after 0)
   (cond
     (not (nil? after)) (db/query after-query {:after after :limit limit})
     (not (nil? before)) (db/query before-query {:before before :limit limit})
