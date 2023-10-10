@@ -4,7 +4,7 @@ on:
     branches:
       - "main"
     paths:
-      - "api/**"
+      - "www/**"
 
 jobs:
   deploy:
@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: cd api/ && flyctl deploy --remote-only
+      - run: cd www/ && flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
