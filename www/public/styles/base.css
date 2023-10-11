@@ -44,22 +44,6 @@ h6 {
   color: var(--color-tx-normal);
 }
 
-/* Container */
-.container {
-}
-
-.entries {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1ch;
-}
-
-.entry {
-  background-color: var(--color-bg-secondary);
-  padding: var(--size-1);
-  border-radius: 0.25em;
-}
-
 /* Header */
 .header {
   height: var(--header-height, 4rem);
@@ -74,4 +58,26 @@ h6 {
   font-size: 1.5em;
   text-decoration: none;
   color: var(--color-tx-muted);
+}
+
+.search {
+  margin-inline-start: auto;
+
+  & .input {
+    background-color: var(--color-bg-secondary);
+    border: 2px solid var(--color-ui-normal);
+  }
+}
+
+/* Show all entries in the dict */
+.entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1ch;
+}
+
+.entry {
+  background-color: var(--color-bg-secondary);
+  padding: var(--size-1);
+  border-radius: 0.25em;
 }

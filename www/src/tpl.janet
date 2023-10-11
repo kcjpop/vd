@@ -16,7 +16,10 @@
 
 (def- header
   [:header {:class "header"}
-   [:a {:href "/" :class "logo"} "tudien.io"]])
+   [:a {:href "/" :class "logo"} "tudien.io"]
+   [:search {:role "search" :class "search"}
+    [:form {:action "/vi-vi/search" :id "js-nav-search"}
+     [:input {:type "search" :name "keyword" :class "input" :placeholder "Tìm kiếm…"}]]]])
 
 (defn with-main
   "A layout with <main> in its body"

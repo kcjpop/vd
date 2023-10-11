@@ -58,7 +58,9 @@
   "Show search results of multiple entries."
   [entries]
   [[:h1 "Kết quả tìm kiếm"]
-   (map render-word entries)])
+   (if (empty? entries)
+     [:p "Hông tìm thấy gì"]
+     (map render-word entries))])
 
 # Handlers
 
@@ -85,9 +87,8 @@
   [req]
   (let [keyword (-> (get-in req [:params :keyword]) (uri/unescape))
         results (search keyword)]
-    (cond
-      (nil? results) [:p "Không tìm thấy kết quả nào"]
-      (= (length results) 1) (render-word (first results))
+    (if (= (length results) 1)
+      (render-word (first results))
       (render-search-result results))))
 
 # Declare routes
