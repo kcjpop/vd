@@ -57,7 +57,7 @@ h6 {
   font-weight: 700;
   font-size: 1.5em;
   text-decoration: none;
-  color: var(--color-tx-muted);
+  color: var(--color-tx-normal);
 }
 
 .search {
