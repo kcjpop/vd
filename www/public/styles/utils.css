@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.p-2 {
+  padding: var(--size-2);
+}

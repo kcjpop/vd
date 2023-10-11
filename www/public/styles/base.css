@@ -2,6 +2,10 @@
   --font-primary: "Hanken Grotesk", "Familjen Grotesk", "Jost", "Space Grotesk",
     "IBM Plex Sans", "Figtree", "Input Sans", "Barlow", "Public Sans", "Inter",
     sans-serif, system-ui;
+
+  --prose-width: 65ch;
+
+  --size-2: 1em;
 }
 
 *,
@@ -32,7 +36,7 @@ h6 {
   --flow-space: 0.5em;
 }
 
-/* Line length */
-article > * {
-  max-width: 65ch;
+/* Container */
+.container {
+  max-width: var(--prose-width);
 }

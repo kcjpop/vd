@@ -4,7 +4,7 @@
 (use ./vi-vi/main)
 
 # Layout
-(defn app-layout [{:body body :request request}]
+(defn app-layout [{:body body :head head :request request}]
   (text/html
     (doctype :html5)
     [:html {:lang "vi-VN"}
@@ -14,9 +14,9 @@
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
       [:meta {:name "csrf-token" :content (csrf-token-value request)}]
       [:link {:href "/styles/main.css" :rel "stylesheet"}]
-      [:script {:src "/app.js" :defer ""}]]
-     [:body
-      body]]))
+      [:script {:src "/app.js" :defer ""}]
+      head]
+     [:body body]]))
 
 # Middleware
 (def app (-> (handler)

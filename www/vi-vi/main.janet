@@ -2,9 +2,13 @@
 
 (import ../utils :as u)
 
-# Declare routes
-(route :get "/vi-vi" :vivi/main)
-(route :get "/vi-vi/:word" :vivi/search)
+# Helpers
+
+(defn qs->int
+  "Convert non-nil query string value to int."
+  [req qs-name]
+  (let [val (get-in req [:query-string qs-name])]
+    (if val (u/str->int val) val)))
 
 # Domain
 
@@ -35,20 +39,37 @@
     (not (nil? before)) (db/query before-query {:before before :limit limit})
     []))
 
-(defn qs->int
-  "Convert non-nil query string value to int."
-  [req qs-name]
-  (let [val (get-in req [:query-string qs-name])]
-    (if val (u/str->int val) val)))
+(def- search-query
+  "select *
+  from word
+  where w like :keyword")
+
+(defn- search
+  "Search by keyword"
+  [keyword]
+  (pp {:keyword (string "%" keyword "%")})
+  (db/query search-query {:keyword (string "%" keyword "%")}))
 
 # Render
 
 (defn render-word
   "Render a single word, showing its definitions."
-  [word]
+  [{:w word :m meaning}]
   [:article
-   [:h2 (get word :w)]
-   [:p (get word :m)]])
+   [:a {:href (string "/vi-vi/search?s=" word)}
+    [:h2 word]]
+   [:p meaning]])
+
+(defn render-search-result
+  "Show search results of multiple entries."
+  [entries]
+  [:div {:class "container p-2"}
+   [:h1 "Kết quả tìm kiếm"]
+   (map render-word entries)])
+
+# Declare routes
+(route :get "/vi-vi" :vivi/main)
+(route :get "/vi-vi/search" :vivi/search)
 
 (defn vivi/main
   "Route handler to show all words in Viet-Viet dict."
@@ -58,10 +79,11 @@
         entries (get-all-words :after after :before before)
         first-entry (first entries)
         last-entry (last entries)]
-    [:div
-     [:h1 "All words"]
-     [:a {:href (string "?before=" (get first-entry :id))} "Trang trước"]
-     [:a {:href (string "?after=" (get last-entry :id))} "Trang tiếp"]
+    [:main {:class "container p-2"}
+     [:h1 "Từ điển tiếng Việt"]
+     [:div {:class "flex justify-space-between"}
+      [:a {:href (string "?before=" (get first-entry :id))} "Trang trước"]
+      [:a {:href (string "?after=" (get last-entry :id))} "Trang tiếp"]]
      (map render-word entries)]))
 
 (defn vivi/search
@@ -69,6 +91,9 @@
   show that word only. Otherwise show a list of words, or an _empty result_
   message."
   [req]
-  (let [keyword (get-in req [:params :word])
-        single-word (db/fetch [:word 30144])]
-    (render-word single-word)))
+  (let [keyword (get-in req [:query-string :s])
+        results (search keyword)]
+    (cond
+      (nil? results) [:p "No result"]
+      (= (length results) 1) (render-word (first results))
+      (render-search-result results))))
