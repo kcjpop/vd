@@ -70,7 +70,8 @@
         entries (get-all-words :after after :before before)
         first-entry (first entries)
         last-entry (last entries)]
-    [[:h1 "Từ điển tiếng Việt"]
+    [:div {:class "flow"}
+     [:h1 "Từ điển tiếng Việt"]
      [:div {:class "flex justify-space-between"}
       [:a {:href (string "?before=" (get first-entry :id))} "Trang trước"]
       [:a {:href (string "?after=" (get last-entry :id))} "Trang tiếp"]]
