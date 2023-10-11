@@ -1,5 +1,6 @@
 (use joy)
 
+(import uri)
 (import ../tpl)
 (import ../utils :as u)
 
@@ -49,7 +50,7 @@
   "Render a single word, showing its definitions."
   [{:w word :m meaning}]
   [:article
-   [:a {:href (string "/vi-vi/search?s=" word)}
+   [:a {:href (string "/vi-vi/" word)}
     [:h2 word]]
    [:p meaning]])
 
@@ -80,7 +81,7 @@
   show that word only. Otherwise show a list of words, or an _empty result_
   message."
   [req]
-  (let [keyword (get-in req [:query-string :s])
+  (let [keyword (-> (get-in req [:params :keyword]) (uri/unescape))
         results (search keyword)]
     (cond
       (nil? results) [:p "Không tìm thấy kết quả nào"]
@@ -89,7 +90,7 @@
 
 # Declare routes
 (route :get "/vi-vi" :vivi/main)
-(route :get "/vi-vi/search" :vivi/search)
+(route :get "/vi-vi/:keyword" :vivi/search)
 
 (def vivi/main (layout main-handler tpl/with-main))
 (def vivi/search (layout search-handler tpl/with-main))
