@@ -14,8 +14,14 @@
       [:script {:src "/app.js" :defer ""}]]
      [:body body]]))
 
+(def- header
+  [:header {:class "header"}
+   [:a {:href "/" :class "logo"} "tudien.io"]])
+
 (defn with-main
   "A layout with <main> in its body"
-  [{:body body :request request}]
-  (base @{:body [:main {:class "container p-2"} body]
-          :request request}))
+  [{:body outlet :request request}]
+  (let [body [header
+              [:main {:class "container p-2"} outlet]]]
+    (base @{:body body
+            :request request})))

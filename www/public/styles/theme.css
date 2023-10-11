@@ -1,0 +1,132 @@
+:root {
+  --flexoki-black: #100f0f;
+  --flexoki-black-rgb: 16, 15, 15;
+
+  --flexoki-paper: #fffcf0;
+  --flexoki-paper-rgb: 254, 252, 240;
+
+  --flexoki-950: #1c1b1a;
+  --flexoki-900: #282726;
+  --flexoki-850: #343331;
+  --flexoki-800: #403e3c;
+  --flexoki-700: #575653;
+  --flexoki-600: #6f6e69;
+  --flexoki-500: #878580;
+  --flexoki-300: #b7b5ac;
+  --flexoki-200: #cecdc3;
+  --flexoki-150: #dad8ce;
+  --flexoki-100: #e6e4d9;
+  --flexoki-50: #f2f0e5;
+
+  --flexoki-200-rgb: 206, 205, 195;
+
+  --flexoki-red-600: #af3029;
+  --flexoki-red-400: #d14d41;
+
+  --flexoki-orange-600: #bc5215;
+  --flexoki-orange-400: #da702c;
+
+  --flexoki-yellow-900: #4d3a0b;
+  --flexoki-yellow-600: #ad8301;
+  --flexoki-yellow-400: #d0a215;
+  --flexoki-yellow-100: #fceeb8;
+
+  --flexoki-green-600: #66800b;
+  --flexoki-green-400: #879a39;
+
+  --flexoki-cyan-950: #142625;
+  --flexoki-cyan-600: #24837b;
+  --flexoki-cyan-400: #3aa99f;
+  --flexoki-cyan-50: #ebf2e7;
+
+  --flexoki-blue-600: #205ea6;
+  --flexoki-blue-400: #4385be;
+
+  --flexoki-purple-600: #5e409d;
+  --flexoki-purple-400: #8b7ec8;
+
+  --flexoki-magenta-600: #a02f6f;
+  --flexoki-magenta-400: #ce5d97;
+}
+
+:root,
+.theme-light {
+  --color-bg-primary: var(--flexoki-paper);
+  --color-bg-primary-rgb: var(--flexoki-paper-rgb);
+  --color-inverted-rgb: var(--flexoki-black-rgb);
+
+  --color-bg-secondary: var(--flexoki-50);
+
+  --color-tx-normal: var(--flexoki-black);
+  --color-tx-normal-rgb: var(--flexoki-black-rgb);
+  --color-tx-muted: var(--flexoki-600);
+  --color-tx-faint: var(--flexoki-300);
+
+  --color-ui-normal: var(--flexoki-100);
+  --color-ui-hover: var(--flexoki-150);
+  --color-ui-active: var(--flexoki-200);
+
+  --color-highlight: var(--flexoki-yellow-100);
+
+  --color-action: var(--flexoki-cyan-600);
+  --color-bg-hover: var(--flexoki-cyan-50);
+  --color-selection: rgba(187, 220, 206, 0.3);
+
+  --color-re: var(--flexoki-red-600);
+  --color-re-hover: var(--flexoki-red-400);
+  --color-or: var(--flexoki-orange-600);
+  --color-or-hover: var(--flexoki-orange-400);
+  --color-ye: var(--flexoki-yellow-600);
+  --color-ye-hover: var(--flexoki-yellow-400);
+  --color-gr: var(--flexoki-green-600);
+  --color-gr-hover: var(--flexoki-green-400);
+  --color-cy: var(--flexoki-cyan-600);
+  --color-cy-hover: var(--flexoki-cyan-400);
+  --color-bl: var(--flexoki-blue-600);
+  --color-bl-hover: var(--flexoki-blue-400);
+  --color-pu: var(--flexoki-purple-600);
+  --color-pu-hover: var(--flexoki-purple-400);
+  --color-ma: var(--flexoki-magenta-600);
+  --color-ma-hover: var(--flexoki-magenta-400);
+}
+
+.theme-dark {
+  --color-bg-primary: var(--flexoki-black);
+  --color-bg-primary-rgb: var(--flexoki-black-rgb);
+  --color-inverted-rgb: var(--flexoki-paper-rgb);
+
+  --color-bg-secondary: var(--flexoki-950);
+
+  --color-tx-normal: var(--flexoki-200);
+  --color-tx-normal-rgb: var(--flexoki-200-rgb);
+
+  --color-tx-muted: var(--flexoki-500);
+  --color-tx-faint: var(--flexoki-700);
+
+  --color-ui-normal: var(--flexoki-900);
+  --color-ui-hover: var(--flexoki-850);
+  --color-ui-active: var(--flexoki-800);
+
+  --color-highlight: var(--flexoki-yellow-900);
+
+  --color-action: var(--flexoki-cyan-400);
+  --color-bg-hover: var(--flexoki-cyan-950);
+  --color-selection: rgba(30, 95, 91, 0.3);
+
+  --color-re: var(--flexoki-red-400);
+  --color-re-hover: var(--flexoki-red-600);
+  --color-or: var(--flexoki-orange-400);
+  --color-or-hover: var(--flexoki-orange-600);
+  --color-ye: var(--flexoki-yellow-400);
+  --color-ye-hover: var(--flexoki-yellow-600);
+  --color-gr: var(--flexoki-green-400);
+  --color-gr-hover: var(--flexoki-green-600);
+  --color-cy: var(--flexoki-cyan-400);
+  --color-cy-hover: var(--flexoki-cyan-600);
+  --color-bl: var(--flexoki-blue-400);
+  --color-bl-hover: var(--flexoki-blue-600);
+  --color-pu: var(--flexoki-purple-400);
+  --color-pu-hover: var(--flexoki-purple-600);
+  --color-ma: var(--flexoki-magenta-400);
+  --color-ma-hover: var(--flexoki-magenta-600);
+}

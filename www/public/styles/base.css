@@ -38,7 +38,28 @@ h6 {
   --flow-space: 0.5em;
 }
 
+:is(body) {
+  background-color: var(--color-bg-primary);
+  color: var(--color-tx-normal);
+}
+
 /* Container */
 .container {
   max-width: var(--prose-width);
+}
+
+/* Header */
+.header {
+  height: var(--header-height, 4rem);
+  background-color: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  padding-inline: var(--size-2);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: var(--color-tx-muted);
 }
