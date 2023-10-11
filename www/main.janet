@@ -7,7 +7,6 @@
 
 # Middleware
 (def app (-> (handler)
-             (layout tpl/base)
              (with-csrf-token)
              (with-session)
              (extra-methods)

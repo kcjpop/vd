@@ -16,5 +16,6 @@
 
 (defn with-main
   "A layout with <main> in its body"
-  [req]
-  nil)
+  [{:body body :request request}]
+  (base @{:body [:main {:class "container p-2"} body]
+          :request request}))

@@ -7,3 +7,9 @@
     ([err]
       (print "Error while converting str->int: " input err)
       default-value)))
+
+(defn qs->int
+  "Convert non-nil query string value to int."
+  [req qs-name]
+  (let [val (get-in req [:query-string qs-name])]
+    (if val (str->int val) val)))

@@ -1,18 +1,7 @@
 (use joy)
 
+(import ../tpl)
 (import ../utils :as u)
-
-# Declare routes
-(route :get "/vi-vi" :vivi/main)
-(route :get "/vi-vi/search" :vivi/search)
-
-# Helpers
-
-(defn qs->int
-  "Convert non-nil query string value to int."
-  [req qs-name]
-  (let [val (get-in req [:query-string qs-name])]
-    (if val (u/str->int val) val)))
 
 # Domain
 
@@ -67,28 +56,26 @@
 (defn render-search-result
   "Show search results of multiple entries."
   [entries]
-  [:div {:class "container p-2"}
-   [:h1 "Kết quả tìm kiếm"]
+  [[:h1 "Kết quả tìm kiếm"]
    (map render-word entries)])
 
 # Handlers
 
-(defn vivi/main
+(defn- main-handler
   "Route handler to show all words in Viet-Viet dict."
   [req]
-  (let [before (qs->int req :before)
-        after (qs->int req :after)
+  (let [before (u/qs->int req :before)
+        after (u/qs->int req :after)
         entries (get-all-words :after after :before before)
         first-entry (first entries)
         last-entry (last entries)]
-    [:main {:class "container p-2"}
-     [:h1 "Từ điển tiếng Việt"]
+    [[:h1 "Từ điển tiếng Việt"]
      [:div {:class "flex justify-space-between"}
       [:a {:href (string "?before=" (get first-entry :id))} "Trang trước"]
       [:a {:href (string "?after=" (get last-entry :id))} "Trang tiếp"]]
      (map render-word entries)]))
 
-(defn vivi/search
+(defn- search-handler
   "Route handler to search for a keyword in Viet-Viet dict. If there is a match,
   show that word only. Otherwise show a list of words, or an _empty result_
   message."
@@ -96,6 +83,13 @@
   (let [keyword (get-in req [:query-string :s])
         results (search keyword)]
     (cond
-      (nil? results) [:p "No result"]
+      (nil? results) [:p "Không tìm thấy kết quả nào"]
       (= (length results) 1) (render-word (first results))
       (render-search-result results))))
+
+# Declare routes
+(route :get "/vi-vi" :vivi/main)
+(route :get "/vi-vi/search" :vivi/search)
+
+(def vivi/main (layout main-handler tpl/with-main))
+(def vivi/search (layout search-handler tpl/with-main))
