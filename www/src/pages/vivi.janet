@@ -26,11 +26,11 @@
 (defn- get-all-words
   "Get all words from the database, supporting cursor-based pagination."
   [&named before after limit]
-  (default limit 100)
+  (default limit 300)
   (default after 0)
   (cond
-    (not (nil? after)) (db/query after-query {:after after :limit limit})
-    (not (nil? before)) (db/query before-query {:before before :limit limit})
+    (truthy? before) (db/query before-query {:before before :limit limit})
+    (>= after 0) (db/query after-query {:after after :limit limit})
     []))
 
 (def- search-query
