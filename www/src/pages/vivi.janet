@@ -8,7 +8,7 @@
 
 (def- before-query
   "with t as (
-    select * from word
+    select * from words
     where id < :before
     order by id desc
     limit :limit)
@@ -18,7 +18,7 @@
 
 (def- after-query
   "select *
-  from word
+  from words
   where id > :after
   order by id asc
   limit :limit")
@@ -35,8 +35,8 @@
 
 (def- search-query
   "select *
-  from word
-  where w like :keyword")
+  from words
+  where word like :keyword")
 
 (defn- search
   "Search by keyword"
@@ -48,7 +48,7 @@
 
 (defn render-word
   "Render a single word, showing its definitions."
-  [{:w word :m meaning}]
+  [{:word word :meaning meaning}]
   [:article
    [:a {:href (string "/vi-vi/" word)}
     [:h2 word]]
