@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,600;0,700;1,600;1,700&display=swap");
+
 :root {
   --font-primary: "Hanken Grotesk", "Familjen Grotesk", "Jost", "Space Grotesk",
     "IBM Plex Sans", "Figtree", "Input Sans", "Barlow", "Public Sans", "Inter",
     sans-serif, system-ui;
+
+  --prose-width: 65ch;
+
+  --size-2: 1em;
 }
 
 *,
@@ -32,7 +38,28 @@ h6 {
   --flow-space: 0.5em;
 }
 
-/* Line length */
-article > * {
-  max-width: 65ch;
+:is(body) {
+  background-color: var(--color-bg-primary);
+  color: var(--color-tx-normal);
+}
+
+/* Container */
+.container {
+  max-width: var(--prose-width);
+}
+
+/* Header */
+.header {
+  height: var(--header-height, 4rem);
+  background-color: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  padding-inline: var(--size-2);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5em;
+  text-decoration: none;
+  color: var(--color-tx-muted);
 }
