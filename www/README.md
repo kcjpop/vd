@@ -24,6 +24,14 @@ $ fish_add_path /usr/local/Cellar/janet/1.31.0/bin
 $ joy server
 ```
 
+- To auto-restart when making changes:
+
+```sh
+# Make sure to have `entr` installed.
+# On MacOS: brew install entr
+$ ls **/*.janet | entr -r janet main.janet
+```
+
 ### Deployment
 
 There is one `fly.toml` and `Dockerfile` included to deploy the app to Fly.io.

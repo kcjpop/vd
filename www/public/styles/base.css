@@ -7,6 +7,7 @@
 
   --prose-width: 65ch;
 
+  --size-1: 0.5em;
   --size-2: 1em;
 }
 
@@ -45,7 +46,18 @@ h6 {
 
 /* Container */
 .container {
-  max-width: var(--prose-width);
+}
+
+.entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1ch;
+}
+
+.entry {
+  background-color: var(--color-bg-secondary);
+  padding: var(--size-1);
+  border-radius: 0.25em;
 }
 
 /* Header */

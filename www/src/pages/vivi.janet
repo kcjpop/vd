@@ -49,7 +49,7 @@
 (defn render-word
   "Render a single word, showing its definitions."
   [{:word word :meaning meaning}]
-  [:article
+  [:article {:class "entry"}
    [:a {:href (string "/vi-vi/" word)}
     [:h2 word]]
    [:p meaning]])
@@ -74,7 +74,8 @@
      [:div {:class "flex justify-space-between"}
       [:a {:href (string "?before=" (get first-entry :id))} "Trang trước"]
       [:a {:href (string "?after=" (get last-entry :id))} "Trang tiếp"]]
-     (map render-word entries)]))
+     [:div {:class "entries"}
+      (map render-word entries)]]))
 
 (defn- search-handler
   "Route handler to search for a keyword in Viet-Viet dict. If there is a match,
