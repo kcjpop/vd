@@ -2,6 +2,10 @@
 
 (import ../utils :as u)
 
+# Declare routes
+(route :get "/vi-vi" :vivi/main)
+(route :get "/vi-vi/search" :vivi/search)
+
 # Helpers
 
 (defn qs->int
@@ -67,9 +71,7 @@
    [:h1 "Kết quả tìm kiếm"]
    (map render-word entries)])
 
-# Declare routes
-(route :get "/vi-vi" :vivi/main)
-(route :get "/vi-vi/search" :vivi/search)
+# Handlers
 
 (defn vivi/main
   "Route handler to show all words in Viet-Viet dict."
